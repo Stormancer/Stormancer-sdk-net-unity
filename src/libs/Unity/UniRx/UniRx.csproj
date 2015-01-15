@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9CB53456-6C06-40AE-9D1F-82639FF90982}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>UniRx</RootNamespace>
+    <AssemblyName>UniRx</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;UNITY_4_6_0;UNITY_4_6;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_MONO;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_4_6_FEATURES;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;DEVELOPMENT_BUILD;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN;UNITY_PRO_LICENSE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;UNITY_4_6_0;UNITY_4_6;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_MONO;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_4_6_FEATURES;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;DEVELOPMENT_BUILD;ENABLE_PROFILER;UNITY_PRO_LICENSE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="UnityEditor">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Unity\Editor\Data\Managed\UnityEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Unity\Editor\Data\Managed\UnityEngine.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Disposables\BooleanDisposable.cs" />
+    <Compile Include="Disposables\CompositeDisposable.cs" />
+    <Compile Include="Disposables\Disposable.cs" />
+    <Compile Include="Disposables\DisposableExtensions.cs" />
+    <Compile Include="Disposables\ICancelable.cs" />
+    <Compile Include="Disposables\MultipleAssignmentDisposable.cs" />
+    <Compile Include="Disposables\RefCountDisposable.cs" />
+    <Compile Include="Disposables\ScheduledDisposable.cs" />
+    <Compile Include="Disposables\SerialDisposable.cs" />
+    <Compile Include="Disposables\SingleAssignmentDisposable.cs" />
+    <Compile Include="EventPattern.cs" />
+    <Compile Include="InternalUtil\ImmutableList.cs" />
+    <Compile Include="InternalUtil\ListObserver.cs" />
+    <Compile Include="InternalUtil\PriorityQueue.cs" />
+    <Compile Include="InternalUtil\ReflectionAccessor.cs" />
+    <Compile Include="InternalUtil\ScheduledItem.cs" />
+    <Compile Include="InternalUtil\ThreadSafeQueueWorker.cs" />
+    <Compile Include="Notification.cs" />
+    <Compile Include="Notifiers\BooleanNotifier.cs" />
+    <Compile Include="Notifiers\CountNotifier.cs" />
+    <Compile Include="Notifiers\ScheduledNotifier.cs" />
+    <Compile Include="Observable.Aggregate.cs" />
+    <Compile Include="Observable.Binding.cs" />
+    <Compile Include="Observable.Blocking.cs" />
+    <Compile Include="Observable.Concatenate.cs" />
+    <Compile Include="Observable.Concurrency.cs" />
+    <Compile Include="Observable.Conversions.cs" />
+    <Compile Include="Observable.Creation.cs" />
+    <Compile Include="Observable.cs" />
+    <Compile Include="Observable.ErrorHandling.cs" />
+    <Compile Include="Observable.Events.cs" />
+    <Compile Include="Observable.Joins.cs" />
+    <Compile Include="Observable.Multiple.cs" />
+    <Compile Include="Observable.Paging.cs" />
+    <Compile Include="Observable.Time.cs" />
+    <Compile Include="Observer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Schedulers\CurrentThreadScheduler.cs" />
+    <Compile Include="Schedulers\ImmediateScheduler.cs" />
+    <Compile Include="Schedulers\Scheduler.cs" />
+    <Compile Include="Schedulers\ThreadPoolScheduler.cs" />
+    <Compile Include="Subjects\AsyncSubject.cs" />
+    <Compile Include="Subjects\BehaviorSubject.cs" />
+    <Compile Include="Subjects\ConnectableObservable.cs" />
+    <Compile Include="Subjects\ISubject.cs" />
+    <Compile Include="Subjects\ReplaySubject.cs" />
+    <Compile Include="Subjects\Subject.cs" />
+    <Compile Include="System\IProgress.cs" />
+    <Compile Include="System\Tuple.cs" />
+    <Compile Include="System\Unit.cs" />
+    <Compile Include="TimeInterval.cs" />
+    <Compile Include="Timestamped.cs" />
+    <Compile Include="UnityEngineBridge\AotSafeExtensions.cs" />
+    <Compile Include="UnityEngineBridge\CancellationToken.cs" />
+    <Compile Include="UnityEngineBridge\Diagnostics\LogEntry.cs" />
+    <Compile Include="UnityEngineBridge\Diagnostics\LogEntryExtensions.cs" />
+    <Compile Include="UnityEngineBridge\Diagnostics\Logger.cs" />
+    <Compile Include="UnityEngineBridge\Diagnostics\ObservableLogger.cs" />
+    <Compile Include="UnityEngineBridge\Diagnostics\UnityDebugSink.cs" />
+    <Compile Include="UnityEngineBridge\LazyTask.cs" />
+    <Compile Include="UnityEngineBridge\MainThreadDispatcher.cs" />
+    <Compile Include="UnityEngineBridge\MainThreadScheduler.cs" />
+    <Compile Include="UnityEngineBridge\Observable.Unity.cs" />
+    <Compile Include="UnityEngineBridge\ObservableMonoBehaviour.cs" />
+    <Compile Include="UnityEngineBridge\ObservableWWW.cs" />
+    <Compile Include="UnityEngineBridge\ScenePlaybackDetector.cs" />
+    <Compile Include="UnityEngineBridge\TypedMonoBehaviour.cs" />
+    <Compile Include="UnityEngineBridge\UI\ObserveExtensions.cs" />
+    <Compile Include="UnityEngineBridge\UnityEventExtensions.cs" />
+    <Compile Include="UnityWinRTBridge\Thread.cs" />
+    <Compile Include="UnityWinRTBridge\ThreadPoolScheduler_UnityWinRT.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
