@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DAC77239-930B-454A-8ED6-82C31A7B2ABD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Stormancer</RootNamespace>
+    <AssemblyName>Stormancer.Unity</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;StormancerClient UNITY_4_6</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;StormancerClient UNITY_4_6</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Raknet.csharp">
+      <HintPath>..\..\..\..\..\libs\Unity\Raknet\Raknet.csharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Threading">
+      <HintPath>..\..\..\..\libs\Unity\System.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Unity\Editor\Data\Managed\UnityEngine.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\Common\Stormancer.Core\ClientException.cs">
+      <Link>Core\ClientException.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\Common\Stormancer.Core\IConnection.cs">
+      <Link>Core\IConnection.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\Common\Stormancer.Core\ILogger.cs">
+      <Link>Core\ILogger.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\Common\Stormancer.Core\IScene.cs">
+      <Link>Core\IScene.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\Common\Stormancer.Core\IScenePeer.cs">
+      <Link>Core\IScenePeer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\Common\Stormancer.Core\Models\ConnectionDataToken.cs">
+      <Link>Core\Models\ConnectionDataToken.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\Common\Stormancer.Core\Packet.cs">
+      <Link>Core\Packet.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\Common\Stormancer.Core\PacketPriority.cs">
+      <Link>Core\PacketPriority.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\Common\Stormancer.Core\PacketReliability.cs">
+      <Link>Core\PacketReliability.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\Common\Stormancer.Core\Route.cs">
+      <Link>Core\Route.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\Common\Stormancer.Core\ShutdownArgs.cs">
+      <Link>Core\ShutdownArgs.cs</Link>
+    </Compile>
+    <Compile Include="ApiClient.cs" />
+    <Compile Include="Client.cs" />
+    <Compile Include="Configuration\ClientConfiguration.cs" />
+    <Compile Include="Extensions\Buffers.cs" />
+    <Compile Include="Extensions\DictionaryExtension.cs" />
+    <Compile Include="Extensions\PacketExtensions.cs" />
+    <Compile Include="Extensions\SceneExtensions.cs" />
+    <Compile Include="Extensions\StreamExtensions.cs" />
+    <Compile Include="IConnectionManager.cs" />
+    <Compile Include="ILogger.cs" />
+    <Compile Include="Infrastructure\BSStream.cs" />
+    <Compile Include="Infrastructure\BufferPool\BufferInterfaces.cs" />
+    <Compile Include="Infrastructure\BufferPool\BufferObjects.cs" />
+    <Compile Include="Infrastructure\BufferPool\MemoryInterfaces.cs" />
+    <Compile Include="Infrastructure\BufferPool\MemoryObjects.cs" />
+    <Compile Include="Infrastructure\BufferPool\StreamObjects.cs" />
+    <Compile Include="Infrastructure\Connection.cs" />
+    <Compile Include="Infrastructure\DefaultPacketDispatcher.cs" />
+    <Compile Include="Infrastructure\IPacketDispatcher.cs" />
+    <Compile Include="Infrastructure\ISerializer.cs" />
+    <Compile Include="Infrastructure\ITokenHandler.cs" />
+    <Compile Include="Infrastructure\Modules\IModule.cs" />
+    <Compile Include="Infrastructure\MsgPackSerializer.cs" />
+    <Compile Include="Infrastructure\RaknetTransport.cs" />
+    <Compile Include="IPacketProcessor.cs" />
+    <Compile Include="ITransport.cs" />
+    <Compile Include="MessageIDTypes.cs" />
+    <Compile Include="Processors\RequestProcessor.cs" />
+    <Compile Include="Processors\SceneDispatcher.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scene.cs" />
+    <Compile Include="SceneEndpoint.cs" />
+    <Compile Include="ScenePeer.cs" />
+    <Compile Include="SystemMessages\ConnectedToSceneMsg.cs" />
+    <Compile Include="SystemMessages\Empty.cs" />
+    <Compile Include="SystemMessages\RouteDto.cs" />
+    <Compile Include="SystemMessages\SceneInfosDto.cs" />
+    <Compile Include="SystemMessages\SystemResponse.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\libs\Unity\MsgPack\MsgPack.csproj">
+      <Project>{224120c7-9061-40c4-be7b-8f32113fff0d}</Project>
+      <Name>MsgPack</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\libs\Unity\UniRx\UniRx.csproj">
+      <Project>{9cb53456-6c06-40ae-9d1f-82639ff90982}</Project>
+      <Name>UniRx</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\libs\Unity\Unity.Tasks\Unity.Tasks.csproj">
+      <Project>{81e29676-e413-4d27-8426-de539dabfe2f}</Project>
+      <Name>Unity.Tasks</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\libs\Unity\UnityHttp\UnityHttp.csproj">
+      <Project>{212d3970-1a5b-4eed-a2f4-49657ebfcad4}</Project>
+      <Name>UnityHttp</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>xcopy /d "$(ProjectDir)..\..\..\..\libs\Unity\Raknet\Raknet.dll"</PostBuildEvent>
+  </PropertyGroup>
+</Project>
