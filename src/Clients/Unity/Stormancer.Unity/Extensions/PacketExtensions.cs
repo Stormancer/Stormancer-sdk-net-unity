@@ -21,18 +21,29 @@ namespace Stormancer
         /// <remarks>The method reads the packet stream during the deserialization process.</remarks>
         public static T ToObject<T>(this Packet packet)
         {
-            return packet.Connection.GetComponent<ISerializer>("serializer").Deserialize<T>(packet.Stream);
+            return packet.Serializer().Deserialize<T>(packet.Stream);
+        }
+        public static T ReadObject<T>(this Packet<IScenePeer> packet)
+        {
+            return packet.Serializer().Deserialize<T>(packet.Stream);
         }
 
+      
         public static ISerializer Serializer(this Packet packet)
         {
             return packet.Connection.Serializer();
         }
-
+        public static ISerializer Serializer(this Packet<IScenePeer> packet)
+        {
+            return packet.Connection.Serializer();
+        }
+        public static ISerializer Serializer(this IScenePeer c)
+        {
+            return c.GetComponent<ISerializer>();
+        }
         public static ISerializer Serializer(this IConnection c)
         {
-            return c.GetComponent<ISerializer>("serializer");
+            return c.GetComponent<ISerializer>();
         }
-        
     }
 }

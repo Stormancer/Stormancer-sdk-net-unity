@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Stormancer.Core
 {
@@ -16,13 +17,7 @@ namespace Stormancer.Core
     {
         string Id { get; }
 
-        /// <summary>
-        /// Adds a route handler to the scene
-        /// </summary>
-        /// <param name="route">The name of the route</param>
-        /// <param name="handler">The route handler</param>
-        /// <param name="metadata">Optional metadata</param>
-        void AddRoute(string route, Action<Packet> handler, Dictionary<string,string> metadata = null);
+       
 
       
 

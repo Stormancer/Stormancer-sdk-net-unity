@@ -23,6 +23,7 @@ namespace Stormancer.Client45.Infrastructure
         }
         public SceneEndpoint DecodeToken(string token)
         {
+            token = token.Trim('"');
             var data = token.Split('-')[0];
             var buffer= Convert.FromBase64String(data);
 

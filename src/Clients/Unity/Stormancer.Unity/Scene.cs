@@ -34,9 +34,9 @@ namespace Stormancer
         /// <remarks>
         /// The index is used internally by Stormancer to optimize bandwidth consumption. That means that Stormancer clients can connect to only 256 scenes simultaneously.
         /// </remarks>
-        public byte Handle { get { return _handle; } }
+        public byte Handle { get { return _handle; } internal set { _handle = value; } }
 
-        private ushort _maxRouteRegistration;
+        private ushort _nextNewRouteId = 100;//Reserve 100 route handles for system routes.
 
         /// <summary>
         /// A string representing the unique Id of the scene.
@@ -96,7 +96,7 @@ namespace Stormancer
         /// <param name="route">A string containing the name of the route to listen to.</param>
         /// <param name="handler">An action that is executed when the remote peer call the route.</param>
         /// <returns></returns>
-        public void AddRoute(string route, Action<Packet> handler, Dictionary<string, string> metadata = null)
+        public void AddRoute(string route, Action<Packet<IScenePeer>> handler, Dictionary<string, string> metadata = null)
         {
             if (route[0] == '@')
             {
@@ -112,7 +112,7 @@ namespace Stormancer
             Route routeObj;
             if (!_localRoutesMap.TryGetValue(route, out routeObj))
             {
-                routeObj = new Route(this, route, _maxRouteRegistration++, metadata);
+                routeObj = new Route(this, route, _nextNewRouteId++, metadata);
                 _localRoutesMap.Add(route, routeObj);
             }
 
@@ -120,16 +120,16 @@ namespace Stormancer
 
         }
 
-        public IObservable<Packet> OnMessage(Route route)
+        public IObservable<Packet<IScenePeer>> OnMessage(Route route)
         {
             var index = route.Index;
-            var observable = Observable.Create<Packet>(observer =>
+            var observable = Observable.Create<Packet<IScenePeer>>(observer =>
             {
 
                 Action<Packet> action = (data) =>
                 {
-
-                    observer.OnNext(data);
+                    var packet = new Packet<IScenePeer>(Host, data.Stream, data.Metadata);
+                    observer.OnNext(packet);
                 };
                 _handlers.AddOrUpdate(index, action, (_, existingAction) =>
                 {
@@ -153,7 +153,7 @@ namespace Stormancer
         /// </summary>
         /// <param name="route">A string containing the name of the route to listen to.</param>
         /// <returns type="IObservable&lt;Packet&gt;">An IObservable&lt;Packet&gt; instance that fires each time a message is received on the route. </returns>
-        public IObservable<Packet> OnMessage(string route)
+        public IObservable<Packet<IScenePeer>> OnMessage(string route)
         {
             if (Connected)
             {
@@ -163,7 +163,7 @@ namespace Stormancer
             Route routeObj;
             if (!_localRoutesMap.TryGetValue(route, out routeObj))
             {
-                routeObj = new Route(this, route, _maxRouteRegistration++, null);
+                routeObj = new Route(this, route, _nextNewRouteId++, null);
                 _localRoutesMap.Add(route, routeObj);
             }
             return OnMessage(routeObj);
@@ -245,7 +245,7 @@ namespace Stormancer
         /// </remarks>
         public Task Connect()
         {
-            return this._client.ConnectToScene(this._token, this._localRoutesMap.Values)
+            return this._client.ConnectToScene(this, this._token, this._localRoutesMap.Values)
                 .ContinueWith(t => {
                     this._handle = t.Result;
                     this.Connected = true;
@@ -276,7 +276,6 @@ namespace Stormancer
 
 
             packet.Metadata["routeId"] = routeId;
-            packet.Metadata["scene"] = this;
 
             Action<Packet> observer;
 
@@ -302,7 +301,7 @@ namespace Stormancer
         {
             get
             {
-                return new ScenePeer(_peer, _handle, _remoteRoutesMap.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.Index), this);
+                return new ScenePeer(_peer, _handle, _remoteRoutesMap, this);
             }
         }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Stormancer.Core
 {
@@ -29,9 +30,9 @@ namespace Stormancer.Core
         Dictionary<string, string> Metadata { get; }
 
         /// <summary>
-        /// Data & services associated with the object.
+        /// Register components.
         /// </summary>
-        Dictionary<string, object> Components { get; }
+        void RegisterComponent<T>(T component);
 
         /// <summary>
         /// Gets a service from the object.
@@ -39,7 +40,7 @@ namespace Stormancer.Core
         /// <typeparam name="T">Type of the service to fetch.</typeparam>
         /// <param name="key">A string containing the service key.</param>
         /// <returns>A service object.</returns>
-        T GetComponent<T>(string key);
+        T GetComponent<T>();
 
         /// <summary>
         /// Account of the application which the peer is connected to.
@@ -62,12 +63,12 @@ namespace Stormancer.Core
         void Close();
 
         /// <summary>
-        /// Sends a system message to the remote scene.
+        /// Sends a system message to the peer.
         /// </summary>
         /// <param name="msgId"></param>
         /// <param name="writer"></param>
         void SendSystem(byte msgId, Action<Stream> writer);
-
+        void SendRaw(Action<Stream> writer, Stormancer.Core.PacketPriority priority, Stormancer.Core.PacketReliability reliability, char channel);
         /// <summary>
         /// Sends a packet to the target remote scene.
         /// </summary>
@@ -91,7 +92,7 @@ namespace Stormancer.Core
         /// </summary>
         Action<string> ConnectionClosed { get; set; }
 
-       
+        void SetApplication(string account, string application);
 
     }
 

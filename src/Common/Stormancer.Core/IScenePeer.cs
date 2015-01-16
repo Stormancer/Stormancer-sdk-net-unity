@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Stormancer.Core
 {
@@ -24,7 +25,8 @@ namespace Stormancer.Core
             PacketPriority priority,
             PacketReliability reliability);
 
-        
+
+        T GetComponent<T>();
 
         long Id { get; }
 

@@ -75,10 +75,10 @@ namespace MsgPack.Serialization
 
 			var entries = GetTargetMembers().OrderBy( item => item.Contract.Id ).ToArray();
 
-			if ( entries.Length == 0 )
-			{
-				throw SerializationExceptions.NewNoSerializableFieldsException( typeof( TObject ) );
-			}
+            //if ( entries.Length == 0 )
+            //{
+            //    throw SerializationExceptions.NewNoSerializableFieldsException( typeof( TObject ) );
+            //}
 
 			if ( entries.All( item => item.Contract.Id == DataMemberContract.UnspecifiedId ) )
 			{

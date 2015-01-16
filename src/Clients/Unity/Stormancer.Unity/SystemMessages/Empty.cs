@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace Stormancer.Dto
 {
-    internal struct Empty
+    public class Empty
     {
+        private static Empty _instance = new Empty();
+        public static Empty Instance
+        {
+            get
+            {
+                return _instance;
+            }
+        }
     }
 }

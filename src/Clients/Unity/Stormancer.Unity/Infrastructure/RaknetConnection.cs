@@ -3,13 +3,14 @@ using Stormancer.Core;
 using Stormancer.Infrastructure;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Stormancer.Networking
 {
-   
+
     internal class RakNetConnection : IConnection
     {
         private RakPeerInterface _rakPeer;
@@ -66,12 +67,12 @@ namespace Stormancer.Networking
         /// <summary>
         /// The account id of the application to which this connection is connected.
         /// </summary>
-        public string Account { get; set; }
+        public string Account { get; private set; }
 
         /// <summary>
         /// The id of the application to which this connection is connected.
         /// </summary>
-        public string Application { get; set; }
+        public string Application { get; private set; }
 
         public Stormancer.Core.ConnectionState State { get; private set; }
 
@@ -99,7 +100,7 @@ namespace Stormancer.Networking
         public override bool Equals(object obj)
         {
             var v2 = obj as IConnection;
-            if(v2 == null)
+            if (v2 == null)
             {
                 return false;
             }
@@ -136,10 +137,19 @@ namespace Stormancer.Networking
             {
                 throw new ArgumentNullException("writer");
             }
+            SendRaw(s =>
+            {
+                s.WriteByte(msgId);
+                writer(s);
+            }, Core.PacketPriority.HIGH_PRIORITY, Core.PacketReliability.RELIABLE, (char)0);
+        }
+        public void SendRaw(Action<Stream> writer, Stormancer.Core.PacketPriority priority, Stormancer.Core.PacketReliability reliability, char channel)
+        {
+
             var stream = new BitStream();
-            stream.Write(msgId);
             writer(new BSStream(stream));
-            var result = _rakPeer.Send(stream, RakNet.PacketPriority.HIGH_PRIORITY, RakNet.PacketReliability.RELIABLE, (char)0, this.Guid, false);
+            var result = _rakPeer.Send(stream, (RakNet.PacketPriority)priority, (RakNet.PacketReliability)reliability, channel, this.Guid, false);
+
             if (result == 0)
             {
                 throw new InvalidOperationException("Failed to send message.");
@@ -162,9 +172,10 @@ namespace Stormancer.Networking
                 throw new ArgumentNullException("writer");
             }
             var stream = new BitStream();
-            stream.Write(sceneIndex);
-            stream.Write(route);
-            writer(new BSStream(stream));
+            var s = new BSStream(stream);
+            s.WriteByte(sceneIndex);
+            s.Write(BitConverter.GetBytes(route), 0, 2);
+            writer(s);
             var result = _rakPeer.Send(stream, (RakNet.PacketPriority)priority, (RakNet.PacketReliability)reliability, channel, this.Guid, false);
 
             if (result == 0)
@@ -180,17 +191,37 @@ namespace Stormancer.Networking
             set;
         }
 
-        
 
-        private Dictionary<string, object> _localData = new Dictionary<string, object>();
-        public Dictionary<string, object> Components
+
+        private Dictionary<Type, object> _localData = new Dictionary<Type, object>();
+
+
+        public T GetComponent<T>()
         {
-            get { return _localData; }
+            object result;
+            if (_localData.TryGetValue(typeof(T), out result))
+            {
+                return (T)result;
+            }
+            else
+            {
+                return default(T);
+            }
         }
 
-        public T GetComponent<T>(string key)
+        public void RegisterComponent<T>(T component)
         {
-            return (T)_localData[key];
+            _localData.Add(typeof(T), component);
+        }
+
+
+        public void SetApplication(string account, string application)
+        {
+            if (this.Account == null)
+            {
+                this.Account = account;
+                this.Application = application;
+            }
         }
     }
 }

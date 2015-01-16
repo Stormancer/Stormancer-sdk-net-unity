@@ -26,6 +26,7 @@ namespace Stormancer.Processors
             }
             else
             {
+                packet.Metadata["scene"] = scene;
                 scene.HandleMessage(packet);
                 return true;
             }

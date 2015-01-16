@@ -218,16 +218,16 @@ namespace Stormancer
                 return SendSystemRequest<Stormancer.Dto.SceneInfosRequestDto, Stormancer.Dto.SceneInfosDto>((byte)MessageIDTypes.ID_GET_SCENE_INFOS, parameter);
             }).Then(result =>
             {
-                if (!_serverConnection.Components.ContainsKey("serializer"))
+                if (_serverConnection.GetComponent<ISerializer>() == null)
                 {
                     if (result.SelectedSerializer == null)
                     {
                         throw new InvalidOperationException("No seralizer selected.");
                     }
-                    _serverConnection.Components["serializer"] = _serializers[result.SelectedSerializer];
+                    _serverConnection.RegisterComponent(_serializers[result.SelectedSerializer]);
                 }
                 var scene = new Scene(this._serverConnection, this, sceneId, ci.Token, result);
-                _scenesDispatcher.AddScene(scene);
+                
                 return scene;
             });
 
@@ -277,16 +277,25 @@ namespace Stormancer
             return GetScene(ci.TokenData.SceneId, ci);
         }
 
-        internal Task<byte> ConnectToScene(string token, IEnumerable<Route> localRoutes)
+        internal Task<byte> ConnectToScene(Scene scene, string token, IEnumerable<Route> localRoutes)        
         {
             var parameter = new Stormancer.Dto.ConnectToSceneMsg
             {
                 Token = token,
-                Routes = localRoutes.Select(r => new Stormancer.Dto.RouteDto { }).ToList()
-
+                Routes = localRoutes.Select(r => new Stormancer.Dto.RouteDto
+                {
+                    Handle = r.Index,
+                    Metadata = r.Metadata,
+                    Name = r.Name
+                }).ToList()
             };
             return this.SendSystemRequest<Stormancer.Dto.ConnectToSceneMsg, Stormancer.Dto.ConnectedToSceneMsg>((byte)MessageIDTypes.ID_CONNECT_TO_SCENE, parameter)
-                .Then(result => result.Handle);
+                .Then(result =>
+                    {
+                        scene.Handle = result.Handle;
+                        _scenesDispatcher.AddScene(scene);
+                        return result.Handle;
+                    });
         }
 
         internal Task Disconnect(byte sceneHandle)
@@ -324,17 +333,9 @@ namespace Stormancer
                 Disconnect();
             }
 
-            GC.SuppressFinalize(this);
         }
 
-        /// <summary>
-        /// Finalizer
-        /// </summary>
-        ~Client()
-        {
-            this.Dispose();
-        }
-
+       
 
 
 

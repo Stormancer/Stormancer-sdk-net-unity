@@ -44,10 +44,10 @@ namespace Stormancer
         {
             return scene.SendRequest(route, s =>
             {
-                scene.HostConnection.Serializer().Serialize(data, s);
+                scene.Host.Serializer().Serialize(data, s);
             }).Select(packet =>
             {
-                var value = scene.HostConnection.Serializer().Deserialize<U>(packet.Stream);
+                var value = scene.Host.Serializer().Deserialize<U>(packet.Stream);
                
                 return value;
             });
@@ -58,7 +58,7 @@ namespace Stormancer
             var tcs = new TaskCompletionSource<Unit>();
             scene.SendRequest(route, s =>
             {
-                scene.HostConnection.Serializer().Serialize(data, s);
+                scene.Host.Serializer().Serialize(data, s);
             }).Subscribe(p => { }, () => tcs.SetResult(Unit.Default));
 
             return tcs.Task;

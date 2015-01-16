@@ -56,7 +56,7 @@ namespace Stormancer.Networking.Processors
                             {
                                 var clientException = task.Exception.InnerExceptions.OfType<ClientException>().FirstOrDefault();
                                 var msg = clientException != null ? clientException.Message : "An error occured on the server.";
-                                context.Error(s => p.Connection.GetComponent<ISerializer>("serializer").Serialize(msg, s));
+                                context.Error(s => p.Serializer().Serialize(msg, s));
                             }
                             else
                             {
@@ -133,8 +133,7 @@ namespace Stormancer.Networking.Processors
                 }
 
                 this._pendingRequests.TryRemove(id, out request);
-                var s = p.Connection.GetComponent<ISerializer>("serializer");
-                var msg = s.Deserialize<string>(p.Stream);
+                var msg = p.Serializer().Deserialize<string>(p.Stream);
 
                 request.observer.OnError(new ClientException(msg));
 
