@@ -215,7 +215,7 @@ namespace Stormancer.Networking
             var infos = endpoint.Split(':');
             var host = infos[0];
             var port = ushort.Parse(infos[1]);
-            var result = _peer.Connect(host, port, null, 0);
+            _peer.Connect(host, port, null, 0);
 
             var address = new SystemAddress(host, port);
 

@@ -10,7 +10,7 @@ namespace System.Threading.Tasks
         private static Task<TResult> ThenImpl<TResult>(Task task, Func<TResult> continuation)
         {
             var tcs = new TaskCompletionSource<TResult>();
-            task.ContinueWith(t =>
+            task.ContinueWith((Task t) =>
             {
                 if (t.IsFaulted)
                 {
@@ -39,7 +39,7 @@ namespace System.Threading.Tasks
         {
             var tcs = new TaskCompletionSource<TResult>();
 
-            task.ContinueWith(t =>
+            task.ContinueWith((Task<T> t) =>
             {
                 if (t.IsFaulted)
                 {
@@ -69,10 +69,10 @@ namespace System.Threading.Tasks
         public static Task Then(this Task task, Action continuation)
         {
             return ThenImpl(task, () =>
-                {
-                    continuation();
-                    return true;
-                });
+            {
+                continuation();
+                return true;
+            });
         }
 
         public static Task<TResult> Then<TResult>(this Task task, Func<TResult> continuation)
@@ -82,14 +82,14 @@ namespace System.Threading.Tasks
 
         public static Task Then<T>(this Task<T> task, Action<T> continuation)
         {
-            return ThenImpl(task, r =>
-                {
-                    continuation(r);
-                    return true;
-                });
+            return ThenImpl(task, (T r) =>
+            {
+                continuation(r);
+                return true;
+            });
         }
 
-        public static Task<TResult> Then<T, TResult>(this Task<T> task, Func<T,TResult> continuation)
+        public static Task<TResult> Then<T, TResult>(this Task<T> task, Func<T, TResult> continuation)
         {
             return ThenImpl(task, continuation);
         }
@@ -102,6 +102,6 @@ namespace System.Threading.Tasks
         public static Task<TResult> Then<TResult>(this Task task, Func<Task<TResult>> continuation)
         {
             return ThenImpl(task, continuation).Unwrap();
-        }        
+        }
     }
 }

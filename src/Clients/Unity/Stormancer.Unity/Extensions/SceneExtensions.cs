@@ -12,6 +12,33 @@ namespace Stormancer
     public static class SceneExtensions
     {
         /// <summary>
+        /// Listen to messages on the specified route, deserialize them and execute the given handler for eah of them.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="scene">The remote scene proxy on which the route messages will be listened.</param>
+        /// <param name="route">The route to listen.</param>
+        /// <param name="handler">The handler to execute for each message on the route.</param>
+        /// <returns>An IDisposable object you can use to unregister the handler.</returns>
+        public static IDisposable AddRoute<T>(this Scene scene, string route, Action<T> handler)
+        {
+            return scene.OnMessage<T>(route).Subscribe(handler);
+        }
+
+        /// <summary>
+        /// Listen to messages on the specified route, deserialize them and execute the given handler for eah of them.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="scene">The remote scene proxy on which the route messages will be listened.</param>
+        /// <param name="route">The route to listen.</param>
+        /// <param name="handler">The handler to execute for each message on the route.</param>
+        /// <returns>An IDisposable object you can use to unregister the handler.</returns>
+        /// <remarks>RegisterRoute is an alias to the AddRoute method.</remarks>
+        public static IDisposable RegisterRoute<T>(this Scene scene, string route, Action<T> handler)
+        {
+            return scene.AddRoute(route,handler);
+        }
+
+        /// <summary>
         /// Listen to messages on the specified route, and output instances of T using the scene serializer.
         /// </summary>
         /// <typeparam name="T"></typeparam>

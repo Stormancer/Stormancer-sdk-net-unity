@@ -34,7 +34,7 @@ namespace Stormancer
             var uri = new Uri(_config.GetApiEndpoint(), string.Format(CreateTokenUri, accountId, applicationName, sceneId));
             var request = new Request("POST", uri.AbsoluteUri, data);
             request.AddHeader("Content-Type", "application/msgpack");
-
+            request.AddHeader("Accept", "application/json");
             return request.Send().ContinueWith(t =>
             {
                 try
@@ -58,6 +58,7 @@ namespace Stormancer
                 }
                 catch (Exception ex)
                 {
+                    UnityEngine.Debug.LogException(ex);
                     throw new InvalidOperationException("An error occured while retrieving the connection token. See the inner exception for more informations.", ex);
                 }
             });

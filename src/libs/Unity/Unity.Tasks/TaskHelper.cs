@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace System.Threading.Tasks
-{  
+{
 
     public static class TaskHelper
     {
@@ -24,7 +24,7 @@ namespace System.Threading.Tasks
 
         public static Task If(bool condition, Func<Task> action)
         {
-            if(condition)
+            if (condition)
             {
                 return action();
             }

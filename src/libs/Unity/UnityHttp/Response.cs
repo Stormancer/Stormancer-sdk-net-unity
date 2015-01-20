@@ -26,14 +26,6 @@ namespace Http
             }
         }
 
-        public string Asset
-        {
-            get
-            {
-                throw new NotSupportedException("This can't be done, yet.");
-            }
-        }
-
         void AddHeader(string name, string value)
         {
             name = name.ToLower().Trim();

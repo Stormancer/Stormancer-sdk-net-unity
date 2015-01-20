@@ -50,9 +50,9 @@ namespace Stormancer.Core
         /// <typeparam name="T">The returned metadata type.</typeparam>
         /// <param name="key">A string containing a metadata key.</param>
         /// <returns>The metadata for the *key* as a `T`</returns>
-        public T GetMetadata<T>(string key)
+        public TData GetMetadata<TData>(string key)
         {
-            return (T)this.Metadata[key];
+            return (TData)this.Metadata[key];
         }
 
         /// <summary>
