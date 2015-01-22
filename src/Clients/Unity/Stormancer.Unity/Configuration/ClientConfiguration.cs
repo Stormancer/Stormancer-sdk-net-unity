@@ -1,9 +1,12 @@
 ﻿using Stormancer.Client45.Infrastructure;
 using Stormancer.Networking;
+using Stormancer.Plugins;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+
 
 namespace Stormancer
 {
@@ -81,7 +84,7 @@ namespace Stormancer
             Transport = new RaknetTransport(NullLogger.Instance);
             Serializers = new List<ISerializer> { new MsgPackSerializer() };
             MaxPeers = 20;
-           
+
         }
 
         /// <summary>
@@ -92,7 +95,7 @@ namespace Stormancer
         /// <returns></returns>
         ClientConfiguration Metadata(string key, string value)
         {
-            _metadata[key]= value;
+            _metadata[key] = value;
             return this;
         }
 
@@ -106,7 +109,7 @@ namespace Stormancer
         /// </summary>
         public ITransport Transport { get; set; }
 
-       
+
         /// <summary>
         /// List of available serializers for the client.
         /// </summary>
@@ -115,8 +118,15 @@ namespace Stormancer
         /// </remarks>
         public List<ISerializer> Serializers { get; private set; }
 
-
+        /// <summary>
+        /// Maximum number of remote peers that can connect with this client.
+        /// </summary>
         public ushort MaxPeers { get; set; }
 
+        /// <summary>
+        /// Adds a plugin to the client.
+        /// </summary>
+        /// <param name="plugin">The plugin to add.</param>
+        void AddPlugin(IClientPlugin plugin) { }
     }
 }

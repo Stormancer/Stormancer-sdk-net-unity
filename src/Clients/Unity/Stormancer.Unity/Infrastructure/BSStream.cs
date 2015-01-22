@@ -38,14 +38,14 @@ namespace Stormancer.Infrastructure
 
         public override long Length
         {
-            get { throw new NotImplementedException(); }
+            get { return Position; }
         }
-
+        private long _position;
         public override long Position
         {
             get
             {
-                throw new NotImplementedException();
+                return _position;
             }
             set
             {
@@ -63,6 +63,7 @@ namespace Stormancer.Infrastructure
             {
                 if (bs.ReadAlignedBytes(buffer, (uint)count))
                 {
+                    _position += count;
                     return count;
                 }
                 else
@@ -75,6 +76,7 @@ namespace Stormancer.Infrastructure
                 var temp = new byte[count];
                 if (bs.ReadAlignedBytes(temp, (uint)count))
                 {
+                    _position += count;
                     temp.CopyTo(buffer, offset);
                     return count;
                 }
@@ -112,6 +114,7 @@ namespace Stormancer.Infrastructure
                 
                 bs.WriteAlignedBytes(temp, (uint)count);
             }
+            _position += count;
         }
     }
 }

@@ -82,11 +82,11 @@ namespace Stormancer.Networking
 
                         case (byte)DefaultMessageIDTypes.ID_DISCONNECTION_NOTIFICATION:
                             logger.Trace("{0} disconnected.", packet.systemAddress.ToString());
-                            OnDisconnection(packet, server,"disconnection");
+                            OnDisconnection(packet, server,"CLIENT_DISCONNECTED");
                             break;
                         case (byte)DefaultMessageIDTypes.ID_CONNECTION_LOST:
                             logger.Trace("{0} lost the connection.", packet.systemAddress.ToString());
-                            OnDisconnection(packet, server,"connection_lost");
+                            OnDisconnection(packet, server, "CONNECTION_LOST");
 
                             break;
 

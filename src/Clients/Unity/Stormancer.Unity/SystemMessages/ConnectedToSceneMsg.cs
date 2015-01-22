@@ -6,11 +6,6 @@ using System.Threading.Tasks;
 
 namespace Stormancer.Dto
 {
-    public struct ConnectedToSceneMsg
-    {
-        public byte Handle;
-    }
-
     public struct ConnectToSceneMsg
     {
         public string Token;

@@ -277,7 +277,7 @@ namespace Stormancer
             return GetScene(ci.TokenData.SceneId, ci);
         }
 
-        internal Task<byte> ConnectToScene(Scene scene, string token, IEnumerable<Route> localRoutes)        
+        internal Task ConnectToScene(Scene scene, string token, IEnumerable<Route> localRoutes)        
         {
             var parameter = new Stormancer.Dto.ConnectToSceneMsg
             {
@@ -289,12 +289,11 @@ namespace Stormancer
                     Name = r.Name
                 }).ToList()
             };
-            return this.SendSystemRequest<Stormancer.Dto.ConnectToSceneMsg, Stormancer.Dto.ConnectedToSceneMsg>((byte)MessageIDTypes.ID_CONNECT_TO_SCENE, parameter)
+            return this.SendSystemRequest<Stormancer.Dto.ConnectToSceneMsg, Stormancer.Dto.ConnectionResult>((byte)MessageIDTypes.ID_CONNECT_TO_SCENE, parameter)
                 .Then(result =>
                     {
-                        scene.Handle = result.Handle;
+                        scene.CompleteConnectionInitialization(result);
                         _scenesDispatcher.AddScene(scene);
-                        return result.Handle;
                     });
         }
 

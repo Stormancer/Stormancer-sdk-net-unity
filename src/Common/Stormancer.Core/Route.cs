@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Stormancer.Core
 {
@@ -10,17 +11,22 @@ namespace Stormancer.Core
     /// </summary>
     public class Route
     {
-       
-        public Route(IScene scene,string routeName, ushort index, Dictionary<string, string> metadata)
+        public Route(IScene scene, string routeName, ushort handle, Dictionary<string, string> metadata)
         {
             Name = routeName;
             Scene = scene;
-            Index = index;
-            if(metadata == null)
+
+            if (metadata == null)
             {
                 metadata = new Dictionary<string, string>();
             }
             Metadata = metadata;
+            Index = handle;
+        }
+        public Route(IScene scene, string routeName, Dictionary<string, string> metadata)
+            : this(scene, routeName, 0, metadata)
+        {
+
         }
 
         /// <summary>
@@ -32,7 +38,9 @@ namespace Stormancer.Core
         /// A string containing the name of the route.
         /// </summary>
         public string Name { get; private set; }
-        public ushort Index { get; private set; }
+        public ushort Index { get; set; }
         public Dictionary<string, string> Metadata { get; private set; }
+
+        public Action<Packet> Handlers { get; set; }
     }
 }

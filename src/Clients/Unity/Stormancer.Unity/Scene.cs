@@ -11,6 +11,7 @@ using Stormancer.Client45.Infrastructure;
 using Stormancer.Networking;
 using Stormancer.Core;
 using UniRx;
+using Stormancer.Dto;
 
 namespace Stormancer
 {
@@ -28,15 +29,27 @@ namespace Stormancer
 
         private byte _handle;
 
+        private readonly Dictionary<string, string> _metadata;
+
+        /// <summary>
+        /// Returns metadata informations for the remote scene host.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public string GetHostMetadata(string key)
+        {
+            string result = null;
+            _metadata.TryGetValue(key, out result);
+            return result;
+        }
+
         /// <summary>
         /// A byte representing the index of the scene for this peer.
         /// </summary>
         /// <remarks>
         /// The index is used internally by Stormancer to optimize bandwidth consumption. That means that Stormancer clients can connect to only 256 scenes simultaneously.
         /// </remarks>
-        public byte Handle { get { return _handle; } internal set { _handle = value; } }
-
-        private ushort _nextNewRouteId = 100;//Reserve 100 route handles for system routes.
+        public byte Handle { get { return _handle; } }
 
         /// <summary>
         /// A string representing the unique Id of the scene.
@@ -82,10 +95,11 @@ namespace Stormancer
             this._peer = connection;
             _token = token;
             _client = client;
+            _metadata = dto.Metadata;
 
             foreach (var route in dto.Routes)
             {
-                _remoteRoutesMap.Add(route.Name, new Route(this, route.Name, route.Handle, route.Metadata));
+                _remoteRoutesMap.Add(route.Name, new Route(this, route.Name, route.Metadata) { Index = route.Handle });
             }
         }
 
@@ -112,7 +126,7 @@ namespace Stormancer
             Route routeObj;
             if (!_localRoutesMap.TryGetValue(route, out routeObj))
             {
-                routeObj = new Route(this, route, _nextNewRouteId++, metadata);
+                routeObj = new Route(this, route, metadata);
                 _localRoutesMap.Add(route, routeObj);
             }
 
@@ -131,19 +145,11 @@ namespace Stormancer
                     var packet = new Packet<IScenePeer>(Host, data.Stream, data.Metadata);
                     observer.OnNext(packet);
                 };
-                _handlers.AddOrUpdate(index, action, (_, existingAction) =>
-                {
-                    existingAction += action;
-                    return existingAction;
-                });
+                route.Handlers += action;
 
                 return () =>
                 {
-                    Action<Packet> existingAction;
-                    if (_handlers.TryGetValue(index, out existingAction))
-                    {
-                        existingAction -= action;
-                    }
+                    route.Handlers -= action;
                 };
             });
             return observable;
@@ -163,7 +169,7 @@ namespace Stormancer
             Route routeObj;
             if (!_localRoutesMap.TryGetValue(route, out routeObj))
             {
-                routeObj = new Route(this, route, _nextNewRouteId++, null);
+                routeObj = new Route(this, route, new Dictionary<string, string>());
                 _localRoutesMap.Add(route, routeObj);
             }
             return OnMessage(routeObj);
@@ -246,10 +252,20 @@ namespace Stormancer
         public Task Connect()
         {
             return this._client.ConnectToScene(this, this._token, this._localRoutesMap.Values)
-                .ContinueWith(t => {
-                    this._handle = t.Result;
+                .Then(() =>
+                {
                     this.Connected = true;
                 });
+        }
+        internal void CompleteConnectionInitialization(ConnectionResult cr)
+        {
+            this._handle = cr.SceneHandle;
+
+            foreach (var route in _localRoutesMap)
+            {
+                route.Value.Index = cr.RouteMappings[route.Key];
+                _handlers.TryAdd(route.Value.Index, route.Value.Handlers);
+            }
         }
 
         /// <summary>
@@ -308,6 +324,25 @@ namespace Stormancer
         public bool IsHost
         {
             get { return false; }
+        }
+
+        private Dictionary<Type, Func<object>> _registrations = new Dictionary<Type, Func<object>>();
+        public T GetComponent<T>()
+        {
+            Func<object> factory;
+            if (_registrations.TryGetValue(typeof(T), out factory))
+            {
+                return (T)factory();
+            }
+            else
+            {
+                return default(T);
+            }
+        }
+
+        public void RegisterComponent<T>(Func<T> component)
+        {
+            _registrations[typeof(T)] = () => component();
         }
     }
 }
