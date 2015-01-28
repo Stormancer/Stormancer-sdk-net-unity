@@ -4,9 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-#if !StormancerClient
-using Stormancer.Platform.Core.Composition;
-#endif
+
 namespace Stormancer
 {
     /// <summary>
@@ -17,9 +15,6 @@ namespace Stormancer
     /// 
     /// In this case, you *must* use the same serializer on your clients and server application.
     /// </remarks>
-#if !StormancerClient
-    [Dependency]
-#endif
     public interface ISerializer
     {
         /// <summary>

@@ -85,6 +85,8 @@ namespace Stormancer
             Serializers = new List<ISerializer> { new MsgPackSerializer() };
             MaxPeers = 20;
 
+            Plugins = new List<IClientPlugin>();
+            Plugins.Add(new RpcClientPlugin());
         }
 
         /// <summary>
@@ -127,6 +129,12 @@ namespace Stormancer
         /// Adds a plugin to the client.
         /// </summary>
         /// <param name="plugin">The plugin to add.</param>
-        void AddPlugin(IClientPlugin plugin) { }
+        void AddPlugin(IClientPlugin plugin)
+        {
+
+            Plugins.Add(plugin);
+        }
+
+        internal List<IClientPlugin> Plugins { get; private set; }
     }
 }

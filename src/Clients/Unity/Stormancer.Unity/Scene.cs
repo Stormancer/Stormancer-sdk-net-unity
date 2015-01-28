@@ -226,7 +226,7 @@ namespace Stormancer
         /// <returns></returns>
         public Task Disconnect()
         {
-            return this._client.Disconnect(this._handle);
+            return this._client.Disconnect(this, this._handle);
             //var sysResponse = await this._client.SendWithResponse(Mess, "scene.stop", this.Id)
             //    //Handles if the server sends no response
             //    .DefaultIfEmpty(default(SystemResponse))

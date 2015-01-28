@@ -47,6 +47,9 @@
     <Compile Include="..\..\..\Common\Stormancer.Core\ClientException.cs">
       <Link>Core\ClientException.cs</Link>
     </Compile>
+    <Compile Include="..\..\..\Common\Stormancer.Core\Extensions\PacketExtensions.cs">
+      <Link>Core\Extensions\PacketExtensions.cs</Link>
+    </Compile>
     <Compile Include="..\..\..\Common\Stormancer.Core\IConnection.cs">
       <Link>Core\IConnection.cs</Link>
     </Compile>
@@ -59,8 +62,14 @@
     <Compile Include="..\..\..\Common\Stormancer.Core\IScenePeer.cs">
       <Link>Core\IScenePeer.cs</Link>
     </Compile>
+    <Compile Include="..\..\..\Common\Stormancer.Core\ISerializer.cs">
+      <Link>Core\ISerializer.cs</Link>
+    </Compile>
     <Compile Include="..\..\..\Common\Stormancer.Core\Models\ConnectionDataToken.cs">
       <Link>Core\Models\ConnectionDataToken.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\Common\Stormancer.Core\Models\RouteDto.cs">
+      <Link>Core\Models\RouteDto.cs</Link>
     </Compile>
     <Compile Include="..\..\..\Common\Stormancer.Core\Packet.cs">
       <Link>Core\Packet.cs</Link>
@@ -79,7 +88,6 @@
     <Compile Include="Configuration\ClientConfiguration.cs" />
     <Compile Include="Extensions\Buffers.cs" />
     <Compile Include="Extensions\DictionaryExtension.cs" />
-    <Compile Include="Extensions\PacketExtensions.cs" />
     <Compile Include="Extensions\SceneExtensions.cs" />
     <Compile Include="Extensions\StreamExtensions.cs" />
     <Compile Include="IConnectionManager.cs" />
@@ -93,7 +101,6 @@
     <Compile Include="Infrastructure\RaknetConnection.cs" />
     <Compile Include="Infrastructure\DefaultPacketDispatcher.cs" />
     <Compile Include="Infrastructure\IPacketDispatcher.cs" />
-    <Compile Include="Infrastructure\ISerializer.cs" />
     <Compile Include="Infrastructure\ITokenHandler.cs" />
     <Compile Include="Infrastructure\Modules\IModule.cs" />
     <Compile Include="Infrastructure\MsgPackSerializer.cs" />
@@ -104,6 +111,7 @@
     <Compile Include="Plugins\IClientPlugin.cs" />
     <Compile Include="Plugins\PluginBuildContext.cs" />
     <Compile Include="Plugins\RpcClientPlugin.cs" />
+    <Compile Include="Plugins\RpcRequestContext.cs" />
     <Compile Include="Processors\RequestProcessor.cs" />
     <Compile Include="Processors\SceneDispatcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -113,7 +121,6 @@
     <Compile Include="SystemMessages\ConnectedToSceneMsg.cs" />
     <Compile Include="SystemMessages\ConnectionResult.cs" />
     <Compile Include="SystemMessages\Empty.cs" />
-    <Compile Include="SystemMessages\RouteDto.cs" />
     <Compile Include="SystemMessages\SceneInfosDto.cs" />
     <Compile Include="SystemMessages\SystemResponse.cs" />
   </ItemGroup>

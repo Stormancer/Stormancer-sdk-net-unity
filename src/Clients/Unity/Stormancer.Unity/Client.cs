@@ -19,6 +19,7 @@ using Stormancer.Client45;
 using Stormancer.Networking;
 using Stormancer.Core;
 using Stormancer.Cluster.Application;
+using Stormancer.Plugins;
 
 
 namespace Stormancer
@@ -57,6 +58,7 @@ namespace Stormancer
         private readonly string _accountId;
         private readonly string _applicationName;
 
+        private readonly PluginBuildContext _pluginCtx = new PluginBuildContext();
         private IConnection _serverConnection;
 
         private ITransport _transport;
@@ -139,8 +141,20 @@ namespace Stormancer
 
             this._metadata.Add("serializers", string.Join(",", this._serializers.Keys.ToArray()));
             this._metadata.Add("transport", _transport.Name);
+            this._metadata.Add("version", "1.0.0a");
+            this._metadata.Add("platform", "NET45");
 
             this._maxPeers = configuration.MaxPeers;
+
+            foreach (var plugin in configuration.Plugins)
+            {
+                plugin.Build(_pluginCtx);
+            }
+
+            if (_pluginCtx.ClientCreated != null)
+            {
+                _pluginCtx.ClientCreated(this);
+            }
 
             Initialize();
         }
@@ -151,14 +165,18 @@ namespace Stormancer
             {
                 _initialized = true;
 
-                _transport.PacketReceived += _transport_PacketReceived;
+                _transport.PacketReceived += Transport_PacketReceived;
 
 
             }
         }
 
-        void _transport_PacketReceived(Stormancer.Core.Packet obj)
+        private void Transport_PacketReceived(Stormancer.Core.Packet obj)
         {
+            if (_pluginCtx != null)
+            {
+                _pluginCtx.PacketReceived(obj);
+            }
 
             _dispatcher.DispatchPacket(obj);
         }
@@ -227,7 +245,12 @@ namespace Stormancer
                     _serverConnection.RegisterComponent(_serializers[result.SelectedSerializer]);
                 }
                 var scene = new Scene(this._serverConnection, this, sceneId, ci.Token, result);
-                
+
+                if (_pluginCtx.SceneCreated != null)
+                {
+                    _pluginCtx.SceneCreated(scene);
+                }
+
                 return scene;
             });
 
@@ -277,7 +300,7 @@ namespace Stormancer
             return GetScene(ci.TokenData.SceneId, ci);
         }
 
-        internal Task ConnectToScene(Scene scene, string token, IEnumerable<Route> localRoutes)        
+        internal Task ConnectToScene(Scene scene, string token, IEnumerable<Route> localRoutes)
         {
             var parameter = new Stormancer.Dto.ConnectToSceneMsg
             {
@@ -294,13 +317,24 @@ namespace Stormancer
                     {
                         scene.CompleteConnectionInitialization(result);
                         _scenesDispatcher.AddScene(scene);
+                        if (_pluginCtx.SceneConnected != null)
+                        {
+                            _pluginCtx.SceneConnected(scene);
+                        }
                     });
         }
 
-        internal Task Disconnect(byte sceneHandle)
+        internal Task Disconnect(Scene scene, byte sceneHandle)
         {
             return this.SendSystemRequest<byte, Stormancer.Dto.Empty>((byte)MessageIDTypes.ID_DISCONNECT_FROM_SCENE, sceneHandle)
-                .Then(() => this._scenesDispatcher.RemoveScene(sceneHandle));
+                .Then(() =>
+                    {
+                        this._scenesDispatcher.RemoveScene(sceneHandle);
+                        if (_pluginCtx.SceneDisconnected != null)
+                        {
+                            _pluginCtx.SceneDisconnected(scene);
+                        }
+                    });
         }
 
 
@@ -334,7 +368,7 @@ namespace Stormancer
 
         }
 
-       
+
 
 
 
@@ -348,9 +382,7 @@ namespace Stormancer
             return _requestProcessor.SendSceneRequest(peer, scene, route, writer);
         }
 
-
-
-
+        public ulong Id { get { return this._transport.Id; } }
     }
 
 }

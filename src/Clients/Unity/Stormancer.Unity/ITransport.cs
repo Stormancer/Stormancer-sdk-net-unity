@@ -62,5 +62,7 @@ namespace Stormancer.Networking
         /// The name of the transport.
         /// </summary>
         string Name { get; }
+
+        ulong Id { get; }
     }
 }

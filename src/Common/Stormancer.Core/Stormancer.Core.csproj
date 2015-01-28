@@ -44,11 +44,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientException.cs" />
+    <Compile Include="Extensions\PacketExtensions.cs" />
     <Compile Include="IConnection.cs" />
     <Compile Include="ILogger.cs" />
     <Compile Include="IScene.cs" />
     <Compile Include="IScenePeer.cs" />
+    <Compile Include="ISerializer.cs" />
     <Compile Include="Models\ConnectionDataToken.cs" />
+    <Compile Include="Models\RouteDto.cs" />
     <Compile Include="Packet.cs" />
     <Compile Include="PacketPriority.cs" />
     <Compile Include="PacketReliability.cs" />

@@ -27,7 +27,7 @@ namespace Stormancer
         {
             return packet.Serializer().Deserialize<T>(packet.Stream);
         }
-
+        
       
         public static ISerializer Serializer(this Packet packet)
         {

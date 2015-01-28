@@ -242,6 +242,11 @@ namespace Stormancer.Networking
             get;
             private set;
         }
+
+        public ulong Id
+        {
+            get { return this._peer.GetMyGUID().g; }
+        }
     }
 
 
