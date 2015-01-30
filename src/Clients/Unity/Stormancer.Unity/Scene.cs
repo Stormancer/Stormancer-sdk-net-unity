@@ -205,21 +205,6 @@ namespace Stormancer
             _peer.SendToScene(this.Handle, routeObj.Index, writer, priority, reliability, channel);//.SendPacket(routeObj, writer, priority, reliability, channel);
         }
 
-
-        /// <summary>
-        /// Sends a request to the remote peer with ability to get responses.
-        /// </summary>
-        /// <param name="route">The remote route on wich to send the request.</param>
-        /// <param name="writer">An `Action&lt;Stream&gt;` object that will write the request content.</param>
-        /// <returns>An observable notifying responses from the remote host.</returns>
-        public IObservable<Packet> SendRequest(string route, Action<Stream> writer)
-        {
-
-            return _client.SendRequest(this._peer, this._handle, this._remoteRoutesMap[route].Index, writer);
-        }
-
-
-
         /// <summary>
         /// Disconnects the scene.
         /// </summary>

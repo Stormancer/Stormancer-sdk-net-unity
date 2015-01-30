@@ -22,6 +22,7 @@ namespace Stormancer
                 return this._scene;
             }
         }
+        public Client Client { get; private set; }
 
         private TaskCompletionSource<bool> _connectedTcs = new TaskCompletionSource<bool>();
 
@@ -46,8 +47,8 @@ namespace Stormancer
                 config = ClientConfiguration.ForAccount(AccountId, Application);
             }
 
-            var client = new Stormancer.Client(config);
-            client.GetPublicScene(this.SceneId, "")
+            Client = new Stormancer.Client(config);
+            Client.GetPublicScene(this.SceneId, "")
                 .ContinueWith<Scene>(task => {
                 if (task.IsFaulted)
                 {

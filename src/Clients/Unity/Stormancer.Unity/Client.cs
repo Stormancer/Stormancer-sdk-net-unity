@@ -6,11 +6,6 @@ using System.Linq;
 using UniRx;
 using System.Text;
 using System.Threading.Tasks;
-#if StormancerClient
-#else
-using Microsoft.AspNet.SignalR.Client;
-using Microsoft.AspNet.SignalR;
-#endif
 using System.Threading;
 using Stormancer.Proxy.Agent;
 using System.IO;
@@ -173,7 +168,7 @@ namespace Stormancer
 
         private void Transport_PacketReceived(Stormancer.Core.Packet obj)
         {
-            if (_pluginCtx != null)
+            if (_pluginCtx.PacketReceived != null)
             {
                 _pluginCtx.PacketReceived(obj);
             }

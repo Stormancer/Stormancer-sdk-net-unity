@@ -1,7 +1,4 @@
 ﻿using Stormancer.Networking;
-#if !StormancerClient
-using Stormancer.Platform.Core.Composition;
-#endif
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +11,6 @@ namespace Stormancer.Networking
     /// <summary>
     /// Interface describing a message dispatcher.
     /// </summary>
-#if !StormancerClient
-    [Dependency]
-#endif
     public interface IPacketDispatcher
     {
 

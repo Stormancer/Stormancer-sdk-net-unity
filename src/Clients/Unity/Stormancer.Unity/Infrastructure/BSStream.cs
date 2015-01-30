@@ -99,7 +99,7 @@ namespace Stormancer.Infrastructure
 
         public override void Write(byte[] buffer, int offset, int count)
         {
-            if (count <= 0)
+            if (count < 0)
             {
                 throw new ArgumentException("Count must be a positive value.");
             }

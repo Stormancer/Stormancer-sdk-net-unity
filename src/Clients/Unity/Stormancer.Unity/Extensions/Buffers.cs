@@ -36,10 +36,7 @@ namespace Stormancer
             bs.Write(buffer, (uint)data.Count);
         }
 
-        //We pick a value that is the largest multiple of 4096 that is still smaller than the large object heap threshold (85K).
-        // The CopyTo/CopyToAsync buffer is short-lived and is likely to be collected at Gen0, and it offers a significant
-        // improvement in Copy performance.
-        private const int _DefaultCopyBufferSize = 81920;
+        private const int _DefaultCopyBufferSize = 1024;
 
         public static void CopyTo(this Stream stream, Stream destination)
         {

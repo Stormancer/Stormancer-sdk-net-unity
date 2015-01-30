@@ -58,59 +58,59 @@ namespace Stormancer
         }
 
        
-        /// <summary>
-        /// Sends a request to the remote scene on the route, serializing the data with the scene serializer.
-        /// </summary>
-        /// <typeparam name="T">Type of the input request data.</typeparam>
-        /// <typeparam name="U">Type of the output request data.</typeparam>
-        /// <param name="scene">The remote scene proxy to which the request will be sent.</param>
-        /// <param name="route">A String containing the name of the route to which the request should be sent.</param>
-        /// <param name="data">The Input request data.</param>
-        /// <returns>An observable outputting the request responses.</returns>
-        public static IObservable<U> SendRequest<T, U>(this Scene scene, string route, T data)
-        {
-            return scene.SendRequest(route, s =>
-            {
-                scene.Host.Serializer().Serialize(data, s);
-            }).Select(packet =>
-            {
-                var value = scene.Host.Serializer().Deserialize<U>(packet.Stream);
+        ///// <summary>
+        ///// Sends a request to the remote scene on the route, serializing the data with the scene serializer.
+        ///// </summary>
+        ///// <typeparam name="T">Type of the input request data.</typeparam>
+        ///// <typeparam name="U">Type of the output request data.</typeparam>
+        ///// <param name="scene">The remote scene proxy to which the request will be sent.</param>
+        ///// <param name="route">A String containing the name of the route to which the request should be sent.</param>
+        ///// <param name="data">The Input request data.</param>
+        ///// <returns>An observable outputting the request responses.</returns>
+        //public static IObservable<U> SendRequest<T, U>(this Scene scene, string route, T data)
+        //{
+        //    return scene.SendRequest(route, s =>
+        //    {
+        //        scene.Host.Serializer().Serialize(data, s);
+        //    }).Select(packet =>
+        //    {
+        //        var value = scene.Host.Serializer().Deserialize<U>(packet.Stream);
                
-                return value;
-            });
-        }
+        //        return value;
+        //    });
+        //}
 
-        public static Task SendVoidRequest<T>(this Scene scene, string route, T data)
-        {
-            var tcs = new TaskCompletionSource<Unit>();
-            scene.SendRequest(route, s =>
-            {
-                scene.Host.Serializer().Serialize(data, s);
-            }).Subscribe(p => { }, () => tcs.SetResult(Unit.Default));
+        //public static Task SendVoidRequest<T>(this Scene scene, string route, T data)
+        //{
+        //    var tcs = new TaskCompletionSource<Unit>();
+        //    scene.SendRequest(route, s =>
+        //    {
+        //        scene.Host.Serializer().Serialize(data, s);
+        //    }).Subscribe(p => { }, () => tcs.SetResult(Unit.Default));
 
-            return tcs.Task;
-        }
+        //    return tcs.Task;
+        //}
 
-        public static Task SendVoidRequest(this Scene scene, string route)
-        {
-            var tcs = new TaskCompletionSource<Unit>();
-            scene.SendRequest(route, s =>
-            {
-            }).Subscribe(p => { }, () => tcs.SetResult(Unit.Default));
+        //public static Task SendVoidRequest(this Scene scene, string route)
+        //{
+        //    var tcs = new TaskCompletionSource<Unit>();
+        //    scene.SendRequest(route, s =>
+        //    {
+        //    }).Subscribe(p => { }, () => tcs.SetResult(Unit.Default));
 
-            return tcs.Task;
-        }
-        public static IObservable<T> SendRequest<T>(this Scene scene, string route)
-        {
-            return scene.SendRequest(route, s =>
-            {
-            }).Select(packet =>
-            {
-                var value = packet.Serializer().Deserialize<T>(packet.Stream);
+        //    return tcs.Task;
+        //}
+        //public static IObservable<T> SendRequest<T>(this Scene scene, string route)
+        //{
+        //    return scene.SendRequest(route, s =>
+        //    {
+        //    }).Select(packet =>
+        //    {
+        //        var value = packet.Serializer().Deserialize<T>(packet.Stream);
                 
-                return value;
-            });
-        }
+        //        return value;
+        //    });
+        //}
 
         public static void Send<T>(this Scene scene, string route, T data)
         {

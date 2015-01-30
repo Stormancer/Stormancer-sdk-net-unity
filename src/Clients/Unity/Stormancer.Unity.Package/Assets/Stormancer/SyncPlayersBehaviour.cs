@@ -16,7 +16,7 @@ namespace Stormancer
         // The prefab used for other players
         public GameObject PlayerPrefab;
         public float _syncPeriod = 0.1f;
-        private string _id = null;
+        private string _id { get { return _stormancerScene.Client.Id.ToString(); } }
         private StormancerSceneBehaviour _stormancerScene;
 
         // Use this for initialization
@@ -26,7 +26,6 @@ namespace Stormancer
             this._stormancerScene.ConfigureScene(InitScene);
 
             this._stormancerScene.ConnectedTask
-                .Then(() => RequestId())
                 .Then(() =>
             {           
                         MainThreadDispatcher.Post(() =>
@@ -34,18 +33,7 @@ namespace Stormancer
                     this.InvokeRepeating("SendPosition", 0, this._syncPeriod);
                 });
             });
-        }
-
-        private void RequestId()
-        {
-            Debug.Log("Getting id for players sync.");
-            this._stormancerScene.Scene.SendRequest<string, string>("game.getId", "")
-                .Subscribe(id => 
-            {
-                this._id = id;
-                Debug.Log("Id for players sync obtained: " + id);
-            });
-        }
+        }   
 
         private void InitScene(Scene scene)
         {

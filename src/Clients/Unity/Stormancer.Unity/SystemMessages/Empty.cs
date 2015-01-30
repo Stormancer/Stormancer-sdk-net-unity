@@ -16,5 +16,10 @@ namespace Stormancer.Dto
                 return _instance;
             }
         }
+
+        /// <summary>
+        /// Dummy property to prevent MsgPack from crashing when serializing an empty object.
+        /// </summary>
+        public bool value { get { return true; } set { } }
     }
 }
