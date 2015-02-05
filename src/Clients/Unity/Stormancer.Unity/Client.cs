@@ -7,7 +7,6 @@ using UniRx;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
-using Stormancer.Proxy.Agent;
 using System.IO;
 using Stormancer.Client45.Infrastructure;
 using Stormancer.Client45;
@@ -29,7 +28,10 @@ namespace Stormancer
             private long _current = 0;
             public long GenerateNewConnectionId()
             {
-                return _current++;
+                lock(this)
+                {
+                    return _current++;
+                }
             }
 
 
@@ -208,6 +210,17 @@ namespace Stormancer
 
             return tcs.Task;
         }
+
+        /// <summary>
+        /// Returns a private scene (requires a token obtained from strong authentication with the Stormancer API).
+        /// </summary>
+        /// <remarks>
+        /// The effective connection happens when "Connect" is called on the scene. Note that when you call GetScene, 
+        /// a connection token is requested from the Stormancer API.this token is only valid for a few minutes: Don't get scenes
+        /// a long time before connecting to them.
+        /// </remarks>
+        /// <param name="token">The token securing the connection.</param>
+        /// <returns>A task returning the scene object on completion.</returns>        
         private Task<Scene> GetScene(string sceneId, SceneEndpoint ci)
         {
             return TaskHelper.If(_serverConnection == null, () =>
@@ -223,11 +236,16 @@ namespace Stormancer
                             .Then(connection =>
                             {
                                 _serverConnection = connection;
+
+                                foreach (var kvp in _metadata)
+                                {
+                                    _serverConnection.Metadata[kvp.Key] = kvp.Value;
+                                }
                             });
                     });
             }).Then(() =>
             {
-                var parameter = new Stormancer.Dto.SceneInfosRequestDto { Metadata = _metadata, Token = ci.Token };
+                var parameter = new Stormancer.Dto.SceneInfosRequestDto { Metadata = _serverConnection.Metadata, Token = ci.Token };
                 return SendSystemRequest<Stormancer.Dto.SceneInfosRequestDto, Stormancer.Dto.SceneInfosDto>((byte)MessageIDTypes.ID_GET_SCENE_INFOS, parameter);
             }).Then(result =>
             {
@@ -238,6 +256,8 @@ namespace Stormancer
                         throw new InvalidOperationException("No seralizer selected.");
                     }
                     _serverConnection.RegisterComponent(_serializers[result.SelectedSerializer]);
+                    _serverConnection.Metadata.Add("serializer", result.SelectedSerializer);
+
                 }
                 var scene = new Scene(this._serverConnection, this, sceneId, ci.Token, result);
 
@@ -305,7 +325,8 @@ namespace Stormancer
                     Handle = r.Index,
                     Metadata = r.Metadata,
                     Name = r.Name
-                }).ToList()
+                }).ToList(),
+                ConnectionMetadata = _serverConnection.Metadata
             };
             return this.SendSystemRequest<Stormancer.Dto.ConnectToSceneMsg, Stormancer.Dto.ConnectionResult>((byte)MessageIDTypes.ID_CONNECT_TO_SCENE, parameter)
                 .Then(result =>
@@ -377,7 +398,7 @@ namespace Stormancer
             return _requestProcessor.SendSceneRequest(peer, scene, route, writer);
         }
 
-        public ulong Id { get { return this._transport.Id; } }
+        public long Id { get { return this._transport.Id; } }
     }
 
 }

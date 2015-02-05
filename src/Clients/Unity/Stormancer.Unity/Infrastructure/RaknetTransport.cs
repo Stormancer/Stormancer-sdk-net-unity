@@ -89,6 +89,9 @@ namespace Stormancer.Networking
                             OnDisconnection(packet, server, "CONNECTION_LOST");
 
                             break;
+                        case (byte)MessageIDTypes.ID_CONNECTION_RESULT:
+                            OnConnectionIdReceived(BitConverter.ToInt64(packet.data, 1));
+                            break;
 
                         case (byte)DefaultMessageIDTypes.ID_CONNECTION_ATTEMPT_FAILED:
                             if (_pendingConnections.TryGetValue(packet.systemAddress.ToString(), out tcs))
@@ -109,6 +112,11 @@ namespace Stormancer.Networking
             logger.Info("Stopped raknet server.");
         }
 
+        private void OnConnectionIdReceived(long p)
+        {
+            Id = p;
+        }
+
         #region message handling
 
         private void OnConnection(RakNet.Packet packet, RakPeerInterface server)
@@ -123,6 +131,8 @@ namespace Stormancer.Networking
             {
                 action(c);
             }
+
+            c.SendSystem((byte)MessageIDTypes.ID_CONNECTION_RESULT, s => s.Write(BitConverter.GetBytes(c.Id), 0, 8));
         }
 
 
@@ -243,10 +253,7 @@ namespace Stormancer.Networking
             private set;
         }
 
-        public ulong Id
-        {
-            get { return this._peer.GetMyGUID().g; }
-        }
+        public long Id { get; private set; }
     }
 
 

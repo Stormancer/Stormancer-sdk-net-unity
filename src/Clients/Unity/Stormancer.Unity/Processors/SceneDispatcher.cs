@@ -10,7 +10,7 @@ namespace Stormancer.Processors
 {
     internal class SceneDispatcher : IPacketProcessor
     {
-        private Scene[] _scenes = new Scene[256];
+        private Scene[] _scenes = new Scene[(int)byte.MaxValue - (int)MessageIDTypes.ID_SCENES + 1];
 
         public void RegisterProcessor(PacketProcessorConfig config)
         {
@@ -19,7 +19,11 @@ namespace Stormancer.Processors
 
         private bool Handler(byte sceneHandle, Packet packet)
         {
-            var scene = _scenes[sceneHandle];
+            if (sceneHandle < (byte)MessageIDTypes.ID_SCENES)
+            {
+                return false;
+            }
+            var scene = _scenes[sceneHandle - (byte)MessageIDTypes.ID_SCENES];
             if (scene == null)
             {
                 return false;
@@ -28,6 +32,7 @@ namespace Stormancer.Processors
             {
                 packet.Metadata["scene"] = scene;
                 scene.HandleMessage(packet);
+
                 return true;
             }
 
@@ -35,12 +40,12 @@ namespace Stormancer.Processors
 
         public void AddScene(Scene scene)
         {
-            _scenes[scene.Handle] = scene;
+            _scenes[scene.Handle - (byte)MessageIDTypes.ID_SCENES] = scene;
         }
 
         public void RemoveScene(byte sceneHandle)
         {
-            _scenes[sceneHandle] = null;
+            _scenes[sceneHandle - (byte)MessageIDTypes.ID_SCENES] = null;
         }
     }
 }

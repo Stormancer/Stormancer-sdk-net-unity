@@ -1,5 +1,4 @@
-﻿using Stormancer.Proxy.Agent;
-using System;
+﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
@@ -301,7 +300,7 @@ namespace Stormancer.Networking.Processors
             {
                 throw new ArgumentNullException("writer");
             }
-            _packet.Connection.SendSystem((byte)MessageIDTypes.ID_REQUEST_RESPONSE_COMPLETE, s =>
+            _packet.Connection.SendSystem((byte)MessageIDTypes.ID_REQUEST_RESPONSE_ERROR, s =>
             {
                 s.Write(_requestId, 0, 2);
                 writer(s);

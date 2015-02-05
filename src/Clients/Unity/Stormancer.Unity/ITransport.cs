@@ -63,6 +63,6 @@ namespace Stormancer.Networking
         /// </summary>
         string Name { get; }
 
-        ulong Id { get; }
+        long Id { get; }
     }
 }

@@ -141,7 +141,7 @@ namespace Stormancer.Networking
             {
                 s.WriteByte(msgId);
                 writer(s);
-            }, Core.PacketPriority.HIGH_PRIORITY, Core.PacketReliability.RELIABLE, (char)0);
+            }, Core.PacketPriority.HIGH_PRIORITY, Core.PacketReliability.RELIABLE_ORDERED, (char)0);
         }
         public void SendRaw(Action<Stream> writer, Stormancer.Core.PacketPriority priority, Stormancer.Core.PacketReliability reliability, char channel)
         {

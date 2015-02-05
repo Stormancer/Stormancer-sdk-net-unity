@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Stormancer.Proxy.Agent
+namespace Stormancer.Networking
 {
     /// <metadata visibility="internal"/>
     /// <summary>
@@ -19,10 +19,11 @@ namespace Stormancer.Proxy.Agent
         ID_REQUEST_RESPONSE_MSG ,
         ID_REQUEST_RESPONSE_COMPLETE,
         ID_REQUEST_RESPONSE_ERROR,
-        ID_SYSTEM_ERROR,
+        ID_CONNECTION_RESULT,
 
 
         ID_SCENES,
+
 
     }
 }
