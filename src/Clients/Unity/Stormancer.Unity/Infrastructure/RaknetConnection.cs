@@ -13,6 +13,61 @@ namespace Stormancer.Networking
 
     internal class RakNetConnection : IConnection
     {
+        private class RakNetConnectionStatistics : IConnectionStatistics
+        {
+            public static IConnectionStatistics GetConnectionStatistics(RakNetConnection connection)
+            {
+                var result = new RakNetConnectionStatistics();
+                using (var stats = connection._rakPeer.GetStatistics(connection._rakPeer.GetSystemAddressFromGuid(connection._guid)))
+                {
+                    result.PacketLossRate = stats.packetlossLastSecond;
+                    result.BytesPerSecondLimitationType = stats.isLimitedByOutgoingBandwidthLimit ? BPSLimitationType.OutgoingBandwidth : (stats.isLimitedByCongestionControl ? BPSLimitationType.CongestionControl : BPSLimitationType.None);
+                    result.BytesPerSecondLimit = (long)(stats.isLimitedByOutgoingBandwidthLimit ? stats.BPSLimitByOutgoingBandwidthLimit : stats.BPSLimitByCongestionControl);
+                    result._queuedBytes = stats.bytesInSendBuffer.ToArray();
+                    result._queuedPackets = stats.messageInSendBuffer.ToArray();
+                }
+
+                return result;
+            }
+
+            private RakNetConnectionStatistics()
+            {
+            }
+            public float PacketLossRate { get; private set; }
+
+            public BPSLimitationType BytesPerSecondLimitationType { get; private set; }
+
+            public long BytesPerSecondLimit { get; private set; }
+
+            private double[] _queuedBytes;
+            public double QueuedBytes
+            {
+                get
+                {
+                    return this._queuedBytes.Sum();
+                }
+            }
+
+            public double QueuedBytesForPriority(Core.PacketPriority priority)
+            {
+                return this._queuedBytes[(int)priority];
+            }
+
+            private uint[] _queuedPackets;
+
+            public int QueuedPackets
+            {
+                get { return this._queuedPackets.Cast<int>().Sum(); }
+            }
+
+            public int QueuedPacketsForPriority(Core.PacketPriority priority)
+            {
+                return (int)(this._queuedPackets[(int)priority]);
+            }
+        }
+
+
+
         private RakPeerInterface _rakPeer;
         private RakNetGUID _guid;
 
@@ -223,5 +278,18 @@ namespace Stormancer.Networking
                 this.Application = application;
             }
         }
+
+
+
+        public int Ping
+        {
+            get { return this._rakPeer.GetLastPing(this._guid); }
+        }
+
+        public IConnectionStatistics GetConnectionStatistics()
+        {
+            return RakNetConnectionStatistics.GetConnectionStatistics(this);
+        }
+
     }
 }

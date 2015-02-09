@@ -62,7 +62,6 @@ namespace Stormancer.Networking
         /// The name of the transport.
         /// </summary>
         string Name { get; }
-
-        long Id { get; }
+                long? Id { get; }
     }
 }

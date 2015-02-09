@@ -43,9 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BPSLimitationType.cs" />
     <Compile Include="ClientException.cs" />
     <Compile Include="Extensions\PacketExtensions.cs" />
     <Compile Include="IConnection.cs" />
+    <Compile Include="IConnectionStatistics.cs" />
     <Compile Include="ILogger.cs" />
     <Compile Include="IScene.cs" />
     <Compile Include="IScenePeer.cs" />

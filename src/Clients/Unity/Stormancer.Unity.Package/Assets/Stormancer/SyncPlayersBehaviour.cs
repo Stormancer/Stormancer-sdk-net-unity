@@ -16,7 +16,7 @@ namespace Stormancer
         // The prefab used for other players
         public GameObject PlayerPrefab;
         public float _syncPeriod = 0.1f;
-        private string _id { get { return _stormancerScene.Client.Id.ToString(); } }
+
         private StormancerSceneBehaviour _stormancerScene;
 
         // Use this for initialization
@@ -39,18 +39,18 @@ namespace Stormancer
         {
             scene.RegisterRoute<PositionUpdate>("game.position", pos => 
             {
-                if (this._id != null && pos.Id != this._id)
+                if (this._stormancerScene.Id != null && pos.Id != this._stormancerScene.Id)
                 {
                     MainThreadDispatcher.Post(() => 
                     {
-                        var otherplayer = GameObject.Find(pos.Id);
+                        var otherplayer = GameObject.Find(pos.Id.ToString());
                         
                         Interpolation interpolation;
                         if (otherplayer == null)
                         {
                             Debug.Log("Creating other player " + pos.Id);
                             otherplayer = (GameObject)Instantiate(PlayerPrefab);
-                            otherplayer.name = pos.Id;
+                            otherplayer.name = pos.Id.ToString();
                             otherplayer.transform.position = pos.Position;
                             otherplayer.transform.rotation = pos.Rotation;
                             interpolation = otherplayer.GetComponent<Interpolation>();

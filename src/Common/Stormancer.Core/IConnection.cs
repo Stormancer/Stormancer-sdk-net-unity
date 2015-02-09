@@ -83,9 +83,7 @@ namespace Stormancer.Core
             Action<Stream> writer,
             PacketPriority priority,
             PacketReliability reliability,
-            char channel);
-
-     
+            char channel);     
 
         /// <summary>
         /// Event fired when the connection has been closed
@@ -93,6 +91,18 @@ namespace Stormancer.Core
         Action<string> ConnectionClosed { get; set; }
 
         void SetApplication(string account, string application);
+
+        /// <summary>
+        /// The connection's Ping in milliseconds
+        /// </summary>
+        int Ping { get; }
+
+        /// <summary>
+        /// Returns advanced statistics about the connection.
+        /// </summary>
+        /// <returns>The required statistics</returns>
+        IConnectionStatistics GetConnectionStatistics();
+
 
     }
 

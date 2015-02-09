@@ -398,7 +398,29 @@ namespace Stormancer
             return _requestProcessor.SendSceneRequest(peer, scene, route, writer);
         }
 
-        public long Id { get { return this._transport.Id; } }
+        /// <summary>
+        /// The client's unique stormancer Id. Returns null if the Id has not been acquired yet (connection still in progress).
+        /// </summary>
+        public long? Id { get { return this._transport.Id; } }
+
+        /// <summary>
+        /// The server connection's ping, in milliseconds.
+        /// </summary>
+        public int ServerPing { get { return this._serverConnection.Ping; } }
+
+        /// <summary>
+        /// The name of the transport used for connecting to the server.
+        /// </summary>
+        public string ServerTransportType { get { return this._transport.Name; } }
+
+        /// <summary>
+        /// Returns statistics about the connection to the server.
+        /// </summary>
+        /// <returns>The required statistics</returns>
+        public IConnectionStatistics GetServerConnectionStatistics()
+        {
+            return this._serverConnection.GetConnectionStatistics();
+        }
     }
 
 }

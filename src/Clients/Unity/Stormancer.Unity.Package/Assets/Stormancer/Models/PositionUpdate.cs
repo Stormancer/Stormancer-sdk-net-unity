@@ -9,6 +9,6 @@ namespace Stormancer.Unity.Models
     {
         public DtoVector Position { get; set; }
         public DtoQuaternion Rotation { get; set; }
-        public string Id { get; set; }
+        public long Id { get; set; }
     }
 }

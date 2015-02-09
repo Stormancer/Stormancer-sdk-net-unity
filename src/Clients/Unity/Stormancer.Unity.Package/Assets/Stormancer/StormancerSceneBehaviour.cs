@@ -12,7 +12,7 @@ namespace Stormancer
         public string AccountId;
         public string Application;
         public string SceneId;
-        public bool UseLocalEmulator = false;
+        //public bool UseLocalEmulator = false;
         private Scene _scene;
 
         public Scene Scene
@@ -22,7 +22,10 @@ namespace Stormancer
                 return this._scene;
             }
         }
-        public Client Client { get; private set; }
+
+        public long? Id { get { return this._client.Id; } }
+
+        private Client _client;
 
         private TaskCompletionSource<bool> _connectedTcs = new TaskCompletionSource<bool>();
 
@@ -39,16 +42,16 @@ namespace Stormancer
         void Start()
         {
             ClientConfiguration config;
-            if (this.UseLocalEmulator)
-            {
-                config = ClientConfiguration.ForLocalDev(this.Application);
-            } else
-            {
+            //if (this.UseLocalEmulator)
+            //{
+            //    config = ClientConfiguration.ForLocalDev(this.Application);
+            //} else
+            //{
                 config = ClientConfiguration.ForAccount(AccountId, Application);
-            }
+            //}
 
-            Client = new Stormancer.Client(config);
-            Client.GetPublicScene(this.SceneId, "")
+            _client = new Stormancer.Client(config);
+            _client.GetPublicScene(this.SceneId, "")
                 .ContinueWith<Scene>(task => {
                 if (task.IsFaulted)
                 {
