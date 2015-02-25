@@ -158,6 +158,6 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>xcopy /d "$(ProjectDir)..\..\..\..\libs\Unity\Raknet\Raknet.dll"</PostBuildEvent>
+    <PostBuildEvent>xcopy /d "$(ProjectDir)..\..\..\..\libs\Raknet\x86\Raknet.dll" "$(TargetDir)x86\"</PostBuildEvent>
   </PropertyGroup>
 </Project>

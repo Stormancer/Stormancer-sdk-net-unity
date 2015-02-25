@@ -35,6 +35,7 @@ namespace Stormancer
             var request = new Request("POST", uri.AbsoluteUri, data);
             request.AddHeader("Content-Type", "application/msgpack");
             request.AddHeader("Accept", "application/json");
+            request.AddHeader("x-version", "1.0.0");
             return request.Send().ContinueWith(t =>
             {
                 try
