@@ -1,4 +1,5 @@
 ﻿/// <reference path="Scripts/typings/msgpack/msgpack.d.ts" />
+/// <reference path="CancellationTokenSource.ts" />
 
 // Module
 module Stormancer {
@@ -123,10 +124,10 @@ module Stormancer {
         logger: ILogger;
 
         // Returns a public scene (accessible without authentication)
-        getPublicScene<T>(sceneId: string, userData: T): Task<IScene>;
+        getPublicScene<T>(sceneId: string, userData: T): JQueryPromise<IScene>;
 
         // Returns a private scene (requires a token obtained from strong authentication with the Stormancer API.
-        getScene(token: string): Task<IScene>;
+        getScene(token: string): JQueryPromise<IScene>;
 
         // Disconnects the client.
         disconnect(): void;
@@ -134,14 +135,11 @@ module Stormancer {
         // The client's unique stormancer Id. Returns null if the Id has not been acquired yet (connection still in progress).
         id: number;
 
-        // The server connection's ping, in milliseconds.
-        serverPing: number;
-
         // The name of the transport used for connecting to the server.
         serverTransportType: string;
 
-        // Returns statistics about the connection to the server.
-        getServerConnectionStatistics(): IConnectionStatistics;
+        //// Returns statistics about the connection to the server.
+        //getServerConnectionStatistics(): IConnectionStatistics;
     }
 
     export interface IScene {
@@ -160,45 +158,25 @@ module Stormancer {
         hostConnection: IConnection;
 
         // Registers a route on the local peer.
-        addRoute(route: string, handler: Action<Packet<IScenePeer>>, metadata: Dictionary): void;
+        addRoute(route: string, handler: (packet: Packet<IScenePeer>) => void, metadata: { [key: string]: string }): void;
 
         // Sends a packet to the scene.
-        sendPacket(route: string, writer: Action<Stream>, priority: PacketPriority, reliability: PacketReliability, channel: number): void;
+        sendPacket(route: string, data: Uint8Array, priority: PacketPriority, reliability: PacketReliability, channel: number): void;
 
         // Disconnects the scene.
-        disconnect: Task<void>;
+        disconnect: JQueryPromise<void>;
 
         // Connects the scene to the server.
-        connect: Task<void>;
+        connect: JQueryPromise<void>;
 
         // Fires when packet are received on the scene.
-        packetReceived: Action<Packet<IConnection>>;
+        packetReceived: (packet: Packet<IConnection>) => void;
 
         host: IScenePeer;
     }
 
-    interface Stream {
-        (): Uint8Array;
-    }
-
-    interface IDictionary<T> {
-        [key: string]: T;
-    }
-
-    interface Dictionary {
-        [key: string]: string;
-    }
-
-    interface Action<T> {
-        T: void;
-    }
-
-    interface Task<T> {
-        T: JQueryPromise<T>;
-    }
-
     class Packet<T> {
-        constructor(source: T, data: Uint8Array, metadata: Dictionary) {
+        constructor(source: T, data: Uint8Array, metadata: { [key: string]: string }) {
             this.source = source;
             this.data = data;
             this.metadata = metadata;
@@ -209,7 +187,7 @@ module Stormancer {
         // Data contained in the packet.
         public data: Uint8Array;
 
-        public metadata: Dictionary;
+        public metadata: { [key: string]: string };
 
         public getMetadata(key: string): string {
             return this.metadata[key];
@@ -221,7 +199,7 @@ module Stormancer {
     // A remote scene.
     export interface IScenePeer {
         // Sends a message to the remote scene.
-        send(route: string, writer: Action<Stream>, priority: PacketPriority, reliability: PacketReliability): void;
+        send(route: string, data : Uint8Array, priority: PacketPriority, reliability: PacketReliability): void;
 
         id: number;
     }
@@ -235,22 +213,22 @@ module Stormancer {
     // A Stormancer network transport
     interface ITransport {
         // Starts the transport
-        start(type: string, handler: IConnectionManager, token: CancellationToken, port: number, maxConnections: number): Task<void>;
+        start(type: string, handler: IConnectionManager, token: Cancellation.token, port: number, maxConnections: number): JQueryPromise<void>;
 
         // Gets a boolean indicating if the transport is currently running.
         isRunning: boolean;
 
         // Connects the transport to a remote host.
-        connect(endpoint: string): Task<IConnection>;
+        connect(endpoint: string): JQueryPromise<IConnection>;
 
         // Fires when the transport recieves new packets.
-        packetReceived: Action<Packet<IConnection>>;
+        packetReceived: (packet: Packet<IConnection>) => void;
 
         // Fires when a remote peer has opened a connection.
-        connectionOpened: Action<IConnection>;
+        connectionOpened: (connection: IConnection) => void;
 
         // Fires when a connection to a remote peer is closed.
-        connectionClose: Action<IConnection>;
+        connectionClose: (connection: IConnection) => void;
 
         // The name of the transport.
         name: string;
@@ -258,52 +236,54 @@ module Stormancer {
         id: number;
     }
 
+
+
     // Contract for the binary serializers used by Stormancer applications.
     interface ISerializer {
         // Serialize an object into a stream.
-        serialize<T>(data: T, stream: Stream): void;
+        serialize<T>(data: T): Uint8Array;
 
         // Deserialize an object from a stream.
-        deserialize<T>(stream: Stream): T;
+        deserialize<T>(bytes: Uint8Array): T;
 
         // The serializer format.
         name: string;
     }
 
     interface ILogger {
-        trace(message: string, ...args: any[]): void;
+        trace(message: string): void;
 
-        debug(message: string, ...args: any[]): void;
+        debug(message: string): void;
 
         error(ex: ExceptionInformation): void;
 
-        error(format: string, ...args: any[]): void;
+        error(format: string): void;
 
-        info(format: string, ...args: any[]): void;
+        info(format: string): void;
     }
 
-    interface IConnectionStatistics {
-        /// Number of packets lost in the last second.
-        PacketLossRate: number;
+    //interface IConnectionStatistics {
+    //    /// Number of packets lost in the last second.
+    //    PacketLossRate: number;
 
-        // Get the kind of limitation on the outgoing flux.
-        BytesPerSecondLimitationType: BPSLimitationType;
+    //    // Get the kind of limitation on the outgoing flux.
+    //    BytesPerSecondLimitationType: BPSLimitationType;
 
-        // If the outgoing flux is limited, gets the limit rate.
-        BytesPerSecondLimit: number;
+    //    // If the outgoing flux is limited, gets the limit rate.
+    //    BytesPerSecondLimit: number;
 
-        // Gets the number of bytes in the sending queue.
-        QueuedBytes: number;
+    //    // Gets the number of bytes in the sending queue.
+    //    QueuedBytes: number;
 
-        // Gets the number of bytes in the sending queue for a given priority.
-        QueuedBytesForPriority(priority: PacketPriority): number;
+    //    // Gets the number of bytes in the sending queue for a given priority.
+    //    QueuedBytesForPriority(priority: PacketPriority): number;
 
-        // Gets the number of packets in the sending queue.
-        QueuedPackets: number;
+    //    // Gets the number of packets in the sending queue.
+    //    QueuedPackets: number;
 
-        // Gets the number of packets in the sending queue for a given priority.
-        QueuedPacketsForPriority(priority: PacketPriority): number;
-    }
+    //    // Gets the number of packets in the sending queue for a given priority.
+    //    QueuedPacketsForPriority(priority: PacketPriority): number;
+    //}
 
     interface IConnection {
 
@@ -314,16 +294,16 @@ module Stormancer {
         IpAddress: string;
 
         // Connection date.
-        ConnectionDate: DateTime;
+        ConnectionDate: Date;
 
         // Metadata associated with the connection.
-        Metadata: Dictionary;
+        Metadata: { [key: string]: string };
 
-        // Register components.
-        RegisterComponent<T>(component: T): void;
+        //// Register components.
+        //RegisterComponent<T>(component: T): void;
 
-        // Gets a service from the object.
-        GetComponent<T>(): T;
+        //// Gets a service from the object.
+        //GetComponent<T>(): T;
 
         // Account of the application which the peer is connected to.
         Account: string
@@ -338,28 +318,28 @@ module Stormancer {
         Close(): void;
 
         // Sends a system message to the peer.
-        SendSystem(msgId: number, writer: Action<Stream>): void;
+        SendSystem(msgId: number, data: Uint8Array): void;
 
-        SendRaw(writer: Action<Stream>, priority: PacketPriority, reliability: PacketReliability, channel: number): void;
+        SendRaw(data: Uint8Array, priority: PacketPriority, reliability: PacketReliability, channel: number): void;
  
         // Sends a packet to the target remote scene.
-        SendToScene(sceneIndex: number, route: number, writer: Action<Stream>, priority: PacketPriority, reliability: PacketReliability, channel: number); void;
+        SendToScene(sceneIndex: number, route: number, data: Uint8Array, priority: PacketPriority, reliability: PacketReliability, channel: number); void;
 
         // Event fired when the connection has been closed
-        ConnectionClosed: Action<string>
+        ConnectionClosed: ((reason: string) => void);
 
         SetApplication(account: string, application: string): void;
 
         // The connection's Ping in milliseconds
-        Ping: number;
+        //Ping: number;
 
         // Returns advanced statistics about the connection.
-        GetConnectionStatistics(): IConnectionStatistics;
+        //GetConnectionStatistics(): IConnectionStatistics;
     }
 
     interface IConnectionManager {
         // Generates an unique connection id for this node.
-        generateNewConnectionId: number;
+        generateNewConnectionId(): number;
 
         // Adds a connection to the manager
         NewConnection(connection: IConnection): void;
@@ -377,99 +357,96 @@ module Stormancer {
 
     // Contains method to register handlers for message types when passed to the IPacketProcessor.RegisterProcessor method.
     class PacketProcessorConfig {
-        constructor(handlers: IDictionary<(packet: Packet<IConnection>, b: boolean) => void>, defaultprocessors: ((n: number, p: Packet<IConnection>, b: boolean) => void)[]) {
+        constructor(handlers: { [key: number]: (packet: Packet<IConnection>) => boolean },
+            defaultprocessors: ((n: number, p: Packet<IConnection>) => boolean)[]) {
             this._handlers = handlers;
             this._defaultProcessors = defaultprocessors;
         }
 
-        private _handlers: IDictionary<(packet: Packet<IConnection>, b: boolean) => void>;
+        private _handlers: { [key: number]: (packet: Packet<IConnection>) => boolean };
 
-        private _defaultProcessors: ((numb: number, packet: Packet<IConnection>, b: boolean) => void)[];
+        private _defaultProcessors: ((n: number, p: Packet<IConnection>) => boolean)[];
 
         // Adds an handler for the specified message type.
-        public AddProcessor(msgId: number, handler: (p: Packet<IConnection>, b: boolean) => void): void {
+        public AddProcessor(msgId: number, handler: (p: Packet<IConnection>) => boolean): void {
             if (this._handlers[msgId]) {
-                //throw new ArgumentException(string.Format("An handler is already registered for id {0}", msgId));
+                throw new Error("An handler is already registered for id " + msgId);
             }
             this._handlers[msgId] = handler;
         }
 
         // Adds
-        public AddCatchAllProcessor(handler: (n: number, p: Packet<IConnection>, b: boolean) => void): void {
+        public AddCatchAllProcessor(handler: (n: number, p: Packet<IConnection>) => boolean): void {
             this._defaultProcessors.push(handler);
         }
     }
 
-    class CancellationToken {
-    }
 
-    class DateTime {
-    }
 
-    export class Client implements IClient {
-        public applicationName: string;
+    //export class Client implements IClient {
+    //    public applicationName: string;
 
-        public logger: ILogger;
+    //    public logger: ILogger;
 
-        public getPublicScene<T>(sceneId: string, userData: T): Task<IScene> {
-            return;
-        }
+    //    public getPublicScene<T>(sceneId: string, userData: T): Task<IScene> {
+    //        return;
+    //    }
 
-        public getScene(token: string): Task<IScene> {
-            return;
-        }
+    //    public getScene(token: string): Task<IScene> {
+    //        return;
+    //    }
 
-        public disconnect(): void {
-        }
+    //    public disconnect(): void {
+    //    }
 
-        public id: number;
+    //    public id: number;
 
-        public serverPing: number;
+    //    public serverPing: number;
 
-        public serverTransportType: string;
+    //    public serverTransportType: string;
 
-        public getServerConnectionStatistics(): IConnectionStatistics {
-            return;
-        }
-    }
+    //    public getServerConnectionStatistics(): IConnectionStatistics {
+    //        return;
+    //    }
+    //}
 
-    export class Scene implements IScene {
-        public id: string;
+    //export class Scene implements IScene {
+    //    public id: string;
 
-        public getHostMetadata(key: string): string {
-            return;
-        }
+    //    public getHostMetadata(key: string): string {
+    //        return;
+    //    }
 
-        public handle: number;
+    //    public handle: number;
 
-        public connected: boolean;
+    //    public connected: boolean;
 
-        public hostConnection: IConnection;
+    //    public hostConnection: IConnection;
 
-        public addRoute(route: string, handler: Action<Packet<IScenePeer>>, metadata: Dictionary): void {
-        }
+    //    public addRoute(route: string, handler: Action<Packet<IScenePeer>>, metadata: Dictionary): void {
+    //    }
 
-        public sendPacket(route: string, writer: Action<Stream>, priority: PacketPriority, reliability: PacketReliability, channel: number): void {
-        }
+    //    public sendPacket(route: string, writer: Action<Stream>, priority: PacketPriority, reliability: PacketReliability, channel: number): void {
+    //    }
 
-        public disconnect: Task<void>;
+    //    public disconnect: Task<void>;
 
-        public connect: Task<void>;
+    //    public connect: Task<void>;
 
-        public packetReceived: Action<Packet<IConnection>>;
+    //    public packetReceived: Action<Packet<IConnection>>;
 
-        public host: IScenePeer;
-    }
+    //    public host: IScenePeer;
+    //}
 
-    class ScenePeer implements IScenePeer {
-        public send(route: string, writer: Action<Stream>, priority: PacketPriority, reliability: PacketReliability): void {
-        }
+    //class ScenePeer implements IScenePeer {
+    //    public send(route: string, writer: Action<Stream>, priority: PacketPriority, reliability: PacketReliability): void {
+    //    }
 
-        public id: number;
-    }
+    //    public id: number;
+    //}
 
-    class BPSLimitationType {
-    }
+    //class BPSLimitationType {
+    //}
 }
 
 interface JQueryStatic {

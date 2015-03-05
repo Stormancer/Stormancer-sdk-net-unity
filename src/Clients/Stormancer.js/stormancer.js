@@ -1,4 +1,5 @@
 /// <reference path="Scripts/typings/msgpack/msgpack.d.ts" />
+/// <reference path="CancellationTokenSource.ts" />
 // Module
 var Stormancer;
 (function (Stormancer) {
@@ -102,6 +103,7 @@ var Stormancer;
         // Adds an handler for the specified message type.
         PacketProcessorConfig.prototype.AddProcessor = function (msgId, handler) {
             if (this._handlers[msgId]) {
+                throw new Error("An handler is already registered for id " + msgId);
             }
             this._handlers[msgId] = handler;
         };
@@ -110,58 +112,6 @@ var Stormancer;
             this._defaultProcessors.push(handler);
         };
         return PacketProcessorConfig;
-    })();
-    var CancellationToken = (function () {
-        function CancellationToken() {
-        }
-        return CancellationToken;
-    })();
-    var DateTime = (function () {
-        function DateTime() {
-        }
-        return DateTime;
-    })();
-    var Client = (function () {
-        function Client() {
-        }
-        Client.prototype.getPublicScene = function (sceneId, userData) {
-            return;
-        };
-        Client.prototype.getScene = function (token) {
-            return;
-        };
-        Client.prototype.disconnect = function () {
-        };
-        Client.prototype.getServerConnectionStatistics = function () {
-            return;
-        };
-        return Client;
-    })();
-    Stormancer.Client = Client;
-    var Scene = (function () {
-        function Scene() {
-        }
-        Scene.prototype.getHostMetadata = function (key) {
-            return;
-        };
-        Scene.prototype.addRoute = function (route, handler, metadata) {
-        };
-        Scene.prototype.sendPacket = function (route, writer, priority, reliability, channel) {
-        };
-        return Scene;
-    })();
-    Stormancer.Scene = Scene;
-    var ScenePeer = (function () {
-        function ScenePeer() {
-        }
-        ScenePeer.prototype.send = function (route, writer, priority, reliability) {
-        };
-        return ScenePeer;
-    })();
-    var BPSLimitationType = (function () {
-        function BPSLimitationType() {
-        }
-        return BPSLimitationType;
     })();
 })(Stormancer || (Stormancer = {}));
 (function ($, window) {
