@@ -13,9 +13,8 @@ namespace Stormancer.Networking
     /// </summary>
     public interface IPacketDispatcher
     {
-
         void DispatchPacket(Packet packet);
 
-        void AddPRocessor(IPacketProcessor processor);
+        void AddProcessor(IPacketProcessor processor);
     }
 }

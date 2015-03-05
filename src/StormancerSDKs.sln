@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityHttp", "libs\Unity\Uni
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.Tasks", "libs\Unity\Unity.Tasks\Unity.Tasks.csproj", "{81E29676-E413-4D27-8426-DE539DABFE2F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stormancer.js", "Clients\Stormancer.js\Stormancer.js.csproj", "{AC5DB693-0AAB-4BA7-8D74-67C307BCDCE7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{81E29676-E413-4D27-8426-DE539DABFE2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81E29676-E413-4D27-8426-DE539DABFE2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81E29676-E413-4D27-8426-DE539DABFE2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC5DB693-0AAB-4BA7-8D74-67C307BCDCE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC5DB693-0AAB-4BA7-8D74-67C307BCDCE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC5DB693-0AAB-4BA7-8D74-67C307BCDCE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC5DB693-0AAB-4BA7-8D74-67C307BCDCE7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,5 +74,6 @@ Global
 		{4CFA72EA-D026-455A-90E9-C8E30DBA3DDD} = {EC648FFE-38FA-48E2-95E6-4E41CC5B7E6F}
 		{212D3970-1A5B-4EED-A2F4-49657EBFCAD4} = {65FEAD7F-0F78-4B1D-98D4-B4F6A44F912D}
 		{81E29676-E413-4D27-8426-DE539DABFE2F} = {65FEAD7F-0F78-4B1D-98D4-B4F6A44F912D}
+		{AC5DB693-0AAB-4BA7-8D74-67C307BCDCE7} = {7BDA6BD5-5308-4809-AF65-4C7EE55E324A}
 	EndGlobalSection
 EndGlobal

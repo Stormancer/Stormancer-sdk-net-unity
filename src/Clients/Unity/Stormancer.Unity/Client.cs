@@ -127,8 +127,8 @@ namespace Stormancer
             _requestProcessor = new Stormancer.Networking.Processors.RequestProcessor(_logger, new List<IRequestModule>());
 
             _scenesDispatcher = new Processors.SceneDispatcher();
-            this._dispatcher.AddPRocessor(_requestProcessor);
-            this._dispatcher.AddPRocessor(_scenesDispatcher);
+            this._dispatcher.AddProcessor(_requestProcessor);
+            this._dispatcher.AddProcessor(_scenesDispatcher);
             this._metadata = configuration._metadata;
 
             foreach (var serializer in configuration.Serializers)

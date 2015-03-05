@@ -67,6 +67,7 @@ namespace Stormancer
         private ConcurrentDictionary<ushort, Action<Packet>> _handlers = new ConcurrentDictionary<ushort, Action<Packet>>();
 
         public IConnection HostConnection { get { return _peer; } }
+
         /// <summary>
         /// Returns a list of the routes registered on the local peer.
         /// </summary>
