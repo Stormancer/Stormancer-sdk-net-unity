@@ -25,7 +25,7 @@ namespace Stormancer.Client45.Infrastructure
         {
             token = token.Trim('"');
             var data = token.Split('-')[0];
-            var buffer= Convert.FromBase64String(data);
+            var buffer = Convert.FromBase64String(data);
 
             var result = _tokenSerializer.Deserialize<ConnectionData>(new MemoryStream(buffer));
 

@@ -20,11 +20,13 @@
   <ItemGroup>
     <Content Include="app.css" />
     <Content Include="index.html" />
+    <Content Include="Scripts\jQuery.XDomainRequest.js" />
     <Content Include="Scripts\msgPack.js" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
+    <TypeScriptCompile Include="CancellationTokenSource.ts" />
     <TypeScriptCompile Include="stormancer.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\msgpack\msgpack.d.ts" />

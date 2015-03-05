@@ -5,8 +5,6 @@ using System.Text;
 
 namespace Stormancer.Cluster.Application
 {
-
-
     public class ConnectionData
     {
         public Dictionary<string, string> Endpoints { get; set; }
