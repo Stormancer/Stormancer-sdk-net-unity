@@ -141,20 +141,25 @@ namespace Stormancer.Networking.Processors
             });
         }
 
-        public IObservable<Packet> SendSystemRequest(IConnection peer, byte msgId, Action<Stream> writer)
+        public Task<Packet> SendSystemRequest(IConnection peer, byte msgId, Action<Stream> writer)
         {
-            return Observable.Create<Packet>(observer =>
-            {
-                var request = ReserveRequestSlot(observer);
-                peer.SendSystem(msgId, bs =>
-                {
-                    var bw = new BinaryWriter(bs);
-                    bw.Write(request.id);
-                    bw.Flush();
-                    writer(bs);
+            var tcs = new TaskCompletionSource<Packet>();
+            var request = ReserveRequestSlot(
+                Observer.Create<Packet>(
+                    packet => tcs.TrySetResult(packet),
+                    ex => tcs.TrySetException(ex),
+                    () => { }
+                ));
 
-                });
-                return () =>
+            peer.SendSystem(msgId, bs =>
+            {
+                var bw = new BinaryWriter(bs);
+                bw.Write(request.id);
+                bw.Flush();
+                writer(bs);
+            });
+
+            tcs.Task.ContinueWith(t =>
                 {
                     Request r;
                     if (_pendingRequests.TryGetValue(request.id, out r))
@@ -164,10 +169,9 @@ namespace Stormancer.Networking.Processors
                             _pendingRequests.TryRemove(request.id, out request);
                         }
                     }
+                });
 
-                };
-            });
-
+            return tcs.Task;
 
         }
 

@@ -50,7 +50,7 @@ module Stormancer {
             //this.dispatcher = new DefaultPacketDispatcher();
             //this.transport = new RaknetTransport(NullLogger.Instance);
             this.serializers = [];
-            //this.serializers.push( new MsgPackSerializer() );
+            this.serializers.push(new MsgPackSerializer());
         }
 
         static apiEndpoint: string = "http://api.stormancer.com/";
@@ -97,13 +97,13 @@ module Stormancer {
             return config;
         }
 
-        //private _metadata: Map = {};
+        public _metadata: Map = {};
 
-        //// Adds metadata to the connection.
-        //public Metadata(key: string, value: string): Configuration {
-        //    this._metadata[key] = value;
-        //    return this;
-        //}
+        // Adds metadata to the connection.
+        public Metadata(key: string, value: string): Configuration {
+            this._metadata[key] = value;
+            return this;
+        }
 
         // Gets or Sets the dispatcher to be used by the client.
         public dispatcher: IPacketDispatcher;
@@ -143,30 +143,158 @@ module Stormancer {
     }
 
     export class Client implements IClient {
-        constructor(config: Configuration) {
-            this._accountId = config.account;
-            this._applicationName = config.application;
-            this._apiClient = new ApiClient(config, this._tokenHandler);
-        }
-
         private _apiClient: ApiClient;
         private _accountId: string;
         private _applicationName: string;
+
+        //private _logger: ILogger = Logger.instance;
+
+        private _transport: ITransport;
+        private _dispatcher: IPacketDispatcher;
+
+        private _initialized: boolean;
+
         private _tokenHandler: ITokenHandler = new TokenHandler();
+
+        private _requestProcessor: RequestProcessor;
+        private _sceneDispatcher: SceneDispatcher;
+
+        private _serializers: IMap<ISerializer> = {};
+
+        private _cts: Cancellation.tokenSource;
+
+        private _metadata: Map;
 
         public applicationName: string;
 
         public logger: ILogger;
 
-        public getPublicScene<T>(sceneId: string, userData: T): JQueryPromise<IScene>;
+        constructor(config: Configuration) {
+            this._accountId = config.account;
+            this._applicationName = config.application;
+            this._apiClient = new ApiClient(config, this._tokenHandler);
+            this._transport = config.transport;
+            this._dispatcher = config.dispatcher;
+            this._requestProcessor = new Stormancer.Networking.Processors.RequestProcessor(this._logger, []);
 
-        public getScene(token: string): JQueryPromise<IScene>;
+            this._scenesDispatcher = new Processors.SceneDispatcher();
+            this._dispatcher.addProcessor(this._requestProcessor);
+            this._dispatcher.addProcessor(this._scenesDispatcher);
+            this._metadata = config._metadata;
 
-        public disconnect(): void;
+            for (var i in config.serializers) {
+                var serializer = config.serializers[i];
+                this._serializers[serializer.name] = serializer;
+            }
+
+            this._metadata["serializers"] = Helpers.mapKeys(this._serializers).join(',');
+            this._metadata["transport"] = this._transport.name;
+            this._metadata["version"] = "1.0.0a";
+            this._metadata["platform"] = "JS";
+
+            this.initialize();
+        }
+
+        private initialize(): void {
+            if (!this._initialized) {
+                this._initialized = true;
+                var previous = this._transport.packetReceived;
+                this._transport.packetReceived = previous ? (packet => {
+                    previous(packet);
+                    this.transport_packetReceived(packet);
+                }) : this.transport_packetReceived;
+            }
+        }
+
+        private transport_packetReceived(packet: Packet<IConnection>): void {
+            this._dispatcher.dispatchPacket(packet);
+        }
+
+        public getPublicScene<T>(sceneId: string, userData: T): JQueryPromise<IScene> {
+            return this._apiClient.getSceneEndpoint(this._accountId, this._applicationName, sceneId, userData)
+                .then(ci => this.getSceneImpl(sceneId, ci));
+        }
+
+        public getScene(token: string): JQueryPromise<IScene> {
+            var ci = this._tokenHandler.decodeToken(token);
+            return this.getSceneImpl(ci.tokenData.sceneId, ci);
+        }
+
+        private getSceneImpl(sceneId: string, ci: SceneEndpoint): JQueryPromise<IScene> {
+            return this.ensureTransportStarted(ci).then(() => {
+                var parameter: SceneInfosRequestDto = { Metadata: this._serverConnection.metadata, Token: ci.token };
+                return this.sendSystemRequest<SceneInfosRequestDto, SceneInfosDto>(136, parameter);
+            }).then((result: SceneInfosDto) => {
+                if (!this._serverConnection.serializer) {
+                    if (!result.SelectedSerializer) {
+                        throw new Error("No serializer selected.");
+                    }
+                    this._serverConnection.serializer = this._serializers[result.SelectedSerializer];
+                    this._serverConnection.metadata["serializer"] = result.SelectedSerializer;
+                }
+                var scene = new Scene(this._serverConnection, this, sceneId, ci.token, result);
+                return scene;
+            });
+        }
+
+        private sendSystemRequest<T, U>(id: number, parameter: T): JQueryPromise<U> {
+            return this._requestProcessor.sendSystemRequest(this._serverConnection, id, this._systemSerializer.serialize(parameter))
+                .then(packet => this._systemSerializer.deserialize<U>(packet.data));
+        }
+
+        private _systemSerializer: ISerializer = new MsgPackSerializer();
+
+        private ensureTransportStarted(ci: SceneEndpoint): JQueryPromise<void> {
+            return Helpers.promiseIf(this._serverConnection == null,() => {
+                return Helpers.promiseIf(!this._transport.isRunning, this.startTransport)
+                    .then(() => {
+                    return this._transport.connect(ci.tokenData.endpoints[this._transport.name])
+                        .then(this.registerConnection);
+                });
+            });
+        }
+
+        private startTransport(): JQueryPromise<void> {
+            this._cts = new Cancellation.tokenSource();
+            return this._transport.start("client", new ConnectionHandler(), this._cts.token, null, 50);
+        }
+
+        private registerConnection(connection: IConnection) {
+            this._serverConnection = connection;
+            for (var key in this._metadata) {
+                this._serverConnection.metadata[key] = this._metadata[key];
+            }
+        }
+
+        private _serverConnection: IConnection;
+
+        public disconnect(): void { }
 
         public id: number;
 
         public serverTransportType: string;
+    }
+
+    export class ConnectionHandler implements IConnectionManager {
+        // Generates an unique connection id for this node.
+        generateNewConnectionId(): number {
+            throw "Not Implemented!";
+        }
+
+        // Adds a connection to the manager
+        newConnection(connection: IConnection): void {
+            throw "Not Implemented!";
+        }
+
+        // Closes the target connection.
+        closeConnection(connection: IConnection, reason: string): void {
+            throw "Not Implemented!";
+        }
+
+        // Returns a connection by id.
+        getConnection(id: number): IConnection {
+            throw "Not Implemented!";
+        }
     }
 
     export interface IScene {
@@ -235,6 +363,24 @@ module Stormancer {
         dispatchPacket(packet: Packet<IConnection>): void;
 
         addProcessor(processor: IPacketProcessor): void;
+    }
+
+    interface SceneInfosRequestDto {
+        Token: string;
+        Metadata: Map;
+    }
+
+    interface SceneInfosDto {
+        SceneId: string;
+        Metadata: Map;
+        Routes: RouteDto[];
+        SelectedSerializer: string;
+    }
+
+    interface RouteDto {
+        Name: string;
+        Handle: number;
+        Metadata: Map;
     }
 
     // A Stormancer network transport
@@ -360,6 +506,8 @@ module Stormancer {
 
         // Returns advanced statistics about the connection.
         //getConnectionStatistics(): IConnectionStatistics;
+
+        serializer: ISerializer;
     }
 
     interface IConnectionManager {
@@ -498,13 +646,11 @@ module Stormancer {
                     "x-version": "1.0"
                 },
                 data: data
-            })
-                .fail(() => {
+            }).fail(() => {
                 throw new Error("TODO");
-            })
-                .done(() => {
-                    return _tokenHandler.DecodeToken(response.ReadAsString());
-            })
+            });/*.done(() => {
+                return this._tokenHandler.DecodeToken(response.ReadAsString());
+            });*/
         }
     }
 
@@ -539,6 +685,91 @@ module Stormancer {
             }
             return str;
         }
+
+        static mapKeys(map: { [key: string]: any }): string[] {
+            var keys: string[] = [];
+            for (var key in map) {
+                if (map.hasOwnProperty(key)) {
+                    keys.push(key);
+                }
+            }
+            return keys;
+        }
+
+        static promiseFromResult<T>(result: T): JQueryPromise<T> {
+            var deferred = jQuery.Deferred();
+            deferred.resolve(result);
+            return deferred.promise();
+        }
+
+        static promiseIf(condition: boolean, action: () => JQueryPromise<void>): JQueryPromise<void> {
+            if (condition) {
+                return action();
+            } else {
+                return Helpers.promiseFromResult(null);
+            }
+        }
+    }
+
+    export class RequestProcessor {
+        private _pendingRequests: { [key: number]: Request } = {};
+
+        private reserveRequestSlot(observer: IObserver<Packet<IConnection>>) {
+            var id = 0;
+
+            while (id < 65535) {
+                if (!this._pendingRequests[id]) {
+                    var request: Request = { lastRefresh: new Date, id: id, observer: observer, deferred: jQuery.Deferred<void>() };
+                    this._pendingRequests[id] = request;
+                    return request;
+                }
+                id++;
+            }
+
+            throw new Error("Unable to create new request: Too many pending requests.");
+        }
+
+        public sendSystemRequest(peer: IConnection, msgId: number, data: Uint8Array): JQueryPromise<Packet<IConnection>> {
+            var deferred = $.Deferred<Packet<IConnection>>();
+
+            var request = this.reserveRequestSlot({
+                onNext(packet) { deferred.resolve(packet); },
+                onError(e) { deferred.reject(e) },
+                onCompleted() { }
+            });
+
+            peer.sendSystem(msgId, data);
+
+            deferred.promise().always(() => {
+                var r = this._pendingRequests[request.id];
+                if (r == request) {
+                    delete this._pendingRequests[request.id];
+                }
+            });
+
+            return deferred.promise();
+        }
+    }
+
+    export interface Request {
+        lastRefresh: Date;
+        id: number;
+        observer: IObserver<Packet<IConnection>>;
+        deferred: JQueryDeferred<void>;
+    }
+
+    export interface IObserver<T> {
+        onCompleted(): void;
+        onError(error: any): void;
+        onNext(value: T): void;
+    }
+
+    export class Scene implements IScene {
+        constructor(connection: IConnection, client: Client, id: string, token: string, dto: SceneInfosDto) {
+        }
+
+
+        //TODO !!!
     }
 }
 

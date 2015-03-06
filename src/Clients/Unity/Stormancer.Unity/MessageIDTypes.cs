@@ -20,10 +20,6 @@ namespace Stormancer.Networking
         ID_REQUEST_RESPONSE_COMPLETE,
         ID_REQUEST_RESPONSE_ERROR,
         ID_CONNECTION_RESULT,
-
-
         ID_SCENES,
-
-
     }
 }

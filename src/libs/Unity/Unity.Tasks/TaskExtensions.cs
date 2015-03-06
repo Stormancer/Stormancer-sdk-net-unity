@@ -103,5 +103,10 @@ namespace System.Threading.Tasks
         {
             return ThenImpl(task, continuation).Unwrap();
         }
+
+        public static Task<TResult> Then<T,TResult>(this Task<T> task, Func<T,Task<TResult>> continuation)
+        {
+            return ThenImpl(task, continuation).Unwrap();
+        }
     }
 }

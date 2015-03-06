@@ -28,7 +28,7 @@ namespace Stormancer
             private long _current = 0;
             public long GenerateNewConnectionId()
             {
-                lock(this)
+                lock (this)
                 {
                     return _current++;
                 }
@@ -74,7 +74,7 @@ namespace Stormancer
         private Dictionary<string, ISerializer> _serializers = new Dictionary<string, ISerializer>();
 
 
-        private CancellationTokenSource cts;
+        private CancellationTokenSource _cts;
         private ushort _maxPeers;
 
         private Dictionary<string, string> _metadata;
@@ -191,24 +191,15 @@ namespace Stormancer
         public Task<Scene> GetPublicScene<T>(string sceneId, T userData)
         {
             return _apiClient.GetSceneEndpoint(this._accountId, this._applicationName, sceneId, userData)
-                .ContinueWith(t =>
-                    {
-                        var ci = t.Result;
-                        return GetScene(sceneId, ci);
-                    }
-            ).Unwrap();
+                .Then(ci => GetScene(sceneId, ci));
         }
 
         private Task<U> SendSystemRequest<T, U>(byte id, T parameter)
         {
-            var tcs = new TaskCompletionSource<U>();
-
-            _requestProcessor.SendSystemRequest(_serverConnection, id, s =>
-            {
-                _systemSerializer.Serialize(parameter, s);
-            }).Subscribe(packet => tcs.SetResult(_systemSerializer.Deserialize<U>(packet.Stream)));
-
-            return tcs.Task;
+            return _requestProcessor.SendSystemRequest(_serverConnection, id, s =>
+             {
+                 _systemSerializer.Serialize(parameter, s);
+             }).Then(packet => _systemSerializer.Deserialize<U>(packet.Stream));
         }
 
         /// <summary>
@@ -227,8 +218,8 @@ namespace Stormancer
             {
                 return TaskHelper.If(!_transport.IsRunning, () =>
                     {
-                        cts = new CancellationTokenSource();
-                        return _transport.Start("client", new ConnectionHandler(), cts.Token, null, (ushort)(_maxPeers + 1));
+                        _cts = new CancellationTokenSource();
+                        return _transport.Start("client", new ConnectionHandler(), _cts.Token, null, (ushort)(_maxPeers + 1));
                     })
                     .Then(() =>
                     {
@@ -253,7 +244,7 @@ namespace Stormancer
                 {
                     if (result.SelectedSerializer == null)
                     {
-                        throw new InvalidOperationException("No seralizer selected.");
+                        throw new InvalidOperationException("No serializer selected.");
                     }
                     _serverConnection.RegisterComponent(_serializers[result.SelectedSerializer]);
                     _serverConnection.Metadata.Add("serializer", result.SelectedSerializer);
