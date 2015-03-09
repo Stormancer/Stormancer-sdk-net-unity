@@ -68,7 +68,9 @@ namespace Stormancer.Core
         /// <param name="msgId"></param>
         /// <param name="writer"></param>
         void SendSystem(byte msgId, Action<Stream> writer);
-        void SendRaw(Action<Stream> writer, Stormancer.Core.PacketPriority priority, Stormancer.Core.PacketReliability reliability, char channel);
+        
+        //void SendRaw(Action<Stream> writer, Stormancer.Core.PacketPriority priority, Stormancer.Core.PacketReliability reliability, char channel);
+        
         /// <summary>
         /// Sends a packet to the target remote scene.
         /// </summary>
@@ -82,8 +84,7 @@ namespace Stormancer.Core
             ushort route,
             Action<Stream> writer,
             PacketPriority priority,
-            PacketReliability reliability,
-            char channel);     
+            PacketReliability reliability);     
 
         /// <summary>
         /// Event fired when the connection has been closed

@@ -192,7 +192,7 @@ namespace Stormancer.Networking.Processors
                     s.Write(data, 0, data.Length);
                     writer(s);
 
-                }, PacketPriority.MEDIUM_PRIORITY, PacketReliability.RELIABLE, (char)0);
+                }, PacketPriority.MEDIUM_PRIORITY, PacketReliability.RELIABLE);
                 return () =>
                 {
                     _pendingRequests.TryRemove(request.id, out request);

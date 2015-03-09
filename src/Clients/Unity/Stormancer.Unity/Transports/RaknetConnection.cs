@@ -220,7 +220,7 @@ namespace Stormancer.Networking
         /// <param name="priority"></param>
         /// <param name="reliability"></param>
         /// <param name="channel"></param>
-        public void SendToScene(byte sceneIndex, ushort route, Action<System.IO.Stream> writer, Stormancer.Core.PacketPriority priority, Stormancer.Core.PacketReliability reliability, char channel)
+        public void SendToScene(byte sceneIndex, ushort route, Action<System.IO.Stream> writer, Stormancer.Core.PacketPriority priority, Stormancer.Core.PacketReliability reliability)
         {
             if (writer == null)
             {
@@ -231,7 +231,7 @@ namespace Stormancer.Networking
             s.WriteByte(sceneIndex);
             s.Write(BitConverter.GetBytes(route), 0, 2);
             writer(s);
-            var result = _rakPeer.Send(stream, (RakNet.PacketPriority)priority, (RakNet.PacketReliability)reliability, channel, this.Guid, false);
+            var result = _rakPeer.Send(stream, (RakNet.PacketPriority)priority, (RakNet.PacketReliability)reliability, (char)0, this.Guid, false);
 
             if (result == 0)
             {

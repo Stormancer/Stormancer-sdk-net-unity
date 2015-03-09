@@ -182,7 +182,7 @@ namespace Stormancer
         /// <param name="route">A string containing the route on which the message should be sent.</param>
         /// <param name="writer">An action called.</param>
         /// <returns>A task completing when the transport takes</returns>
-        public void SendPacket(string route, Action<Stream> writer, PacketPriority priority = PacketPriority.MEDIUM_PRIORITY, PacketReliability reliability = PacketReliability.RELIABLE, char channel = (char)0)
+        public void SendPacket(string route, Action<Stream> writer, PacketPriority priority = PacketPriority.MEDIUM_PRIORITY, PacketReliability reliability = PacketReliability.RELIABLE)
         {
             if (route == null)
             {
@@ -202,7 +202,7 @@ namespace Stormancer
                 throw new ArgumentException("The route " + route + " doesn't exist on the scene.");
             }
 
-            _peer.SendToScene(this.Handle, routeObj.Index, writer, priority, reliability, channel);//.SendPacket(routeObj, writer, priority, reliability, channel);
+            _peer.SendToScene(this.Handle, routeObj.Index, writer, priority, reliability);//.SendPacket(routeObj, writer, priority, reliability, channel);
         }
 
         /// <summary>

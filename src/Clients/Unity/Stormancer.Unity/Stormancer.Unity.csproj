@@ -51,6 +51,9 @@
     <Compile Include="..\..\..\Common\Stormancer.Core\ClientException.cs">
       <Link>Core\ClientException.cs</Link>
     </Compile>
+    <Compile Include="..\..\..\Common\Stormancer.Core\DisposableAction.cs">
+      <Link>Core\DisposableAction.cs</Link>
+    </Compile>
     <Compile Include="..\..\..\Common\Stormancer.Core\Extensions\PacketExtensions.cs">
       <Link>Core\Extensions\PacketExtensions.cs</Link>
     </Compile>
@@ -105,13 +108,13 @@
     <Compile Include="Infrastructure\BufferPool\MemoryInterfaces.cs" />
     <Compile Include="Infrastructure\BufferPool\MemoryObjects.cs" />
     <Compile Include="Infrastructure\BufferPool\StreamObjects.cs" />
-    <Compile Include="Infrastructure\RaknetConnection.cs" />
+    <Compile Include="Transports\RaknetConnection.cs" />
     <Compile Include="Infrastructure\DefaultPacketDispatcher.cs" />
     <Compile Include="Infrastructure\IPacketDispatcher.cs" />
     <Compile Include="Infrastructure\ITokenHandler.cs" />
     <Compile Include="Infrastructure\Modules\IModule.cs" />
     <Compile Include="Infrastructure\MsgPackSerializer.cs" />
-    <Compile Include="Infrastructure\RaknetTransport.cs" />
+    <Compile Include="Transports\RaknetTransport.cs" />
     <Compile Include="IPacketProcessor.cs" />
     <Compile Include="ITransport.cs" />
     <Compile Include="MessageIDTypes.cs" />
@@ -130,6 +133,8 @@
     <Compile Include="SystemMessages\Empty.cs" />
     <Compile Include="SystemMessages\SceneInfosDto.cs" />
     <Compile Include="SystemMessages\SystemResponse.cs" />
+    <Compile Include="Transports\WebSocketClientConnection.cs" />
+    <Compile Include="Transports\WebSocketClientTransport.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\libs\Unity\MsgPack\MsgPack.csproj">
@@ -147,6 +152,10 @@
     <ProjectReference Include="..\..\..\libs\Unity\UnityHttp\UnityHttp.csproj">
       <Project>{212d3970-1a5b-4eed-a2f4-49657ebfcad4}</Project>
       <Name>UnityHttp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\libs\Unity\WebsocketSharp\websocket-sharp.csproj">
+      <Project>{b357bac7-529e-4d81-a0d2-71041b19c8de}</Project>
+      <Name>websocket-sharp</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

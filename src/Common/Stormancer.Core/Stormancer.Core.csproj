@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="BPSLimitationType.cs" />
     <Compile Include="ClientException.cs" />
+    <Compile Include="DisposableAction.cs" />
     <Compile Include="Extensions\PacketExtensions.cs" />
     <Compile Include="IConnection.cs" />
     <Compile Include="IConnectionStatistics.cs" />
