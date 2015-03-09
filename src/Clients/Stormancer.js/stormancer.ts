@@ -3,6 +3,17 @@
 
 // Module
 module Stormancer {
+    export class MessageIDTypes {
+        public static ID_CONNECT_TO_SCENE = 134;
+        public static ID_DISCONNECT_FROM_SCENE = 135;
+        public static ID_GET_SCENE_INFOS = 136;
+        public static ID_REQUEST_RESPONSE_MSG = 137;
+        public static ID_REQUEST_RESPONSE_COMPLETE = 138;
+        public static ID_REQUEST_RESPONSE_ERROR = 139;
+        public static ID_CONNECTION_RESULT = 140;
+        public static ID_SCENES = 141;
+    }
+
     export class jQueryWrapper {
         static $: JQueryStatic;
         static initWrapper(jquery: JQueryStatic) {
@@ -121,7 +132,7 @@ module Stormancer {
         applicationName: string;
 
         // An user specified logger.
-        logger: ILogger;
+        _logger: ILogger;
 
         // Returns a public scene (accessible without authentication)
         getPublicScene<T>(sceneId: string, userData: T): JQueryPromise<IScene>;
@@ -157,7 +168,7 @@ module Stormancer {
         private _tokenHandler: ITokenHandler = new TokenHandler();
 
         private _requestProcessor: RequestProcessor;
-        private _sceneDispatcher: SceneDispatcher;
+        private _scenesDispatcher: SceneDispatcher;
 
         private _serializers: IMap<ISerializer> = {};
 
@@ -167,7 +178,7 @@ module Stormancer {
 
         public applicationName: string;
 
-        public logger: ILogger;
+        public _logger: ILogger;
 
         constructor(config: Configuration) {
             this._accountId = config.account;
@@ -175,9 +186,9 @@ module Stormancer {
             this._apiClient = new ApiClient(config, this._tokenHandler);
             this._transport = config.transport;
             this._dispatcher = config.dispatcher;
-            this._requestProcessor = new Stormancer.Networking.Processors.RequestProcessor(this._logger, []);
+            this._requestProcessor = new RequestProcessor(this._logger, []);
 
-            this._scenesDispatcher = new Processors.SceneDispatcher();
+            this._scenesDispatcher = new SceneDispatcher();
             this._dispatcher.addProcessor(this._requestProcessor);
             this._dispatcher.addProcessor(this._scenesDispatcher);
             this._metadata = config._metadata;
@@ -223,7 +234,7 @@ module Stormancer {
         private getSceneImpl(sceneId: string, ci: SceneEndpoint): JQueryPromise<IScene> {
             return this.ensureTransportStarted(ci).then(() => {
                 var parameter: SceneInfosRequestDto = { Metadata: this._serverConnection.metadata, Token: ci.token };
-                return this.sendSystemRequest<SceneInfosRequestDto, SceneInfosDto>(136, parameter);
+                return this.sendSystemRequest<SceneInfosRequestDto, SceneInfosDto>(MessageIDTypes.ID_GET_SCENE_INFOS, parameter);
             }).then((result: SceneInfosDto) => {
                 if (!this._serverConnection.serializer) {
                     if (!result.SelectedSerializer) {
@@ -349,6 +360,26 @@ module Stormancer {
         }
 
         public connection: T;
+    }
+
+    class SceneDispatcher implements IPacketProcessor {
+        private _scenes: Scene[] = [];
+
+        public registerProcessor(config: PacketProcessorConfig): void {
+            config.addCatchAllProcessor(this.handler);
+        }
+
+        private handler(sceneHandler: number, packet: Packet<IConnection>): boolean {
+            throw "Not implemented";
+        }
+
+        public addScene(scene: Scene): void {
+            throw "Not implemented";
+        }
+
+        public removeScene(sceneHandle: number) {
+            throw "Not implemented";
+        }
     }
 
     // A remote scene.
@@ -711,8 +742,112 @@ module Stormancer {
         }
     }
 
-    export class RequestProcessor {
-        private _pendingRequests: { [key: number]: Request } = {};
+    interface IRequestModule {
+        register(builder: (msgId: number, handler: (context: RequestContext) => JQueryPromise<void>) => void): void;
+    }
+
+    //export class RequestModuleBuilder {
+    //    private _addHandler: (msgId: number, handler: (context: RequestContext) => JQueryPromise<void>) => void;
+
+    //    private requestModuleBuilder(addHandler: (msgId: number, handler: (context: RequestContext) => JQueryPromise<void>) => void) {
+    //        if (!addHandler) {
+    //            throw new Error("addHandler is null or undefined.");
+    //        }
+    //        this._addHandler = addHandler;
+    //    }
+
+    //    public service(msgId: number, handler: (context: RequestContext) => JQueryPromise<void>): void {
+    //        this._addHandler(msgId, handler);
+    //    }
+    //}
+
+    export class RequestContext {
+        private _packet: Packet<IConnection>;
+        private _requestId: Uint8Array;
+        private _didSendValues = false;
+        public inputData: Uint8Array; 
+        public isComplete = false;
+
+        constructor(p: Packet<IConnection>) {
+            this._packet = p;
+            this._requestId = p.data.subarray(0, 2);
+            this.inputData = p.data.subarray(2);
+        }
+
+        public send(data: Uint8Array) :void{
+            if (this.isComplete) {
+                throw new Error("The request is already completed.");
+            }
+            this._didSendValues = true;
+            var dataToSend = new Uint8Array(2 + data.length);
+            dataToSend.set(this._requestId);
+            dataToSend.set(data, 2);
+            this._packet.connection.sendSystem(MessageIDTypes.ID_REQUEST_RESPONSE_MSG, dataToSend);
+        }
+
+        public complete(): void{
+            var dataToSend = new Uint8Array(3);
+            dataToSend.set(this._requestId);
+            dataToSend.set(2, this._didSendValues ? 1 : 0);
+            this._packet.connection.sendSystem(MessageIDTypes.ID_REQUEST_RESPONSE_COMPLETE, dataToSend);
+        }
+
+        public error(data: Uint8Array): void {
+            var dataToSend = new Uint8Array(2 + data.length);
+            dataToSend.set(this._requestId);
+            dataToSend.set(data, 2);
+            this._packet.connection.sendSystem(MessageIDTypes.ID_REQUEST_RESPONSE_ERROR, dataToSend);
+        }
+    }
+
+    export class RequestProcessor implements IPacketProcessor {
+        private _pendingRequests: IMap<Request> = {};
+        private _logger: ILogger;
+        private _isRegistered: boolean = false;
+        private _handlers : IMap<(context : RequestContext) => JQueryPromise<void>> = {};
+
+        constructor(logger: ILogger, modules: IRequestModule[]) {
+            this._pendingRequests = {};
+            this._logger = logger;
+            for (var key in modules) {
+                var mod = modules[key];
+                mod.register(this.addSystemRequestHandler);
+            }
+        }
+
+        public registerProcessor(config: PacketProcessorConfig): void{
+            this._isRegistered = true;
+            for (var key in this._handlers) {
+                var handler = this._handlers[key];
+                config.addProcessor(key,(p: Packet<IConnection>) => {
+                    var context = new RequestContext(p);
+
+                    var continuation = (fault: any) => {
+                        if (!context.isComplete) {
+                            if (fault) {
+                                context.error(p.connection.serializer.serialize(fault));                              
+                            }
+                            else {
+                                context.complete();
+                            }
+                        }
+                    };
+
+                    handler(context)
+                        .done(() => continuation(null))
+                        .fail(error => continuation(error));
+
+                    return true;
+                });
+            }
+        }
+
+        public addSystemRequestHandler(msgId: number, handler: (context: RequestContext) => JQueryPromise<void>): void {
+            if (this._isRegistered) {
+                throw new Error("Can only add handler before 'registerProcessor' is called.");
+            }
+            this._handlers[msgId] = handler;
+        }
 
         private reserveRequestSlot(observer: IObserver<Packet<IConnection>>) {
             var id = 0;

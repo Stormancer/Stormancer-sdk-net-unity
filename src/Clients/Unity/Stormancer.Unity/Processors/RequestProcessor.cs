@@ -23,7 +23,8 @@ namespace Stormancer.Networking.Processors
         private readonly ConcurrentDictionary<ushort, Request> _pendingRequests;
         private readonly ILogger _logger;
 
-        private bool isRegistered = false;
+        private bool _isRegistered = false;
+        private readonly Dictionary<byte, Func<RequestContext, Task>> _handlers = new Dictionary<byte, Func<RequestContext, Task>>();
 
         public RequestProcessor(ILogger logger, IEnumerable<IRequestModule> modules)
         {
@@ -40,7 +41,7 @@ namespace Stormancer.Networking.Processors
 
         public void RegisterProcessor(PacketProcessorConfig config)
         {
-            isRegistered = true;
+            _isRegistered = true;
             foreach (var handler in _handlers)//Add system request handlers
             {
                 config.AddProcessor(handler.Key, p =>
@@ -219,10 +220,10 @@ namespace Stormancer.Networking.Processors
         }
 
 
-        private Dictionary<byte, Func<RequestContext, Task>> _handlers = new Dictionary<byte, Func<RequestContext, Task>>();
+        
         public void AddSystemRequestHandler(byte msgId, Func<RequestContext, Task> handler)
         {
-            if (isRegistered)
+            if (_isRegistered)
             {
                 throw new InvalidOperationException("Can only add handler before 'RegisterProcessor' is called.");
             }
@@ -237,7 +238,7 @@ namespace Stormancer.Networking.Processors
         private Packet _packet;
         private byte[] _requestId;
         private MemoryStream _stream = new MemoryStream();
-        private bool DidSentValues = false;
+        private bool _didSendValues = false;
         public Packet Packet
         {
             get
@@ -278,7 +279,7 @@ namespace Stormancer.Networking.Processors
             {
                 throw new InvalidOperationException("The request is already completed.");
             }
-            this.DidSentValues = true;
+            this._didSendValues = true;
             _packet.Connection.SendSystem((byte)MessageIDTypes.ID_REQUEST_RESPONSE_MSG, s =>
             {
                 s.Write(_requestId, 0, 2);
@@ -294,7 +295,7 @@ namespace Stormancer.Networking.Processors
             {
                 s.Write(_requestId, 0, 2);
 
-                s.WriteByte((byte)(DidSentValues ? 1 : 0));
+                s.WriteByte((byte)(_didSendValues ? 1 : 0));
             });
         }
         public void Error(Action<Stream> writer)
