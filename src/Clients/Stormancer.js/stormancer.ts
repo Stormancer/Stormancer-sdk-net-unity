@@ -279,33 +279,73 @@ module Stormancer {
 
         private _serverConnection: IConnection;
 
-        public disconnect(): void { }
+        public disconnectScene(scene: IScene, sceneHandle: number): JQueryPromise<void> {
+            return this.sendSystemRequest(MessageIDTypes.ID_DISCONNECT_FROM_SCENE, sceneHandle)
+                .then(() => this._scenesDispatcher.removeScene(sceneHandle));
+        }
+
+        public disconnect(): void {
+            if (this._serverConnection) {
+                this._serverConnection.close();
+            }
+        }
+
+        public connectToScene(scene: Scene, token: string, localRoutes: Route[]): JQueryPromise<void> {
+            var parameter: ConnectToSceneMsg = {
+                Token: token,
+                Routes: [],
+                ConnectionMetadata: this._serverConnection.metadata
+            };
+
+            for (var i = 0; i < localRoutes.length; i++) {
+                var r = localRoutes[i];
+                parameter.Routes.push({
+                    Handle: r.index,
+                    Metadata: r.metadata,
+                    Name: r.name
+                });
+            }
+
+            return this.sendSystemRequest<ConnectToSceneMsg, ConnectionResult>(MessageIDTypes.ID_CONNECT_TO_SCENE, parameter)
+                .then(result => {
+                throw "Not implemented";
+            });
+        }
 
         public id: number;
 
         public serverTransportType: string;
     }
 
+    export interface ConnectToSceneMsg {
+        Token: string;
+        Routes: RouteDto[];
+        ConnectionMetadata: Map;
+    }
+
+    export interface ConnectionResult {
+        SceneHandle: number;
+        RouteMappings: IMap<number>;
+    }
+
     export class ConnectionHandler implements IConnectionManager {
+        private _current = 0;
+
         // Generates an unique connection id for this node.
-        generateNewConnectionId(): number {
-            throw "Not Implemented!";
+        public generateNewConnectionId(): number {
+            return this._current++;
         }
 
         // Adds a connection to the manager
-        newConnection(connection: IConnection): void {
-            throw "Not Implemented!";
+        public newConnection(connection: IConnection): void { }
+
+        // Returns a connection by id.
+        public getConnection(id: number): IConnection {
+            throw new Error("Not implemented.");
         }
 
         // Closes the target connection.
-        closeConnection(connection: IConnection, reason: string): void {
-            throw "Not Implemented!";
-        }
-
-        // Returns a connection by id.
-        getConnection(id: number): IConnection {
-            throw "Not Implemented!";
-        }
+        public closeConnection(connection: IConnection, reason: string): void { }
     }
 
     export interface IScene {
@@ -330,19 +370,21 @@ module Stormancer {
         sendPacket(route: string, data: Uint8Array, priority: PacketPriority, reliability: PacketReliability, channel: number): void;
 
         // Disconnects the scene.
-        disconnect: JQueryPromise<void>;
+        disconnect(): JQueryPromise<void>;
 
         // Connects the scene to the server.
-        connect: JQueryPromise<void>;
+        connect(): JQueryPromise<void>;
 
         // Fires when packet are received on the scene.
-        packetReceived: (packet: Packet<IConnection>) => void;
+        packetReceived: ((packet: Packet<IConnection>) => void)[];
 
-        host: IScenePeer;
+        host(): IScenePeer;
+
+        onMessage(route: string, handler: (packet: Packet<IScenePeer>) => void): void;
     }
 
     class Packet<T> {
-        constructor(source: T, data: Uint8Array, metadata: Map) {
+        constructor(source: T, data: Uint8Array, metadata: IMap<any>) {
             this.source = source;
             this.data = data;
             this.metadata = metadata;
@@ -353,9 +395,9 @@ module Stormancer {
         // Data contained in the packet.
         public data: Uint8Array;
 
-        public metadata: Map;
+        public metadata: IMap<any>;
 
-        public getMetadata(key: string): string {
+        public getMetadata(key: string): any {
             return this.metadata[key];
         }
 
@@ -370,15 +412,25 @@ module Stormancer {
         }
 
         private handler(sceneHandler: number, packet: Packet<IConnection>): boolean {
-            throw "Not implemented";
+            if (sceneHandler < MessageIDTypes.ID_SCENES) {
+                return false;
+            }
+            var scene = this._scenes[sceneHandler - MessageIDTypes.ID_SCENES];
+            if (!scene) {
+                return false;
+            } else {
+                packet.metadata["scene"] = scene;
+                scene.handleMessage(packet);
+                return true;
+            }
         }
 
         public addScene(scene: Scene): void {
-            throw "Not implemented";
+            this._scenes[scene.handle - MessageIDTypes.ID_SCENES] = scene;
         }
 
         public removeScene(sceneHandle: number) {
-            throw "Not implemented";
+            delete this._scenes[sceneHandle - MessageIDTypes.ID_SCENES];
         }
     }
 
@@ -387,7 +439,7 @@ module Stormancer {
         // Sends a message to the remote scene.
         send(route: string, data: Uint8Array, priority: PacketPriority, reliability: PacketReliability): void;
 
-        id: number;
+        id(): number;
     }
 
     interface IPacketDispatcher {
@@ -633,24 +685,6 @@ module Stormancer {
         public contentType: string;
     }
 
-    //class ConnectionHandler implements IConnectionManager {
-    //    private _current: number = 0;
-
-    //    public generateNewConnectionId(): number {
-    //        return this._current++;
-    //    }
-
-    //    public NewConnection(connection: IConnection): void {
-    //    }
-
-    //    public CloseConnection(connection: IConnection, reason: string): void {
-    //    }
-
-    //    public GetConnection(id: number): IConnection {
-    //        throw new Error("Not implemented");
-    //    }
-    //}
-
     class ApiClient {
         constructor(config: Configuration, tokenHandler: ITokenHandler) {
             this._config = config;
@@ -677,11 +711,12 @@ module Stormancer {
                     "x-version": "1.0"
                 },
                 data: data
+            }).done(() => {
+                throw "Not implemented";
+                //return this._tokenHandler.DecodeToken(response.ReadAsString());
             }).fail(() => {
-                throw new Error("TODO");
-            });/*.done(() => {
-                return this._tokenHandler.DecodeToken(response.ReadAsString());
-            });*/
+                throw "Not implemented";
+            });
         }
     }
 
@@ -727,6 +762,15 @@ module Stormancer {
             return keys;
         }
 
+        static mapValues<T>(map: IMap<T>): T[] {
+            var result: T[] = [];
+            for (var key in map) {
+                result.push(map[key]);
+            }
+
+            return result;
+        }
+
         static promiseFromResult<T>(result: T): JQueryPromise<T> {
             var deferred = jQuery.Deferred();
             deferred.resolve(result);
@@ -765,7 +809,7 @@ module Stormancer {
         private _packet: Packet<IConnection>;
         private _requestId: Uint8Array;
         private _didSendValues = false;
-        public inputData: Uint8Array; 
+        public inputData: Uint8Array;
         public isComplete = false;
 
         constructor(p: Packet<IConnection>) {
@@ -774,7 +818,7 @@ module Stormancer {
             this.inputData = p.data.subarray(2);
         }
 
-        public send(data: Uint8Array) :void{
+        public send(data: Uint8Array): void {
             if (this.isComplete) {
                 throw new Error("The request is already completed.");
             }
@@ -785,7 +829,7 @@ module Stormancer {
             this._packet.connection.sendSystem(MessageIDTypes.ID_REQUEST_RESPONSE_MSG, dataToSend);
         }
 
-        public complete(): void{
+        public complete(): void {
             var dataToSend = new Uint8Array(3);
             dataToSend.set(this._requestId);
             dataToSend.set(2, this._didSendValues ? 1 : 0);
@@ -804,7 +848,7 @@ module Stormancer {
         private _pendingRequests: IMap<Request> = {};
         private _logger: ILogger;
         private _isRegistered: boolean = false;
-        private _handlers : IMap<(context : RequestContext) => JQueryPromise<void>> = {};
+        private _handlers: IMap<(context: RequestContext) => JQueryPromise<void>> = {};
 
         constructor(logger: ILogger, modules: IRequestModule[]) {
             this._pendingRequests = {};
@@ -815,7 +859,7 @@ module Stormancer {
             }
         }
 
-        public registerProcessor(config: PacketProcessorConfig): void{
+        public registerProcessor(config: PacketProcessorConfig): void {
             this._isRegistered = true;
             for (var key in this._handlers) {
                 var handler = this._handlers[key];
@@ -825,7 +869,7 @@ module Stormancer {
                     var continuation = (fault: any) => {
                         if (!context.isComplete) {
                             if (fault) {
-                                context.error(p.connection.serializer.serialize(fault));                              
+                                context.error(p.connection.serializer.serialize(fault));
                             }
                             else {
                                 context.complete();
@@ -899,12 +943,185 @@ module Stormancer {
         onNext(value: T): void;
     }
 
+    export class Route {
+        public handlers: ((packet: Packet<IConnection>) => void)[] = [];
+
+        public constructor(public scene: IScene, public name: string, public index = 0, public metadata: Map = {}) {
+        }
+    }
+
     export class Scene implements IScene {
+        public id: string;        
+        
+        // A byte representing the index of the scene for this peer.
+        public handle: number;
+
+        // A boolean representing whether the scene is connected or not.
+        public connected: boolean;
+
+        public hostConnection: IConnection;
+        private _token: string;
+        private _metadata: Map;
+        private _remoteRoutesMap: IMap<Route> = {};
+        private _localRoutesMap: IMap<Route> = {};
+        private _client: Client;
         constructor(connection: IConnection, client: Client, id: string, token: string, dto: SceneInfosDto) {
+            this.id = id;
+            this.hostConnection = connection;
+            this._token = token;
+            this._client = client;
+            this._metadata = dto.Metadata;
+
+            for (var i = 0; i < dto.Routes.length; i++) {
+                var route = dto.Routes[i];
+                this._remoteRoutesMap[route.Name] = new Route(this, route.Name, route.Handle, route.Metadata);
+            }
         }
 
+        // Returns metadata informations for the remote scene host.
+        getHostMetadata(key: string): string {
+            return this._metadata[key];
+        }
+        
+        // Registers a route on the local peer.
+        public addRoute(route: string, handler: (packet: Packet<IScenePeer>) => void, metadata: Map = {}): void {
+            if (route[0] === `@`) {
+                throw new Error("A route cannot start with the @ character.");
+            }
 
-        //TODO !!!
+            if (this.connected) {
+                throw new Error("You cannot register handles once the scene is connected.");
+            }
+
+            var routeObj = this._localRoutesMap[route];
+            if (!routeObj) {
+                routeObj = new Route(this, route, 0, metadata);
+                this._localRoutesMap[route] = routeObj;
+            }
+
+            this.onMessage(route, handler);
+        }
+
+        public onMessage(route: string, handler: (packet: Packet<IScenePeer>) => void): void {
+            if (this.connected) {
+                throw new Error("You cannot register handles once the scene is connected.");
+            }
+
+            var routeObj = this._localRoutesMap[route];
+            if (!routeObj) {
+                routeObj = new Route(this, route);
+                this._localRoutesMap[route] = routeObj;
+            }
+
+            this.onMessageImpl(routeObj, handler);
+        }
+
+        private onMessageImpl(route: Route, handler: (packet: Packet<IScenePeer>) => void): void {
+            var index = route.index;
+
+            var action = (p: Packet<IConnection>) => {
+                var packet = new Packet(this.host(), p.data, p.metadata);
+                handler(packet);
+            };
+
+            route.handlers.push(action);
+        }
+
+        // Sends a packet to the scene.
+        public sendPacket(route: string, data: Uint8Array, priority: PacketPriority, reliability: PacketReliability, channel: number): void {
+            if (!route) {
+                throw new Error("route is null or undefined!");
+            }
+            if (!data) {
+                throw new Error("data is null or undefind!");
+            }
+            if (!this.connected) {
+                throw new Error("The scene must be connected to perform this operation.");
+            }
+
+            var routeObj = this._remoteRoutesMap[route];
+            if (!routeObj) {
+                throw new Error("The route " + route + " doesn't exist on the scene.");
+            }
+
+            this.hostConnection.sendToScene(this.handle, routeObj.index, data, priority, reliability, channel);
+        }
+
+        // Connects the scene to the server.
+        public connect(): JQueryPromise<void> {
+            return this._client.connectToScene(this, this._token, Helpers.mapValues(this._localRoutesMap))
+                .then(() => {
+                this.connected = true;
+            });
+        }
+
+        // Disconnects the scene.
+        public disconnect(): JQueryPromise<void> {
+            return this._client.disconnectScene(this, this.handle);
+        }
+
+        public handleMessage(packet: Packet<IConnection>): void {
+            var ev = this.packetReceived;
+            ev && ev.map((value) => {
+                value(packet);
+            });
+            
+            // extract the route id
+            var temp = packet.data.subarray(0, 2);
+            var routeId = new Uint16Array(temp.buffer)[0];
+
+            packet.metadata["routeId"] = routeId;
+
+            var observer = this._handlers[routeId];
+            observer && observer.map(value => {
+                value(packet);
+            });
+        }
+
+        public completeConnectionInitialization(cr: ConnectionResult): void {
+            this.handle = cr.SceneHandle;
+
+            for (var key in this._localRoutesMap) {
+                var route = this._localRoutesMap[key];
+                route.index = cr.RouteMappings[key];
+                this._handlers[route.index] = route.handlers;
+            }
+        }
+
+        private _handlers: IMap<((packet: Packet<IConnection>) => void)[]> = {};
+
+        // Fires when packet are received on the scene.
+        packetReceived: ((packet: Packet<IConnection>) => void)[];
+
+        public host(): IScenePeer {
+            return new ScenePeer(this.hostConnection, this.handle, this._remoteRoutesMap, this);
+        }
+    }
+
+    export class ScenePeer implements IScenePeer {
+        private _connection: IConnection;
+        private _sceneHandle: number;
+        private _routeMapping: IMap<Route>;
+        private _scene: IScene;
+
+        public id(): number {
+            return this._connection.id;
+        }
+
+        public constructor(connection: IConnection, sceneHandle: number, routeMapping: IMap<Route>, scene: IScene) {
+            this._connection = connection;
+            this._sceneHandle = sceneHandle;
+            this._routeMapping = routeMapping;
+            this._scene = scene;
+        }
+
+        public send(route: string, data: Uint8Array, priority: PacketPriority, reliability: PacketReliability) {
+            var r = this._routeMapping[route];
+            if (!r) {
+                throw new Error("The route " + route + " is not declared on the server.");
+            }
+            this._connection.sendToScene(this._sceneHandle, r.index, data, priority, reliability, 0);
+        }
     }
 }
 

@@ -26,7 +26,6 @@ namespace Stormancer
         private readonly IConnection _peer;
         private string _token;
 
-
         private byte _handle;
 
         private readonly Dictionary<string, string> _metadata;
@@ -200,7 +199,7 @@ namespace Stormancer
             Route routeObj;
             if (!_remoteRoutesMap.TryGetValue(route, out routeObj))
             {
-                throw new ArgumentException("The route doesn't exist on the scene.");
+                throw new ArgumentException("The route " + route + " doesn't exist on the scene.");
             }
 
             _peer.SendToScene(this.Handle, routeObj.Index, writer, priority, reliability, channel);//.SendPacket(routeObj, writer, priority, reliability, channel);
@@ -243,6 +242,7 @@ namespace Stormancer
                     this.Connected = true;
                 });
         }
+
         internal void CompleteConnectionInitialization(ConnectionResult cr)
         {
             this._handle = cr.SceneHandle;
@@ -255,17 +255,14 @@ namespace Stormancer
         }
 
         /// <summary>
-        /// Fires when packet are received on the scene.
+        /// Fires when packets are received on the scene.
         /// </summary>
-        /// 
         public Action<Packet> PacketReceived;
-        private Client _client;
 
+        private Client _client;
 
         internal void HandleMessage(Packet packet)
         {
-
-
             var ev = PacketReceived;
             if (ev != null)
             {
@@ -276,7 +273,6 @@ namespace Stormancer
             packet.Stream.Read(temp, 0, 2);
             var routeId = BitConverter.ToUInt16(temp, 0);
 
-
             packet.Metadata["routeId"] = routeId;
 
             Action<Packet> observer;
@@ -285,7 +281,6 @@ namespace Stormancer
             {
                 observer(packet);
             }
-
         }
 
         /// <summary>
