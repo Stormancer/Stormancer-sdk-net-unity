@@ -24,7 +24,7 @@ namespace Stormancer.Networking
         private WebSocket _socket;
         private WebSocketClientConnection _connection;
 
-        public string _type;
+        private string _type;
         private IConnectionManager _connectionManager;
 
         private readonly Stormancer.Diagnostics.ILogger _logger;

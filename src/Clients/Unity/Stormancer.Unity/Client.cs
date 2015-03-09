@@ -34,7 +34,6 @@ namespace Stormancer
                 }
             }
 
-
             public void NewConnection(IConnection connection)
             {
 
@@ -44,7 +43,6 @@ namespace Stormancer
             {
                 throw new NotImplementedException();
             }
-
 
             public void CloseConnection(IConnection connection, string reason)
             {

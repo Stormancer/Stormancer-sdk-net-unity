@@ -64,8 +64,8 @@ var Stormancer;
     var Configuration = (function () {
         function Configuration() {
             this._metadata = {};
-            //this.dispatcher = new DefaultPacketDispatcher();
-            //this.transport = new RaknetTransport(NullLogger.Instance);
+            //this.dispatcher = new PacketDispatcher();
+            this.transport = new WebSocketTransport();
             this.serializers = [];
             this.serializers.push(new MsgPackSerializer());
         }
@@ -129,17 +129,12 @@ var Stormancer;
             this.initialize();
         }
         Client.prototype.initialize = function () {
-            var _this = this;
             if (!this._initialized) {
                 this._initialized = true;
-                var previous = this._transport.packetReceived;
-                this._transport.packetReceived = previous ? (function (packet) {
-                    previous(packet);
-                    _this.transport_packetReceived(packet);
-                }) : this.transport_packetReceived;
+                this._transport.packetReceived.push(this.transportPacketReceived);
             }
         };
-        Client.prototype.transport_packetReceived = function (packet) {
+        Client.prototype.transportPacketReceived = function (packet) {
             this._dispatcher.dispatchPacket(packet);
         };
         Client.prototype.getPublicScene = function (sceneId, userData) {
@@ -181,7 +176,7 @@ var Stormancer;
         };
         Client.prototype.startTransport = function () {
             this._cts = new Cancellation.tokenSource();
-            return this._transport.start("client", new ConnectionHandler(), this._cts.token, null, 50);
+            return this._transport.start("client", new ConnectionHandler(), this._cts.token);
         };
         Client.prototype.registerConnection = function (connection) {
             this._serverConnection = connection;
@@ -199,6 +194,7 @@ var Stormancer;
             }
         };
         Client.prototype.connectToScene = function (scene, token, localRoutes) {
+            var _this = this;
             var parameter = {
                 Token: token,
                 Routes: [],
@@ -213,7 +209,8 @@ var Stormancer;
                 });
             }
             return this.sendSystemRequest(MessageIDTypes.ID_CONNECT_TO_SCENE, parameter).then(function (result) {
-                throw "Not implemented";
+                scene.completeConnectionInitialization(result);
+                _this._scenesDispatcher.addScene(scene);
             });
         };
         return Client;
@@ -333,25 +330,21 @@ var Stormancer;
             this._tokenHandler = tokenHandler;
         }
         ApiClient.prototype.getSceneEndpoint = function (accountId, applicationName, sceneId, userData) {
+            var _this = this;
             var serializer = new MsgPackSerializer();
             var data = serializer.serialize(userData);
             var url = this._config.getApiEndpoint() + Helpers.stringFormat(this.createTokenUri, accountId, applicationName, sceneId);
-            return jQueryWrapper.$.ajax({
+            return $.ajax({
                 type: "POST",
                 url: url,
                 contentType: "application/msgpack",
-                accepts: {
-                    json: "application/json"
-                },
                 headers: {
-                    "x-version": "1.0"
+                    "Accept": "application/json",
+                    "x-version": "1.0.0"
                 },
                 data: data
-            }).done(function () {
-                throw "Not implemented";
-                //return this._tokenHandler.DecodeToken(response.ReadAsString());
-            }).fail(function () {
-                throw "Not implemented";
+            }).then(function (result) {
+                return _this._tokenHandler.decodeToken(result);
             });
         };
         return ApiClient;
@@ -682,6 +675,95 @@ var Stormancer;
         return ScenePeer;
     })();
     Stormancer.ScenePeer = ScenePeer;
+    var WebSocketTransport = (function () {
+        function WebSocketTransport() {
+            this.name = "websocket";
+            // Gets a boolean indicating if the transport is currently running.
+            this.isRunning = false;
+            this._connecting = false;
+            // Fires when the transport recieves new packets.
+            this.packetReceived = [];
+            // Fires when a remote peer has opened a connection.
+            this.connectionOpened = [];
+            // Fires when a connection to a remote peer is closed.
+            this.connectionClose = [];
+        }
+        // Starts the transport
+        WebSocketTransport.prototype.start = function (type, handler, token) {
+            this._type = name;
+            this._connectionManager = handler;
+            this.isRunning = true;
+            token.onCancelled(this.stop);
+            var deferred = $.Deferred();
+            deferred.resolve();
+            return deferred.promise();
+        };
+        WebSocketTransport.prototype.stop = function () {
+            this.isRunning = false;
+            if (this._socket) {
+                this._socket.close();
+                this._socket = null;
+            }
+        };
+        // Connects the transport to a remote host.
+        WebSocketTransport.prototype.connect = function (endpoint) {
+            var _this = this;
+            if (!this._socket && !this._connecting) {
+                this._connecting = true;
+                try {
+                    var socket = new WebSocket("ws://" + endpoint + "/");
+                    socket.binaryType = "arraybuffer";
+                    socket.onopen = function () { return _this.onOpen(socket); };
+                    socket.onmessage = function (args) { return _this.onMessage(args.data); };
+                    socket.onclose = function (args) { return _this.onClose(args.wasClean); };
+                    this._socket = socket;
+                    var connection = this.createNewConnection(this._socket);
+                }
+                finally {
+                    this._connecting = false;
+                }
+            }
+            throw "Not implemented";
+            return $.Deferred().promise();
+        };
+        WebSocketTransport.prototype.createNewConnection = function (socket) {
+            throw "Not Implemented";
+        };
+        WebSocketTransport.prototype.onOpen = function (socket) {
+        };
+        WebSocketTransport.prototype.onMessage = function (data) {
+            //TODO
+        };
+        WebSocketTransport.prototype.onClose = function (clean) {
+            //TODO
+        };
+        return WebSocketTransport;
+    })();
+    Stormancer.WebSocketTransport = WebSocketTransport;
+    var WebSocketConnection = (function () {
+        function WebSocketConnection() {
+        }
+        // Close the connection
+        WebSocketConnection.prototype.close = function () {
+            throw "Not implemented";
+        };
+        // Sends a system message to the peer.
+        WebSocketConnection.prototype.sendSystem = function (msgId, data) {
+            throw "Not implemented";
+        };
+        WebSocketConnection.prototype.sendRaw = function (data, priority, reliability, channel) {
+            throw "Not implemented";
+        };
+        // Sends a packet to the target remote scene.
+        WebSocketConnection.prototype.sendToScene = function (sceneIndex, route, data, priority, reliability, channel) {
+            throw "Not implemented";
+        };
+        WebSocketConnection.prototype.setApplication = function (account, application) {
+            throw "Not implemented";
+        };
+        return WebSocketConnection;
+    })();
+    Stormancer.WebSocketConnection = WebSocketConnection;
 })(Stormancer || (Stormancer = {}));
 (function ($, window) {
     Stormancer.jQueryWrapper.initWrapper($);

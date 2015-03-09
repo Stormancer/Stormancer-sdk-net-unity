@@ -58,8 +58,8 @@ module Stormancer {
     // Represents the configuration of a Stormancer client.
     export class Configuration {
         constructor() {
-            //this.dispatcher = new DefaultPacketDispatcher();
-            //this.transport = new RaknetTransport(NullLogger.Instance);
+            //this.dispatcher = new PacketDispatcher();
+            this.transport = new WebSocketTransport();
             this.serializers = [];
             this.serializers.push(new MsgPackSerializer());
         }
@@ -209,15 +209,11 @@ module Stormancer {
         private initialize(): void {
             if (!this._initialized) {
                 this._initialized = true;
-                var previous = this._transport.packetReceived;
-                this._transport.packetReceived = previous ? (packet => {
-                    previous(packet);
-                    this.transport_packetReceived(packet);
-                }) : this.transport_packetReceived;
+                this._transport.packetReceived.push(this.transportPacketReceived);
             }
         }
 
-        private transport_packetReceived(packet: Packet<IConnection>): void {
+        private transportPacketReceived(packet: Packet<IConnection>): void {
             this._dispatcher.dispatchPacket(packet);
         }
 
@@ -267,7 +263,7 @@ module Stormancer {
 
         private startTransport(): JQueryPromise<void> {
             this._cts = new Cancellation.tokenSource();
-            return this._transport.start("client", new ConnectionHandler(), this._cts.token, null, 50);
+            return this._transport.start("client", new ConnectionHandler(), this._cts.token);
         }
 
         private registerConnection(connection: IConnection) {
@@ -308,7 +304,8 @@ module Stormancer {
 
             return this.sendSystemRequest<ConnectToSceneMsg, ConnectionResult>(MessageIDTypes.ID_CONNECT_TO_SCENE, parameter)
                 .then(result => {
-                throw "Not implemented";
+                scene.completeConnectionInitialization(result);
+                this._scenesDispatcher.addScene(scene);
             });
         }
 
@@ -469,7 +466,7 @@ module Stormancer {
     // A Stormancer network transport
     interface ITransport {
         // Starts the transport
-        start(type: string, handler: IConnectionManager, token: Cancellation.token, port: number, maxConnections: number): JQueryPromise<void>;
+        start(type: string, handler: IConnectionManager, token: Cancellation.token): JQueryPromise<void>;
 
         // Gets a boolean indicating if the transport is currently running.
         isRunning: boolean;
@@ -478,13 +475,13 @@ module Stormancer {
         connect(endpoint: string): JQueryPromise<IConnection>;
 
         // Fires when the transport recieves new packets.
-        packetReceived: (packet: Packet<IConnection>) => void;
+        packetReceived: ((packet: Packet<IConnection>) => void)[];
 
         // Fires when a remote peer has opened a connection.
-        connectionOpened: (connection: IConnection) => void;
+        connectionOpened: ((connection: IConnection) => void)[];
 
         // Fires when a connection to a remote peer is closed.
-        connectionClose: (connection: IConnection) => void;
+        connectionClose: ((connection: IConnection) => void)[];
 
         // The name of the transport.
         name: string;
@@ -577,7 +574,7 @@ module Stormancer {
         sendRaw(data: Uint8Array, priority: PacketPriority, reliability: PacketReliability, channel: number): void;
  
         // Sends a packet to the target remote scene.
-        sendToScene(sceneIndex: number, route: number, data: Uint8Array, priority: PacketPriority, reliability: PacketReliability, channel: number); void;
+        sendToScene(sceneIndex: number, route: number, data: Uint8Array, priority: PacketPriority, reliability: PacketReliability, channel: number): void;
 
         // Event fired when the connection has been closed
         connectionClosed: ((reason: string) => void);
@@ -700,22 +697,17 @@ module Stormancer {
             var data: Uint8Array = serializer.serialize(userData);
 
             var url = this._config.getApiEndpoint() + Helpers.stringFormat(this.createTokenUri, accountId, applicationName, sceneId);
-            return jQueryWrapper.$.ajax({
+            return $.ajax({
                 type: "POST",
                 url: url,
                 contentType: "application/msgpack",
-                accepts: {
-                    json: "application/json"
-                },
                 headers: {
-                    "x-version": "1.0"
+                    "Accept": "application/json",
+                    "x-version": "1.0.0"
                 },
                 data: data
-            }).done(() => {
-                throw "Not implemented";
-                //return this._tokenHandler.DecodeToken(response.ReadAsString());
-            }).fail(() => {
-                throw "Not implemented";
+            }).then(result => {
+                return this._tokenHandler.decodeToken(result);
             });
         }
     }
@@ -1122,6 +1114,154 @@ module Stormancer {
             }
             this._connection.sendToScene(this._sceneHandle, r.index, data, priority, reliability, 0);
         }
+    }
+
+    export class WebSocketTransport implements ITransport {
+        public name: string = "websocket";
+        public id: number;
+        // Gets a boolean indicating if the transport is currently running.
+        public isRunning: boolean = false;
+
+        private _type: string;
+        private _connectionManager: IConnectionManager;
+        private _socket: WebSocket;
+        private _connecting = false;
+
+        // Fires when the transport recieves new packets.
+        public packetReceived: ((packet: Packet<IConnection>) => void)[] = [];
+
+        // Fires when a remote peer has opened a connection.
+        public connectionOpened: ((connection: IConnection) => void)[] = [];
+
+        // Fires when a connection to a remote peer is closed.
+        public connectionClose: ((connection: IConnection) => void)[] = [];
+        
+        // Starts the transport
+        public start(type: string, handler: IConnectionManager, token: Cancellation.token): JQueryPromise<void> {
+            this._type = name;
+            this._connectionManager = handler;
+
+            this.isRunning = true;
+
+            token.onCancelled(this.stop);
+
+            var deferred = $.Deferred<void>();
+            deferred.resolve();
+            return deferred.promise();
+        }
+
+        private stop() {
+            this.isRunning = false;
+            if (this._socket) {
+                this._socket.close();
+                this._socket = null;
+            }
+        }
+        
+        // Connects the transport to a remote host.
+        public connect(endpoint: string): JQueryPromise<IConnection> {
+            if (!this._socket && !this._connecting) {
+                this._connecting = true;
+                try {
+                    var socket = new WebSocket("ws://" + endpoint + "/");
+                    socket.binaryType = "arraybuffer";
+
+                    socket.onopen = () => this.onOpen(socket);
+                    socket.onmessage = args => this.onMessage(args.data);
+                    socket.onclose = args => this.onClose(args.wasClean);
+                    this._socket = socket;
+
+                    var connection = this.createNewConnection(this._socket);
+                    //TODO
+                }
+                finally {
+                    this._connecting = false;
+                }
+                //TODO
+            }
+            throw "Not implemented";
+            return $.Deferred().promise();
+        }
+
+        private createNewConnection(socket: WebSocket): WebSocketConnection {
+            //TODO
+            throw "Not Implemented";
+        }
+
+        private onOpen(socket: WebSocket) {
+        }
+
+        private onMessage(data: ArrayBuffer) {
+            //TODO
+        }
+
+        private onClose(clean: boolean) {
+            //TODO
+        }
+    }
+
+    export class WebSocketConnection implements IConnection {
+
+        // Unique id in the node for the connection.
+        public id: number;
+
+        // Ip address of the remote peer.
+        public ipAddress: string;
+
+        // Connection date.
+        public connectionDate: Date;
+
+        // Metadata associated with the connection.
+        public metadata: Map;
+
+        //// Register components.
+        //RegisterComponent<T>(component: T): void;
+
+        //// Gets a service from the object.
+        //GetComponent<T>(): T;
+
+        // Account of the application which the peer is connected to.
+        public account: string
+
+        // Name of the application to which the peer is connected.
+        public application: string;
+
+        // State of the connection.
+        public state: ConnectionState;
+
+        // Close the connection
+        public close(): void {
+            throw "Not implemented";
+        }
+
+        // Sends a system message to the peer.
+        public sendSystem(msgId: number, data: Uint8Array): void {
+            throw "Not implemented";
+        }
+
+        public sendRaw(data: Uint8Array, priority: PacketPriority, reliability: PacketReliability, channel: number): void {
+            throw "Not implemented";
+        }
+ 
+        // Sends a packet to the target remote scene.
+        public sendToScene(sceneIndex: number, route: number, data: Uint8Array, priority: PacketPriority, reliability: PacketReliability, channel: number): void {
+            throw "Not implemented";
+        }
+
+        // Event fired when the connection has been closed
+        public connectionClosed: ((reason: string) => void);
+
+        public setApplication(account: string, application: string): void {
+            throw "Not implemented";
+        }
+
+        // The connection's Ping in milliseconds
+        //ping: number;
+
+        // Returns advanced statistics about the connection.
+        //getConnectionStatistics(): IConnectionStatistics;
+
+        public serializer: ISerializer;
     }
 }
 
