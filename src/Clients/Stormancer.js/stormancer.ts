@@ -541,8 +541,6 @@ module Stormancer {
         // Unique id in the node for the connection.
         id: number;
 
-        // Ip address of the remote peer.
-        ipAddress: string;
 
         // Connection date.
         connectionDate: Date;
@@ -570,14 +568,12 @@ module Stormancer {
 
         // Sends a system message to the peer.
         sendSystem(msgId: number, data: Uint8Array): void;
-
-        sendRaw(data: Uint8Array, priority: PacketPriority, reliability: PacketReliability, channel: number): void;
  
         // Sends a packet to the target remote scene.
         sendToScene(sceneIndex: number, route: number, data: Uint8Array, priority: PacketPriority, reliability: PacketReliability, channel: number): void;
 
         // Event fired when the connection has been closed
-        connectionClosed: ((reason: string) => void);
+        connectionClosed: ((reason: string) => void)[];
 
         setApplication(account: string, application: string): void;
 
@@ -1201,24 +1197,23 @@ module Stormancer {
     }
 
     export class WebSocketConnection implements IConnection {
+        private _socket: WebSocket;
+
+        public constructor(id: number, socket: WebSocket) {
+            this.id = id;
+            this._socket = socket;
+            this.connectionDate = new Date();
+            this.state = ConnectionState.Connected;
+        }
 
         // Unique id in the node for the connection.
         public id: number;
-
-        // Ip address of the remote peer.
-        public ipAddress: string;
 
         // Connection date.
         public connectionDate: Date;
 
         // Metadata associated with the connection.
         public metadata: Map;
-
-        //// Register components.
-        //RegisterComponent<T>(component: T): void;
-
-        //// Gets a service from the object.
-        //GetComponent<T>(): T;
 
         // Account of the application which the peer is connected to.
         public account: string
@@ -1231,35 +1226,39 @@ module Stormancer {
 
         // Close the connection
         public close(): void {
-            throw "Not implemented";
+            this._socket.close();
         }
 
         // Sends a system message to the peer.
         public sendSystem(msgId: number, data: Uint8Array): void {
-            throw "Not implemented";
-        }
+            var bytes = new Uint8Array(data.length + 1);
+            bytes[0] = msgId;
+            bytes.set(data, 1);
 
-        public sendRaw(data: Uint8Array, priority: PacketPriority, reliability: PacketReliability, channel: number): void {
-            throw "Not implemented";
+            this._socket.send(bytes.buffer);
         }
  
         // Sends a packet to the target remote scene.
         public sendToScene(sceneIndex: number, route: number, data: Uint8Array, priority: PacketPriority, reliability: PacketReliability, channel: number): void {
-            throw "Not implemented";
+            var bytes = new Uint8Array(data.length + 3);
+            bytes[0] = sceneIndex;
+
+            var ushorts = new Uint16Array(1);
+            ushorts[0] = route;
+            bytes.set(new Uint8Array(ushorts.buffer), 1);
+
+            bytes.set(data, 3);
+
+            this._socket.send(bytes.buffer);
         }
 
         // Event fired when the connection has been closed
-        public connectionClosed: ((reason: string) => void);
+        public connectionClosed: ((reason: string) => void)[];
 
         public setApplication(account: string, application: string): void {
-            throw "Not implemented";
+            this.account = account;
+            this.application = application;
         }
-
-        // The connection's Ping in milliseconds
-        //ping: number;
-
-        // Returns advanced statistics about the connection.
-        //getConnectionStatistics(): IConnectionStatistics;
 
         public serializer: ISerializer;
     }

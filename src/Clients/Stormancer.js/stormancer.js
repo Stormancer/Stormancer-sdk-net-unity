@@ -741,25 +741,36 @@ var Stormancer;
     })();
     Stormancer.WebSocketTransport = WebSocketTransport;
     var WebSocketConnection = (function () {
-        function WebSocketConnection() {
+        function WebSocketConnection(id, socket) {
+            this.id = id;
+            this._socket = socket;
+            this.connectionDate = new Date();
+            this.state = 2 /* Connected */;
         }
         // Close the connection
         WebSocketConnection.prototype.close = function () {
-            throw "Not implemented";
+            this._socket.close();
         };
         // Sends a system message to the peer.
         WebSocketConnection.prototype.sendSystem = function (msgId, data) {
-            throw "Not implemented";
-        };
-        WebSocketConnection.prototype.sendRaw = function (data, priority, reliability, channel) {
-            throw "Not implemented";
+            var bytes = new Uint8Array(data.length + 1);
+            bytes[0] = msgId;
+            bytes.set(data, 1);
+            this._socket.send(bytes.buffer);
         };
         // Sends a packet to the target remote scene.
         WebSocketConnection.prototype.sendToScene = function (sceneIndex, route, data, priority, reliability, channel) {
-            throw "Not implemented";
+            var bytes = new Uint8Array(data.length + 3);
+            bytes[0] = sceneIndex;
+            var ushorts = new Uint16Array(1);
+            ushorts[0] = route;
+            bytes.set(new Uint8Array(ushorts.buffer), 1);
+            bytes.set(data, 3);
+            this._socket.send(bytes.buffer);
         };
         WebSocketConnection.prototype.setApplication = function (account, application) {
-            throw "Not implemented";
+            this.account = account;
+            this.application = application;
         };
         return WebSocketConnection;
     })();
