@@ -25,11 +25,27 @@
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="ApiClient.ts" />
     <TypeScriptCompile Include="app.ts" />
     <TypeScriptCompile Include="CancellationTokenSource.ts" />
+    <TypeScriptCompile Include="Client.ts" />
+    <TypeScriptCompile Include="Configuration\ClientConfiguration.ts" />
+    <TypeScriptCompile Include="Core\IConnection.ts" />
+    <TypeScriptCompile Include="Core\ILogger.ts" />
+    <TypeScriptCompile Include="Heplers.ts" />
+    <TypeScriptCompile Include="IConnectionManager.ts" />
+    <TypeScriptCompile Include="ILogger.ts" />
+    <TypeScriptCompile Include="IPacketProcessor.ts" />
+    <TypeScriptCompile Include="ITransport.ts" />
+    <TypeScriptCompile Include="MessageIDTypes.ts" />
+    <TypeScriptCompile Include="Scene.ts" />
+    <TypeScriptCompile Include="SceneEndpoint.ts" />
+    <TypeScriptCompile Include="ScenePeer.ts" />
     <TypeScriptCompile Include="stormancer.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\msgpack\msgpack.d.ts" />
+    <TypeScriptCompile Include="Transports\WebSocketClientConnection.ts" />
+    <TypeScriptCompile Include="Transports\WebSocketClientTransport.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

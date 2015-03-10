@@ -11,6 +11,7 @@ namespace Stormancer.Dto
         public string Token;
         public Dictionary<string, string> Metadata;
     }
+
     public struct SceneInfosDto
     {
         public string SceneId;

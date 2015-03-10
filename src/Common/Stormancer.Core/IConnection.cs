@@ -7,6 +7,13 @@ using System.Threading.Tasks;
 
 namespace Stormancer.Core
 {
+    public enum ConnectionState
+    {
+        Disconnected,
+        Connecting,
+        Connected
+    }
+
     public interface IConnection
     {
         /// <summary>
@@ -103,14 +110,5 @@ namespace Stormancer.Core
         /// </summary>
         /// <returns>The required statistics</returns>
         IConnectionStatistics GetConnectionStatistics();
-
-
-    }
-
-    public enum ConnectionState
-    {
-        Disconnected,
-        Connecting,
-        Connected
     }
 }

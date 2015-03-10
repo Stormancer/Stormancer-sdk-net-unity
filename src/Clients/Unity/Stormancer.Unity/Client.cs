@@ -15,7 +15,6 @@ using Stormancer.Core;
 using Stormancer.Cluster.Application;
 using Stormancer.Plugins;
 
-
 namespace Stormancer
 {
     /// <summary>

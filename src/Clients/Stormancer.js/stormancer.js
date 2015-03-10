@@ -906,4 +906,4 @@ var Stormancer;
     };
     //jQuery.support.cors = true
 }(jQuery, window));
-//# sourceMappingURL=stormancer.js.map
+//# sourceMappingURL=Stormancer.js.map
