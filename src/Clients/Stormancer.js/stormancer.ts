@@ -60,17 +60,15 @@ module Stormancer {
         constructor() {
             //this.dispatcher = new PacketDispatcher();
             this.transport = new WebSocketTransport();
+            this.dispatcher = new DefaultPacketDispatcher();
             this.serializers = [];
             this.serializers.push(new MsgPackSerializer());
         }
 
         static apiEndpoint: string = "http://api.stormancer.com/";
 
-        static localDevEndpoint: string = "http://localhost:8081/";
-
-        // A boolean value indicating if the client should try to connect to the local dev platform.
-        public isLocalDev: boolean;
-
+        
+        
         // A string containing the target server endpoint.
         // This value overrides the *IsLocalDev* property.
         public serverEndpoint: string;
@@ -82,37 +80,24 @@ module Stormancer {
         public application: string;
 
         getApiEndpoint(): string {
-            if (this.isLocalDev) {
-                return this.serverEndpoint ? this.serverEndpoint : Configuration.localDevEndpoint;
-            }
-            else {
-                return this.serverEndpoint ? this.serverEndpoint : Configuration.apiEndpoint;
-            }
+            return this.serverEndpoint ? this.serverEndpoint : Configuration.apiEndpoint;
+
         }
 
-        // Creates a ClientConfiguration object targeting the local development server.
-        static forLocalDev(applicationName: string): Configuration {
-            var config = new Configuration();
-            config.isLocalDev = true;
-            config.application = applicationName;
-            config.account = "local";
-            return config;
-        }
-
+        
         // Creates a ClientConfiguration object targeting the public online platform.
         static forAccount(accountId: string, applicationName: string): Configuration {
             var config = new Configuration();
-            config.isLocalDev = false;
             config.account = accountId;
             config.application = applicationName;
             return config;
         }
 
-        public _metadata: Map = {};
+        public metadata: Map = {};
 
         // Adds metadata to the connection.
         public Metadata(key: string, value: string): Configuration {
-            this._metadata[key] = value;
+            this.metadata[key] = value;
             return this;
         }
 
@@ -170,7 +155,7 @@ module Stormancer {
         private _requestProcessor: RequestProcessor;
         private _scenesDispatcher: SceneDispatcher;
 
-        private _serializers: IMap<ISerializer> = {};
+        private _serializers: IMap<ISerializer> = { msgpack: new MsgPackSerializer() };
 
         private _cts: Cancellation.tokenSource;
 
@@ -191,7 +176,7 @@ module Stormancer {
             this._scenesDispatcher = new SceneDispatcher();
             this._dispatcher.addProcessor(this._requestProcessor);
             this._dispatcher.addProcessor(this._scenesDispatcher);
-            this._metadata = config._metadata;
+            this._metadata = config.metadata;
 
             for (var i in config.serializers) {
                 var serializer = config.serializers[i];
@@ -209,7 +194,7 @@ module Stormancer {
         private initialize(): void {
             if (!this._initialized) {
                 this._initialized = true;
-                this._transport.packetReceived.push(this.transportPacketReceived);
+                this._transport.packetReceived.push(packet => this.transportPacketReceived(packet));
             }
         }
 
@@ -224,22 +209,23 @@ module Stormancer {
 
         public getScene(token: string): JQueryPromise<IScene> {
             var ci = this._tokenHandler.decodeToken(token);
-            return this.getSceneImpl(ci.tokenData.sceneId, ci);
+            return this.getSceneImpl(ci.tokenData[7], ci);
         }
 
         private getSceneImpl(sceneId: string, ci: SceneEndpoint): JQueryPromise<IScene> {
+            var self = this;
             return this.ensureTransportStarted(ci).then(() => {
-                var parameter: SceneInfosRequestDto = { Metadata: this._serverConnection.metadata, Token: ci.token };
-                return this.sendSystemRequest<SceneInfosRequestDto, SceneInfosDto>(MessageIDTypes.ID_GET_SCENE_INFOS, parameter);
+                var parameter: SceneInfosRequestDto = { Metadata: self._serverConnection.metadata, Token: ci.token };
+                return self.sendSystemRequest<SceneInfosRequestDto, SceneInfosDto>(MessageIDTypes.ID_GET_SCENE_INFOS, parameter);
             }).then((result: SceneInfosDto) => {
-                if (!this._serverConnection.serializer) {
+                if (!self._serverConnection.serializer) {
                     if (!result.SelectedSerializer) {
                         throw new Error("No serializer selected.");
                     }
-                    this._serverConnection.serializer = this._serializers[result.SelectedSerializer];
-                    this._serverConnection.metadata["serializer"] = result.SelectedSerializer;
+                    self._serverConnection.serializer = self._serializers[result.SelectedSerializer];
+                    self._serverConnection.metadata["serializer"] = result.SelectedSerializer;
                 }
-                var scene = new Scene(this._serverConnection, this, sceneId, ci.token, result);
+                var scene = new Scene(self._serverConnection, self, sceneId, ci.token, result);
                 return scene;
             });
         }
@@ -252,13 +238,14 @@ module Stormancer {
         private _systemSerializer: ISerializer = new MsgPackSerializer();
 
         private ensureTransportStarted(ci: SceneEndpoint): JQueryPromise<void> {
-            return Helpers.promiseIf(this._serverConnection == null,() => {
-                return Helpers.promiseIf(!this._transport.isRunning, this.startTransport)
+            var self = this;
+            return Helpers.promiseIf(self._serverConnection == null,() => {
+                return Helpers.promiseIf(!self._transport.isRunning, self.startTransport, self)
                     .then(() => {
-                    return this._transport.connect(ci.tokenData.endpoints[this._transport.name])
-                        .then(this.registerConnection);
+                    return self._transport.connect(ci.tokenData[3][self._transport.name])
+                        .then(c => self.registerConnection(c));
                 });
-            });
+            }, self);
         }
 
         private startTransport(): JQueryPromise<void> {
@@ -361,10 +348,10 @@ module Stormancer {
         hostConnection: IConnection;
 
         // Registers a route on the local peer.
-        addRoute(route: string, handler: (packet: Packet<IScenePeer>) => void, metadata: Map): void;
+        addRoute(route: string, handler: (packet: Packet<IScenePeer>) => void, metadata?: Map): void;
 
         // Sends a packet to the scene.
-        sendPacket(route: string, data: Uint8Array, priority: PacketPriority, reliability: PacketReliability, channel: number): void;
+        sendPacket(route: string, data: Uint8Array, priority?: PacketPriority, reliability?: PacketReliability): void;
 
         // Disconnects the scene.
         disconnect(): JQueryPromise<void>;
@@ -381,21 +368,40 @@ module Stormancer {
     }
 
     class Packet<T> {
-        constructor(source: T, data: Uint8Array, metadata: IMap<any>) {
-            this.source = source;
+        constructor(source: T, data: Uint8Array, metadata?: IMap<any>) {
+            this.connection = source;
             this.data = data;
-            this.metadata = metadata;
+            this._metadata = metadata;
         }
-
-        public source: T;
 
         // Data contained in the packet.
         public data: Uint8Array;
 
-        public metadata: IMap<any>;
+        private _metadata: IMap<any>;
 
-        public getMetadata(key: string): any {
-            return this.metadata[key];
+        public setMetadata(metadata: IMap<any>) {
+            this._metadata = metadata;
+        }
+
+        public getMetadata(): IMap<any> {
+            if (!this._metadata) {
+                this._metadata = {};
+            }
+            return this._metadata;
+        }
+
+        public setMetadataValue(key: string, value): void {
+            if (!this._metadata) {
+                this._metadata = {};
+            }
+            this._metadata[key] = value;
+        }
+
+        public getMetadataValue(key: string): any {
+            if (!this._metadata) {
+                this._metadata = {};
+            }
+            return this._metadata[key];
         }
 
         public connection: T;
@@ -416,7 +422,7 @@ module Stormancer {
             if (!scene) {
                 return false;
             } else {
-                packet.metadata["scene"] = scene;
+                packet.setMetadataValue("scene", scene);
                 scene.handleMessage(packet);
                 return true;
             }
@@ -434,7 +440,7 @@ module Stormancer {
     // A remote scene.
     export interface IScenePeer {
         // Sends a message to the remote scene.
-        send(route: string, data: Uint8Array, priority: PacketPriority, reliability: PacketReliability): void;
+        send(route: string, data: Uint8Array, priority?: PacketPriority, reliability?: PacketReliability): void;
 
         id(): number;
     }
@@ -443,6 +449,41 @@ module Stormancer {
         dispatchPacket(packet: Packet<IConnection>): void;
 
         addProcessor(processor: IPacketProcessor): void;
+    }
+
+    class DefaultPacketDispatcher implements IPacketDispatcher {
+        private _handlers: IMap<(packet: Packet<IConnection>) => boolean> = {};
+        private _defaultProcessors: ((msgType: number, packet: Packet<IConnection>) => boolean)[] = [];
+
+        public dispatchPacket(packet: Packet<IConnection>): void {
+            var processed = false;
+            var count = 0;
+            var msgType = 0;
+            while (!processed && count < 40) {
+                msgType = packet.data[0];
+                packet.data = packet.data.subarray(1);
+                if (this._handlers[msgType]) {
+                    processed = this._handlers[msgType](packet);
+                    count++;
+                }
+                else {
+                    break;
+                }
+            }
+            for (var i = 0, len = this._defaultProcessors.length; i < len; i++) {
+                if (this._defaultProcessors[i](msgType, packet)) {
+                    processed = true;
+                    break;
+                }
+            }
+            if (!processed) {
+                throw new Error("Couldn't process message. msgId: " + msgType);
+            }
+        }
+
+        public addProcessor(processor: IPacketProcessor): void {
+            processor.registerProcessor(new PacketProcessorConfig(this._handlers, this._defaultProcessors));
+        }
     }
 
     interface SceneInfosRequestDto {
@@ -481,12 +522,12 @@ module Stormancer {
         connectionOpened: ((connection: IConnection) => void)[];
 
         // Fires when a connection to a remote peer is closed.
-        connectionClose: ((connection: IConnection) => void)[];
+        connectionClosed: ((connection: IConnection) => void)[];
 
         // The name of the transport.
         name: string;
 
-        id: number;
+        id: Uint8Array;
     }
 
     // Contract for the binary serializers used by Stormancer applications.
@@ -570,7 +611,7 @@ module Stormancer {
         sendSystem(msgId: number, data: Uint8Array): void;
  
         // Sends a packet to the target remote scene.
-        sendToScene(sceneIndex: number, route: number, data: Uint8Array, priority: PacketPriority, reliability: PacketReliability, channel: number): void;
+        sendToScene(sceneIndex: number, route: number, data: Uint8Array, priority: PacketPriority, reliability: PacketReliability): void;
 
         // Event fired when the connection has been closed
         connectionClosed: ((reason: string) => void)[];
@@ -625,7 +666,7 @@ module Stormancer {
 
         // Adds
         public addCatchAllProcessor(handler: (n: number, p: Packet<IConnection>) => boolean): void {
-            this._defaultProcessors.push(handler);
+            this._defaultProcessors.push((n, p) => handler(n, p));
         }
     }
 
@@ -636,14 +677,14 @@ module Stormancer {
     class TokenHandler implements ITokenHandler {
         private _tokenSerializer: ISerializer;
 
-        public _tokenHandler(): void {
+        public constructor() {
             this._tokenSerializer = new MsgPackSerializer();
         }
 
         public decodeToken(token: string): SceneEndpoint {
             var data = token.split('-')[0];
             var buffer = Helpers.base64ToByteArray(data);
-            var result = this._tokenSerializer.deserialize<ConnectionData>(buffer);
+            var result = this._tokenSerializer.deserialize<any[]>(buffer);
 
             var sceneEndpoint = new SceneEndpoint();
             sceneEndpoint.token = token;
@@ -653,29 +694,9 @@ module Stormancer {
     }
 
     class SceneEndpoint {
-        public tokenData: ConnectionData;
+        public tokenData: any[];
 
         public token: string;
-    }
-
-    class ConnectionData {
-        public endpoints: Map;
-
-        public accountId: string;
-
-        public application: string;
-
-        public sceneId: string;
-
-        public routing: string;
-
-        public issued: Date;
-
-        public expiration: Date;
-
-        public userData: number[];
-
-        public contentType: string;
     }
 
     class ApiClient {
@@ -685,7 +706,7 @@ module Stormancer {
         }
 
         private _config: Configuration;
-        private createTokenUri = "{0}/{1}/scenes/{2}/token";
+        private createTokenUri = "/{0}/{1}/scenes/{2}/token";
         private _tokenHandler: ITokenHandler;
 
         public getSceneEndpoint<T>(accountId: string, applicationName: string, sceneId: string, userData: T): JQueryPromise<SceneEndpoint> {
@@ -717,7 +738,7 @@ module Stormancer {
             return msgpack.unpack(bytes);
         }
 
-        name: string = "MsgPack";
+        name: string = "msgpack/map";
     }
 
     interface IMap<T> {
@@ -730,7 +751,7 @@ module Stormancer {
 
     class Helpers {
         static base64ToByteArray(data: string): Uint8Array {
-            return new Uint8Array(atob(data).split('').map(function (v) { return parseInt(v) }));
+            return new Uint8Array(atob(data).split('').map(function (c) { return c.charCodeAt(0) }));
         }
 
         static stringFormat(str: string, ...args: any[]): string {
@@ -765,9 +786,14 @@ module Stormancer {
             return deferred.promise();
         }
 
-        static promiseIf(condition: boolean, action: () => JQueryPromise<void>): JQueryPromise<void> {
+        static promiseIf(condition: boolean, action: () => JQueryPromise<void>, context?: any): JQueryPromise<void> {
             if (condition) {
-                return action();
+                if (context) {
+                    return action.call(context);
+                }
+                else {
+                    return action();
+                }
             } else {
                 return Helpers.promiseFromResult(null);
             }
@@ -872,6 +898,65 @@ module Stormancer {
                     return true;
                 });
             }
+
+            config.addProcessor(MessageIDTypes.ID_REQUEST_RESPONSE_MSG, p => {
+                var id = new DataView(p.data.buffer, p.data.byteOffset).getUint16(0, true);
+                var request: Request = this._pendingRequests[id];
+                if (request) {
+                    p.setMetadataValue["request"] = request;
+                    request.lastRefresh = new Date();
+                    p.data = p.data.subarray(2);
+                    request.observer.onNext(p);
+                    request.deferred.resolve();
+                }
+                else {
+                    console.error("Unknow request id.");
+                }
+
+                return true;
+            });
+
+            config.addProcessor(MessageIDTypes.ID_REQUEST_RESPONSE_COMPLETE, p => {
+                var id = new DataView(p.data.buffer, p.data.byteOffset).getUint16(0, true);
+
+                var request = this._pendingRequests[id];
+                if (request) {
+                    p.setMetadataValue("request", request);
+                }
+                else {
+                    console.error("Unknow request id.");
+                }
+
+                delete this._pendingRequests[id];
+                if (p.data[3]) {
+                    request.deferred.promise().always(() => request.observer.onCompleted());
+                }
+                else {
+                    request.observer.onCompleted();
+                }
+
+                return true;
+            });
+
+            config.addProcessor(MessageIDTypes.ID_REQUEST_RESPONSE_ERROR, p => {
+                var id = new DataView(p.data.buffer, p.data.byteOffset).getUint16(0, true);
+
+                var request = this._pendingRequests[id];
+                if (request) {
+                    p.setMetadataValue("request", request);
+                }
+                else {
+                    console.error("Unknow request id.");
+                }
+
+                delete this._pendingRequests[id];
+                
+                var msg = p.connection.serializer.deserialize<string>(p.data.subarray(2));
+
+                request.observer.onError(new Error(msg));
+
+                return true;
+            });
         }
 
         public addSystemRequestHandler(msgId: number, handler: (context: RequestContext) => JQueryPromise<void>): void {
@@ -905,7 +990,11 @@ module Stormancer {
                 onCompleted() { }
             });
 
-            peer.sendSystem(msgId, data);
+            var dataToSend = new Uint8Array(2 + data.length);
+            var idArray = new Uint16Array([request.id]);
+            dataToSend.set(new Uint8Array(idArray.buffer));
+            dataToSend.set(data, 2);
+            peer.sendSystem(msgId, dataToSend);
 
             deferred.promise().always(() => {
                 var r = this._pendingRequests[request.id];
@@ -1008,15 +1097,15 @@ module Stormancer {
             var index = route.index;
 
             var action = (p: Packet<IConnection>) => {
-                var packet = new Packet(this.host(), p.data, p.metadata);
+                var packet = new Packet(this.host(), p.data, p.getMetadata());
                 handler(packet);
             };
 
-            route.handlers.push(action);
+            route.handlers.push(p => action(p));
         }
 
         // Sends a packet to the scene.
-        public sendPacket(route: string, data: Uint8Array, priority: PacketPriority, reliability: PacketReliability, channel: number): void {
+        public sendPacket(route: string, data: Uint8Array, priority: PacketPriority = PacketPriority.MEDIUM_PRIORITY, reliability: PacketReliability = PacketReliability.RELIABLE): void {
             if (!route) {
                 throw new Error("route is null or undefined!");
             }
@@ -1032,7 +1121,7 @@ module Stormancer {
                 throw new Error("The route " + route + " doesn't exist on the scene.");
             }
 
-            this.hostConnection.sendToScene(this.handle, routeObj.index, data, priority, reliability, channel);
+            this.hostConnection.sendToScene(this.handle, routeObj.index, data, priority, reliability);
         }
 
         // Connects the scene to the server.
@@ -1055,10 +1144,9 @@ module Stormancer {
             });
             
             // extract the route id
-            var temp = packet.data.subarray(0, 2);
-            var routeId = new Uint16Array(temp.buffer)[0];
+            var routeId = new Uint16Array(packet.data.buffer, packet.data.byteOffset, 2)[0];
 
-            packet.metadata["routeId"] = routeId;
+            packet.setMetadataValue("routeId", routeId);
 
             var observer = this._handlers[routeId];
             observer && observer.map(value => {
@@ -1108,13 +1196,13 @@ module Stormancer {
             if (!r) {
                 throw new Error("The route " + route + " is not declared on the server.");
             }
-            this._connection.sendToScene(this._sceneHandle, r.index, data, priority, reliability, 0);
+            this._connection.sendToScene(this._sceneHandle, r.index, data, priority, reliability);
         }
     }
 
     export class WebSocketTransport implements ITransport {
         public name: string = "websocket";
-        public id: number;
+        public id: Uint8Array;
         // Gets a boolean indicating if the transport is currently running.
         public isRunning: boolean = false;
 
@@ -1122,6 +1210,7 @@ module Stormancer {
         private _connectionManager: IConnectionManager;
         private _socket: WebSocket;
         private _connecting = false;
+        private _connection: WebSocketConnection;
 
         // Fires when the transport recieves new packets.
         public packetReceived: ((packet: Packet<IConnection>) => void)[] = [];
@@ -1130,7 +1219,7 @@ module Stormancer {
         public connectionOpened: ((connection: IConnection) => void)[] = [];
 
         // Fires when a connection to a remote peer is closed.
-        public connectionClose: ((connection: IConnection) => void)[] = [];
+        public connectionClosed: ((connection: IConnection) => void)[] = [];
         
         // Starts the transport
         public start(type: string, handler: IConnectionManager, token: Cancellation.token): JQueryPromise<void> {
@@ -1158,41 +1247,80 @@ module Stormancer {
         public connect(endpoint: string): JQueryPromise<IConnection> {
             if (!this._socket && !this._connecting) {
                 this._connecting = true;
-                try {
-                    var socket = new WebSocket("ws://" + endpoint + "/");
-                    socket.binaryType = "arraybuffer";
 
-                    socket.onopen = () => this.onOpen(socket);
-                    socket.onmessage = args => this.onMessage(args.data);
-                    socket.onclose = args => this.onClose(args.wasClean);
-                    this._socket = socket;
+                var socket = new WebSocket("ws://" + endpoint + "/");
+                socket.binaryType = "arraybuffer";
 
-                    var connection = this.createNewConnection(this._socket);
-                    //TODO
-                }
-                finally {
-                    this._connecting = false;
-                }
-                //TODO
+                socket.onmessage = args => this.onMessage(args.data);
+
+                this._socket = socket;
+
+                var result = $.Deferred<IConnection>();
+
+                socket.onclose = args => this.onClose(result, args);
+                socket.onopen = () => this.onOpen(result);
+                return result.promise();
             }
-            throw "Not implemented";
-            return $.Deferred().promise();
+            throw new Error("This transport is already connected.");
         }
+
+
 
         private createNewConnection(socket: WebSocket): WebSocketConnection {
-            //TODO
-            throw "Not Implemented";
+            var cid = this._connectionManager.generateNewConnectionId();
+            return new WebSocketConnection(cid, socket);
         }
 
-        private onOpen(socket: WebSocket) {
+        private onOpen(deferred: JQueryDeferred<IConnection>) {
+            this._connecting = false;
+
+            var connection = this.createNewConnection(this._socket);
+
+            this._connectionManager.newConnection(connection);
+
+            this.connectionOpened.map(action => {
+                action(connection);
+            });
+
+            this._connection = connection;
+
+            deferred.resolve(connection);
         }
 
-        private onMessage(data: ArrayBuffer) {
-            //TODO
+        private onMessage(buffer: ArrayBuffer) {
+            var data = new Uint8Array(buffer);
+            if (this._connection) {
+                var packet = new Packet<IConnection>(this._connection, data);
+
+                if (data[0] === MessageIDTypes.ID_CONNECTION_RESULT) {
+                    this.id = data.subarray(1, 9);
+                }
+                else {
+                    this.packetReceived.map(action => {
+                        action(packet);
+                    });
+                }
+            }
         }
 
-        private onClose(clean: boolean) {
-            //TODO
+        private onClose(deferred: JQueryDeferred<IConnection>, closeEvent: CloseEvent) {
+            if (!this._connection) {
+                this._connecting = false;
+
+                deferred.reject(new Error("Can't connect WebSocket to server. Error code: " + closeEvent.code + ". Reason: " + closeEvent.reason + "."));
+                this._socket = null;
+            }
+            else {
+                var reason = closeEvent.wasClean ? "CLIENT_DISCONNECTED" : "CONNECTION_LOST";
+
+                if (this._connection) {
+                    this._connectionManager.closeConnection(this._connection, reason);
+
+                    this.connectionClosed.map(action => {
+                        action(this._connection);
+                    });
+                }
+            }
         }
     }
 
@@ -1213,7 +1341,7 @@ module Stormancer {
         public connectionDate: Date;
 
         // Metadata associated with the connection.
-        public metadata: Map;
+        public metadata: Map = {};
 
         // Account of the application which the peer is connected to.
         public account: string
@@ -1239,7 +1367,7 @@ module Stormancer {
         }
  
         // Sends a packet to the target remote scene.
-        public sendToScene(sceneIndex: number, route: number, data: Uint8Array, priority: PacketPriority, reliability: PacketReliability, channel: number): void {
+        public sendToScene(sceneIndex: number, route: number, data: Uint8Array, priority: PacketPriority, reliability: PacketReliability): void {
             var bytes = new Uint8Array(data.length + 3);
             bytes[0] = sceneIndex;
 
@@ -1260,7 +1388,7 @@ module Stormancer {
             this.application = application;
         }
 
-        public serializer: ISerializer;
+        public serializer: ISerializer = new MsgPackSerializer();
     }
 }
 

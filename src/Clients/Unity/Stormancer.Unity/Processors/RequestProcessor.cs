@@ -42,6 +42,7 @@ namespace Stormancer.Networking.Processors
         public void RegisterProcessor(PacketProcessorConfig config)
         {
             _isRegistered = true;
+
             foreach (var handler in _handlers)//Add system request handlers
             {
                 config.AddProcessor(handler.Key, p =>
@@ -68,6 +69,7 @@ namespace Stormancer.Networking.Processors
                     return true;
                 });
             }
+
             config.AddProcessor((byte)MessageIDTypes.ID_REQUEST_RESPONSE_MSG, p =>
             {
                 var temp = new byte[2];
@@ -89,6 +91,7 @@ namespace Stormancer.Networking.Processors
 
                 return true;
             });
+
             config.AddProcessor((byte)MessageIDTypes.ID_REQUEST_RESPONSE_COMPLETE, p =>
             {
                 var temp = new byte[2];
@@ -115,8 +118,10 @@ namespace Stormancer.Networking.Processors
                 {
                     request.observer.OnCompleted();
                 }
+
                 return true;
             });
+
             config.AddProcessor((byte)MessageIDTypes.ID_REQUEST_RESPONSE_ERROR, p =>
             {
                 var temp = new byte[2];
@@ -136,7 +141,6 @@ namespace Stormancer.Networking.Processors
                 var msg = p.Serializer().Deserialize<string>(p.Stream);
 
                 request.observer.OnError(new ClientException(msg));
-
 
                 return true;
             });
