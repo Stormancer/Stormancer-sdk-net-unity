@@ -1,4 +1,6 @@
 # Stormancer
-Stormancer's various SDKs
+Stormancer SDKs
 
-Warning: This repo currently only contains the Unity client for Stormancer v1, which is currently unreleased. More clients will follow soon and the code will stabilize when we draw closer to the release of Stormancer version 1.0.
+Warning: This repo currently only contains client libraries for Stormancer v1, which is currently only available privately for testing.
+
+Contact us at team@stormancer.com to get access to this new (awesome) version.
