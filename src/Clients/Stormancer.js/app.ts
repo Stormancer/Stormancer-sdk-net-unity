@@ -2,7 +2,7 @@
     element: HTMLElement;
     span: HTMLElement;
     timerToken: number;
-    scene: any;
+    scene;
 
     constructor(element: HTMLElement) {
         this.element = element;
@@ -21,23 +21,27 @@
         var deferred = $.Deferred<string>();
         scenePromise.then(scene => {
             this.scene = scene;
-            scene.addRoute("echo.out", packet => {
-                console.log(packet.data[0]);
-                console.log(packet.data.length);
-            });
+            scene.addRoute("echo.out", this.messageReceived);
 
             return scene.connect().then(() => {
                 this.timerToken = setInterval(() => {
                     var localDateString = new Date().toLocaleString();
                     this.span.innerHTML = localDateString;
-                    this.send(localDateString);
+                    this.sendMessage("echo.in", localDateString);
                 }, 500);
-            });            
+            });
         });
     }
 
-    send(message) {
-        this.scene.sendPacket("echo.in", new Uint8Array(message.split('')));
+    sendMessage(routeName, message) {
+        this.scene.sendPacket(routeName, new Uint8Array(message.split('').map(function (v) { return v.charCodeAt(0) })));
+        console.log("Message sent on " + routeName + ":" + message);
+    }
+
+    messageReceived(packet) {
+        console.log("Packet received :", packet);
+        var message = packet.data.map(String.fromCharCode).join('');
+        this.span.innerHTML = message;
     }
 
     stop() {

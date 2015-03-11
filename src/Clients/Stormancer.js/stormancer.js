@@ -44,21 +44,26 @@ var Greeter = (function () {
         var deferred = $.Deferred();
         scenePromise.then(function (scene) {
             _this.scene = scene;
-            scene.addRoute("echo.out", function (packet) {
-                console.log(packet.data[0]);
-                console.log(packet.data.length);
-            });
+            scene.addRoute("echo.out", _this.messageReceived);
             return scene.connect().then(function () {
                 _this.timerToken = setInterval(function () {
                     var localDateString = new Date().toLocaleString();
                     _this.span.innerHTML = localDateString;
-                    _this.send(localDateString);
+                    _this.sendMessage("echo.in", localDateString);
                 }, 500);
             });
         });
     };
-    Greeter.prototype.send = function (message) {
-        this.scene.sendPacket("echo.in", new Uint8Array(message.split('')));
+    Greeter.prototype.sendMessage = function (routeName, message) {
+        this.scene.sendPacket(routeName, new Uint8Array(message.split('').map(function (v) {
+            return v.charCodeAt(0);
+        })));
+        console.log("Message sent on " + routeName + ":" + message);
+    };
+    Greeter.prototype.messageReceived = function (packet) {
+        console.log("Packet received :", packet);
+        var message = packet.data.map(String.fromCharCode).join('');
+        this.span.innerHTML = message;
     };
     Greeter.prototype.stop = function () {
         clearTimeout(this.timerToken);
@@ -144,7 +149,7 @@ var Stormancer;
     var Client = (function () {
         function Client(config) {
             this._tokenHandler = new Stormancer.TokenHandler();
-            this._serializers = { msgpack: new Stormancer.MsgPackSerializer() };
+            this._serializers = {};
             this._systemSerializer = new Stormancer.MsgPackSerializer();
             this._accountId = config.account;
             this._applicationName = config.application;
