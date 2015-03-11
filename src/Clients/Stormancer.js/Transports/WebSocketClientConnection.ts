@@ -1,5 +1,3 @@
-/// <reference path="Stormancer.ts" />
-
 module Stormancer {
     export class WebSocketConnection implements IConnection {
         private _socket: WebSocket;

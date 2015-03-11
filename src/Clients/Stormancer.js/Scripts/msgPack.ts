@@ -1,7 +1,12 @@
-﻿/*!{id:msgpack.js,ver:1.05,license:"MIT",author:"uupaa.js@gmail.com"}*/
+﻿/// <reference path="typings/jquery/jquery.d.ts" />
+
+/*!{id:msgpack.js,ver:1.05,license:"MIT",author:"uupaa.js@gmail.com"}*/
 
 // === msgpack ===
 // MessagePack -> http://msgpack.sourceforge.net/
+
+declare function vblen(b);
+declare function vbstr(b);
 
 this.msgpack || (function (globalScope) {
 
@@ -16,7 +21,7 @@ this.msgpack || (function (globalScope) {
         worker: "msgpack.js",   // msgpack.worker - WebWorkers script filename
         upload: msgpackupload,  // msgpack.upload(url:String, option:Hash, callback:Function)
         download: msgpackdownload // msgpack.download(url:String, option:Hash, callback:Function)
-    };
+    };   
 
     var _ie = /MSIE/.test(navigator.userAgent),
         _bin2num = {}, // BinaryStringToNumber   { "\00": 0, ... "\ff": 255 }
@@ -33,17 +38,17 @@ this.msgpack || (function (globalScope) {
         _MAX_DEPTH = 512;
 
     // for WebWorkers Code Block
-    self.importScripts && (onmessage = function (event) {
+    (<any>self).importScripts && (onmessage = function (event) {
         if (event.data.method === "pack") {
-            postMessage(base64encode(msgpackpack(event.data.data)));
+            (<any>window).postMessage(base64encode(msgpackpack(event.data.data)));
         } else {
-            postMessage(msgpackunpack(event.data.data));
+            (<any>window).postMessage(msgpackunpack(event.data.data));
         }
     });
 
     // msgpack.pack
     function msgpackpack(data,       // @param Mix:
-                         settings) { // @param Boolean(= false):
+                         settings?) { // @param Boolean(= false):
         // @return ByteArray/BinaryString/false:
         //     false is error return
         //  [1][mix to String]    msgpack.pack({}, true) -> "..."
@@ -61,7 +66,7 @@ this.msgpack || (function (globalScope) {
     }
 
     // msgpack.unpack
-    function msgpackunpack(data,settings) { // @param BinaryString/ByteArray:
+    function msgpackunpack(data, settings?) { // @param BinaryString/ByteArray:
         // @return Mix/undefined:
         //       undefined is error return
         //  [1][String to mix]    msgpack.unpack("...") -> {}
@@ -78,8 +83,8 @@ this.msgpack || (function (globalScope) {
     function encode(rv,      // @param ByteArray: result
                     mix,     // @param Mix: source data
                     depth,  // @param Number: depth
-                    settings,  
-                    bytesArray
+                    settings?,  
+                    bytesArray?
                     ) { 
         var size, i, iz, c, pos,        // for UTF8.encode, Array.encode, Hash.encode
             high, low, sign, exp, frac; // for IEEE754
@@ -274,7 +279,7 @@ this.msgpack || (function (globalScope) {
     }
 
     // inner - decoder
-    function decode(settings,rawAsArray) { // @return Mix:
+    function decode(settings,rawAsArray?) { // @return Mix:
         var size, i, iz, c, num = 0,
             sign, exp, frac, ary, hash,
             buf = _buf, type = buf[++_idx],key;
@@ -483,7 +488,7 @@ this.msgpack || (function (globalScope) {
         option.binary = true;
 
         if (option.worker && globalScope.Worker) {
-            var worker = new Worker(msgpack.worker);
+            var worker = new Worker(globalScope.msgpack.worker);
 
             worker.onmessage = function (event) {
                 option.data = event.data;
@@ -526,7 +531,7 @@ this.msgpack || (function (globalScope) {
                     } else {
                         if (rv.ok) {
                             if (option.worker && globalScope.Worker) {
-                                worker = new Worker(msgpack.worker);
+                                worker = new Worker(globalScope.msgpack.worker);
                                 worker.onmessage = function (event) {
                                     callback(event.data, option, rv);
                                 };
@@ -560,7 +565,7 @@ this.msgpack || (function (globalScope) {
             }
         }
 
-        function gc(abort) {
+        function gc(abort?) {
             abort && xhr && xhr.abort && xhr.abort();
             watchdog && (clearTimeout(watchdog), watchdog = 0);
             xhr = null;

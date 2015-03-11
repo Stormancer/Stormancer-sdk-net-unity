@@ -1,5 +1,3 @@
-/// <reference path="Stormancer.ts" />
-
 module Stormancer {
     export class Scene implements IScene {
         public id: string;        

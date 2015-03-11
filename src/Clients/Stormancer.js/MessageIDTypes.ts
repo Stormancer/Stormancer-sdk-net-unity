@@ -1,5 +1,3 @@
-/// <reference path="Stormancer.ts" />
-
 module Stormancer {
     export class MessageIDTypes {
         public static ID_CONNECT_TO_SCENE = 134;

@@ -1,7 +1,5 @@
-/// <reference path="Stormancer.ts" />
-
 module Stormancer {
-    interface IConnectionManager {
+    export interface IConnectionManager {
         // Generates an unique connection id for this node.
         generateNewConnectionId(): number;
 

@@ -1,12 +1,10 @@
-/// <reference path="Stormancer.ts" />
-
 module Stormancer {
-    interface SceneInfosRequestDto {
+    export interface SceneInfosRequestDto {
         Token: string;
         Metadata: Map;
     }
 
-    interface SceneInfosDto {
+    export interface SceneInfosDto {
         SceneId: string;
         Metadata: Map;
         Routes: RouteDto[];

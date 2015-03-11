@@ -1,5 +1,3 @@
-/// <reference path="Stormancer.ts" />
-
 module Stormancer {
     export class MsgPackSerializer implements ISerializer {
         public serialize<T>(data: T): Uint8Array {

@@ -1,15 +1,4 @@
-﻿/// <reference path="Scripts/typings/msgpack/msgpack.d.ts" />
-/// <reference path="CancellationTokenSource.ts" />
-/// <reference path="ApiClient.ts" />
-/// <reference path="Client.ts" />
-/// <reference path="IConnectionManager.ts" />
-/// <reference path="ILogger.ts" />
-/// <reference path="IPacketProcessor.ts" />
-/// <reference path="ITransport.ts" />
-/// <reference path="MessageIDTypes.ts" />
-/// <reference path="Scene.ts" />
-/// <reference path="SceneEndpoint.ts" />
-/// <reference path="ScenePeer.ts" />
+﻿/// <reference path="Scripts/msgPack.ts" />
 
 // Module
 module Stormancer {

@@ -1,8 +1,6 @@
-/// <reference path="Stormancer.ts" />
-
 module Stormancer {
     // Contract for the binary serializers used by Stormancer applications.
-    interface ISerializer {
+    export interface ISerializer {
         // Serialize an object into a stream.
         serialize<T>(data: T): Uint8Array;
 

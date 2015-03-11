@@ -1,5 +1,3 @@
-/// <reference path="Stormancer.ts" />
-
 module Stormancer {
     // Contains method to register handlers for message types when passed to the IPacketProcessor.RegisterProcessor method.
     export class PacketProcessorConfig {

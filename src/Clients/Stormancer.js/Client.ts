@@ -1,5 +1,3 @@
-/// <reference path="Stormancer.ts" />
-
 module Stormancer {
     export class ConnectionHandler implements IConnectionManager {
         private _current = 0;

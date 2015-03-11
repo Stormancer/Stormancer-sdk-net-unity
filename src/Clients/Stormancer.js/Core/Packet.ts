@@ -1,7 +1,5 @@
-/// <reference path="Stormancer.ts" />
-
 module Stormancer {
-    class Packet<T> {
+    export class Packet<T> {
         constructor(source: T, data: Uint8Array, metadata?: IMap<any>) {
             this.connection = source;
             this.data = data;

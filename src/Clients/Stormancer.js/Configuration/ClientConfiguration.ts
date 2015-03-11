@@ -1,5 +1,3 @@
-/// <reference path="Stormancer.ts" />
-
 module Stormancer {
     // Represents the configuration of a Stormancer client.
     export class Configuration {

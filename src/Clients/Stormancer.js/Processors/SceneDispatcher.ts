@@ -1,7 +1,5 @@
-/// <reference path="Stormancer.ts" />
-
 module Stormancer {
-    class SceneDispatcher implements IPacketProcessor {
+    export class SceneDispatcher implements IPacketProcessor {
         private _scenes: Scene[] = [];
 
         public registerProcessor(config: PacketProcessorConfig): void {

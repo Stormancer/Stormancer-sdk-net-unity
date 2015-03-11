@@ -1,12 +1,10 @@
-/// <reference path="Stormancer.ts" />
-
 module Stormancer {
-    interface IConnectionStatistics {
+    export interface IConnectionStatistics {
         /// Number of packets lost in the last second.
         packetLossRate: number;
 
         // Get the kind of limitation on the outgoing flux.
-        bytesPerSecondLimitationType: BPSLimitationType;
+        bytesPerSecondLimitationType: any;//BPSLimitationType;
 
         // If the outgoing flux is limited, gets the limit rate.
         bytesPerSecondLimit: number;

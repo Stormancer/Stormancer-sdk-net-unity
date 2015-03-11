@@ -20,8 +20,9 @@
   <ItemGroup>
     <Content Include="app.css" />
     <Content Include="index.html" />
-    <Content Include="Scripts\jQuery.XDomainRequest.js" />
-    <Content Include="Scripts\msgPack.js" />
+    <TypeScriptCompile Include="Helpers.ts" />
+    <TypeScriptCompile Include="Plugins\Request.ts" />
+    <TypeScriptCompile Include="Scripts\msgPack.ts" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -41,7 +42,6 @@
     <TypeScriptCompile Include="Core\PacketPriority.ts" />
     <TypeScriptCompile Include="Core\PacketReliability.ts" />
     <TypeScriptCompile Include="Core\Route.ts" />
-    <TypeScriptCompile Include="Heplers.ts" />
     <TypeScriptCompile Include="IClient.ts" />
     <TypeScriptCompile Include="IConnectionManager.ts" />
     <TypeScriptCompile Include="Infrastructure\DefaultPacketDispatcher.ts" />
@@ -104,8 +104,9 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
-    <TypeScriptRemoveComments>false</TypeScriptRemoveComments>
+    <TypeScriptRemoveComments>True</TypeScriptRemoveComments>
     <TypeScriptSourceMap>true</TypeScriptSourceMap>
+    <TypeScriptOutFile>stormancer.js</TypeScriptOutFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <TypeScriptRemoveComments>true</TypeScriptRemoveComments>

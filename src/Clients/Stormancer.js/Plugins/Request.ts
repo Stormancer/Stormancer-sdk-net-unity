@@ -1,5 +1,7 @@
+/// <reference path="../Helpers.ts" />
+
 module Stormancer {
-    export interface IRequest {
+    export interface Request {
         lastRefresh: Date;
         id: number;
         observer: IObserver<Packet<IConnection>>;

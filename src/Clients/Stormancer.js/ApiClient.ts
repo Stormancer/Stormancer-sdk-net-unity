@@ -1,5 +1,3 @@
-/// <reference path="Stormancer.ts" />
-
 module Stormancer {
     export class ApiClient {
         constructor(config: Configuration, tokenHandler: ITokenHandler) {

@@ -1,5 +1,3 @@
-/// <reference path="Stormancer.ts" />
-
 module Stormancer {
     export class RequestProcessor implements IPacketProcessor {
         private _pendingRequests: IMap<Request> = {};

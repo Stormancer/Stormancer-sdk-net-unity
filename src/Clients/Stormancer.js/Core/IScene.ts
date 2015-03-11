@@ -1,5 +1,3 @@
-/// <reference path="Stormancer.ts" />
-
 module Stormancer {
     export interface IScene {
         // Represents a Stormancer scene.

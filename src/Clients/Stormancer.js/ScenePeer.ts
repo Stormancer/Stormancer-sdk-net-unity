@@ -1,5 +1,3 @@
-/// <reference path="Stormancer.ts" />
-
 module Stormancer {
     export class ScenePeer implements IScenePeer {
         private _connection: IConnection;

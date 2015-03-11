@@ -1,5 +1,3 @@
-/// <reference path="Stormancer.ts" />
-
 module Stormancer {
     export class RequestContext {
         private _packet: Packet<IConnection>;

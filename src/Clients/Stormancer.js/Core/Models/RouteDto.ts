@@ -1,7 +1,5 @@
-/// <reference path="Stormancer.ts" />
-
 module Stormancer {
-    interface RouteDto {
+    export interface RouteDto {
         Name: string;
         Handle: number;
         Metadata: Map;

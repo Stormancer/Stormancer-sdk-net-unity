@@ -1,8 +1,6 @@
-/// <reference path="Stormancer.ts" />
-
 module Stormancer {
     // A Stormancer network transport
-    interface ITransport {
+    export interface ITransport {
         // Starts the transport
         start(type: string, handler: IConnectionManager, token: Cancellation.token): JQueryPromise<void>;
 

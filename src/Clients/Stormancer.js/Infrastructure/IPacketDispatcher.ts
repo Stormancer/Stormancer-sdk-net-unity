@@ -1,7 +1,5 @@
-/// <reference path="Stormancer.ts" />
-
 module Stormancer {
-    interface IPacketDispatcher {
+    export interface IPacketDispatcher {
         dispatchPacket(packet: Packet<IConnection>): void;
 
         addProcessor(processor: IPacketProcessor): void;

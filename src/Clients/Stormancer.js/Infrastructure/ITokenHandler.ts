@@ -1,5 +1,3 @@
-/// <reference path="Stormancer.ts" />
-
 module Stormancer {
     export interface ITokenHandler {
         decodeToken(token: string): SceneEndpoint;

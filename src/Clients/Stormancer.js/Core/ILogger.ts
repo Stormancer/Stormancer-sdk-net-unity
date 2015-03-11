@@ -1,7 +1,5 @@
-/// <reference path="Stormancer.ts" />
-
 module Stormancer {
-    interface ILogger {
+    export interface ILogger {
         trace(message: string): void;
 
         debug(message: string): void;

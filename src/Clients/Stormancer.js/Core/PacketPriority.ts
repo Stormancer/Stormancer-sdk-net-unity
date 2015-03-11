@@ -1,5 +1,3 @@
-/// <reference path="Stormancer.ts" />
-
 module Stormancer {
     // Available packet priorities
     export enum PacketPriority {
