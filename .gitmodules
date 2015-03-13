@@ -1,6 +1,6 @@
 [submodule "src/Clients/cpp"]
 	path = src/Clients/cpp
-	url = https://github.com/antlafarge/Stormancer-sdk-cpp.git
+	url = https://github.com/Stormancer/stormancer-sdk-cpp.git
 [submodule "src/Clients/js"]
 	path = src/Clients/js
-	url = https://github.com/antlafarge/Stormancer-sdk-js.git
+	url = https://github.com/Stormancer/stormancer-sdk-js.git
