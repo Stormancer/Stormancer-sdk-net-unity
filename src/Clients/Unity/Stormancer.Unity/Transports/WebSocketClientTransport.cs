@@ -70,7 +70,7 @@ namespace Stormancer.Networking
                 this._connecting = true;
                 try
                 {
-                    var webSocket = new WebSocket("ws://" + endpoint + "/");
+                    var webSocket = new WebSocket(endpoint + "/");
                     //try 
                     //{
                     this.ConnectSocket(webSocket);
