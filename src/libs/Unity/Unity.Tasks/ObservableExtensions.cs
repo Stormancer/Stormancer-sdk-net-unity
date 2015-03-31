@@ -8,21 +8,57 @@ namespace System.Threading.Tasks
 {
     public static class ObservableExtensions
     {
-        public static Task ToVoidTask<T>(this IObservable<T> observable)
+        /// <summary>
+        /// Converts the IObservable to a Task.
+        /// </summary>
+        /// <typeparam name="T">The return type of the source IObservable.</typeparam>
+        /// <param name="source">The observable to convert.</param>
+        /// <returns>A task completing or getting faulted at the same time as the observable.</returns>
+        /// <remarks>The tasks completes when the converted observable completes, regardless of how many elements it had before completing.</remarks>
+        public static Task ToVoidTask<T>(this IObservable<T> source)
         {
-            return SubscribeAndCleanUp<T, Unit>(observable,
+            return SubscribeAndCleanUp<T, Unit>(source,
                 (obs, tcs) => obs.Subscribe(
                     t => { },
                     ex => tcs.SetException(ex),
                     () => tcs.SetResult(Unit.Default)));
         }
 
-        public static Task<T> ToTask<T>(this IObservable<T> observable)
+        /// <summary>
+        /// Converts the IObvervable to a Task
+        /// </summary>
+        /// <typeparam name="T">The return type of the source IObservable.</typeparam>
+        /// <param name="source">The observable to convert.</param>
+        /// <returns>A task completing or getting faulted at the same type as the observable source.
+        /// Its return value is the last value of the sequence.</returns>
+        /// <remarks>
+        /// The task completes when the converted observable completes, regardless of how many elements it had before completing.
+        /// The task's return value is the last element of the sequence.
+        /// The task is faulted with an InvalidOperationException if the sequence has no element.
+        /// </remarks>
+        public static Task<T> ToTask<T>(this IObservable<T> source)
         {
-            return SubscribeAndCleanUp<T, T>(observable.Single(),
+            var hasResult = false;
+            T result = default(T);
+            return SubscribeAndCleanUp<T, T>(source,
                 (obs, tcs) => obs.Subscribe(
-                    t => tcs.SetResult(t),
-                    ex => tcs.SetException(ex))
+                    t =>
+                    {
+                        hasResult = true;
+                        result = t;
+                    },
+                    ex => tcs.SetException(ex),
+                    () =>
+                    {
+                        if (hasResult)
+                        {
+                            tcs.SetResult(result);
+                        }
+                        else
+                        {
+                            tcs.SetException(new InvalidOperationException("Sequence has no element."));
+                        }
+                    })
                 );
         }
 
