@@ -99,7 +99,7 @@ namespace Stormancer
 
             foreach (var route in dto.Routes)
             {
-                _remoteRoutesMap.Add(route.Name, new Route(this, route.Name, route.Metadata) { Index = route.Handle });
+                _remoteRoutesMap.Add(route.Name, new Route(this, route.Name, route.Metadata) { Handle = route.Handle });
             }
         }
 
@@ -136,7 +136,7 @@ namespace Stormancer
 
         public IObservable<Packet<IScenePeer>> OnMessage(Route route)
         {
-            var index = route.Index;
+            var index = route.Handle;
             var observable = Observable.Create<Packet<IScenePeer>>(observer =>
             {
 
@@ -202,7 +202,7 @@ namespace Stormancer
                 throw new ArgumentException("The route " + route + " doesn't exist on the scene.");
             }
 
-            _peer.SendToScene(this.Handle, routeObj.Index, writer, priority, reliability);//.SendPacket(routeObj, writer, priority, reliability, channel);
+            _peer.SendToScene(this.Handle, routeObj.Handle, writer, priority, reliability);//.SendPacket(routeObj, writer, priority, reliability, channel);
         }
 
         /// <summary>
@@ -249,8 +249,8 @@ namespace Stormancer
 
             foreach (var route in _localRoutesMap)
             {
-                route.Value.Index = cr.RouteMappings[route.Key];
-                _handlers.TryAdd(route.Value.Index, route.Value.Handlers);
+                route.Value.Handle = cr.RouteMappings[route.Key];
+                _handlers.TryAdd(route.Value.Handle, route.Value.Handlers);
             }
         }
 

@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8B4DF876-A345-488E-9AE7-7295F1262863}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Stormancer.Client45</RootNamespace>
+    <AssemblyName>Stormancer.Client45</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;StormancerClient NET45</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Stormancer.Client45.XML</DocumentationFile>
+    <PlatformTarget>x64</PlatformTarget>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;StormancerClient NET45</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MsgPack">
+      <HintPath>..\..\..\packages\MsgPack.Cli.0.5.11\lib\net45\MsgPack.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.7\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Raknet.csharp">
+      <HintPath>..\..\..\..\libs\Raknet\Raknet.csharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Reactive.Core">
+      <HintPath>..\..\..\packages\Rx-Core.2.2.5\lib\net45\System.Reactive.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces">
+      <HintPath>..\..\..\packages\Rx-Interfaces.2.2.5\lib\net45\System.Reactive.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Linq">
+      <HintPath>..\..\..\packages\Rx-Linq.2.2.5\lib\net45\System.Reactive.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.PlatformServices">
+      <HintPath>..\..\..\packages\Rx-PlatformServices.2.2.5\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="websocket-sharp">
+      <HintPath>..\..\..\packages\WebSocketSharp.1.0.3-rc7\lib\websocket-sharp.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApiClient.cs" />
+    <Compile Include="Client.cs" />
+    <Compile Include="Configuration\ClientConfiguration.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="Extensions\SceneExtensions.cs" />
+    <Compile Include="IConnectionManager.cs" />
+    <Compile Include="Infrastructure\DefaultPacketDispatcher.cs" />
+    <Compile Include="Infrastructure\IPacketDispatcher.cs" />
+    <Compile Include="Infrastructure\Modules\IModule.cs" />
+    <Compile Include="Infrastructure\SubStream.cs" />
+    <Compile Include="IPacketProcessor.cs" />
+    <Compile Include="ITransport.cs" />
+    <Compile Include="MessageIDTypes.cs" />
+    <Compile Include="Plugins\IClientPlugin.cs" />
+    <Compile Include="Extensions\Buffers.cs" />
+    <Compile Include="Infrastructure\BSStream.cs" />
+    <Compile Include="Infrastructure\BufferPool\BufferInterfaces.cs" />
+    <Compile Include="Infrastructure\BufferPool\BufferObjects.cs" />
+    <Compile Include="Infrastructure\BufferPool\MemoryInterfaces.cs" />
+    <Compile Include="Infrastructure\BufferPool\MemoryObjects.cs" />
+    <Compile Include="Infrastructure\BufferPool\StreamObjects.cs" />
+    <Compile Include="Infrastructure\ITokenHandler.cs" />
+    <Compile Include="Infrastructure\MsgPackSerializer.cs" />
+    <Compile Include="Plugins\PluginBuildContext.cs" />
+    <Compile Include="Plugins\RpcClientPlugin.cs" />
+    <Compile Include="Plugins\RpcRequestContext.cs" />
+    <Compile Include="Processors\RequestProcessor.cs" />
+    <Compile Include="Processors\SceneDispatcher.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RemotePeer.cs" />
+    <Compile Include="Scene.cs" />
+    <Compile Include="SceneEndpoint.cs" />
+    <Compile Include="SystemMessages\ConnectedToSceneMsg.cs" />
+    <Compile Include="SystemMessages\ConnectionResult.cs" />
+    <Compile Include="SystemMessages\Empty.cs" />
+    <Compile Include="SystemMessages\ExceptionMsg.cs" />
+    <Compile Include="SystemMessages\SceneInfosDto.cs" />
+    <Compile Include="Transports\RaknetConnection.cs" />
+    <Compile Include="Transports\RaknetTransport.cs" />
+    <Compile Include="Transports\WebSocketClientConnection.cs" />
+    <Compile Include="Transports\WebSocketClientTransport.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\Stormancer.Core\Stormancer.Core.csproj">
+      <Project>{4cfa72ea-d026-455a-90e9-c8e30dba3ddd}</Project>
+      <Name>Stormancer.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>xcopy /d "$(SolutionDir)..\libs\Raknet\$(PlatformTarget)\Raknet.dll"</PostBuildEvent>
+  </PropertyGroup>
+</Project>

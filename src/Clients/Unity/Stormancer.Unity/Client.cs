@@ -310,7 +310,7 @@ namespace Stormancer
                 Token = token,
                 Routes = localRoutes.Select(r => new Stormancer.Dto.RouteDto
                 {
-                    Handle = r.Index,
+                    Handle = r.Handle,
                     Metadata = r.Metadata,
                     Name = r.Name
                 }).ToList(),

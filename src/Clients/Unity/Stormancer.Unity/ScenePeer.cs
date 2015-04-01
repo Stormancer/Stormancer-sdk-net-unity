@@ -27,7 +27,7 @@ namespace Stormancer
             {
                 throw new ArgumentException(string.Format("The route '{0}' is not declared on the server.", route));
             }
-            _connection.SendToScene(_sceneHandle, r.Index, writer, priority, reliability);
+            _connection.SendToScene(_sceneHandle, r.Handle, writer, priority, reliability);
         }
 
 
