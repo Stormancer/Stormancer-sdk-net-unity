@@ -35,6 +35,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Net45", "Net45", "{E417EF49
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stormancer.Client45", "Clients\Net45\Stormancer.Client45\Stormancer.Client45.csproj", "{8B4DF876-A345-488E-9AE7-7295F1262863}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{758E9B35-BA23-4BE4-BD7A-7CC61E7239E6}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug_Ubuntu|Any CPU = Debug_Ubuntu|Any CPU
@@ -132,8 +140,8 @@ Global
 		{8B4DF876-A345-488E-9AE7-7295F1262863}.Release_Ubuntu|Any CPU.Build.0 = Release|Any CPU
 		{8B4DF876-A345-488E-9AE7-7295F1262863}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B4DF876-A345-488E-9AE7-7295F1262863}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8B4DF876-A345-488E-9AE7-7295F1262863}.Staging|Any CPU.ActiveCfg = Staging|Any CPU
-		{8B4DF876-A345-488E-9AE7-7295F1262863}.Staging|Any CPU.Build.0 = Staging|Any CPU
+		{8B4DF876-A345-488E-9AE7-7295F1262863}.Staging|Any CPU.ActiveCfg = Release|Any CPU
+		{8B4DF876-A345-488E-9AE7-7295F1262863}.Staging|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

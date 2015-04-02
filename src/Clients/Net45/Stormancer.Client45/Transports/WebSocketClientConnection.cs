@@ -1,4 +1,5 @@
-﻿using Stormancer.Core;
+﻿#if WebSocket
+using Stormancer.Core;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -198,3 +199,4 @@ namespace Stormancer.Networking
         }
     }
 }
+#endif
