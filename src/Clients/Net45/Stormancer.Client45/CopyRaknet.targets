@@ -7,7 +7,7 @@
 
     <Copy
         SourceFiles="@(RaknetFile)"
-        DestinationFolder="$(OutputPath)\$(PlatformTarget)">
+        DestinationFolder="$(OutputPath)">
     </Copy>
     <Message Text="Copied Raknet.dll"/>
   </Target>

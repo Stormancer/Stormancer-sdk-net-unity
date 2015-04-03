@@ -108,6 +108,81 @@ namespace Stormancer
             }
             return rpcService.Rpc(route, writer, priority);
         }
+
+
+        /// <summary>
+        /// Sends a remote procedure call with an object as input, expecting any number of answers.
+        /// </summary>
+        /// <typeparam name="TData">The type of data to send</typeparam>
+        /// <typeparam name="TResponse">The expected type of the responses.</typeparam>
+        /// <param name="scene">The target scene.</param>
+        /// <param name="route">The target route.</param>
+        /// <param name="data">The data object to send.</param>
+        /// <param name="priority">The priority level used to send the request.</param>
+        /// <returns>An IObservable instance that provides return values for the request.</returns>
+        public static IObservable<TResponse> Rpc<TData, TResponse>(this Scene scene, string route, TData data, PacketPriority priority = PacketPriority.MEDIUM_PRIORITY)
+        {
+            return scene.Rpc(route, s => scene.Host.Serializer().Serialize(data, s), priority)
+                .Select(p => p.ReadObject<TResponse>());
+        }
+
+        /// <summary>
+        /// Sends a remote procedure call using raw binary data as input, expecting no answer
+        /// </summary>
+        /// <param name="scene">The target scene. </param>
+        /// <param name="route">The target route.</param>
+        /// <param name="writer">A writer method writing the data to send.</param>
+        /// <param name="priority">The priority level used to send the request.</param>
+        /// <returns>A task representing the remote procedure.</returns>
+        public async static Task RpcVoid(this Scene scene, string route, Action<Stream> writer, PacketPriority priority = PacketPriority.MEDIUM_PRIORITY)
+        {
+            await scene.Rpc(route, writer, priority).DefaultIfEmpty();
+        }
+
+        /// <summary>
+        /// Sends a remote procedure call with an object as input, expecting no answer
+        /// </summary>
+        /// <typeparam name="TData">The type of data to send</typeparam>
+        /// <param name="scene">The target scene.</param>
+        /// <param name="route">The target route.</param>
+        /// <param name="data">The data object to send.</param>
+        /// <param name="priority">The priority level used to send the request.</param>
+        /// <returns>A task representing the remote procedure.</returns>
+        public static Task RpcVoid<TData>(this Scene scene, string route, TData data, PacketPriority priority = PacketPriority.MEDIUM_PRIORITY)
+        {
+            return scene.RpcVoid(route, s => scene.Host.Serializer().Serialize(data, s), priority);
+        }
+
+        /// <summary>
+        /// Sends a remote procedure call using raw binary data as input and output, expecting exactly one answer
+        /// </summary>
+        /// <param name="scene">The target scene. </param>
+        /// <param name="route">The target route.</param>
+        /// <param name="writer">A writer method writing the data to send.</param>
+        /// <param name="priority">The priority level used to send the request.</param>
+        /// <returns>A task representing the remote procedure, whose return value is the raw answer to the remote procedure call.</returns>
+        public static async Task<Packet<IScenePeer>> RpcTask(this Scene scene, string route, Action<Stream> writer, PacketPriority priority = PacketPriority.MEDIUM_PRIORITY)
+        {
+            return await scene.Rpc(route, writer, priority);
+        }
+
+        /// <summary>
+        /// Sends a remote procedure call with an object as input, expecting exactly one answer
+        /// </summary>
+        /// <typeparam name="TData">The type of data to send</typeparam>
+        /// <typeparam name="TResponse">The expected type of the responses.</typeparam>
+        /// <param name="scene">The target scene.</param>
+        /// <param name="route">The target route.</param>
+        /// <param name="data">The data object to send.</param>
+        /// <param name="priority">The priority level used to send the request.</param>
+        /// <returns>A tesk representing the remote procedure, whose return value is the deserialized value of the answer</returns>
+        public static async Task<TResponse> RpcTask<TData, TResponse>(this Scene scene, string route, TData data, PacketPriority priority = PacketPriority.MEDIUM_PRIORITY)
+        {
+            var result = await scene.RpcTask(route, s => scene.Host.Serializer().Serialize(data, s), priority);
+
+            return result.ReadObject<TResponse>();
+        }
+
         /// <summary>
         /// Sends an object to the target scene with the requested reliability and priority levels.
         /// </summary>
