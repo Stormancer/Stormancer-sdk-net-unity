@@ -48,27 +48,9 @@ namespace Stormancer.Client45.Infrastructure
         }
 
 
-        private SerializationContext GetSerializationContext()
+        protected virtual SerializationContext GetSerializationContext()
         {
             var ctx = new MsgPack.Serialization.SerializationContext();
-
-#if UNITY_4_6
-#else
-            var jobjectSerializer = new MsgPackLambdaTypeSerializer<Newtonsoft.Json.Linq.JObject>(
-                (p, o) =>
-                {
-
-                    p.PackString(o.ToString());
-                },
-                p =>
-                {
-                    var json = p.LastReadData.AsString();
-                    return Newtonsoft.Json.Linq.JObject.Parse(json);
-                },
-                ctx
-                );
-            ctx.Serializers.Register(jobjectSerializer);
-#endif
 
             foreach (var plugin in _plugins)
             {
@@ -77,7 +59,7 @@ namespace Stormancer.Client45.Infrastructure
             return ctx;
         }
 
-        public string Name
+        public virtual string Name
         {
             get { return "msgpack/array"; }
         }
