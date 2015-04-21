@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$.$PlatformTarget$</id>
+    <version>$version$</version>
+    <title>$title$.$PlatformTarget$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>http://www.stormancer.com</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <iconUrl>http://stormancer.blob.core.windows.net/stormancer-local-public/1/1e/Logo32x32.png</iconUrl>
+    <description>$description$</description>
+	<summary>$description$</summary>
+    <copyright>Copyright 2015</copyright>
+    <tags>Stormancer Game</tags>
+  </metadata>
+  <files>
+    <file src="bin/$Configuration$/Stormancer.Core.dll" target="lib/Net45"/>
+    <file src="bin/$Configuration$/Raknet.csharp.dll" target="lib/Net45"/>
+    <file src="bin/$Configuration$/Raknet.dll" target="content/$PlatformTarget$"/>
+    <file src="CopyRaknet.targets" target="build/$id$.$PlatformTarget$.targets"/>
+  </files>
+</package>

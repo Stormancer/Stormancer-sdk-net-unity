@@ -63,9 +63,7 @@ namespace Stormancer
 
         private ITokenHandler _tokenHandler = new TokenHandler();
 
-        private ConcurrentDictionary<string, TaskCompletionSource<bool>> _pendingTasksTcs = new ConcurrentDictionary<string, TaskCompletionSource<bool>>();
-
-        private readonly ISerializer _systemSerializer = new MsgPackSerializer();
+        private readonly ISerializer _systemSerializer = new MsgPackMapSerializer();
 
         private Stormancer.Networking.Processors.RequestProcessor _requestProcessor;
         private Stormancer.Processors.SceneDispatcher _scenesDispatcher;
@@ -138,7 +136,7 @@ namespace Stormancer
             this._metadata.Add("serializers", string.Join(",", this._serializers.Keys.ToArray()));
             this._metadata.Add("transport", _transport.Name);
             this._metadata.Add("version", "1.0.0a");
-            this._metadata.Add("platform", "NET45");
+            this._metadata.Add("platform", "Unity");
 
             this._maxPeers = configuration.MaxPeers;
 
@@ -308,7 +306,7 @@ namespace Stormancer
                 Token = token,
                 Routes = localRoutes.Select(r => new Stormancer.Dto.RouteDto
                 {
-                    Handle = r.Index,
+                    Handle = r.Handle,
                     Metadata = r.Metadata,
                     Name = r.Name
                 }).ToList(),

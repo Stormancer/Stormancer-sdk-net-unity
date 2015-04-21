@@ -1,7 +1,4 @@
-﻿#if !StormancerClient
-using Stormancer.Platform.Core.Composition;
-#endif
-using Stormancer.Core;
+﻿using Stormancer.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +10,6 @@ namespace Stormancer.Networking
     /// <summary>
     /// Manages connections
     /// </summary>
-#if !StormancerClient
-    [Dependency]
-#endif
     public interface IConnectionManager
     {
         /// <summary>

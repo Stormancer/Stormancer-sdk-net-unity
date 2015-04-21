@@ -126,6 +126,7 @@
     <Compile Include="Infrastructure\BufferPool\MemoryInterfaces.cs" />
     <Compile Include="Infrastructure\BufferPool\MemoryObjects.cs" />
     <Compile Include="Infrastructure\BufferPool\StreamObjects.cs" />
+    <Compile Include="Infrastructure\MsgPackMapSerializer.cs" />
     <Compile Include="Transports\RaknetConnection.cs" />
     <Compile Include="Infrastructure\DefaultPacketDispatcher.cs" />
     <Compile Include="Infrastructure\IPacketDispatcher.cs" />

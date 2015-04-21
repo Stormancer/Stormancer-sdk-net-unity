@@ -12,7 +12,7 @@ namespace Echo.Client
         static void Main(string[] args)
         {
             var config = Stormancer.ClientConfiguration.ForAccount("test", "echo");
-            config.ServerEndpoint = "http://localhost:8081";
+            //config.ServerEndpoint = "http://localhost:8081";
 
             var client = new Stormancer.Client(config);
             client.GetPublicScene("test-scene", "hello").ContinueWith(

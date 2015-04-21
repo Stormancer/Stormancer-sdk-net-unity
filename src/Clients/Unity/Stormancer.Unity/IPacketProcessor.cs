@@ -4,14 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-#if !StormancerClient
-using Stormancer.Platform.Core.Composition;
-#endif
 namespace Stormancer.Networking
 {
-#if !StormancerClient
-    [Dependency]
-#endif
     public interface IPacketProcessor
     {
         void RegisterProcessor(PacketProcessorConfig config);

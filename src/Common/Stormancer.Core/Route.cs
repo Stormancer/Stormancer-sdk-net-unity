@@ -21,7 +21,7 @@ namespace Stormancer.Core
                 metadata = new Dictionary<string, string>();
             }
             Metadata = metadata;
-            Index = handle;
+            Handle = handle;
         }
 
         public Route(IScene scene, string routeName, Dictionary<string, string> metadata)
@@ -38,7 +38,7 @@ namespace Stormancer.Core
         /// A string containing the name of the route.
         /// </summary>
         public string Name { get; private set; }
-        public ushort Index { get; set; }
+        public ushort Handle { get; set; }
         public Dictionary<string, string> Metadata { get; private set; }
 
         public Action<Packet> Handlers { get; set; }

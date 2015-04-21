@@ -12,7 +12,6 @@ namespace Stormancer
         public string AccountId;
         public string Application;
         public string SceneId;
-        //public bool UseLocalEmulator = false;
         private Scene _scene;
 
         public Scene Scene
@@ -27,39 +26,34 @@ namespace Stormancer
 
         private Client _client;
 
-        private TaskCompletionSource<bool> _connectedTcs = new TaskCompletionSource<bool>();
+        private TaskCompletionSource<Scene> _connectedTcs = new TaskCompletionSource<Scene>();
 
-        public Task ConnectedTask
+        public Task<Scene> ConnectedTask
         {
             get
             {
                 return this._connectedTcs.Task;
             }
         }
-       
+
 
         // Use this for initialization
-        void Start()
+        public Task<Scene> Connect()
         {
             ClientConfiguration config;
-            //if (this.UseLocalEmulator)
-            //{
-            //    config = ClientConfiguration.ForLocalDev(this.Application);
-            //} else
-            //{
-                config = ClientConfiguration.ForAccount(AccountId, Application);
-            //}
+            config = ClientConfiguration.ForAccount(AccountId, Application);
 
             _client = new Stormancer.Client(config);
             _client.GetPublicScene(this.SceneId, "")
-                .ContinueWith<Scene>(task => {
-                if (task.IsFaulted)
+                .ContinueWith<Scene>(task =>
                 {
-                    Debug.LogException(task.Exception);
-                }
-                return task.Result;
-            }).Then(scene =>
-            {                    
+                    if (task.IsFaulted)
+                    {
+                        Debug.LogException(task.Exception);
+                    }
+                    return task.Result;
+                }).Then(scene =>
+            {
                 lock (this._configLock)
                 {
                     this._scene = scene;
@@ -70,19 +64,22 @@ namespace Stormancer
                 }
                 return scene.Connect();
             })
-                    .ContinueWith(t => 
+                    .ContinueWith(t =>
             {
                 if (t.IsFaulted)
                 {
                     this._connectedTcs.SetException(t.Exception);
-                } else
+                }
+                else
                 {
                     Debug.Log("Stormancer scene connected");
-                    this._connectedTcs.SetResult(true);
+                    this._connectedTcs.SetResult(_scene);
                 }
             });
+
+            return this.ConnectedTask;
         }
-   
+
         private object _configLock = new object();
         private Action<Scene> _initConfig = null;
 
@@ -90,14 +87,17 @@ namespace Stormancer
         {
             lock (_configLock)
             {
-                if (this._scene != null)
+                if (this._scene != null && this._scene.Connected)
                 {
-                    configuration(this._scene);
-                } else
+                    throw new InvalidOperationException("You must configure the scene before it connects to the server.");
+                }
+                else
                 {
                     this._initConfig += configuration;
                 }
             }
-        }       
+        }
+
+
     }
 }

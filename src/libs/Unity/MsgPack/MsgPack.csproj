@@ -165,7 +165,6 @@
     <Compile Include="Serialization\DefaultSerializers\System_ArraySegment_1MessagePackSerializer`1.cs" />
     <Compile Include="Serialization\DefaultSerializers\System_Collections_DictionaryEntryMessagePackSerializer.cs" />
     <Compile Include="Serialization\DefaultSerializers\System_Collections_Generic_KeyValuePair_2MessagePackSerializer`2.cs" />
-    <Compile Include="Serialization\DefaultSerializers\System_Numerics_ComplexMessagePackSerializer.cs" />
     <Compile Include="Serialization\DefaultSerializers\System_UriMessagePackSerializer.cs" />
     <Compile Include="Serialization\DefaultSerializers\System_VersionMessagePackSerializer.cs" />
     <Compile Include="Serialization\EmittingSerializers\DefaultSerializationMethodGeneratorManager.cs" />
