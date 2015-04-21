@@ -20,6 +20,7 @@ namespace Stormancer
             _routeMapping = routeMapping;
             _scene = scene;
         }
+
         public void Send(string route, Action<System.IO.Stream> writer, PacketPriority priority, PacketReliability reliability)
         {
             Route r;
@@ -30,12 +31,10 @@ namespace Stormancer
             _connection.SendToScene(_sceneHandle, r.Index, writer, priority, reliability);
         }
 
-
         public void Disconnect()
         {
             _scene.Disconnect();
         }
-
 
         public long Id
         {

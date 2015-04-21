@@ -23,10 +23,10 @@ namespace Stormancer.Core
             Metadata = metadata;
             Index = handle;
         }
+
         public Route(IScene scene, string routeName, Dictionary<string, string> metadata)
             : this(scene, routeName, 0, metadata)
         {
-
         }
 
         /// <summary>

@@ -17,10 +17,6 @@ namespace Stormancer.Core
     {
         string Id { get; }
 
-       
-
-      
-
         /// <summary>
         /// True if the instance is an host. False if it's a client.
         /// </summary>

@@ -13,7 +13,7 @@ namespace Stormancer.Client45.Infrastructure
         SceneEndpoint DecodeToken(string token);
     }
 
-    internal class TokenHandler:ITokenHandler
+    internal class TokenHandler : ITokenHandler
     {
         private readonly ISerializer _tokenSerializer;
 

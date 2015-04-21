@@ -52,7 +52,5 @@ namespace Stormancer.Networking
         {
             processor.RegisterProcessor(new PacketProcessorConfig(_handlers, _defaultProcessors));
         }
-
-
     }
 }

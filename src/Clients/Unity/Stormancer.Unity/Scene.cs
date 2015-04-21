@@ -103,7 +103,6 @@ namespace Stormancer
             }
         }
 
-
         /// <summary>
         /// Registers a route on the local peer.
         /// </summary>
@@ -131,15 +130,12 @@ namespace Stormancer
             }
 
             OnMessage(route).Subscribe(handler);
-
         }
 
         public IObservable<Packet<IScenePeer>> OnMessage(Route route)
         {
-            var index = route.Index;
             var observable = Observable.Create<Packet<IScenePeer>>(observer =>
             {
-
                 Action<Packet> action = (data) =>
                 {
                     var packet = new Packet<IScenePeer>(Host, data.Stream, data.Metadata);
@@ -154,6 +150,7 @@ namespace Stormancer
             });
             return observable;
         }
+
         /// <summary>
         /// Creates an IObservable&lt;Packet&gt; instance that listen to events on the specified route.
         /// </summary>
@@ -206,6 +203,22 @@ namespace Stormancer
         }
 
         /// <summary>
+        /// Connects the scene to the server.
+        /// </summary>
+        /// <returns>A task completed once the connection is complete.</returns>
+        /// <remarks>
+        /// The task is susceptible to throw an exception in case of connection error.
+        /// </remarks>
+        public Task Connect()
+        {
+            return this._client.ConnectToScene(this, this._token, this._localRoutesMap.Values)
+                .Then(() =>
+                {
+                    this.Connected = true;
+                });
+        }
+
+        /// <summary>
         /// Disconnects the scene.
         /// </summary>
         /// <returns></returns>
@@ -225,22 +238,6 @@ namespace Stormancer
 
             //foreach (var handler in _handlers)
             //    this.Connected = false;
-        }
-
-        /// <summary>
-        /// Connects the scene to the server.
-        /// </summary>
-        /// <returns>A task completed once the connection is complete.</returns>
-        /// <remarks>
-        /// The task is susceptible to throw an exception in case of connection error.
-        /// </remarks>
-        public Task Connect()
-        {
-            return this._client.ConnectToScene(this, this._token, this._localRoutesMap.Values)
-                .Then(() =>
-                {
-                    this.Connected = true;
-                });
         }
 
         internal void CompleteConnectionInitialization(ConnectionResult cr)

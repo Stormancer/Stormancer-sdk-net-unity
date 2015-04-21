@@ -62,7 +62,7 @@ namespace Stormancer
         /// <returns></returns>
         public static ClientConfiguration ForLocalDev(string application)
         {
-            return new ClientConfiguration { Account = "local", IsLocalDev = true, Application = application };
+            return new ClientConfiguration { Account = "local", Application = application, IsLocalDev = true };
         }
 
         /// <summary>
@@ -110,7 +110,6 @@ namespace Stormancer
         /// Gets or sets the transport to be used by the client.
         /// </summary>
         public ITransport Transport { get; set; }
-
 
         /// <summary>
         /// List of available serializers for the client.

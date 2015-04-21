@@ -5,7 +5,6 @@ using System.Text;
 
 namespace System.Threading.Tasks
 {
-
     public static class TaskHelper
     {
         public static Task<T> FromResult<T>(T result)

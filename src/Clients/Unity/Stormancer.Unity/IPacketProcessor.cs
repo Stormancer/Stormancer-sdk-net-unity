@@ -17,7 +17,6 @@ namespace Stormancer.Networking
         void RegisterProcessor(PacketProcessorConfig config);
     }
 
-
     /// <summary>
     /// Contains method to register handlers for message types when passed to the IPacketProcessor.RegisterProcessor method.
     /// </summary>

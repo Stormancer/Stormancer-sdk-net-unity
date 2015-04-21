@@ -36,7 +36,7 @@ namespace Stormancer.Networking
         /// Closes the target connection.
         /// </summary>
         /// <param name="connection">The connection to close.</param>
-        void CloseConnection(IConnection connection,string reason);
+        void CloseConnection(IConnection connection, string reason);
 
         /// <summary>
         /// Returns a connection by id.

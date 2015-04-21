@@ -48,6 +48,7 @@ namespace Stormancer
 
             }
         }
+
         private readonly ApiClient _apiClient;
         private readonly string _accountId;
         private readonly string _applicationName;
@@ -75,6 +76,7 @@ namespace Stormancer
         private ushort _maxPeers;
 
         private Dictionary<string, string> _metadata;
+
         /// <summary>
         /// The name of the Stormancer server application the client is connected to.
         /// </summary>
@@ -160,8 +162,6 @@ namespace Stormancer
                 _initialized = true;
 
                 _transport.PacketReceived += Transport_PacketReceived;
-
-
             }
         }
 
@@ -174,7 +174,6 @@ namespace Stormancer
 
             _dispatcher.DispatchPacket(obj);
         }
-
 
         /// <summary>
         /// Returns a public scene (accessible without authentication)
@@ -208,8 +207,8 @@ namespace Stormancer
         /// a long time before connecting to them.
         /// </remarks>
         /// <param name="token">The token securing the connection.</param>
-        /// <returns>A task returning the scene object on completion.</returns>        
-        private Task<Scene> GetScene(string sceneId, SceneEndpoint ci)
+        /// <returns>A task returning the scene object on completion.</returns>
+        private Task<Scene> GetScene(string sceneId, SceneEndpoint sep)
         {
             return TaskHelper.If(_serverConnection == null, () =>
             {
@@ -217,10 +216,9 @@ namespace Stormancer
                     {
                         _cts = new CancellationTokenSource();
                         return _transport.Start("client", new ConnectionHandler(), _cts.Token, null, (ushort)(_maxPeers + 1));
-                    })
-                    .Then(() =>
+                    }).Then(() =>
                     {
-                        return _transport.Connect(ci.TokenData.Endpoints[_transport.Name])
+                        return _transport.Connect(sep.TokenData.Endpoints[_transport.Name])
                             .Then(connection =>
                             {
                                 _serverConnection = connection;
@@ -233,7 +231,7 @@ namespace Stormancer
                     });
             }).Then(() =>
             {
-                var parameter = new Stormancer.Dto.SceneInfosRequestDto { Metadata = _serverConnection.Metadata, Token = ci.Token };
+                var parameter = new Stormancer.Dto.SceneInfosRequestDto { Metadata = _serverConnection.Metadata, Token = sep.Token };
                 return SendSystemRequest<Stormancer.Dto.SceneInfosRequestDto, Stormancer.Dto.SceneInfosDto>((byte)MessageIDTypes.ID_GET_SCENE_INFOS, parameter);
             }).Then(result =>
             {
@@ -247,7 +245,7 @@ namespace Stormancer
                     _serverConnection.Metadata.Add("serializer", result.SelectedSerializer);
 
                 }
-                var scene = new Scene(this._serverConnection, this, sceneId, ci.Token, result);
+                var scene = new Scene(this._serverConnection, this, sceneId, sep.Token, result);
 
                 if (_pluginCtx.SceneCreated != null)
                 {
@@ -341,7 +339,6 @@ namespace Stormancer
                     });
         }
 
-
         /// <summary>
         /// Disconnects the client.
         /// </summary>
@@ -371,10 +368,6 @@ namespace Stormancer
             }
 
         }
-
-
-
-
 
         internal IObservable<Packet> SendRequest(IConnection peer, byte scene, ushort route, Action<Stream> writer)
         {

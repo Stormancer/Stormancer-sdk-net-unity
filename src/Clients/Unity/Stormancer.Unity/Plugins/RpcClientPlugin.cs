@@ -39,10 +39,10 @@ namespace Stormancer.Plugins
                     {
                         processor.Complete(p);
                     });
-
                 }
             };
         }
+
 
         /// <summary>
         /// Used to send remote procedure call through the RPC plugin
@@ -53,7 +53,6 @@ namespace Stormancer.Plugins
         /// </remarks>
         public class RpcService
         {
-
             private ushort _currentRequestId = 0;
             private class Request
             {
@@ -239,6 +238,5 @@ namespace Stormancer.Plugins
             }
         }
     }
-
 
 }
