@@ -64,6 +64,7 @@ namespace Stormancer
                 }
                 return scene.Connect();
             })
+            .Unwrap()
                     .ContinueWith(t =>
             {
                 if (t.IsFaulted)
