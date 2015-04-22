@@ -35,7 +35,6 @@ namespace Stormancer.Processors
 
                 return true;
             }
-
         }
 
         public void AddScene(Scene scene)

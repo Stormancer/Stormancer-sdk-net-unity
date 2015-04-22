@@ -12,7 +12,6 @@ namespace Stormancer.Core
     /// </summary>
     public class Packet<T>
     {
-
         public Packet(T source, Stream stream) : this(source,stream,new Dictionary<string, object>())
         {
           
@@ -34,10 +33,6 @@ namespace Stormancer.Core
             get;
             private set;
         }
-
-
-
-
 
         /// <summary>
         /// Metadata stored by the packet.

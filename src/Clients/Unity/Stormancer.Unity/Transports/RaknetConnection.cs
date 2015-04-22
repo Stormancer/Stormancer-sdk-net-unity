@@ -198,9 +198,9 @@ namespace Stormancer.Networking
                 writer(s);
             }, Core.PacketPriority.HIGH_PRIORITY, Core.PacketReliability.RELIABLE_ORDERED, (char)0);
         }
+
         public void SendRaw(Action<Stream> writer, Stormancer.Core.PacketPriority priority, Stormancer.Core.PacketReliability reliability, char channel)
         {
-
             var stream = new BitStream();
             writer(new BSStream(stream));
             var result = _rakPeer.Send(stream, (RakNet.PacketPriority)priority, (RakNet.PacketReliability)reliability, channel, this.Guid, false);

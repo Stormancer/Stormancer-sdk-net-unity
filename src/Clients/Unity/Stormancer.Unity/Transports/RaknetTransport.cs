@@ -23,6 +23,7 @@ namespace Stormancer.Networking
         {
             this.logger = logger;
         }
+
         public Task Start(string type, IConnectionManager handler, CancellationToken token, ushort? serverPort, ushort maxConnections)
         {
             if (handler == null && serverPort.HasValue)
@@ -47,7 +48,7 @@ namespace Stormancer.Networking
 
             var socketDescriptor = serverPort.HasValue ? new SocketDescriptor(serverPort.Value, null) : new SocketDescriptor();
             var startupResult = server.Startup(maxConnections, socketDescriptor, 1);
-            if(startupResult!= StartupResult.RAKNET_STARTED)
+            if(startupResult != StartupResult.RAKNET_STARTED)
             {
                 throw new InvalidOperationException("Couldn't start raknet peer :" + startupResult);
             }
@@ -60,9 +61,6 @@ namespace Stormancer.Networking
             {
                 for (var packet = server.Receive(); packet != null; packet = server.Receive())
                 {
-
-
-
                     switch (packet.data[0])
                     {
                         case (byte)DefaultMessageIDTypes.ID_CONNECTION_REQUEST_ACCEPTED:
@@ -172,13 +170,13 @@ namespace Stormancer.Networking
         {
             return _connections[guid.g];
         }
+
         private RakNetConnection CreateNewConnection(RakNetGUID raknetGuid, RakPeerInterface peer)
         {
             var cid = _handler.GenerateNewConnectionId();
             var c = new RakNetConnection(raknetGuid, cid, peer, OnRequestClose);
             _connections.TryAdd(raknetGuid.g, c);
             return c;
-
         }
 
         private RakNetConnection RemoveConnection(RakNetGUID guid)
@@ -194,7 +192,6 @@ namespace Stormancer.Networking
         }
 
         #endregion
-
 
         public Action<Stormancer.Core.Packet> PacketReceived
         {
@@ -213,7 +210,6 @@ namespace Stormancer.Networking
             get;
             set;
         }
-
 
         public Task<IConnection> Connect(string endpoint)
         {
@@ -234,11 +230,8 @@ namespace Stormancer.Networking
             _pendingConnections.TryAdd(address.ToString(), tcs);
 
             return tcs.Task;
-
-
-
-
         }
+
         private ConcurrentDictionary<string, TaskCompletionSource<IConnection>> _pendingConnections = new ConcurrentDictionary<string, TaskCompletionSource<IConnection>>();
 
         public string Name
@@ -255,7 +248,5 @@ namespace Stormancer.Networking
 
         public long? Id { get; private set; }
     }
-
-
 
 }
