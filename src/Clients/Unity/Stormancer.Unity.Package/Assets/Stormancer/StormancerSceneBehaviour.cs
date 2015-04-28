@@ -99,6 +99,24 @@ namespace Stormancer
             }
         }
 
+        Task _disconnectTask = null;
+        public Task Disconnect()
+        {
+            if (this._disconnectTask == null)
+            {
+                this._disconnectTask = this.ConnectedTask.Then(scene => scene.Disconnect());
+            }
+            return this._disconnectTask;
+        }
 
+        public void OnDestroy()
+        {
+            this.Disconnect();
+        }
+
+        public void OnApplicationQuit()
+        {
+            this.Disconnect();
+        }
     }
 }
