@@ -186,9 +186,10 @@ namespace Stormancer.Networking.Processors
             return Observable.Create<Packet>(observer =>
             {
                 var request = ReserveRequestSlot(observer);
-                peer.SendSystem(msgId, bs =>
+                peer.SendSystem((byte)MessageIDTypes.ID_SYSTEM_REQUEST, bs =>
                 {
                     var bw = new BinaryWriter(bs);
+                    bw.Write(msgId);
                     bw.Write(request.id);
                     bw.Flush();
                     writer(bs);
