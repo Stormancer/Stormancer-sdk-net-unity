@@ -1,6 +1,7 @@
 ﻿using Stormancer.Core;
 using Stormancer.Networking;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ namespace Stormancer.Processors
     internal class SceneDispatcher : IPacketProcessor
     {
         private Scene[] _scenes = new Scene[(int)byte.MaxValue - (int)MessageIDTypes.ID_SCENES + 1];
+        private ConcurrentDictionary<byte, ConcurrentQueue<Packet>> _waitingPackets = new ConcurrentDictionary<byte, ConcurrentQueue<Packet>>();
 
         public void RegisterProcessor(PacketProcessorConfig config)
         {
@@ -26,7 +28,9 @@ namespace Stormancer.Processors
             var scene = _scenes[sceneHandle - (byte)MessageIDTypes.ID_SCENES];
             if (scene == null)
             {
-                return false;
+                var queue = _waitingPackets.GetOrAdd(sceneHandle, handle => new ConcurrentQueue<Packet>());
+                queue.Enqueue(packet);
+                return true;
             }
             else
             {
@@ -41,6 +45,17 @@ namespace Stormancer.Processors
         public void AddScene(Scene scene)
         {
             _scenes[scene.Handle - (byte)MessageIDTypes.ID_SCENES] = scene;
+            ConcurrentQueue<Packet> waitingPackets;
+            if(_waitingPackets.TryRemove(scene.Handle, out waitingPackets))
+            {
+                Packet packet;
+                while (waitingPackets.TryDequeue(out packet))
+                {
+                    packet.Metadata["scene"] = scene;
+                    scene.HandleMessage(packet);
+                }
+            }
+         
         }
 
         public void RemoveScene(byte sceneHandle)

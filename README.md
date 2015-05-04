@@ -1,6 +1,5 @@
 # Stormancer
-Stormancer SDKs
+Stormancer Unity & .NET SDKs
 
-Warning: This repo currently only contains client libraries for Stormancer v1, which is currently only available privately for testing.
-
-Contact us at team@stormancer.com to get access to this (awesome) new  version.
+The repository contains the client libraries required to connect .NET & Unity3D applications to Stormancer based servers.
+The libraries use the Raknet UDP transport to establish the connection between client & server.
