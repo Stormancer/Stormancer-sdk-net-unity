@@ -109,8 +109,8 @@
     <Compile Include="SystemMessages\Empty.cs" />
     <Compile Include="SystemMessages\ExceptionMsg.cs" />
     <Compile Include="SystemMessages\SceneInfosDto.cs" />
-    <Compile Include="Transports\RaknetConnection.cs" />
-    <Compile Include="Transports\RaknetTransport.cs" />
+    <Compile Include="Transports\RakNetConnection.cs" />
+    <Compile Include="Transports\RakNetTransport.cs" />
     <Compile Include="Transports\WebSocketClientConnection.cs" />
     <Compile Include="Transports\WebSocketClientTransport.cs" />
   </ItemGroup>

@@ -114,10 +114,11 @@ namespace Stormancer
         /// <param name="configuration">A configuration instance containing options for the client.</param>
         public Client(ClientConfiguration configuration)
         {
+            this._logger = configuration.Logger;
             this._accountId = configuration.Account;
             this._applicationName = configuration.Application;
             _apiClient = new ApiClient(configuration, _tokenHandler);
-            this._transport = configuration.Transport;
+            this._transport = configuration.TransportFactory(new Dictionary<string, object> { { "ILogger", this._logger } });
             this._dispatcher = configuration.Dispatcher;
             _requestProcessor = new Stormancer.Networking.Processors.RequestProcessor(_logger, new List<IRequestModule>());
 

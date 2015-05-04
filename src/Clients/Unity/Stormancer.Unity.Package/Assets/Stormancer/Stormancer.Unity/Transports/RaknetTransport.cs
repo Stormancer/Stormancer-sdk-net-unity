@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Stormancer.Networking
 {
-    public class RaknetTransport : ITransport
+    public class RakNetTransport : ITransport
     {
         private IConnectionManager _handler;
         private RakPeerInterface _peer;
@@ -19,7 +19,7 @@ namespace Stormancer.Networking
         private string _type;
         private readonly ConcurrentDictionary<ulong, RakNetConnection> _connections = new ConcurrentDictionary<ulong, RakNetConnection>();
 
-        public RaknetTransport(ILogger logger)
+        public RakNetTransport(ILogger logger)
         {
             this.logger = logger;
         }
