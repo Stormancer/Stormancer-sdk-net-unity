@@ -20,6 +20,7 @@ namespace Stormancer.Networking.Processors
             public IObserver<Packet> observer;
             public TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
         }
+
         private readonly ConcurrentDictionary<ushort, Request> _pendingRequests;
         private readonly ILogger _logger;
 
@@ -43,7 +44,7 @@ namespace Stormancer.Networking.Processors
         {
             _isRegistered = true;
 
-            foreach (var handler in _handlers)//Add system request handlers
+            foreach (var handler in _handlers) //Add system request handlers
             {
                 config.AddProcessor(handler.Key, p =>
                 {
@@ -109,14 +110,16 @@ namespace Stormancer.Networking.Processors
                     _logger.Trace("Unknown request id.");
                 }
 
-                this._pendingRequests.TryRemove(id, out request);
-                if (hasValues)
+                if (this._pendingRequests.TryRemove(id, out request))
                 {
-                    request.tcs.Task.ContinueWith(t => request.observer.OnCompleted());
-                }
-                else
-                {
-                    request.observer.OnCompleted();
+                    if (hasValues)
+                    {
+                        request.tcs.Task.ContinueWith(t => request.observer.OnCompleted());
+                    }
+                    else
+                    {
+                        request.observer.OnCompleted();
+                    }
                 }
 
                 return true;
@@ -127,6 +130,7 @@ namespace Stormancer.Networking.Processors
                 var temp = new byte[2];
                 p.Stream.Read(temp, 0, 2);
                 var id = BitConverter.ToUInt16(temp, 0);
+
                 Request request;
                 if (_pendingRequests.TryGetValue(id, out request))
                 {
@@ -138,6 +142,7 @@ namespace Stormancer.Networking.Processors
                 }
 
                 this._pendingRequests.TryRemove(id, out request);
+
                 var msg = p.Serializer().Deserialize<string>(p.Stream);
 
                 request.observer.OnError(new ClientException(msg));
@@ -153,31 +158,32 @@ namespace Stormancer.Networking.Processors
                 Observer.Create<Packet>(
                     packet => tcs.TrySetResult(packet),
                     ex => tcs.TrySetException(ex),
-                    () => { }
+                    () => tcs.TrySetResult(default(Packet))
                 ));
 
-            peer.SendSystem(msgId, bs =>
+            peer.SendSystem((byte)MessageIDTypes.ID_SYSTEM_REQUEST, bs =>
             {
                 var bw = new BinaryWriter(bs);
+                bw.Write(msgId);
                 bw.Write(request.id);
                 bw.Flush();
                 writer(bs);
+
             });
 
             tcs.Task.ContinueWith(t =>
+            {
+                Request r;
+                if (_pendingRequests.TryGetValue(request.id, out r))
                 {
-                    Request r;
-                    if (_pendingRequests.TryGetValue(request.id, out r))
+                    if (r == request)
                     {
-                        if (r == request)
-                        {
-                            _pendingRequests.TryRemove(request.id, out request);
-                        }
+                        _pendingRequests.TryRemove(request.id, out request);
                     }
-                });
+                }
+            });
 
             return tcs.Task;
-
         }
 
         public IObservable<Packet> SendSceneRequest(IConnection peer, byte sceneId, ushort routeId, Action<Stream> writer)
@@ -223,8 +229,6 @@ namespace Stormancer.Networking.Processors
             throw new Exception("Unable to create new request: Too many pending requests.");
         }
 
-
-        
         public void AddSystemRequestHandler(byte msgId, Func<RequestContext, Task> handler)
         {
             if (_isRegistered)
@@ -232,7 +236,6 @@ namespace Stormancer.Networking.Processors
                 throw new InvalidOperationException("Can only add handler before 'RegisterProcessor' is called.");
             }
             _handlers.Add(msgId, handler);
-
         }
     }
 
@@ -243,6 +246,7 @@ namespace Stormancer.Networking.Processors
         private byte[] _requestId;
         private MemoryStream _stream = new MemoryStream();
         private bool _didSendValues = false;
+
         public Packet Packet
         {
             get
@@ -250,6 +254,7 @@ namespace Stormancer.Networking.Processors
                 return _packet;
             }
         }
+
         public RequestContext(Packet p)
         {
             this._packet = p;
@@ -273,6 +278,7 @@ namespace Stormancer.Networking.Processors
             get;
             private set;
         }
+
         public void Send(Action<Stream> writer)
         {
             if (writer == null)
@@ -289,9 +295,7 @@ namespace Stormancer.Networking.Processors
                 s.Write(_requestId, 0, 2);
                 writer(s);
             });
-
         }
-
 
         public void Complete()
         {
@@ -302,9 +306,9 @@ namespace Stormancer.Networking.Processors
                 s.WriteByte((byte)(_didSendValues ? 1 : 0));
             });
         }
+
         public void Error(Action<Stream> writer)
         {
-
             if (writer == null)
             {
                 throw new ArgumentNullException("writer");
@@ -315,9 +319,5 @@ namespace Stormancer.Networking.Processors
                 writer(s);
             });
         }
-
-
-
-
     }
 }

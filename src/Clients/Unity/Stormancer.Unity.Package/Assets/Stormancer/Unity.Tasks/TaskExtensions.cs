@@ -89,6 +89,11 @@ namespace System.Threading.Tasks
             });
         }
 
+        public static Task Then<T>(this Task<T> task, Func<T, Task> continuation)
+        {
+            return ThenImpl(task, r => continuation(r)).Unwrap();
+        }
+
         public static Task<TResult> Then<T, TResult>(this Task<T> task, Func<T, TResult> continuation)
         {
             return ThenImpl(task, continuation);
@@ -104,7 +109,7 @@ namespace System.Threading.Tasks
             return ThenImpl(task, continuation).Unwrap();
         }
 
-        public static Task<TResult> Then<T,TResult>(this Task<T> task, Func<T,Task<TResult>> continuation)
+        public static Task<TResult> Then<T, TResult>(this Task<T> task, Func<T, Task<TResult>> continuation)
         {
             return ThenImpl(task, continuation).Unwrap();
         }

@@ -120,7 +120,7 @@ namespace Stormancer
             _apiClient = new ApiClient(configuration, _tokenHandler);
             this._transport = configuration.TransportFactory(new Dictionary<string, object> { { "ILogger", this._logger } });
             this._dispatcher = configuration.Dispatcher;
-            _requestProcessor = new Stormancer.Networking.Processors.RequestProcessor(_logger, new List<IRequestModule>());
+            _requestProcessor = new Stormancer.Networking.Processors.RequestProcessor(_logger, Enumerable.Empty<IRequestModule>());
 
             _scenesDispatcher = new Processors.SceneDispatcher();
             this._dispatcher.AddProcessor(_requestProcessor);
@@ -193,9 +193,16 @@ namespace Stormancer
         private Task<U> SendSystemRequest<T, U>(byte id, T parameter)
         {
             return _requestProcessor.SendSystemRequest(_serverConnection, id, s =>
-             {
-                 _systemSerializer.Serialize(parameter, s);
-             }).Then(packet => _systemSerializer.Deserialize<U>(packet.Stream));
+            {
+                _systemSerializer.Serialize(parameter, s);
+            }).Then(packet => _systemSerializer.Deserialize<U>(packet.Stream));
+        }
+        private Task UpdateServerMetadata()
+        {
+            return _requestProcessor.SendSystemRequest(_serverConnection, (byte)SystemRequestIDTypes.ID_SET_METADATA, s =>
+            {
+                _systemSerializer.Serialize(_serverConnection.Metadata, s);
+            });
         }
 
         /// <summary>
@@ -213,10 +220,10 @@ namespace Stormancer
             return TaskHelper.If(_serverConnection == null, () =>
             {
                 return TaskHelper.If(!_transport.IsRunning, () =>
-                    {
-                        _cts = new CancellationTokenSource();
-                        return _transport.Start("client", new ConnectionHandler(), _cts.Token, null, (ushort)(_maxPeers + 1));
-                    })
+                {
+                    _cts = new CancellationTokenSource();
+                    return _transport.Start("client", new ConnectionHandler(), _cts.Token, null, (ushort)(_maxPeers + 1));
+                })
                     .Then(() =>
                     {
                         return _transport.Connect(ci.TokenData.Endpoints[_transport.Name])
@@ -228,12 +235,13 @@ namespace Stormancer
                                 {
                                     _serverConnection.Metadata[kvp.Key] = kvp.Value;
                                 }
+                                return this.UpdateServerMetadata();
                             });
                     });
             }).Then(() =>
             {
                 var parameter = new Stormancer.Dto.SceneInfosRequestDto { Metadata = _serverConnection.Metadata, Token = ci.Token };
-                return SendSystemRequest<Stormancer.Dto.SceneInfosRequestDto, Stormancer.Dto.SceneInfosDto>((byte)MessageIDTypes.ID_GET_SCENE_INFOS, parameter);
+                return SendSystemRequest<Stormancer.Dto.SceneInfosRequestDto, Stormancer.Dto.SceneInfosDto>((byte)SystemRequestIDTypes.ID_GET_SCENE_INFOS, parameter);
             }).Then(result =>
             {
                 if (_serverConnection.GetComponent<ISerializer>() == null)
@@ -244,17 +252,20 @@ namespace Stormancer
                     }
                     _serverConnection.RegisterComponent(_serializers[result.SelectedSerializer]);
                     _serverConnection.Metadata.Add("serializer", result.SelectedSerializer);
-
                 }
-                var scene = new Scene(this._serverConnection, this, sceneId, ci.Token, result);
-
-                if (_pluginCtx.SceneCreated != null)
+                return UpdateServerMetadata().Then(() =>
                 {
-                    _pluginCtx.SceneCreated(scene);
-                }
+                    var scene = new Scene(this._serverConnection, this, sceneId, ci.Token, result);
 
-                return scene;
+                    if (_pluginCtx.SceneCreated != null)
+                    {
+                        _pluginCtx.SceneCreated(scene);
+                    }
+
+                    return scene;
+                });
             });
+
 
 
             //if (_serverConnection == null)
@@ -315,29 +326,29 @@ namespace Stormancer
                 }).ToList(),
                 ConnectionMetadata = _serverConnection.Metadata
             };
-            return this.SendSystemRequest<Stormancer.Dto.ConnectToSceneMsg, Stormancer.Dto.ConnectionResult>((byte)MessageIDTypes.ID_CONNECT_TO_SCENE, parameter)
+            return this.SendSystemRequest<Stormancer.Dto.ConnectToSceneMsg, Stormancer.Dto.ConnectionResult>((byte)SystemRequestIDTypes.ID_CONNECT_TO_SCENE, parameter)
                 .Then(result =>
+                {
+                    scene.CompleteConnectionInitialization(result);
+                    _scenesDispatcher.AddScene(scene);
+                    if (_pluginCtx.SceneConnected != null)
                     {
-                        scene.CompleteConnectionInitialization(result);
-                        _scenesDispatcher.AddScene(scene);
-                        if (_pluginCtx.SceneConnected != null)
-                        {
-                            _pluginCtx.SceneConnected(scene);
-                        }
-                    });
+                        _pluginCtx.SceneConnected(scene);
+                    }
+                });
         }
 
         internal Task Disconnect(Scene scene, byte sceneHandle)
         {
-            return this.SendSystemRequest<byte, Stormancer.Dto.Empty>((byte)MessageIDTypes.ID_DISCONNECT_FROM_SCENE, sceneHandle)
+            return this.SendSystemRequest<byte, Stormancer.Dto.Empty>((byte)SystemRequestIDTypes.ID_DISCONNECT_FROM_SCENE, sceneHandle)
                 .Then(() =>
+                {
+                    this._scenesDispatcher.RemoveScene(sceneHandle);
+                    if (_pluginCtx.SceneDisconnected != null)
                     {
-                        this._scenesDispatcher.RemoveScene(sceneHandle);
-                        if (_pluginCtx.SceneDisconnected != null)
-                        {
-                            _pluginCtx.SceneDisconnected(scene);
-                        }
-                    });
+                        _pluginCtx.SceneDisconnected(scene);
+                    }
+                });
         }
 
 

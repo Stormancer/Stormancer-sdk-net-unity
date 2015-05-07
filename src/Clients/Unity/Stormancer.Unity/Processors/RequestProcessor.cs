@@ -158,15 +158,17 @@ namespace Stormancer.Networking.Processors
                 Observer.Create<Packet>(
                     packet => tcs.TrySetResult(packet),
                     ex => tcs.TrySetException(ex),
-                    () => { }
+                    () => tcs.TrySetResult(default(Packet))
                 ));
 
-            peer.SendSystem(msgId, bs =>
+            peer.SendSystem((byte)MessageIDTypes.ID_SYSTEM_REQUEST, bs =>
             {
                 var bw = new BinaryWriter(bs);
+                bw.Write(msgId);
                 bw.Write(request.id);
                 bw.Flush();
                 writer(bs);
+
             });
 
             tcs.Task.ContinueWith(t =>
