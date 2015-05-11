@@ -17,8 +17,8 @@ namespace Stormancer.Networking.Processors
         {
             public DateTime lastRefresh;
             public ushort id;
-            public IObserver<Packet> observer;
-            public TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
+            //public IObserver<Packet> observer;
+            public TaskCompletionSource<Packet> tcs;
         }
 
         private readonly ConcurrentDictionary<ushort, Request> _pendingRequests;
@@ -78,12 +78,11 @@ namespace Stormancer.Networking.Processors
                 var id = BitConverter.ToUInt16(temp, 0);
 
                 Request request;
-                if (_pendingRequests.TryGetValue(id, out request))
+                if (_pendingRequests.TryRemove(id, out request))
                 {
                     p.Metadata["request"] = request;
                     request.lastRefresh = DateTime.UtcNow;
-                    request.observer.OnNext(p);
-                    request.tcs.TrySetResult(true);
+                    request.tcs.TrySetResult(p);
                 }
                 else
                 {
@@ -99,26 +98,17 @@ namespace Stormancer.Networking.Processors
                 p.Stream.Read(temp, 0, 2);
                 var id = BitConverter.ToUInt16(temp, 0);
                 var hasValues = p.Stream.ReadByte() == 1;
-
-                Request request;
-                if (_pendingRequests.TryGetValue(id, out request))
+                if (!hasValues)
                 {
-                    p.Metadata["request"] = request;
-                }
-                else
-                {
-                    _logger.Trace("Unknown request id.");
-                }
-
-                if (this._pendingRequests.TryRemove(id, out request))
-                {
-                    if (hasValues)
+                    Request request;
+                    if (this._pendingRequests.TryRemove(id, out request))
                     {
-                        request.tcs.Task.ContinueWith(t => request.observer.OnCompleted());
+                        p.Metadata["request"] = request;
+                        request.tcs.TrySetResult(null);
                     }
                     else
                     {
-                        request.observer.OnCompleted();
+                        _logger.Trace("Unknown request id.");
                     }
                 }
 
@@ -132,20 +122,17 @@ namespace Stormancer.Networking.Processors
                 var id = BitConverter.ToUInt16(temp, 0);
 
                 Request request;
-                if (_pendingRequests.TryGetValue(id, out request))
+                if (_pendingRequests.TryRemove(id, out request))
                 {
                     p.Metadata["request"] = request;
+
+                    var msg = p.Serializer().Deserialize<string>(p.Stream);
+                    request.tcs.TrySetException(new ClientException(msg));
                 }
                 else
                 {
                     _logger.Trace("Unknown request id.");
                 }
-
-                this._pendingRequests.TryRemove(id, out request);
-
-                var msg = p.Serializer().Deserialize<string>(p.Stream);
-
-                request.observer.OnError(new ClientException(msg));
 
                 return true;
             });
@@ -154,12 +141,7 @@ namespace Stormancer.Networking.Processors
         public Task<Packet> SendSystemRequest(IConnection peer, byte msgId, Action<Stream> writer)
         {
             var tcs = new TaskCompletionSource<Packet>();
-            var request = ReserveRequestSlot(
-                Observer.Create<Packet>(
-                    packet => tcs.TrySetResult(packet),
-                    ex => tcs.TrySetException(ex),
-                    () => tcs.TrySetResult(default(Packet))
-                ));
+            var request = ReserveRequestSlot(tcs);
 
             peer.SendSystem((byte)MessageIDTypes.ID_SYSTEM_REQUEST, bs =>
             {
@@ -186,38 +168,38 @@ namespace Stormancer.Networking.Processors
             return tcs.Task;
         }
 
-        public IObservable<Packet> SendSceneRequest(IConnection peer, byte sceneId, ushort routeId, Action<Stream> writer)
-        {
-            if (writer == null)
-            {
-                throw new ArgumentNullException("writer");
-            }
-            return Observable.Create<Packet>(observer =>
-            {
-                var request = ReserveRequestSlot(observer);
+        //public IObservable<Packet> SendSceneRequest(IConnection peer, byte sceneId, ushort routeId, Action<Stream> writer)
+        //{
+        //    if (writer == null)
+        //    {
+        //        throw new ArgumentNullException("writer");
+        //    }
+        //    return Observable.Create<Packet>(observer =>
+        //    {
+        //        var request = ReserveRequestSlot(observer);
 
-                peer.SendToScene(sceneId, routeId, s =>
-                {
-                    var data = BitConverter.GetBytes(request.id);
-                    s.Write(data, 0, data.Length);
-                    writer(s);
+        //        peer.SendToScene(sceneId, routeId, s =>
+        //        {
+        //            var data = BitConverter.GetBytes(request.id);
+        //            s.Write(data, 0, data.Length);
+        //            writer(s);
 
-                }, PacketPriority.MEDIUM_PRIORITY, PacketReliability.RELIABLE);
-                return () =>
-                {
-                    _pendingRequests.TryRemove(request.id, out request);
-                };
-            });
-        }
+        //        }, PacketPriority.MEDIUM_PRIORITY, PacketReliability.RELIABLE);
+        //        return () =>
+        //        {
+        //            _pendingRequests.TryRemove(request.id, out request);
+        //        };
+        //    });
+        //}
 
-        private Request ReserveRequestSlot(IObserver<Packet> observer)
+        private Request ReserveRequestSlot(TaskCompletionSource<Packet> tcs)
         {
             ushort id = 0;
             while (id < ushort.MaxValue)
             {
                 if (!_pendingRequests.ContainsKey(id))
                 {
-                    var request = new Request { lastRefresh = DateTime.UtcNow, id = id, observer = observer };
+                    var request = new Request { lastRefresh = DateTime.UtcNow, id = id, tcs = tcs };
                     if (_pendingRequests.TryAdd(id, request))
                     {
                         return request;
@@ -319,5 +301,7 @@ namespace Stormancer.Networking.Processors
                 writer(s);
             });
         }
+
+
     }
 }

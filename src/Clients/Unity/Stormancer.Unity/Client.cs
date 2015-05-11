@@ -136,6 +136,7 @@ namespace Stormancer
             this._metadata.Add("transport", _transport.Name);
             this._metadata.Add("version", "1.0.0a");
             this._metadata.Add("platform", "Unity");
+            this._metadata.Add("protocol", "2");
 
             this._maxPeers = configuration.MaxPeers;
 
@@ -386,15 +387,15 @@ namespace Stormancer
 
 
 
-        internal IObservable<Packet> SendRequest(IConnection peer, byte scene, ushort route, Action<Stream> writer)
-        {
-            if (writer == null)
-            {
-                throw new ArgumentNullException("writer");
+        //internal IObservable<Packet> SendRequest(IConnection peer, byte scene, ushort route, Action<Stream> writer)
+        //{
+        //    if (writer == null)
+        //    {
+        //        throw new ArgumentNullException("writer");
 
-            }
-            return _requestProcessor.SendSceneRequest(peer, scene, route, writer);
-        }
+        //    }
+        //    return _requestProcessor.SendSceneRequest(peer, scene, route, writer);
+        //}
 
         /// <summary>
         /// The client's unique stormancer Id. Returns null if the Id has not been acquired yet (connection still in progress).
