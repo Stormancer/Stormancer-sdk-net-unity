@@ -153,18 +153,6 @@ namespace Stormancer.Networking.Processors
 
             });
 
-            tcs.Task.ContinueWith(t =>
-            {
-                Request r;
-                if (_pendingRequests.TryGetValue(request.id, out r))
-                {
-                    if (r == request)
-                    {
-                        _pendingRequests.TryRemove(request.id, out request);
-                    }
-                }
-            });
-
             return tcs.Task;
         }
 

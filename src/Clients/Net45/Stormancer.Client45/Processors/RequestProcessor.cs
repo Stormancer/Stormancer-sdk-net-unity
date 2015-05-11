@@ -24,13 +24,13 @@ namespace Stormancer.Networking.Processors
         {
             public DateTime lastRefresh;
             public ushort id;
-            public IObserver<Packet> observer;
-            public TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
+            //public IObserver<Packet> observer;
+            public TaskCompletionSource<Packet> tcs;
         }
         private readonly ConcurrentDictionary<ushort, Request> _pendingRequests;
         private readonly ILogger _logger;
-       
-        private bool isRegistered = false;
+
+        private bool _isRegistered = false;
 
 
         /// <summary>
@@ -57,8 +57,9 @@ namespace Stormancer.Networking.Processors
         /// <param name="config"></param>
         public void RegisterProcessor(PacketProcessorConfig config)
         {
-            isRegistered = true;
-            foreach (var handler in _handlers)//Add system request handlers
+            _isRegistered = true;
+
+            foreach (var handler in _handlers) //Add system request handlers
             {
                 config.AddProcessor(handler.Key, p =>
                 {
@@ -71,7 +72,6 @@ namespace Stormancer.Networking.Processors
                             if (task.IsFaulted)
                             {
                                 var clientException = task.Exception.InnerExceptions.OfType<ClientException>().FirstOrDefault();
-                                _logger.Log(LogLevel.Error,"requestProcessor.server","An error occured while processing a system request",new ExceptionMsg(task.Exception));
                                 var msg = clientException != null ? clientException.Message : "An error occured on the server.";
                                 context.Error(s => p.Serializer().Serialize(msg, s));
                             }
@@ -85,6 +85,7 @@ namespace Stormancer.Networking.Processors
                     return true;
                 });
             }
+
             config.AddProcessor((byte)MessageIDTypes.ID_REQUEST_RESPONSE_MSG, p =>
             {
                 var temp = new byte[2];
@@ -92,82 +93,60 @@ namespace Stormancer.Networking.Processors
                 var id = BitConverter.ToUInt16(temp, 0);
 
                 Request request;
-                if (_pendingRequests.TryGetValue(id, out request))
+                if (_pendingRequests.TryRemove(id, out request))
                 {
                     p.Metadata["request"] = request;
                     request.lastRefresh = DateTime.UtcNow;
-                    request.observer.OnNext(p);
-                    request.tcs.TrySetResult(true);
+                    request.tcs.TrySetResult(p);
                 }
                 else
                 {
-                    _logger.Trace("requestProcessor","Unknown request id.");
+                    _logger.Trace("requestProcessor", "Unknown request id.");
                 }
 
                 return true;
             });
+
             config.AddProcessor((byte)MessageIDTypes.ID_REQUEST_RESPONSE_COMPLETE, p =>
             {
                 var temp = new byte[2];
                 p.Stream.Read(temp, 0, 2);
                 var id = BitConverter.ToUInt16(temp, 0);
                 var hasValues = p.Stream.ReadByte() == 1;
-
-                Request request;
-                if (_pendingRequests.TryGetValue(id, out request))
+                if (!hasValues)
                 {
-                    p.Metadata["request"] = request;
-                }
-                else
-                {
-                    _logger.Trace("requestProcessor", "Unknown request id.");
-                }
-
-                if (this._pendingRequests.TryRemove(id, out request))
-                {
-                    if (hasValues)
+                    Request request;
+                    if (this._pendingRequests.TryRemove(id, out request))
                     {
-                        request.tcs.Task.ContinueWith(t => request.observer.OnCompleted());
+                        p.Metadata["request"] = request;
+                        request.tcs.TrySetResult(null);
                     }
                     else
                     {
-                        request.observer.OnCompleted();
+                        _logger.Trace("requestProcessor", "Unknown request id.");
                     }
-
                 }
+
                 return true;
             });
+
             config.AddProcessor((byte)MessageIDTypes.ID_REQUEST_RESPONSE_ERROR, p =>
             {
                 var temp = new byte[2];
                 p.Stream.Read(temp, 0, 2);
                 var id = BitConverter.ToUInt16(temp, 0);
+
                 Request request;
-                if (_pendingRequests.TryGetValue(id, out request))
+                if (_pendingRequests.TryRemove(id, out request))
                 {
                     p.Metadata["request"] = request;
+
+                    var msg = p.Serializer().Deserialize<string>(p.Stream);
+                    request.tcs.TrySetException(new ClientException(msg));
                 }
                 else
                 {
                     _logger.Trace("requestProcessor", "Unknown request id.");
-                }
-
-                if (this._pendingRequests.TryRemove(id, out request))
-                {
-                    try
-                    {
-                        var msg = p.Serializer().Deserialize<string>(p.Stream);
-                        request.observer.OnError(new ClientException(msg));
-                    }
-                    catch (InvalidOperationException)
-                    {
-                       
-                        request.observer.OnError(new ClientException("An error occured on the server."));
-
-                        
-                    }
-
-
                 }
 
                 return true;
@@ -181,45 +160,31 @@ namespace Stormancer.Networking.Processors
         /// <param name="msgId">Message id</param>
         /// <param name="writer">An action writing the request parameters</param>
         /// <returns>An observable returning the request responses</returns>
-        public IObservable<Packet> SendSystemRequest(IConnection peer, byte msgId, Action<Stream> writer)
+        public Task<Packet> SendSystemRequest(IConnection peer, byte msgId, Action<Stream> writer)
         {
-            return Observable.Create<Packet>(observer =>
+            var tcs = new TaskCompletionSource<Packet>();
+            var request = ReserveRequestSlot(tcs);
+
+            peer.SendSystem((byte)MessageIDTypes.ID_SYSTEM_REQUEST, bs =>
             {
-                var request = ReserveRequestSlot(observer);
-                peer.SendSystem((byte)MessageIDTypes.ID_SYSTEM_REQUEST, bs =>
-                {
-                    var bw = new BinaryWriter(bs);
-                    bw.Write(msgId);
-                    bw.Write(request.id);
-                    bw.Flush();
-                    writer(bs);
+                var bw = new BinaryWriter(bs);
+                bw.Write(msgId);
+                bw.Write(request.id);
+                bw.Flush();
+                writer(bs);
 
-                });
-                return () =>
-                {
-                    Request r;
-                    if (_pendingRequests.TryGetValue(request.id, out r))
-                    {
-                        if (r == request)
-                        {
-                            _pendingRequests.TryRemove(request.id, out request);
-                        }
-                    }
-
-                };
             });
 
-
+            return tcs.Task;
         }
-
-        private Request ReserveRequestSlot(IObserver<Packet> observer)
+        private Request ReserveRequestSlot(TaskCompletionSource<Packet> tcs)
         {
             ushort id = 0;
             while (id < ushort.MaxValue)
             {
                 if (!_pendingRequests.ContainsKey(id))
                 {
-                    var request = new Request { lastRefresh = DateTime.UtcNow, id = id, observer = observer };
+                    var request = new Request { lastRefresh = DateTime.UtcNow, id = id, tcs = tcs };
                     if (_pendingRequests.TryAdd(id, request))
                     {
                         return request;
@@ -233,7 +198,7 @@ namespace Stormancer.Networking.Processors
 
 
         private Dictionary<byte, Func<RequestContext, Task>> _handlers = new Dictionary<byte, Func<RequestContext, Task>>();
-        
+
         /// <summary>
         /// Register a new system request handlers for the specified message Id
         /// </summary>
@@ -241,7 +206,7 @@ namespace Stormancer.Networking.Processors
         /// <param name="handler">A function that handles message with the provided id</param>
         public void AddSystemRequestHandler(byte msgId, Func<RequestContext, Task> handler)
         {
-            if (isRegistered)
+            if (_isRegistered)
             {
                 throw new InvalidOperationException("Can only add handler before 'RegisterProcessor' is called.");
             }

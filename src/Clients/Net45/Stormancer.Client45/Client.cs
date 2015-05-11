@@ -97,7 +97,7 @@ namespace Stormancer
             }
         }
 
-       
+
         private ILogger _logger = NullLogger.Instance;
 
         /// <summary>
@@ -132,7 +132,7 @@ namespace Stormancer
             this._accountId = configuration.Account;
             this._applicationName = configuration.Application;
             _apiClient = new ApiClient(configuration, _tokenHandler);
-            this._transport = configuration.TransportFactory(new Dictionary<string,object> { {"ILogger", this._logger}});
+            this._transport = configuration.TransportFactory(new Dictionary<string, object> { { "ILogger", this._logger } });
             this._dispatcher = configuration.Dispatcher;
             _requestProcessor = new Stormancer.Networking.Processors.RequestProcessor(_logger, Enumerable.Empty<IRequestModule>());
 
@@ -215,12 +215,12 @@ namespace Stormancer
             return result;
         }
 
-        private async Task UpdateServerMetadata()
+        private Task UpdateServerMetadata()
         {
-            await _requestProcessor.SendSystemRequest(_serverConnection, (byte)SystemRequestIDTypes.ID_SET_METADATA, s =>
+            return _requestProcessor.SendSystemRequest(_serverConnection, (byte)SystemRequestIDTypes.ID_SET_METADATA, s =>
             {
                 _systemSerializer.Serialize(_serverConnection.Metadata, s);
-            }).Select(p => new Empty()).DefaultIfEmpty();
+            });
         }
         private async Task<Scene> GetScene(string sceneId, SceneEndpoint ci)
         {
@@ -238,7 +238,7 @@ namespace Stormancer
                     _serverConnection.Metadata[kvp.Key] = kvp.Value;
                 }
                 await UpdateServerMetadata();
-                
+
             }
             var parameter = new Stormancer.Dto.SceneInfosRequestDto { Metadata = _serverConnection.Metadata, Token = ci.Token };
 
