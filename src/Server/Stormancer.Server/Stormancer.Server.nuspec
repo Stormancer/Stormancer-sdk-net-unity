@@ -11,11 +11,12 @@
     <iconUrl>http://stormancer.blob.core.windows.net/stormancer-local-public/1/1e/Logo32x32.png</iconUrl>
     <description>$description$</description>
 	<summary>$description$</summary>
-    <releaseNotes>Compatible with Stormancer version 1</releaseNotes>
+    <releaseNotes>Added a default _app.json application description file.</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>Stormancer Game</tags>
   </metadata>
   <files>
-    <file src="bin/$Configuration$/Stormancer.Core.dll" target="lib/Net45"/>
+    <file src="bin/$Configuration$/Stormancer.Core.dll" target="lib/Net45"/>	
+	<file src="_app.json" target="content" />
   </files>
 </package>
