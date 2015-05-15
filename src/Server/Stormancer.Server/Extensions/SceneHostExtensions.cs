@@ -119,5 +119,15 @@ namespace Stormancer
             }
             rpcService.AddProcedure(route, handler, ordered);
         }
+
+        public static void EnableClientLogs(this IScenePeerClient peer)
+        {
+            peer.Host.GetComponent<Stormancer.Plugins.ClientLogsService>().EnableClientLogs(peer);
+        }
+
+        public static void DisableClientLogs(this IScenePeerClient peer)
+        {
+            peer.Host.GetComponent<Stormancer.Plugins.ClientLogsService>().DisableClientLogs(peer);
+        }
     }
 }

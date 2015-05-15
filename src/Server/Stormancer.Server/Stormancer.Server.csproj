@@ -71,6 +71,8 @@
     <Compile Include="IStartup.cs" />
     <Compile Include="ITaskBasedEventHandler.cs" />
     <Compile Include="Plugins\ClientLogsPlugin.cs" />
+    <Compile Include="Plugins\ClientLogsPluginConstants.cs" />
+    <Compile Include="Plugins\ClientLogsService.cs" />
     <Compile Include="Plugins\HostPluginBuildContext.cs" />
     <Compile Include="Plugins\IHostPlugin.cs" />
     <Compile Include="Plugins\RpcHostPlugin.cs" />
