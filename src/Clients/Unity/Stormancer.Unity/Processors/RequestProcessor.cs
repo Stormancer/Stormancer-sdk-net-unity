@@ -48,7 +48,6 @@ namespace Stormancer.Networking.Processors
             {
                 config.AddProcessor(handler.Key, p =>
                 {
-
                     var context = new RequestContext(p);
                     handler.Value(context).ContinueWith(task =>
                     {
@@ -65,7 +64,6 @@ namespace Stormancer.Networking.Processors
                                 context.Complete();
                             }
                         }
-
                     });
                     return true;
                 });
