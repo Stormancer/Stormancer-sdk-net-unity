@@ -97,7 +97,7 @@ namespace Stormancer
             }
         }
 
-       
+
         private ILogger _logger = NullLogger.Instance;
 
         /// <summary>
@@ -128,12 +128,13 @@ namespace Stormancer
         /// <param name="configuration">A configuration instance containing options for the client.</param>
         public Client(ClientConfiguration configuration)
         {
+            this._logger = configuration.Logger;
             this._accountId = configuration.Account;
             this._applicationName = configuration.Application;
             _apiClient = new ApiClient(configuration, _tokenHandler);
-            this._transport = configuration.Transport;
+            this._transport = configuration.TransportFactory(new Dictionary<string, object> { { "ILogger", this._logger } });
             this._dispatcher = configuration.Dispatcher;
-            _requestProcessor = new Stormancer.Networking.Processors.RequestProcessor(_logger, new List<IRequestModule>());
+            _requestProcessor = new Stormancer.Networking.Processors.RequestProcessor(_logger, Enumerable.Empty<IRequestModule>());
 
             _scenesDispatcher = new Processors.SceneDispatcher();
             this._dispatcher.AddPRocessor(_requestProcessor);
@@ -149,6 +150,7 @@ namespace Stormancer
             this._metadata.Add("transport", _transport.Name);
             this._metadata.Add("version", "1.0.0a");
             this._metadata.Add("platform", "NET45");
+            this._metadata.Add("protocol", "2");
 
             this._maxPeers = configuration.MaxPeers;
 
@@ -212,6 +214,14 @@ namespace Stormancer
 
             return result;
         }
+
+        private Task UpdateServerMetadata()
+        {
+            return _requestProcessor.SendSystemRequest(_serverConnection, (byte)SystemRequestIDTypes.ID_SET_METADATA, s =>
+            {
+                _systemSerializer.Serialize(_serverConnection.Metadata, s);
+            });
+        }
         private async Task<Scene> GetScene(string sceneId, SceneEndpoint ci)
         {
             if (_serverConnection == null)
@@ -227,10 +237,12 @@ namespace Stormancer
                 {
                     _serverConnection.Metadata[kvp.Key] = kvp.Value;
                 }
+                await UpdateServerMetadata();
+
             }
             var parameter = new Stormancer.Dto.SceneInfosRequestDto { Metadata = _serverConnection.Metadata, Token = ci.Token };
 
-            var result = await SendSystemRequest<Stormancer.Dto.SceneInfosRequestDto, Stormancer.Dto.SceneInfosDto>((byte)MessageIDTypes.ID_GET_SCENE_INFOS, parameter);
+            var result = await SendSystemRequest<Stormancer.Dto.SceneInfosRequestDto, Stormancer.Dto.SceneInfosDto>((byte)SystemRequestIDTypes.ID_GET_SCENE_INFOS, parameter);
 
             if (_serverConnection.GetComponent<ISerializer>() == null)
             {
@@ -241,6 +253,7 @@ namespace Stormancer
                 _serverConnection.RegisterComponent(_serializers[result.SelectedSerializer]);
                 _serverConnection.Metadata.Add("serializer", result.SelectedSerializer);
             }
+            await UpdateServerMetadata();
             var scene = new Scene(this._serverConnection, this, sceneId, ci.Token, result);
 
             _pluginCtx.SceneCreated(scene);
@@ -279,9 +292,16 @@ namespace Stormancer
                 }).ToList(),
                 ConnectionMetadata = _serverConnection.Metadata
             };
-            var result = await this.SendSystemRequest<Stormancer.Dto.ConnectToSceneMsg, Stormancer.Dto.ConnectionResult>((byte)MessageIDTypes.ID_CONNECT_TO_SCENE, parameter);
+            var result = await this.SendSystemRequest<Stormancer.Dto.ConnectToSceneMsg, Stormancer.Dto.ConnectionResult>((byte)SystemRequestIDTypes.ID_CONNECT_TO_SCENE, parameter);
             scene.CompleteConnectionInitialization(result);
             _scenesDispatcher.AddScene(scene);
+
+            //Send ready message. It will fires the Connected event on the server. If not sent, the connection to the scene will timeout.
+            //await _requestProcessor.SendSystemRequest(_serverConnection, (byte)SystemRequestIDTypes.ID_SCENE_READY, s =>
+            //{
+            //    s.WriteByte(scene.Handle);
+            //});
+
             if (_pluginCtx.SceneConnected != null)
                 _pluginCtx.SceneConnected(scene);
         }
@@ -289,7 +309,7 @@ namespace Stormancer
 
         internal async Task Disconnect(Scene scene, byte sceneHandle)
         {
-            await this.SendSystemRequest<byte, Stormancer.Dto.Empty>((byte)MessageIDTypes.ID_DISCONNECT_FROM_SCENE, sceneHandle);
+            await this.SendSystemRequest<byte, Stormancer.Dto.Empty>((byte)SystemRequestIDTypes.ID_DISCONNECT_FROM_SCENE, sceneHandle);
             this._scenesDispatcher.RemoveScene(sceneHandle);
             if (_pluginCtx.SceneDisconnected != null)
                 _pluginCtx.SceneDisconnected(scene);

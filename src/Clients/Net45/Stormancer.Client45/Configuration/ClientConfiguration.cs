@@ -76,14 +76,20 @@ namespace Stormancer
 
         private ClientConfiguration()
         {
+            Logger = NullLogger.Instance;
             Dispatcher = new DefaultPacketDispatcher();
-            Transport = new RakNetTransport(NullLogger.Instance);
+            TransportFactory = DefaultTransportFactory;
             //Transport = new WebSocketClientTransport(NullLogger.Instance);        
 
             Serializers = new List<ISerializer> { new MsgPackSerializer() };
             MaxPeers = 20;
             Plugins = new List<IClientPlugin>();
             Plugins.Add(new RpcClientPlugin());
+        }
+
+        private RakNetTransport DefaultTransportFactory(IDictionary<string, object> parameters) 
+        {
+            return new RakNetTransport((ILogger)(parameters["ILogger"]));
         }
 
         /// <summary>
@@ -107,7 +113,7 @@ namespace Stormancer
         /// <summary>
         /// Gets or sets the transport to be used by the client.
         /// </summary>
-        public ITransport Transport { get; set; }
+        public Func<IDictionary<string,object>,ITransport> TransportFactory { get; set; }
 
 
         /// <summary>
@@ -122,6 +128,8 @@ namespace Stormancer
         /// Maximum number of remote peers that can connect with this client.
         /// </summary>
         public ushort MaxPeers { get; set; }
+
+        public ILogger Logger { get; set; }
 
         /// <summary>
         /// Adds a plugin to the client.

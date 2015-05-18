@@ -32,4 +32,6 @@ namespace Stormancer.Dto
         /// </summary>
         public Dictionary<string, string> ConnectionMetadata { get; set; }
     }
+    
+   
 }

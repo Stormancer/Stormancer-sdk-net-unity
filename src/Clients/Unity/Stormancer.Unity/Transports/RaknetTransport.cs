@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Stormancer.Networking
 {
-    public class RaknetTransport : ITransport
+    public class RakNetTransport : ITransport
     {
         private IConnectionManager _handler;
         private RakPeerInterface _peer;
@@ -19,11 +19,10 @@ namespace Stormancer.Networking
         private string _type;
         private readonly ConcurrentDictionary<ulong, RakNetConnection> _connections = new ConcurrentDictionary<ulong, RakNetConnection>();
 
-        public RaknetTransport(ILogger logger)
+        public RakNetTransport(ILogger logger)
         {
             this.logger = logger;
         }
-
         public Task Start(string type, IConnectionManager handler, CancellationToken token, ushort? serverPort, ushort maxConnections)
         {
             if (handler == null && serverPort.HasValue)
@@ -48,7 +47,7 @@ namespace Stormancer.Networking
 
             var socketDescriptor = serverPort.HasValue ? new SocketDescriptor(serverPort.Value, null) : new SocketDescriptor();
             var startupResult = server.Startup(maxConnections, socketDescriptor, 1);
-            if(startupResult != StartupResult.RAKNET_STARTED)
+            if (startupResult != StartupResult.RAKNET_STARTED)
             {
                 throw new InvalidOperationException("Couldn't start raknet peer :" + startupResult);
             }
@@ -61,6 +60,9 @@ namespace Stormancer.Networking
             {
                 for (var packet = server.Receive(); packet != null; packet = server.Receive())
                 {
+
+
+
                     switch (packet.data[0])
                     {
                         case (byte)DefaultMessageIDTypes.ID_CONNECTION_REQUEST_ACCEPTED:
@@ -80,7 +82,7 @@ namespace Stormancer.Networking
 
                         case (byte)DefaultMessageIDTypes.ID_DISCONNECTION_NOTIFICATION:
                             logger.Trace("{0} disconnected.", packet.systemAddress.ToString());
-                            OnDisconnection(packet, server,"CLIENT_DISCONNECTED");
+                            OnDisconnection(packet, server, "CLIENT_DISCONNECTED");
                             break;
                         case (byte)DefaultMessageIDTypes.ID_CONNECTION_LOST:
                             logger.Trace("{0} lost the connection.", packet.systemAddress.ToString());
@@ -134,13 +136,13 @@ namespace Stormancer.Networking
         }
 
 
-        private void OnDisconnection(RakNet.Packet packet, RakPeerInterface server,string reason)
+        private void OnDisconnection(RakNet.Packet packet, RakPeerInterface server, string reason)
         {
             logger.Trace("{0} disconnected", packet.systemAddress);
             var c = RemoveConnection(packet.guid);
             server.DeallocatePacket(packet);
 
-            _handler.CloseConnection(c,reason);
+            _handler.CloseConnection(c, reason);
 
             var action = ConnectionClosed;
             if (action != null)
@@ -170,13 +172,13 @@ namespace Stormancer.Networking
         {
             return _connections[guid.g];
         }
-
         private RakNetConnection CreateNewConnection(RakNetGUID raknetGuid, RakPeerInterface peer)
         {
             var cid = _handler.GenerateNewConnectionId();
             var c = new RakNetConnection(raknetGuid, cid, peer, OnRequestClose);
             _connections.TryAdd(raknetGuid.g, c);
             return c;
+
         }
 
         private RakNetConnection RemoveConnection(RakNetGUID guid)
@@ -192,6 +194,7 @@ namespace Stormancer.Networking
         }
 
         #endregion
+
 
         public Action<Stormancer.Core.Packet> PacketReceived
         {
@@ -210,6 +213,7 @@ namespace Stormancer.Networking
             get;
             set;
         }
+
 
         public Task<IConnection> Connect(string endpoint)
         {
@@ -230,8 +234,11 @@ namespace Stormancer.Networking
             _pendingConnections.TryAdd(address.ToString(), tcs);
 
             return tcs.Task;
-        }
 
+
+
+
+        }
         private ConcurrentDictionary<string, TaskCompletionSource<IConnection>> _pendingConnections = new ConcurrentDictionary<string, TaskCompletionSource<IConnection>>();
 
         public string Name
@@ -248,5 +255,7 @@ namespace Stormancer.Networking
 
         public long? Id { get; private set; }
     }
+
+
 
 }

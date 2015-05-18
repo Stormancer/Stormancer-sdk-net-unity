@@ -1,15 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace UniRx
 {
-    public interface IObservable<T>
-    {
-        IDisposable Subscribe(IObserver<T> observer);
-    }
-
     // Standard Query Operators
 
     // onNext implementation guide. enclose otherFunc but onNext is not catch.
@@ -603,9 +597,21 @@ namespace UniRx
                     {
                         try
                         {
-                            sameKey = (comparer == null)
-                                ? currentKey.Equals(prevKey)
-                                : comparer.Equals(currentKey, prevKey);
+                            if (comparer == null)
+                            {
+                                if (currentKey == null)
+                                {
+                                    sameKey = (prevKey == null);
+                                }
+                                else
+                                {
+                                    sameKey = currentKey.Equals(prevKey);
+                                }
+                            }
+                            else
+                            {
+                                sameKey = comparer.Equals(currentKey, prevKey);
+                            }
                         }
                         catch (Exception ex)
                         {

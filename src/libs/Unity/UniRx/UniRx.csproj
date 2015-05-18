@@ -62,8 +62,12 @@
     <Reference Include="UnityEngine">
       <HintPath>$(UnityDir)\Editor\Data\Managed\UnityEngine.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Unity\Editor\Data\UnityExtensions\Unity\GUISystem\4.6.1\UnityEngine.UI.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Asynchronous\WebRequestExtensions.cs" />
     <Compile Include="Disposables\BooleanDisposable.cs" />
     <Compile Include="Disposables\CompositeDisposable.cs" />
     <Compile Include="Disposables\Disposable.cs" />
@@ -95,8 +99,8 @@
     <Compile Include="Observable.cs" />
     <Compile Include="Observable.ErrorHandling.cs" />
     <Compile Include="Observable.Events.cs" />
+    <Compile Include="Observable.FromAsync.cs" />
     <Compile Include="Observable.Joins.cs" />
-    <Compile Include="Observable.Multiple.cs" />
     <Compile Include="Observable.Paging.cs" />
     <Compile Include="Observable.Time.cs" />
     <Compile Include="Observer.cs" />
@@ -111,32 +115,92 @@
     <Compile Include="Subjects\ISubject.cs" />
     <Compile Include="Subjects\ReplaySubject.cs" />
     <Compile Include="Subjects\Subject.cs" />
+    <Compile Include="System\IObservable.cs" />
+    <Compile Include="System\IObserver.cs" />
     <Compile Include="System\IProgress.cs" />
     <Compile Include="System\Tuple.cs" />
     <Compile Include="System\Unit.cs" />
     <Compile Include="TimeInterval.cs" />
     <Compile Include="Timestamped.cs" />
-    <Compile Include="UnityEngineBridge\AotSafeExtensions.cs" />
-    <Compile Include="UnityEngineBridge\CancellationToken.cs" />
-    <Compile Include="UnityEngineBridge\Diagnostics\LogEntry.cs" />
-    <Compile Include="UnityEngineBridge\Diagnostics\LogEntryExtensions.cs" />
-    <Compile Include="UnityEngineBridge\Diagnostics\Logger.cs" />
-    <Compile Include="UnityEngineBridge\Diagnostics\ObservableLogger.cs" />
-    <Compile Include="UnityEngineBridge\Diagnostics\UnityDebugSink.cs" />
-    <Compile Include="UnityEngineBridge\LazyTask.cs" />
-    <Compile Include="UnityEngineBridge\MainThreadDispatcher.cs" />
-    <Compile Include="UnityEngineBridge\MainThreadScheduler.cs" />
-    <Compile Include="UnityEngineBridge\Observable.Unity.cs" />
-    <Compile Include="UnityEngineBridge\ObservableMonoBehaviour.cs" />
-    <Compile Include="UnityEngineBridge\ObservableWWW.cs" />
+    <Compile Include="UnityEngineBridge\AotSafeExtensions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UnityEngineBridge\AsyncOperationExtensions.cs" />
+    <Compile Include="UnityEngineBridge\CancellationToken.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UnityEngineBridge\Diagnostics\LogEntry.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UnityEngineBridge\Diagnostics\LogEntryExtensions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UnityEngineBridge\Diagnostics\Logger.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UnityEngineBridge\Diagnostics\ObservableLogger.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UnityEngineBridge\Diagnostics\UnityDebugSink.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UnityEngineBridge\InspectableReactiveProperty.cs" />
+    <Compile Include="UnityEngineBridge\InspectorDisplayDrawer.cs" />
+    <Compile Include="UnityEngineBridge\LazyTask.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UnityEngineBridge\LifetimeDisposableExtensions.cs" />
+    <Compile Include="UnityEngineBridge\MainThreadDispatcher.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UnityEngineBridge\MainThreadScheduler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UnityEngineBridge\Observable.Unity.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UnityEngineBridge\ObservableMonoBehaviour.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UnityEngineBridge\ObservableWWW.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UnityEngineBridge\ObserveExtensions.cs" />
+    <Compile Include="UnityEngineBridge\ReactiveCollection.cs" />
+    <Compile Include="UnityEngineBridge\ReactiveDictionary.cs" />
+    <Compile Include="UnityEngineBridge\ReactiveProperty.cs" />
     <Compile Include="UnityEngineBridge\ScenePlaybackDetector.cs" />
-    <Compile Include="UnityEngineBridge\TypedMonoBehaviour.cs" />
-    <Compile Include="UnityEngineBridge\UI\ObserveExtensions.cs" />
-    <Compile Include="UnityEngineBridge\UnityEventExtensions.cs" />
+    <Compile Include="UnityEngineBridge\Triggers\ObservableAnimatorTrigger.cs" />
+    <Compile Include="UnityEngineBridge\Triggers\ObservableCanvasGroupChangedTrigger.cs" />
+    <Compile Include="UnityEngineBridge\Triggers\ObservableCollision2DTrigger.cs" />
+    <Compile Include="UnityEngineBridge\Triggers\ObservableCollisionTrigger.cs" />
+    <Compile Include="UnityEngineBridge\Triggers\ObservableDestroyTrigger.cs" />
+    <Compile Include="UnityEngineBridge\Triggers\ObservableEnableTrigger.cs" />
+    <Compile Include="UnityEngineBridge\Triggers\ObservableEventTrigger.cs" />
+    <Compile Include="UnityEngineBridge\Triggers\ObservableFixedUpdateTrigger.cs" />
+    <Compile Include="UnityEngineBridge\Triggers\ObservableLateUpdateTrigger.cs" />
+    <Compile Include="UnityEngineBridge\Triggers\ObservableMouseTrigger.cs" />
+    <Compile Include="UnityEngineBridge\Triggers\ObservableRectTransformTrigger.cs" />
+    <Compile Include="UnityEngineBridge\Triggers\ObservableStateMachineTrigger.cs" />
+    <Compile Include="UnityEngineBridge\Triggers\ObservableTransformChangedTrigger.cs" />
+    <Compile Include="UnityEngineBridge\Triggers\ObservableTrigger2DTrigger.cs" />
+    <Compile Include="UnityEngineBridge\Triggers\ObservableTriggerBase.cs" />
+    <Compile Include="UnityEngineBridge\Triggers\ObservableTriggerExtensions.Component.cs" />
+    <Compile Include="UnityEngineBridge\Triggers\ObservableTriggerExtensions.cs" />
+    <Compile Include="UnityEngineBridge\Triggers\ObservableTriggerTrigger.cs" />
+    <Compile Include="UnityEngineBridge\Triggers\ObservableUpdateTrigger.cs" />
+    <Compile Include="UnityEngineBridge\Triggers\ObservableVisibleTrigger.cs" />
+    <Compile Include="UnityEngineBridge\TypedMonoBehaviour.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UnityEngineBridge\UnityEventExtensions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UnityEngineBridge\UnityGraphicExtensions.cs" />
+    <Compile Include="UnityEngineBridge\UnityUIComponentExtensions.cs" />
     <Compile Include="UnityWinRTBridge\Thread.cs" />
     <Compile Include="UnityWinRTBridge\ThreadPoolScheduler_UnityWinRT.cs" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

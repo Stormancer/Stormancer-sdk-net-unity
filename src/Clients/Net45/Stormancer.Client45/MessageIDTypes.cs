@@ -11,34 +11,25 @@ namespace Stormancer.Networking
     /// <summary>
     /// Message types understood by the agent.
     /// </summary>
-    public enum MessageIDTypes : byte
+    internal enum MessageIDTypes : byte
     {
         /// <summary>
-        /// Connects the user to a scene
+        /// System request
         /// </summary>
-        ID_CONNECT_TO_SCENE = DefaultMessageIDTypes.ID_USER_PACKET_ENUM,
-        /// <summary>
-        /// Used to disconnect the user from a scene
-        /// </summary>
-        ID_DISCONNECT_FROM_SCENE = 135,
+        ID_SYSTEM_REQUEST = DefaultMessageIDTypes.ID_USER_PACKET_ENUM,
 
         /// <summary>
-        /// Retrives runtime informations about a scene
+        /// reponse to a system request
         /// </summary>
-        ID_GET_SCENE_INFOS=136,
+        ID_REQUEST_RESPONSE_MSG =137 ,
 
         /// <summary>
-        /// Sends a reponse to a system request
-        /// </summary>
-        ID_REQUEST_RESPONSE_MSG=137 ,
-
-        /// <summary>
-        /// Sends a "request complete" message to close a system request channel
+        /// "request complete" message to close a system request channel
         /// </summary>
         ID_REQUEST_RESPONSE_COMPLETE=138,
 
         /// <summary>
-        /// Sends an error as aresponse to a system request and close the request channel
+        ///  error as a response to a system request and close the request channel
         /// </summary>
         ID_REQUEST_RESPONSE_ERROR=139,
 

@@ -28,7 +28,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Debug\Stormancer.Client45.XML</DocumentationFile>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -45,9 +45,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\MsgPack.Cli.0.5.11\lib\net45\MsgPack.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.6.0.7\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Raknet.csharp, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
@@ -72,6 +71,9 @@
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\Server\Stormancer.Server\Plugins\ClientLogsPluginConstants.cs">
+      <Link>Plugins\ClientLogsPluginConstants.cs</Link>
+    </Compile>
     <Compile Include="ApiClient.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="Configuration\ClientConfiguration.cs" />
@@ -85,6 +87,7 @@
     <Compile Include="IPacketProcessor.cs" />
     <Compile Include="ITransport.cs" />
     <Compile Include="MessageIDTypes.cs" />
+    <Compile Include="Plugins\ClientLogsPlugin.cs" />
     <Compile Include="Plugins\IClientPlugin.cs" />
     <Compile Include="Extensions\Buffers.cs" />
     <Compile Include="Infrastructure\BSStream.cs" />
@@ -109,6 +112,7 @@
     <Compile Include="SystemMessages\Empty.cs" />
     <Compile Include="SystemMessages\ExceptionMsg.cs" />
     <Compile Include="SystemMessages\SceneInfosDto.cs" />
+    <Compile Include="SystemRequestIDTypes.cs" />
     <Compile Include="Transports\RaknetConnection.cs" />
     <Compile Include="Transports\RaknetTransport.cs" />
     <Compile Include="Transports\WebSocketClientConnection.cs" />
@@ -137,7 +141,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>xcopy /d /y "$(SolutionDir)..\libs\Raknet\$(PlatformTarget)\Raknet.dll"</PostBuildEvent>
+    <PostBuildEvent>xcopy /y "$(SolutionDir)..\libs\Raknet\$(PlatformTarget)\Raknet.dll"</PostBuildEvent>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
