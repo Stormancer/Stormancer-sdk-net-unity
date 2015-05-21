@@ -14,8 +14,6 @@ namespace Stormancer.Plugins
     /// <remarks>Client logs' categories are automatically prefixed by 'client.' to help with filtering.</remarks>
     public class ClientLogsPlugin : IHostPlugin
     {
-        internal const string Version = "1.0.0";
-        internal const string PluginName = "stormancer.plugins.logs";
 
         /// <summary>
         /// Builds the plugin
@@ -23,17 +21,22 @@ namespace Stormancer.Plugins
         /// <param name="ctx">HostPluginBuildContext instance used to build the plugin.</param>
         public void Build(HostPluginBuildContext ctx)
         {
+            var service = new ClientLogsService();
             ctx.SceneCreating += scene =>
             {
+                scene.Metadata.Add(ClientLogsPluginConstants.PluginName, ClientLogsPluginConstants.Version);
 
-                scene.Metadata.Add(PluginName, Version);
+                scene.RegisterComponent(() => service);
 
-                scene.AddRoute("logs.send", p =>
+                scene.AddRoute(ClientLogsPluginConstants.ClientLogsRoute, p =>
                 {
-
-                    var logger = scene.GetComponent<ILogger>();
-                    var log = p.ReadObject<LogMsg>();
-                    logger.Log(log.Level, "client." + log.Category, log.Message, log.Data);
+                    string shouldLogClient;
+                    if (p.Connection.Metadata.TryGetValue(ClientLogsPluginConstants.isLoggingMetadataKey, out shouldLogClient) && shouldLogClient == "True")
+                    {
+                        var logger = scene.GetComponent<ILogger>();
+                        var log = p.ReadObject<LogMsg>();
+                        logger.Log(log.Level, "client." + log.Category, log.Message, log.Data);
+                    }
                 });
             };
         }
