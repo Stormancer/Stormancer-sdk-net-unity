@@ -110,6 +110,6 @@ namespace Stormancer.Core
         /// </summary>
         /// <param name="route">A string containing the name of the route to listen to.</param>
         /// <returns type="IObservable&lt;Packet&gt;">An IObservable&lt;Packet&gt; instance that fires each time a message is received on the route. </returns>
-        IObservable<Packet<IScenePeer>> OnMessage(string route);
+        IObservable<Packet<IScenePeerClient>> OnMessage(string route);
     }
 }
