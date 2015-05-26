@@ -14,110 +14,102 @@ namespace Stormancer
     public static class SceneHostExtensions
     {
         /// <summary>
-        /// Broadcasts a message to all clients
+        /// Broadcasts a message to all clients.
         /// </summary>
-        /// <param name="scene">The scene on which to broadcast</param>
-        /// <param name="route">The route of the message</param>
-        /// <param name="writer">An action that will write the message</param>
-        /// <param name="priority">The message priority level</param>
-        /// <param name="reliability">The message reliability level</param>
-        public static void Broadcast(this ISceneHost scene, string route, Action<Stream> writer, PacketPriority priority,
-            PacketReliability reliability)
+        /// <param name="scene">The scene on which to broadcast.</param>
+        /// <param name="route">The route of the message.</param>
+        /// <param name="writer">An action that will write the message.</param>
+        /// <param name="priority">The message priority level.</param>
+        /// <param name="reliability">The message reliability level.</param>
+        public static void Broadcast(this ISceneHost scene, string route, Action<Stream> writer, PacketPriority priority, PacketReliability reliability)
         {
             scene.Send(new MatchAllFilter(), route, writer, priority, reliability);
 
         }
 
         /// <summary>
-        /// Sends a request to a scene without parameters nor response
+        /// Listen to messages on the specified route, and output instances of T using the scene serializer.
         /// </summary>
-        /// <param name="peer">The target peer</param>
-        /// <param name="route">The target route</param>
-        /// <param name="priority">The request's priority level</param>
-        /// <returns>A task completing when the requests complete on the remote peer</returns>
-        public static async Task SendVoidRequest(this IScenePeerClient peer, string route, PacketPriority priority = PacketPriority.MEDIUM_PRIORITY)
+        /// <typeparam name="TData">Type into which message contents should be deserialized.</typeparam>
+        /// <param name="scene">The scene to listen to.</param>
+        /// <param name="route">A string describing the route to listen to.</param>
+        /// <returns>An observable instance providing the messages.</returns>
+        public static IObservable<TData> OnMessage<TData>(this ISceneHost scene, string route)
         {
-            await peer.Rpc(route, s =>
+            return scene.OnMessage(route).Select(packet =>
             {
-
-            }, priority).FirstOrDefaultAsync();
-        }
-
-        /// <summary>
-        /// Sends a request to a scene that doesn't return data.
-        /// </summary>
-        /// <param name="peer">The target peer</param>
-        /// <param name="route">The target route</param>
-        /// <param name="parameter">The request parameter</param>
-        /// <param name="priority">The request's priority level</param>
-        /// <returns>A task completing on request completion</returns>
-        public static async Task SendVoidRequest(this IScenePeerClient peer, string route, object parameter, PacketPriority priority = PacketPriority.MEDIUM_PRIORITY)
-        {
-            await peer.Rpc(route, s =>
-            {
-                peer.Serializer().Serialize(parameter, s);
-            }, priority).FirstOrDefaultAsync();
-        }
-        /// <summary>
-        /// Sends a RPC to an host.
-        /// </summary>
-        /// <typeparam name="TOut">The type of the data returned by the request.</typeparam>
-        /// <param name="peer">The peer to send the request to</param>
-        /// <param name="route">The target route.</param>
-        /// <param name="parameter">The request parameter</param>
-        /// <param name="priority">The request's priority level</param>
-        /// <returns>An observable to subscribe to to get responses from the peer.</returns>
-        public static IObservable<TOut> SendRequest<TOut>(this IScenePeerClient peer, string route, object parameter, PacketPriority priority = PacketPriority.MEDIUM_PRIORITY)
-        {
-            return peer.Rpc(route, s =>
-            {
-                peer.Serializer().Serialize(parameter, s);
-            }, priority).Select(packet =>
-            {
-                var value = packet.Serializer().Deserialize<TOut>(packet.Stream);
+                var value = packet.Serializer().Deserialize<TData>(packet.Stream);
 
                 return value;
             });
         }
 
         /// <summary>
-        /// Sends a remote procedure call using raw binary data as input and output.
+        /// Sends an object to the target peer with the requested reliability and priority levels.
         /// </summary>
-        /// <param name="peer">The remote peer </param>
-        /// <param name="route">The target route</param>
-        /// <param name="writer">A writer method writing</param>
-        /// <param name="priority">The priority level used to send the request.</param>
-        /// <returns>An IObservable instance that provides return values for the request.</returns>
-        public static IObservable<Packet<IScenePeerClient>> Rpc(this IScenePeerClient peer, string route, Action<Stream> writer, PacketPriority priority = PacketPriority.MEDIUM_PRIORITY)
+        /// <typeparam name="TData">The type of object to send.</typeparam>
+        /// <param name="peer">The target peer.</param>
+        /// <param name="route">The target route on the scene peer.</param>
+        /// <param name="data">The data that will be serialized then sent.</param>
+        /// <param name="priority">The priority level.</param>
+        /// <param name="reliability">The reliability level.</param>
+        public static void Send<TData>(this IScenePeer peer, string route, TData data, PacketPriority priority = PacketPriority.HIGH_PRIORITY, PacketReliability reliability = PacketReliability.RELIABLE_ORDERED)
         {
-            var rpcService = peer.Host.GetComponent<Stormancer.Plugins.RpcService>();
-            if (rpcService == null)
+            peer.Send(route, s =>
             {
-                throw new NotSupportedException("RPC plugin not available.");
-            }
-            return rpcService.Rpc(route, peer, writer, priority);
+                peer.Serializer().Serialize(data, s);
+            }, priority, reliability);
         }
 
+        /// <summary>
+        /// Broadcasts an object to all clients
+        /// </summary>
+        /// <typeparam name="TData">The type of object to send.</typeparam>
+        /// <param name="scene">The scene on which to broadcast.</param>
+        /// <param name="route">The target route on the scene peers.</param>
+        /// <param name="data">The data that will be serialized then sent.</param>
+        /// <param name="priority">The priority level.</param>
+        /// <param name="reliability">The reliability level.</param>
+        /// <remarks>
+        /// This method uses the first peer's serializer to serialize the data. Do not use it if the peers connected to the scene use different serializers.
+        /// </remarks>
+        public static void BroadCast<TData>(this ISceneHost scene, string route, TData data, PacketPriority priority, PacketReliability reliability)
+        {
+            scene.Send(new MatchAllFilter(), route, s =>
+            {
+                var firstPeer = scene.RemotePeers.FirstOrDefault();
+                if (firstPeer != null)
+                {
+                    firstPeer.Serializer().Serialize(data, s);
+                }
+            }, priority, reliability);
+        }
 
         /// <summary>
-        /// Adds a procedure to the scene.
+        /// Listen to messages on the specified route, deserialize them and execute the given handler for eah of them.
         /// </summary>
-        /// <remarks>
-        /// Procedures provide an asynchronous request/response pattern on top of scenes using the RPC plugin. 
-        /// Procedures can be called by remote peers using the `rpc` method. They support multiple partial responses in a single request.
-        /// </remarks>
-        /// <param name="scene">The scene to add the procedure to.</param>
-        /// <param name="route">The route of the procedure</param>
-        /// <param name="handler">A method that implement the procedure logic</param>
-        /// <param name="ordered">True if order of the partial responses should be preserved when sent to the client, false otherwise.</param>
-        public static void AddProcedure(this ISceneHost scene, string route, Func<Stormancer.Plugins.RequestContext<IScenePeerClient>, Task> handler, bool ordered = true)
+        /// <typeparam name="T"></typeparam>
+        /// <param name="scene">The scene on which the route messages will be listened.</param>
+        /// <param name="route">The route to listen.</param>
+        /// <param name="handler">The handler to execute for each message on the route.</param>
+        /// <returns>An IDisposable object you can use to unregister the handler.</returns>
+        public static IDisposable AddRoute<T>(this ISceneHost scene, string route, Action<T> handler)
         {
-            var rpcService = scene.GetComponent<Stormancer.Plugins.RpcService>();
-            if(rpcService == null)
-            {
-                throw new NotSupportedException("RPC plugin not available.");
-            }
-            rpcService.AddProcedure(route, handler, ordered);
+            return scene.OnMessage<T>(route).Subscribe(handler);
+        }
+
+        /// <summary>
+        /// Listen to messages on the specified route, deserialize them and execute the given handler for eah of them. (Duplicate of AddRoute for compatibility)
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="scene">The scene on which the route messages will be listened.</param>
+        /// <param name="route">The route to listen.</param>
+        /// <param name="handler">The handler to execute for each message on the route.</param>
+        /// <returns>An IDisposable object you can use to unregister the handler.</returns>
+        /// <remarks>RegisterRoute is an alias to the AddRoute method.</remarks>
+        public static IDisposable RegisterRoute<T>(this ISceneHost scene, string route, Action<T> handler)
+        {
+            return scene.AddRoute(route, handler);
         }
 
         //public static void EnableClientLogs(this IScenePeerClient peer)

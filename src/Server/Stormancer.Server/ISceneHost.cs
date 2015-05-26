@@ -105,5 +105,11 @@ namespace Stormancer.Core
         /// <param name="runAction">The method that will be run on the thread pool.</param>
         void RunTask(Func<CancellationToken,Task> runAction);
 
+         /// <summary>
+        /// Creates an IObservable&lt;Packet&gt; instance that listen to events on the specified route.
+        /// </summary>
+        /// <param name="route">A string containing the name of the route to listen to.</param>
+        /// <returns type="IObservable&lt;Packet&gt;">An IObservable&lt;Packet&gt; instance that fires each time a message is received on the route. </returns>
+        IObservable<Packet<IScenePeer>> OnMessage(string route);
     }
 }

@@ -64,7 +64,7 @@ namespace Stormancer.Plugins
         /// On the client, code that subscribed to the observable returned by the request send method will receive the messages 
         /// sent through the `SendValue` method.
         /// </remarks>
-        public void SendValue(Action<Stream> writer, PacketPriority priority)
+        public void SendValue(Action<Stream> writer, PacketPriority priority = PacketPriority.MEDIUM_PRIORITY)
         {
             _scene.Send(new MatchPeerFilter(_peer),RpcHostPlugin.NextRouteName, s =>
             {

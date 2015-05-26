@@ -64,6 +64,7 @@
     <Compile Include="Components\IPeerInfosService.cs" />
     <Compile Include="DisconnectedArgs.cs" />
     <Compile Include="Extensions\PacketExtensions.cs" />
+    <Compile Include="Extensions\RpcSceneHostExtensions.cs" />
     <Compile Include="Extensions\SceneHostExtensions.cs" />
     <Compile Include="IAppBuilder.cs" />
     <Compile Include="IPeerFilter.cs" />
