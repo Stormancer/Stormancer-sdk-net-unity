@@ -61,6 +61,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\HostStatus.cs" />
+    <Compile Include="Components\IEnvironment.cs" />
     <Compile Include="Components\IPeerInfosService.cs" />
     <Compile Include="DisconnectedArgs.cs" />
     <Compile Include="Extensions\PacketExtensions.cs" />
