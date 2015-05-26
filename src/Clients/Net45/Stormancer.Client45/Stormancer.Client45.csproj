@@ -71,9 +71,6 @@
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\Server\Stormancer.Server\Plugins\ClientLogsPluginConstants.cs">
-      <Link>Plugins\ClientLogsPluginConstants.cs</Link>
-    </Compile>
     <Compile Include="ApiClient.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="Configuration\ClientConfiguration.cs" />
@@ -87,7 +84,6 @@
     <Compile Include="IPacketProcessor.cs" />
     <Compile Include="ITransport.cs" />
     <Compile Include="MessageIDTypes.cs" />
-    <Compile Include="Plugins\ClientLogsPlugin.cs" />
     <Compile Include="Plugins\IClientPlugin.cs" />
     <Compile Include="Extensions\Buffers.cs" />
     <Compile Include="Infrastructure\BSStream.cs" />
