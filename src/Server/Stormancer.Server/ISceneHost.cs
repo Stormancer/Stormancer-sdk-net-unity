@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Stormancer.Core
@@ -97,6 +98,12 @@ namespace Stormancer.Core
         /// A persistent scene can be restarted after hibernation (for inactivity for instance). When a non persistent scene is destroyed, it's completely deleted from the cluster.
         /// </remarks>
          bool IsPersistent { get;  }
+
+        /// <summary>
+        /// Runs an task on the thread pool whose lifecycle is linked with the scene.
+        /// </summary>
+        /// <param name="runAction">The method that will be run on the thread pool.</param>
+        void RunTask(Func<CancellationToken,Task> runAction);
 
     }
 }
