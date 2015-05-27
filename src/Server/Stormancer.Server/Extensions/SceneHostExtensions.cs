@@ -70,19 +70,17 @@ namespace Stormancer
         /// <param name="data">The data that will be serialized then sent.</param>
         /// <param name="priority">The priority level.</param>
         /// <param name="reliability">The reliability level.</param>
-        /// <remarks>
-        /// This method uses the first peer's serializer to serialize the data. Do not use it if the peers connected to the scene use different serializers.
-        /// </remarks>
         public static void BroadCast<TData>(this ISceneHost scene, string route, TData data, PacketPriority priority, PacketReliability reliability)
         {
-            scene.Send(new MatchAllFilter(), route, s =>
+            var peersBySerializer = scene.RemotePeers.ToLookup(peer => peer.Serializer().Name);
+
+            foreach(var group in peersBySerializer)
             {
-                var firstPeer = scene.RemotePeers.FirstOrDefault();
-                if (firstPeer != null)
-                {
-                    firstPeer.Serializer().Serialize(data, s);
-                }
-            }, priority, reliability);
+                scene.Send(new MatchArrayFilter(group), route, s =>
+                    {
+                        group.First().Serializer().Serialize(data, s);
+                    }, priority, reliability);
+            }
         }
 
         /// <summary>
