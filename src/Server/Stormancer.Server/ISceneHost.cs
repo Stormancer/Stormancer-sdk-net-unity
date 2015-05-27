@@ -100,10 +100,18 @@ namespace Stormancer.Core
          bool IsPersistent { get;  }
 
         /// <summary>
-        /// Runs an task on the thread pool whose lifecycle is linked with the scene.
+        /// Runs a task on the thread pool whose lifecycle is linked with the scene.
         /// </summary>
         /// <param name="runAction">The method that will be run on the thread pool.</param>
-        void RunTask(Func<CancellationToken,Task> runAction);
+        /// <remarks>The task will be forcibly stopped (with a `TaskCancelledException`) as soon as the scene closes.</remarks>
+         Task RunTask(Func<Task> runAction);
+
+        /// <summary>
+        /// Runs a task on the thread pool whose lifecycle is linked with the scene.
+        /// </summary>
+        /// <param name="runAction">The method that will be run on the thread pool.</param>
+        /// <remarks>The cancelation token provided to the task factory will be cancelled as soon as the scene closes. If it does not stop on its own then, the task will be forcibly stopped (with a `TaskCancelleException`) after 30s.</remarks>
+        Task RunTask(Func<CancellationToken,Task> runAction);
 
          /// <summary>
         /// Creates an IObservable&lt;Packet&gt; instance that listen to events on the specified route.
