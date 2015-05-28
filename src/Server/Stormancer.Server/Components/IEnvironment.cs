@@ -18,9 +18,27 @@ namespace Stormancer.Server.Components
         Task<ApplicationInfos> GetApplicationInfos();
 
         /// <summary>
+        /// A boolean value indicating if the running environment is currently the active deployment.
+        /// </summary>
+        bool IsActive { get; }
+
+        /// <summary>
         /// Event fired when the active deployment change.
         /// </summary>
         event EventHandler<ActiveDeploymentChangedEventArgs> ActiveDeploymentChanged;
+
+        /// <summary>
+        /// Returns a dynamic object containing the configuration of the application.
+        /// </summary>
+        /// <returns></returns>
+        dynamic Configuration { get; }
+
+
+        /// <summary>
+        /// Event fired when the application's configuration is updated.
+        /// </summary>
+        event EventHandler<EventArgs> ConfigurationChanged;
+
 
     }
 
@@ -38,5 +56,7 @@ namespace Stormancer.Server.Components
         /// A string containing the id of the active deployment.
         /// </summary>
         public string ActiveDeploymentId{get;set;}
+
+     
     }
 }

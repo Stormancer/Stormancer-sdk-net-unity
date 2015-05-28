@@ -11,9 +11,9 @@ namespace Stormancer.Server.Components
     public class ApplicationInfos
     {
         /// <summary>
-        /// A boolean value indicating whether the current host is the active deployment.
+        /// Id of the active deployment for the application
         /// </summary>
-        public bool IsActiveDeployment { get; set; }
+        public string ActiveDeployment { get; set; }
 
         /// <summary>
         /// A string containing the id of the current deployment.
