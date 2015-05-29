@@ -61,8 +61,5 @@ namespace Stormancer
                 }
             }
         }
-
-
-
     }
 }

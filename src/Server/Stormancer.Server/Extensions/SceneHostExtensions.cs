@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Reactive.Linq;
+using Newtonsoft.Json;
 namespace Stormancer
 {
     /// <summary>
@@ -70,11 +71,11 @@ namespace Stormancer
         /// <param name="data">The data that will be serialized then sent.</param>
         /// <param name="priority">The priority level.</param>
         /// <param name="reliability">The reliability level.</param>
-        public static void BroadCast<TData>(this ISceneHost scene, string route, TData data, PacketPriority priority, PacketReliability reliability)
+        public static void Broadcast<TData>(this ISceneHost scene, string route, TData data, PacketPriority priority = PacketPriority.HIGH_PRIORITY, PacketReliability reliability = PacketReliability.RELIABLE_ORDERED)
         {
             var peersBySerializer = scene.RemotePeers.ToLookup(peer => peer.Serializer().Name);
 
-            foreach(var group in peersBySerializer)
+            foreach (var group in peersBySerializer)
             {
                 scene.Send(new MatchArrayFilter(group), route, s =>
                     {
@@ -108,6 +109,34 @@ namespace Stormancer
         public static IDisposable RegisterRoute<T>(this ISceneHost scene, string route, Action<T> handler)
         {
             return scene.AddRoute(route, handler);
+        }
+        /// <summary>
+        /// Deserializes user data using the relevant serializer
+        /// </summary>
+        /// <typeparam name="T">The type to deserialize to.</typeparam>
+        /// <param name="client">The scene peer client whose user data will be read from.</param>
+        /// <returns>The deserialized user data.</returns>
+        public static T GetUserData<T>(this IScenePeerClient client)
+        {
+            using (var userDataStream = new MemoryStream(client.UserData))
+            {
+
+                if (client.ContentType == "application/json")
+                {
+                    var serializer = new JsonSerializer();
+                    using (var sr = new StreamReader(userDataStream))
+                    {
+                        using (var jsonTextReader = new JsonTextReader(sr))
+                        {
+                            return serializer.Deserialize<T>(jsonTextReader);
+                        }
+                    }
+                }
+                else
+                {
+                    return client.Serializer().Deserialize<T>(userDataStream);
+                }
+            }
         }
 
         //public static void EnableClientLogs(this IScenePeerClient peer)
