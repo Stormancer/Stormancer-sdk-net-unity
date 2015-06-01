@@ -26,7 +26,11 @@ namespace Stormancer
 
         private long position;
 
+        public SubStream(Stream parent, bool closesParent)
+            : this(parent, parent.Length - parent.Position, closesParent)
+        {
 
+        }
 
         public SubStream(Stream parent, long length, bool closesParent)
         {

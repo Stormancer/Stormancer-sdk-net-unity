@@ -34,13 +34,22 @@ namespace Stormancer.Plugins
             }
         }
 
-        internal RequestContext(T peer, Scene scene, ushort id, bool ordered)
+        /// <summary>
+        /// Stream instance containing the binary data sent with the request.
+        /// </summary>
+        public Stream InputStream
         {
-            // TODO: Complete member initialization
+            get;
+            private set;
+        }
+
+        internal RequestContext(T peer, Scene scene, ushort id, bool ordered, Stream inputStream)
+        {
             this._scene = scene;
             this.id = id;
             this._ordered = ordered;
             this._peer = peer;
+            this.InputStream = inputStream;
         }
 
         private void WriteRequestId(Stream s)

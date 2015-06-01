@@ -140,8 +140,8 @@ namespace Stormancer.Plugins
                     var buffer = new byte[2];
                     p.Stream.Read(buffer, 0, 2);
                     var id = BitConverter.ToUInt16(buffer, 0);
-
-                    var ctx = new RequestContext<IScenePeer>(p.Connection, _scene, id, ordered);
+                    
+                    var ctx = new RequestContext<IScenePeer>(p.Connection, _scene, id, ordered, new SubStream(p.Stream, false));
 
                     handler(ctx).ContinueWith(t =>
                     {

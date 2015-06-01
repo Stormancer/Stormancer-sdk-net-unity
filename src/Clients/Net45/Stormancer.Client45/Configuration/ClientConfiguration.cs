@@ -129,6 +129,12 @@ namespace Stormancer
         /// </summary>
         public ushort MaxPeers { get; set; }
 
+        /// <summary>
+        /// The logger that will be used to log Stormancer's messages.
+        /// </summary>
+        /// <remarks>
+        /// The default value is NullLogger.Instance, a logger that discards every message.
+        /// </remarks>
         public ILogger Logger { get; set; }
 
         /// <summary>

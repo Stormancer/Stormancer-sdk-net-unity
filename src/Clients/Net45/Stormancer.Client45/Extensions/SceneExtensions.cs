@@ -34,7 +34,7 @@ namespace Stormancer
         }
 
 
-       
+
         /// <summary>
         /// Sends a request to a scene without expecting a response
         /// </summary>
@@ -56,13 +56,14 @@ namespace Stormancer
         /// <summary>
         /// Sends a request to a scene that doesn't return data.
         /// </summary>
+        /// <typeparam name="TData">The type of parameter to send.</typeparam>
         /// <param name="scene">The target scene.</param>
         /// <param name="route">The name of the route used to send the request.</param>
         /// <param name="parameter">A parameter object that will be sent as content of the request.</param>
         /// <param name="priority">An optional priority level for the request.</param>
         /// <returns>A task completing with the request.</returns>
         /// <remarks>Uses the RPC plugin</remarks>
-        public static async Task SendVoidRequest(this Scene scene, string route, object parameter, PacketPriority priority = PacketPriority.MEDIUM_PRIORITY)
+        public static async Task SendVoidRequest<TData>(this Scene scene, string route, TData parameter, PacketPriority priority = PacketPriority.MEDIUM_PRIORITY)
         {
             await scene.Rpc(route, s =>
             {
@@ -72,20 +73,21 @@ namespace Stormancer
         /// <summary>
         /// Sends a RPC to a scene host.
         /// </summary>
-        /// <typeparam name="TOut">The type of the data returned by the request.</typeparam>
+        /// <typeparam name="TData">The type of parameter to send.</typeparam>
+        /// <typeparam name="TResponse">The type of the data returned by the request.</typeparam>
         /// <param name="scene">The target scene.</param>
         /// <param name="route">The target route.</param>
         /// <param name="priority">The request priority. Only applies to the request, not the response.</param>
         /// <param name="parameter">The request parameter</param>
         /// <returns>A task completing with the request.</returns>
-        public static IObservable<TOut> SendRequest<TOut>(this Scene scene, string route, object parameter, PacketPriority priority = PacketPriority.MEDIUM_PRIORITY)
+        public static IObservable<TResponse> SendRequest<TData, TResponse>(this Scene scene, string route, TData parameter, PacketPriority priority = PacketPriority.MEDIUM_PRIORITY)
         {
             return scene.Rpc(route, s =>
             {
                 scene.Host.Serializer().Serialize(parameter, s);
             }, priority).Select(packet =>
             {
-                var value = packet.Serializer().Deserialize<TOut>(packet.Stream);
+                var value = packet.Serializer().Deserialize<TResponse>(packet.Stream);
 
                 return value;
             });
@@ -186,13 +188,13 @@ namespace Stormancer
         /// <summary>
         /// Sends an object to the target scene with the requested reliability and priority levels.
         /// </summary>
-        /// <typeparam name="T">The type of the parameter object.</typeparam>
+        /// <typeparam name="TData">The type of the parameter object.</typeparam>
         /// <param name="scene">The target scene.</param>
         /// <param name="route">The target route on the scene.</param>
         /// <param name="data">The data that will be serialized then sent.</param>
         /// <param name="priority">The priority level.</param>
         /// <param name="reliability">The reliability level</param>
-        public static void Send<T>(this Scene scene, string route, T data, PacketPriority priority = PacketPriority.HIGH_PRIORITY, PacketReliability reliability = PacketReliability.RELIABLE_ORDERED)
+        public static void Send<TData>(this Scene scene, string route, TData data, PacketPriority priority = PacketPriority.HIGH_PRIORITY, PacketReliability reliability = PacketReliability.RELIABLE_ORDERED)
         {
             scene.Host.Send(route, s =>
             {
@@ -203,26 +205,26 @@ namespace Stormancer
         /// <summary>
         /// Listen to messages on the specified route, deserialize them and execute the given handler for eah of them.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TData"></typeparam>
         /// <param name="scene">The remote scene proxy on which the route messages will be listened.</param>
         /// <param name="route">The route to listen.</param>
         /// <param name="handler">The handler to execute for each message on the route.</param>
         /// <returns>An IDisposable object you can use to unregister the handler.</returns>
-        public static IDisposable AddRoute<T>(this Scene scene, string route, Action<T> handler)
+        public static IDisposable AddRoute<TData>(this Scene scene, string route, Action<TData> handler)
         {
-            return scene.OnMessage<T>(route).Subscribe(handler);
+            return scene.OnMessage<TData>(route).Subscribe(handler);
         }
 
         /// <summary>
         /// Listen to messages on the specified route, deserialize them and execute the given handler for eah of them. (Duplicate of AddRoute for compatibility)
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TData"></typeparam>
         /// <param name="scene">The remote scene proxy on which the route messages will be listened.</param>
         /// <param name="route">The route to listen.</param>
         /// <param name="handler">The handler to execute for each message on the route.</param>
         /// <returns>An IDisposable object you can use to unregister the handler.</returns>
         /// <remarks>RegisterRoute is an alias to the AddRoute method.</remarks>
-        public static IDisposable RegisterRoute<T>(this Scene scene, string route, Action<T> handler)
+        public static IDisposable RegisterRoute<TData>(this Scene scene, string route, Action<TData> handler)
         {
             return scene.AddRoute(route, handler);
         }
@@ -238,7 +240,7 @@ namespace Stormancer
         /// <param name="route">The route of the procedure</param>
         /// <param name="handler">A method that implement the procedure logic</param>
         /// <param name="ordered">True if order of the partial responses should be preserved when sent to the client, false otherwise.</param>
-        public static void AddProcedure(this Scene scene, string route, Func<Stormancer.Plugins.RequestContext<IScenePeer>, Task> handler,bool ordered = true)
+        public static void AddProcedure(this Scene scene, string route, Func<Stormancer.Plugins.RequestContext<IScenePeer>, Task> handler, bool ordered = true)
         {
             var rpcService = scene.GetComponent<Stormancer.Plugins.RpcClientPlugin.RpcService>();
             if (rpcService == null)
@@ -246,6 +248,34 @@ namespace Stormancer
                 throw new NotSupportedException("RPC plugin not available.");
             }
             rpcService.AddProcedure(route, handler, ordered);
+        }
+
+                /// <summary>
+        /// Reads the message from the request.
+        /// </summary>
+        /// <typeparam name="TData">The expected type of the data.</typeparam>
+        /// <param name="context">The request context to read from.</param>
+        /// <returns>The deserialized data.</returns>
+        /// <remarks>ReadObject will yield you a new object every time you call it. If the request only contains a single object, make sure to call it only once.</remarks>
+        public static TData ReadObject<TData>(this Stormancer.Plugins.RequestContext<IScenePeer> context)
+        {
+            var serializer = context.RemotePeer.Serializer();
+            return serializer.Deserialize<TData>(context.InputStream);
+        }
+
+        /// <summary>
+        /// Sends an object as a response to a request.
+        /// </summary>
+        /// <typeparam name="TData">The type of object to send as a response.</typeparam>
+        /// <param name="context">The request context to respond to.</param>
+        /// <param name="data">The data to send as a response.</param>
+        /// <param name="priority">The priority of the response.</param>
+        public static void SendValue<TData>(this Stormancer.Plugins.RequestContext<IScenePeer> context, TData data, PacketPriority priority = PacketPriority.MEDIUM_PRIORITY)
+        {
+            context.SendValue(s =>
+            {
+                context.RemotePeer.Serializer().Serialize(data, s);
+            }, priority);
         }
     }
 }

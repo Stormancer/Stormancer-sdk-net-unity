@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Stormancer.Core
@@ -98,5 +99,25 @@ namespace Stormancer.Core
         /// </remarks>
          bool IsPersistent { get;  }
 
+        /// <summary>
+        /// Runs a task on the thread pool whose lifecycle is linked with the scene.
+        /// </summary>
+        /// <param name="runAction">The method that will be run on the thread pool.</param>
+        /// <remarks>The task will be forcibly stopped (with a `TaskCancelledException`) as soon as the scene closes.</remarks>
+         Task RunTask(Func<Task> runAction);
+
+        /// <summary>
+        /// Runs a task on the thread pool whose lifecycle is linked with the scene.
+        /// </summary>
+        /// <param name="runAction">The method that will be run on the thread pool.</param>
+        /// <remarks>The cancelation token provided to the task factory will be cancelled as soon as the scene closes. If it does not stop on its own then, the task will be forcibly stopped (with a `TaskCancelleException`) after 30s.</remarks>
+        Task RunTask(Func<CancellationToken,Task> runAction);
+
+         /// <summary>
+        /// Creates an IObservable&lt;Packet&gt; instance that listen to events on the specified route.
+        /// </summary>
+        /// <param name="route">A string containing the name of the route to listen to.</param>
+        /// <returns type="IObservable&lt;Packet&gt;">An IObservable&lt;Packet&gt; instance that fires each time a message is received on the route. </returns>
+        IObservable<Packet<IScenePeerClient>> OnMessage(string route);
     }
 }
