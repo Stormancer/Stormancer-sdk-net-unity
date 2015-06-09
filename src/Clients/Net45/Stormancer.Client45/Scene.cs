@@ -200,7 +200,7 @@ namespace Stormancer
             Route routeObj;
             if (!_remoteRoutesMap.TryGetValue(route, out routeObj))
             {
-                throw new ArgumentException("The route doesn't exist on the scene.");
+                throw new ArgumentException(string.Format("The route '{0}' does not exist on the remote scene.", route));
             }
 
             _peer.SendToScene(this.Handle, routeObj.Handle, writer, priority, reliability);//.SendPacket(routeObj, writer, priority, reliability, channel);

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Stormancer.Plugins
@@ -43,15 +44,24 @@ namespace Stormancer.Plugins
             private set;
         }
 
-        internal RequestContext(T peer, Scene scene, ushort id, bool ordered, Stream inputStream)
+        internal RequestContext(T peer, Scene scene, ushort id, bool ordered, Stream inputStream, CancellationToken token)
         {
             this._scene = scene;
             this.id = id;
             this._ordered = ordered;
             this._peer = peer;
             this.InputStream = inputStream;
+            CancellationToken = token;
         }
 
+        /// <summary>
+        /// A Token that gets cancelled if the client cancels the RPC.
+        /// </summary>
+        public CancellationToken CancellationToken
+        {
+            get;
+            private set;
+        }
         private void WriteRequestId(Stream s)
         {
             s.Write(BitConverter.GetBytes(id), 0, 2);

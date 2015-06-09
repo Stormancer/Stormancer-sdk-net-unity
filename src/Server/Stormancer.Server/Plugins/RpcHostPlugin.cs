@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Stormancer.Plugins
@@ -18,7 +19,9 @@ namespace Stormancer.Plugins
         internal const string NextRouteName = "stormancer.rpc.next";
         internal const string ErrorRouteName = "stormancer.rpc.error";
         internal const string CompletedRouteName = "stormancer.rpc.completed";
-        internal const string Version = "1.0.0";
+        internal const string CancellationRouteName = "stormancer.rpc.cancel";
+
+        internal const string Version = "1.1.0";
         internal const string PluginName = "stormancer.plugins.rpc";
 
         /// <summary>
@@ -36,6 +39,10 @@ namespace Stormancer.Plugins
                 scene.AddRoute(NextRouteName, p =>
                 {
                     processor.Next(p);
+                });
+                scene.AddRoute(CancellationRouteName, p =>
+                {
+                    processor.Cancel(p);
                 });
                 scene.AddRoute(ErrorRouteName, p =>
                 {
@@ -70,6 +77,7 @@ namespace Stormancer.Plugins
         }
         private readonly object _lock = new object();
         private readonly ConcurrentDictionary<ushort, Request> _pendingRequests = new ConcurrentDictionary<ushort, Request>();
+        private ConcurrentDictionary<uint, CancellationTokenSource> _runningRequests = new ConcurrentDictionary<uint, CancellationTokenSource>();
         private readonly ISceneHost _scene;
 
         internal RpcService(ISceneHost scene)
@@ -115,6 +123,12 @@ namespace Stormancer.Plugins
 
                     return () =>
                     {
+
+                        _scene.Send(new MatchPeerFilter(peer), RpcHostPlugin.CancellationRouteName, s =>
+                        {
+                            s.Write(BitConverter.GetBytes(id), 0, 2);
+                        }, priority, PacketReliability.RELIABLE_ORDERED);
+
                         _pendingRequests.TryRemove(id, out rq);
 
                     };
@@ -148,25 +162,28 @@ namespace Stormancer.Plugins
                 var buffer = new byte[2];
                 p.Stream.Read(buffer, 0, 2);
                 var id = BitConverter.ToUInt16(buffer, 0);
-
-                var ctx = new RequestContext<IScenePeerClient>(p.Connection, _scene, id, ordered, new SubStream(p.Stream, false));
-
-                handler(ctx).ContinueWith(t =>
+                var cts = new CancellationTokenSource();
+                var ctx = new RequestContext<IScenePeerClient>(p.Connection, _scene, id, ordered, new SubStream(p.Stream, false), cts.Token);
+                if (_runningRequests.TryAdd(id, cts))
                 {
-                    if (t.IsCompleted)
+                    handler(ctx).ContinueWith(t =>
                     {
-                        ctx.SendCompleted();
-                    }
-                    else
-                    {
-                        var ex = t.Exception.InnerExceptions.OfType<ClientException>();
-                        if (ex.Any())
+                        _runningRequests.TryRemove(id, out cts);
+                        if (t.IsCompleted)
                         {
-                            ctx.SendError(string.Join("|", ex.Select(e => e.Message)));
+                            ctx.SendCompleted();
                         }
-                    }
+                        else
+                        {
+                            var ex = t.Exception.InnerExceptions.OfType<ClientException>();
+                            if (ex.Any())
+                            {
+                                ctx.SendError(string.Join("|", ex.Select(e => e.Message)));
+                            }
+                        }
 
-                });
+                    });
+                }
             }, new Dictionary<string, string> { { "stormancer.plugins.rpc", "1.0.0" } });
         }
         private ushort ReserveId()
@@ -244,6 +261,18 @@ namespace Stormancer.Plugins
                     rq.Observer.OnCompleted();
                 }
 
+            }
+        }
+
+        internal void Cancel(Packet<IScenePeerClient> p)
+        {
+            var buffer = new byte[2];
+            p.Stream.Read(buffer, 0, 2);
+            var id = BitConverter.ToUInt16(buffer, 0);
+            CancellationTokenSource cts;
+            if (_runningRequests.TryGetValue(id, out cts))
+            {
+                cts.Cancel();
             }
         }
     }
