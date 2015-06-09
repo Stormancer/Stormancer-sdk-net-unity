@@ -53,6 +53,8 @@ namespace Stormancer.Plugins
                     processor.Complete(p);
                 });
 
+                scene.Disconnected.Add(processor.PeerDisconnected);
+
 
             };
         }
@@ -78,6 +80,8 @@ namespace Stormancer.Plugins
         private readonly object _lock = new object();
         private readonly ConcurrentDictionary<ushort, Request> _pendingRequests = new ConcurrentDictionary<ushort, Request>();
         private ConcurrentDictionary<uint, CancellationTokenSource> _runningRequests = new ConcurrentDictionary<uint, CancellationTokenSource>();
+        private ConcurrentDictionary<long, CancellationTokenSource> _peersCts = new ConcurrentDictionary<long, CancellationTokenSource>();
+
         private readonly ISceneHost _scene;
 
         internal RpcService(ISceneHost scene)
@@ -159,16 +163,22 @@ namespace Stormancer.Plugins
         {
             this._scene.AddRoute(route, p =>
             {
+
                 var buffer = new byte[2];
                 p.Stream.Read(buffer, 0, 2);
                 var id = BitConverter.ToUInt16(buffer, 0);
-                var cts = new CancellationTokenSource();
+                
+                CancellationTokenSource peerCts = _peersCts.GetOrAdd(p.Connection.Id, _ => new CancellationTokenSource());
+
+                var cts = CancellationTokenSource.CreateLinkedTokenSource(peerCts.Token);
+
                 var ctx = new RequestContext<IScenePeerClient>(p.Connection, _scene, id, ordered, new SubStream(p.Stream, false), cts.Token);
                 if (_runningRequests.TryAdd(id, cts))
                 {
                     handler(ctx).ContinueWith(t =>
                     {
                         _runningRequests.TryRemove(id, out cts);
+
                         if (t.IsCompleted)
                         {
                             ctx.SendCompleted();
@@ -274,6 +284,16 @@ namespace Stormancer.Plugins
             {
                 cts.Cancel();
             }
+        }
+
+        internal Task PeerDisconnected(DisconnectedArgs arg)
+        {
+            CancellationTokenSource cts;
+            if (_peersCts.TryRemove(arg.Peer.Id, out cts))
+            {
+                cts.Cancel();
+            }
+            return Task.FromResult(true);
         }
     }
 }

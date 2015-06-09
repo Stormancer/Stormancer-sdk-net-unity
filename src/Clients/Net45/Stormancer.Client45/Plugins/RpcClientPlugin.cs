@@ -23,6 +23,7 @@ namespace Stormancer.Plugins
         internal const string PluginName = "stormancer.plugins.rpc";
         public void Build(PluginBuildContext ctx)
         {
+            
             ctx.SceneCreated += scene =>
             {
                 var rpcParams = scene.GetHostMetadata(PluginName);
@@ -48,8 +49,14 @@ namespace Stormancer.Plugins
                     {
                         processor.Complete(p);
                     });
+                    
 
                 }
+            };
+            ctx.SceneDisconnected += scene =>
+            {
+                var processor = scene.GetComponent<RpcService>();
+                processor.Disconnected();
             };
         }
 
@@ -74,6 +81,8 @@ namespace Stormancer.Plugins
             private readonly object _lock = new object();
             private readonly ConcurrentDictionary<ushort, Request> _pendingRequests = new ConcurrentDictionary<ushort, Request>();
             private ConcurrentDictionary<uint, CancellationTokenSource> _runningRequests = new ConcurrentDictionary<uint, CancellationTokenSource>();
+            private ConcurrentDictionary<long, CancellationTokenSource> _peersCts = new ConcurrentDictionary<long, CancellationTokenSource>();
+
             private readonly Scene _scene;
 
             internal RpcService(Scene scene, bool supportsCancellation)
@@ -272,6 +281,14 @@ namespace Stormancer.Plugins
                 if (_runningRequests.TryGetValue(id, out cts))
                 {
                     cts.Cancel();
+                }
+            }
+
+            internal void Disconnected()
+            {
+                foreach(var cts in _runningRequests)
+                {
+                    cts.Value.Cancel();
                 }
             }
         }
