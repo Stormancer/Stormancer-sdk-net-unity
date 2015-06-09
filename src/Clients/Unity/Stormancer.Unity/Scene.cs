@@ -131,7 +131,6 @@ namespace Stormancer
             }
 
             OnMessage(route).Subscribe(handler);
-
         }
 
         public IObservable<Packet<IScenePeer>> OnMessage(Route route)
@@ -139,7 +138,6 @@ namespace Stormancer
            // var index = route.Handle;
             var observable = Observable.Create<Packet<IScenePeer>>(observer =>
             {
-
                 Action<Packet> action = (data) =>
                 {
                     var packet = new Packet<IScenePeer>(Host, data.Stream, data.Metadata);
@@ -154,6 +152,7 @@ namespace Stormancer
             });
             return observable;
         }
+
         /// <summary>
         /// Creates an IObservable&lt;Packet&gt; instance that listen to events on the specified route.
         /// </summary>

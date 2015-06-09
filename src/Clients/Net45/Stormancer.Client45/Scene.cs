@@ -301,6 +301,7 @@ namespace Stormancer
             }
         }
 
+        private IScenePeer _host;
         /// <summary>
         /// An `IScenePeer` object that represents the scene host.
         /// </summary>
@@ -308,7 +309,11 @@ namespace Stormancer
         {
             get
             {
-                return new ScenePeer(_peer, _handle, _remoteRoutesMap, this);
+                if (_host == null)
+                {
+                    _host = new ScenePeer(_peer, _handle, _remoteRoutesMap, this);
+                }
+                return _host;
             }
         }
 

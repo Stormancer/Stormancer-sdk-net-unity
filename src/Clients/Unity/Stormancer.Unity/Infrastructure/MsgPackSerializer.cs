@@ -47,7 +47,6 @@ namespace Stormancer.Client45.Infrastructure
             return serializer.UnpackFrom(unpacker);
         }
 
-
         protected virtual SerializationContext GetSerializationContext()
         {
             var ctx = new MsgPack.Serialization.SerializationContext();
@@ -63,8 +62,6 @@ namespace Stormancer.Client45.Infrastructure
         {
             get { return "msgpack/array"; }
         }
-
-
     }
 
     public class MsgPackLambdaTypeSerializer<T> : MessagePackSerializer<T>
@@ -92,6 +89,4 @@ namespace Stormancer.Client45.Infrastructure
     {
         void OnCreatingSerializationContext(SerializationContext ctx);
     }
-
-
 }
