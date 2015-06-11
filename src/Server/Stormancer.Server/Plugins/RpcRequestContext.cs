@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Stormancer.Plugins
@@ -39,9 +40,9 @@ namespace Stormancer.Plugins
             private set;
         }
 
-        internal RequestContext(T peer, ISceneHost scene, ushort id, bool ordered, Stream inputStream)
+        internal RequestContext(T peer, ISceneHost scene, ushort id, bool ordered, Stream inputStream,CancellationToken token)
         {
-           
+            CancellationToken = token;
             this._scene = scene;
             this.id = id;
             this._ordered = ordered;
@@ -54,6 +55,14 @@ namespace Stormancer.Plugins
             s.Write(BitConverter.GetBytes(id), 0, 2);
         }
 
+        /// <summary>
+        /// Cancellation token cancelled if the remote peer cancels the RPC subscription.
+        /// </summary>
+        public CancellationToken CancellationToken
+        {
+            get;
+            private set;
+        }
         /// <summary>
         /// Sends a partial response to the client through the request channel
         /// </summary>

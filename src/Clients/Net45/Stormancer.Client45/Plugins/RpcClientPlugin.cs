@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Stormancer.Plugins
@@ -16,22 +17,30 @@ namespace Stormancer.Plugins
         internal const string NextRouteName = "stormancer.rpc.next";
         internal const string ErrorRouteName = "stormancer.rpc.error";
         internal const string CompletedRouteName = "stormancer.rpc.completed";
-        internal const string Version = "1.0.0";
+        internal const string CancellationRouteName = "stormancer.rpc.cancel";
+
+        internal const string Version = "1.1.0";
         internal const string PluginName = "stormancer.plugins.rpc";
         public void Build(PluginBuildContext ctx)
         {
+            
             ctx.SceneCreated += scene =>
             {
                 var rpcParams = scene.GetHostMetadata(PluginName);
 
-                if (rpcParams == Version)
+                if (rpcParams != null)
                 {
-                    var processor = new RpcService(scene);
+                    var supportsCancellation = new Version(rpcParams) > new Version(Version);
+                    var processor = new RpcService(scene, supportsCancellation);
                     scene.RegisterComponent(() => processor);
                     scene.AddRoute(NextRouteName, p =>
                     {
                         processor.Next(p);
                     });
+                    scene.AddRoute(CancellationRouteName, p =>
+                        {
+                            processor.Cancel(p);
+                        });
                     scene.AddRoute(ErrorRouteName, p =>
                     {
                         processor.Error(p);
@@ -40,8 +49,14 @@ namespace Stormancer.Plugins
                     {
                         processor.Complete(p);
                     });
+                    
 
                 }
+            };
+            ctx.SceneDisconnected += scene =>
+            {
+                var processor = scene.GetComponent<RpcService>();
+                processor.Disconnected();
             };
         }
 
@@ -62,13 +77,18 @@ namespace Stormancer.Plugins
                 public int ReceivedMsg;
                 public TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
             }
+            private bool _supportsCancellation;
             private readonly object _lock = new object();
             private readonly ConcurrentDictionary<ushort, Request> _pendingRequests = new ConcurrentDictionary<ushort, Request>();
+            private ConcurrentDictionary<uint, CancellationTokenSource> _runningRequests = new ConcurrentDictionary<uint, CancellationTokenSource>();
+            private ConcurrentDictionary<long, CancellationTokenSource> _peersCts = new ConcurrentDictionary<long, CancellationTokenSource>();
+
             private readonly Scene _scene;
 
-            internal RpcService(Scene scene)
+            internal RpcService(Scene scene, bool supportsCancellation)
             {
                 _scene = scene;
+                _supportsCancellation = true;
             }
             /// <summary>
             /// Starts a RPC to the scene host.
@@ -107,8 +127,15 @@ namespace Stormancer.Plugins
 
                         return () =>
                         {
-                            _pendingRequests.TryRemove(id, out rq);
+                            if (_supportsCancellation)
+                            {
+                                _scene.SendPacket(CancellationRouteName, s =>
+                                    {
+                                        s.Write(BitConverter.GetBytes(id), 0, 2);
+                                    });
 
+                                _pendingRequests.TryRemove(id, out rq);
+                            }
                         };
                     });
             }
@@ -123,7 +150,6 @@ namespace Stormancer.Plugins
                     return (ushort)_pendingRequests.Count;
                 }
             }
-
             /// <summary>
             /// Adds a procedure that can be called by remote peer to the scene.
             /// </summary>
@@ -140,26 +166,30 @@ namespace Stormancer.Plugins
                     var buffer = new byte[2];
                     p.Stream.Read(buffer, 0, 2);
                     var id = BitConverter.ToUInt16(buffer, 0);
-                    
-                    var ctx = new RequestContext<IScenePeer>(p.Connection, _scene, id, ordered, new SubStream(p.Stream, false));
-
-                    handler(ctx).ContinueWith(t =>
+                    var cts = new CancellationTokenSource();
+                    var ctx = new RequestContext<IScenePeer>(p.Connection, _scene, id, ordered, new SubStream(p.Stream, false), cts.Token);
+                    if (_runningRequests.TryAdd(id, cts))
                     {
-                        if (t.IsCompleted)
+                        handler(ctx).ContinueWith(t =>
                         {
-                            ctx.SendCompleted();
-                        }
-                        else
-                        {
-                            var ex = t.Exception.InnerExceptions.OfType<ClientException>();
-                            if (ex.Any())
+                            _runningRequests.TryRemove(id, out cts);
+                            if (t.IsCompleted)
                             {
-                                ctx.SendError(string.Join("|", ex.Select(e => e.Message)));
+                                ctx.SendCompleted();
                             }
-                        }
+                            else
+                            {
+                                var ex = t.Exception.InnerExceptions.OfType<ClientException>();
+                                if (ex.Any())
+                                {
+                                    ctx.SendError(string.Join("|", ex.Select(e => e.Message)));
+                                }
+                            }
 
-                    });
+                        });
+                    }
                 }, new Dictionary<string, string> { { "stormancer.plugins.rpc", "1.0.0" } });
+
             }
             private ushort ReserveId()
             {
@@ -229,7 +259,8 @@ namespace Stormancer.Plugins
                 {
                     if (messageSent)
                     {
-                        rq.tcs.Task.ContinueWith(t => {
+                        rq.tcs.Task.ContinueWith(t =>
+                        {
                             rq.Observer.OnCompleted();
                         });
                     }
@@ -238,6 +269,26 @@ namespace Stormancer.Plugins
                         rq.Observer.OnCompleted();
                     }
 
+                }
+            }
+
+            internal void Cancel(Packet<IScenePeer> p)
+            {
+                var buffer = new byte[2];
+                p.Stream.Read(buffer, 0, 2);
+                var id = BitConverter.ToUInt16(buffer, 0);
+                CancellationTokenSource cts;
+                if (_runningRequests.TryGetValue(id, out cts))
+                {
+                    cts.Cancel();
+                }
+            }
+
+            internal void Disconnected()
+            {
+                foreach(var cts in _runningRequests)
+                {
+                    cts.Value.Cancel();
                 }
             }
         }

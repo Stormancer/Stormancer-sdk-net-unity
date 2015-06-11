@@ -200,7 +200,7 @@ namespace Stormancer
             Route routeObj;
             if (!_remoteRoutesMap.TryGetValue(route, out routeObj))
             {
-                throw new ArgumentException("The route doesn't exist on the scene.");
+                throw new ArgumentException(string.Format("The route '{0}' does not exist on the remote scene.", route));
             }
 
             _peer.SendToScene(this.Handle, routeObj.Handle, writer, priority, reliability);//.SendPacket(routeObj, writer, priority, reliability, channel);
@@ -301,6 +301,7 @@ namespace Stormancer
             }
         }
 
+        private IScenePeer _host;
         /// <summary>
         /// An `IScenePeer` object that represents the scene host.
         /// </summary>
@@ -308,7 +309,11 @@ namespace Stormancer
         {
             get
             {
-                return new ScenePeer(_peer, _handle, _remoteRoutesMap, this);
+                if (_host == null)
+                {
+                    _host = new ScenePeer(_peer, _handle, _remoteRoutesMap, this);
+                }
+                return _host;
             }
         }
 
