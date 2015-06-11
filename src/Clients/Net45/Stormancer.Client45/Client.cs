@@ -256,7 +256,10 @@ namespace Stormancer
             await UpdateServerMetadata();
             var scene = new Scene(this._serverConnection, this, sceneId, ci.Token, result);
 
-            _pluginCtx.SceneCreated(scene);
+            if (_pluginCtx.SceneCreated != null)
+            {
+                _pluginCtx.SceneCreated(scene);
+            }
             return scene;
 
 
@@ -303,7 +306,9 @@ namespace Stormancer
             //});
 
             if (_pluginCtx.SceneConnected != null)
+            {
                 _pluginCtx.SceneConnected(scene);
+            }
         }
 
 
