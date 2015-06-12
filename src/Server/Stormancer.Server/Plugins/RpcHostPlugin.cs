@@ -223,10 +223,10 @@ namespace Stormancer.Plugins
             p.Stream.Read(buffer, 0, 2);
             var id = BitConverter.ToUInt16(buffer, 0);
 
-            Request observer;
-            if (_pendingRequests.TryGetValue(id, out observer))
+            Request request;
+            if (_pendingRequests.TryGetValue(id, out request))
             {
-                return observer;
+                return request;
             }
             else
             {

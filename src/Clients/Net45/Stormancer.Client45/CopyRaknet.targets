@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <RaknetFile Include="$(PlatformTarget)\Raknet.dll"/>
+    <RaknetFile86 Include="x86\Raknet.dll"/>
+    <RaknetFile64 Include="x64\Raknet.dll"/>
   </ItemGroup>
   <Target Name="CopyRaknet" BeforeTargets="Build">
 
     <Copy
-        SourceFiles="@(RaknetFile)"
-        DestinationFolder="$(OutputPath)">
+        SourceFiles="@(RaknetFile86)"
+        DestinationFolder="$(OutputPath)\x86">
+    </Copy>
+    <Copy
+        SourceFiles="@(RaknetFile64)"
+        DestinationFolder="$(OutputPath)\x64">
     </Copy>
     <Message Text="Copied Raknet.dll"/>
   </Target>
