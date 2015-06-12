@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>$id$.$PlatformTarget$</id>
+    <id>$id$</id>
     <version>$version$</version>
-    <title>$title$.$PlatformTarget$</title>
+    <title>$title$</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>http://www.stormancer.com</projectUrl>
@@ -17,7 +17,8 @@
   <files>
     <file src="bin/$Configuration$/Stormancer.Core.dll" target="lib/Net45"/>
     <file src="bin/$Configuration$/Raknet.csharp.dll" target="lib/Net45"/>
-    <file src="bin/$Configuration$/Raknet.dll" target="content/$PlatformTarget$"/>
-    <file src="CopyRaknet.targets" target="build/$id$.$PlatformTarget$.targets"/>
+    <file src="bin/$Configuration$/x86/Raknet.dll" target="content/x86"/>
+    <file src="bin/$Configuration$/x64/Raknet.dll" target="content/x64"/>
+    <file src="CopyRaknet.targets" target="build/$id$.targets"/>
   </files>
 </package>

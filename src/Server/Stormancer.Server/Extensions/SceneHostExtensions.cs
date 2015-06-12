@@ -22,7 +22,7 @@ namespace Stormancer
         /// <param name="writer">An action that will write the message.</param>
         /// <param name="priority">The message priority level.</param>
         /// <param name="reliability">The message reliability level.</param>
-        public static void Broadcast(this ISceneHost scene, string route, Action<Stream> writer, PacketPriority priority, PacketReliability reliability)
+        public static void Broadcast(this ISceneHost scene, string route, Action<Stream> writer, PacketPriority priority = PacketPriority.HIGH_PRIORITY, PacketReliability reliability = PacketReliability.RELIABLE_ORDERED)
         {
             scene.Send(new MatchAllFilter(), route, writer, priority, reliability);
 
