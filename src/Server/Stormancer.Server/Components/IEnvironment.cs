@@ -39,7 +39,30 @@ namespace Stormancer.Server.Components
         /// </summary>
         event EventHandler<EventArgs> ConfigurationChanged;
 
+        /// <summary>
+        /// Last known ping value between the host and the cluster node.
+        /// </summary>
+        /// <remarks>
+        /// Ping values are updated approximately every 3 seconds.
+        /// Does not represent the ping with the peers, but the internal ping between the node and the sandbox. An high ping value is an indicator of contention in the hosting system.
+        /// </remarks>
+        long LastPing
+        {
+            get;
+        }
 
+        /// <summary>
+        /// Value of the synchronized clock (in ms)
+        /// </summary>
+        /// <remarks>
+        /// The clock value  represents the number milliseconds since an arbitrary date. This value is synchronized between all peers (including server &amp; client peers).
+        /// It's not designed to persist dates (for that you have DateTime) as it may drift as much as 1 ms every 20s.
+        /// Furthermore, the value is reset on server restart. Don't persist it.
+        /// </remarks>
+        long Clock
+        {
+            get;
+        }
     }
 
     /// <summary>
