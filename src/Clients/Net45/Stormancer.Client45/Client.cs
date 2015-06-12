@@ -22,6 +22,7 @@ using Stormancer.Cluster.Application;
 using Stormancer.Dto;
 using Stormancer.Plugins;
 using Stormancer.Diagnostics;
+using System.Diagnostics;
 
 namespace Stormancer
 {
@@ -163,7 +164,31 @@ namespace Stormancer
             Initialize();
 
         }
+        private Stopwatch _watch = new Stopwatch();
 
+        /// <summary>
+        /// Synchronized clock with the server.
+        /// </summary>
+        public long Clock
+        {
+            get
+            {
+                return _watch.ElapsedMilliseconds + _offset;
+            }
+        }
+
+        /// <summary>
+        /// Last ping value with the cluster.
+        /// </summary>
+        /// <remarks>
+        /// 0 means that no mesure has be made yet.
+        /// </remarks>
+        public long LastPing
+        {
+            get;
+            private set;
+        }
+        private long _offset;
 
         private void Initialize()
         {
@@ -173,8 +198,10 @@ namespace Stormancer
 
                 _transport.PacketReceived += _transport_PacketReceived;
 
+                _watch.Start();
 
             }
+
         }
 
         void _transport_PacketReceived(Stormancer.Core.Packet obj)
@@ -222,6 +249,35 @@ namespace Stormancer
                 _systemSerializer.Serialize(_serverConnection.Metadata, s);
             });
         }
+        private async Task SyncClock()
+        {
+            while (_transport.IsRunning)
+            {
+                try
+                {
+                    long tStart = _watch.ElapsedMilliseconds;
+                    var response = await _requestProcessor.SendSystemRequest(_serverConnection, (byte)SystemRequestIDTypes.ID_PING, s =>
+                    {
+                        s.Write(BitConverter.GetBytes(tStart), 0, 8);
+                    }, PacketPriority.IMMEDIATE_PRIORITY);
+                    ulong tRef;
+                    long tEnd;
+                    using (var reader = new BinaryReader(response.Stream))
+                    {
+                        tRef = reader.ReadUInt64();
+                        tEnd = reader.ReadInt64();
+                    }
+                    LastPing = tEnd - tStart;
+                    _offset = (long)tRef - (tStart + tEnd) / 2;
+                }
+                catch (Exception)
+                {
+                    _logger.Error("ping", "failed to ping server.");
+                };
+                await Task.Delay(5000);
+            }
+        }
+
         private async Task<Scene> GetScene(string sceneId, SceneEndpoint ci)
         {
             if (_serverConnection == null)
@@ -230,6 +286,7 @@ namespace Stormancer
                 {
                     cts = new CancellationTokenSource();
                     await _transport.Start("client", new ConnectionHandler(), cts.Token, null, (ushort)(_maxPeers + 1));
+                    var _ =Task.Run(() => SyncClock());
                 }
                 _serverConnection = await _transport.Connect(ci.TokenData.Endpoints[_transport.Name]);
 

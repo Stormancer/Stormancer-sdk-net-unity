@@ -74,7 +74,7 @@ namespace Stormancer.Core
         /// </summary>
         /// <param name="msgId"></param>
         /// <param name="writer"></param>
-        void SendSystem(byte msgId, Action<Stream> writer);
+        void SendSystem(byte msgId, Action<Stream> writer, PacketPriority priority = PacketPriority.MEDIUM_PRIORITY);
         
        
        

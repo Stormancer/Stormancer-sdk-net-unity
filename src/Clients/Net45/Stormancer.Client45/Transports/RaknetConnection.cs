@@ -186,7 +186,8 @@ namespace Stormancer.Networking
         /// </summary>
         /// <param name="msgId">Id of the system message</param>
         /// <param name="writer"></param>
-        public void SendSystem(byte msgId, Action<System.IO.Stream> writer)
+        /// <param name="priority">Priority level of the request</param>
+        public void SendSystem(byte msgId, Action<System.IO.Stream> writer, Core.PacketPriority priority = Core.PacketPriority.MEDIUM_PRIORITY)
         {
             if (writer == null)
             {
@@ -196,7 +197,7 @@ namespace Stormancer.Networking
             {
                 s.WriteByte(msgId);
                 writer(s);
-            }, Core.PacketPriority.HIGH_PRIORITY, Core.PacketReliability.RELIABLE_ORDERED, (char)0);
+            }, priority, Core.PacketReliability.RELIABLE_ORDERED, (char)0);
 
         }
         private void SendRaw(Action<Stream> writer, Stormancer.Core.PacketPriority priority, Stormancer.Core.PacketReliability reliability, char channel)
@@ -230,9 +231,9 @@ namespace Stormancer.Networking
             s.WriteByte(sceneIndex);
             s.Write(BitConverter.GetBytes(route), 0, 2);
             writer(s);
-            
+
             char channel = (char)0;
-            if(reliability == Core.PacketReliability.RELIABLE_SEQUENCED || reliability == Core.PacketReliability.UNRELIABLE_SEQUENCED)
+            if (reliability == Core.PacketReliability.RELIABLE_SEQUENCED || reliability == Core.PacketReliability.UNRELIABLE_SEQUENCED)
             {
                 channel = GetChannel(sceneIndex, route);
             }
