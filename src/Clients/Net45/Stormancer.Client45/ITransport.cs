@@ -16,7 +16,7 @@ namespace Stormancer.Networking
 #if !StormancerClient
     [Dependency]
 #endif
-    public interface ITransport
+    public interface ITransport : IDisposable
     {
         /// <summary>
         /// Starts the transport
@@ -30,7 +30,7 @@ namespace Stormancer.Networking
         /// <remarks>
         /// Only server compatible transports support the `port` parameter. 
         /// </remarks>
-        Task Start(string name, IConnectionManager handler, CancellationToken token, ushort? port, ushort maxConnections);
+        void Start(string name, IConnectionManager handler, CancellationToken token, ushort? port, ushort maxConnections);
 
         /// <summary>
         /// Gets a boolean indicating if the transport is currently running.

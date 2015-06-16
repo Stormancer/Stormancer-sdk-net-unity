@@ -63,6 +63,7 @@ namespace Stormancer
         private readonly ApiClient _apiClient;
         private readonly string _accountId;
         private readonly string _applicationName;
+        private readonly int _pingInterval = 5000;
 
         private readonly PluginBuildContext _pluginCtx = new PluginBuildContext();
         private IConnection _serverConnection;
@@ -100,6 +101,7 @@ namespace Stormancer
 
 
         private ILogger _logger = NullLogger.Instance;
+        private readonly IScheduler _scheduler;
 
         /// <summary>
         /// An user specified logger.
@@ -129,11 +131,12 @@ namespace Stormancer
         /// <param name="configuration">A configuration instance containing options for the client.</param>
         public Client(ClientConfiguration configuration)
         {
+            this._scheduler = configuration.Scheduler;
             this._logger = configuration.Logger;
             this._accountId = configuration.Account;
             this._applicationName = configuration.Application;
             _apiClient = new ApiClient(configuration, _tokenHandler);
-            this._transport = configuration.TransportFactory(new Dictionary<string, object> { { "ILogger", this._logger } });
+            this._transport = configuration.TransportFactory(new Dictionary<string, object> { { "ILogger", this._logger }, { "IScheduler", this._scheduler } });
             this._dispatcher = configuration.Dispatcher;
             _requestProcessor = new Stormancer.Networking.Processors.RequestProcessor(_logger, Enumerable.Empty<IRequestModule>());
 
@@ -249,33 +252,35 @@ namespace Stormancer
                 _systemSerializer.Serialize(_serverConnection.Metadata, s);
             });
         }
-        private async Task SyncClock()
+        private async Task SyncClockImpl()
         {
-            while (_transport.IsRunning)
+            try
             {
-                try
+                long tStart = _watch.ElapsedMilliseconds;
+                var response = await _requestProcessor.SendSystemRequest(_serverConnection, (byte)SystemRequestIDTypes.ID_PING, s =>
                 {
-                    long tStart = _watch.ElapsedMilliseconds;
-                    var response = await _requestProcessor.SendSystemRequest(_serverConnection, (byte)SystemRequestIDTypes.ID_PING, s =>
-                    {
-                        s.Write(BitConverter.GetBytes(tStart), 0, 8);
-                    }, PacketPriority.IMMEDIATE_PRIORITY);
-                    ulong tRef;
-                    long tEnd;
-                    using (var reader = new BinaryReader(response.Stream))
-                    {
-                        tRef = reader.ReadUInt64();
-                        tEnd = reader.ReadInt64();
-                    }
-                    LastPing = tEnd - tStart;
-                    _offset = (long)tRef - (tStart + tEnd) / 2;
+                    s.Write(BitConverter.GetBytes(tStart), 0, 8);
+                }, PacketPriority.IMMEDIATE_PRIORITY);
+                ulong tRef;
+                long tEnd;
+                using (var reader = new BinaryReader(response.Stream))
+                {
+                    tRef = reader.ReadUInt64();
+                    tEnd = reader.ReadInt64();
                 }
-                catch (Exception)
-                {
-                    _logger.Error("ping", "failed to ping server.");
-                };
-                await Task.Delay(5000);
+                LastPing = tEnd - tStart;
+                _offset = (long)tRef - (tStart + tEnd) / 2;
             }
+            catch (Exception)
+            {
+                _logger.Error("ping", "failed to ping server.");
+            };
+        }
+        private IDisposable _syncClockTaskDisposable;
+        private void StartSyncClock()
+        {
+
+            _syncClockTaskDisposable = _scheduler.SchedulePeriodic(_pingInterval, () => { var _ = SyncClockImpl(); });
         }
 
         private async Task<Scene> GetScene(string sceneId, SceneEndpoint ci)
@@ -285,8 +290,8 @@ namespace Stormancer
                 if (!_transport.IsRunning)
                 {
                     cts = new CancellationTokenSource();
-                    await _transport.Start("client", new ConnectionHandler(), cts.Token, null, (ushort)(_maxPeers + 1));
-                    var _ =Task.Run(() => SyncClock());
+                    _transport.Start("client", new ConnectionHandler(), cts.Token, null, (ushort)(_maxPeers + 1));
+                    StartSyncClock();
                 }
                 _serverConnection = await _transport.Connect(ci.TokenData.Endpoints[_transport.Name]);
 
@@ -403,7 +408,12 @@ namespace Stormancer
             if (!this._disposed)
             {
                 this._disposed = true;
+                if (_syncClockTaskDisposable != null)
+                {
+                    _syncClockTaskDisposable.Dispose();
+                }
                 Disconnect();
+
             }
 
         }
