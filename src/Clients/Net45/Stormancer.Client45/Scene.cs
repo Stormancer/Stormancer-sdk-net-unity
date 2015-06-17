@@ -13,7 +13,7 @@ namespace Stormancer
     /// Represents a clientside Stormancer scene.
     /// </summary>
     /// <remarks>
-    /// Scenes are created by Stormancer clients through the <see cref="Stormancer.Client.GetScene"/> and <see cref="Stormancer.Client.GetPublicScene"/> methods.
+    /// Scenes are created by Stormancer clients through the <see cref="Stormancer.Client.GetScene(string)"/> and <see cref="Stormancer.Client.GetPublicScene"/> methods.
     /// </remarks>
     public class Scene : IScene
     {

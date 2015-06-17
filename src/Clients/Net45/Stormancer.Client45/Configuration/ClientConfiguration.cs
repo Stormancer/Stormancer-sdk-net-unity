@@ -87,7 +87,7 @@ namespace Stormancer
 
         private ClientConfiguration()
         {
-            var scheduler = new DefaultScheduler();
+            Scheduler = new DefaultScheduler();
 
             Logger = NullLogger.Instance;
             Dispatcher = new DefaultPacketDispatcher(new Lazy<bool>(() => this.AsynchrounousDispatch));

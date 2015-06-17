@@ -291,7 +291,10 @@ namespace Stormancer
                 {
                     cts = new CancellationTokenSource();
                     _transport.Start("client", new ConnectionHandler(), cts.Token, null, (ushort)(_maxPeers + 1));
-                    StartSyncClock();
+                    if (ci.TokenData.Version > 0)
+                    {
+                        StartSyncClock();
+                    }
                 }
                 _serverConnection = await _transport.Connect(ci.TokenData.Endpoints[_transport.Name]);
 
