@@ -262,14 +262,15 @@ namespace Stormancer
                     s.Write(BitConverter.GetBytes(tStart), 0, 8);
                 }, PacketPriority.IMMEDIATE_PRIORITY);
                 ulong tRef;
-                long tEnd;
+                long tEnd = _watch.ElapsedMilliseconds;
                 using (var reader = new BinaryReader(response.Stream))
                 {
                     tRef = reader.ReadUInt64();
-                    tEnd = reader.ReadInt64();
+
                 }
                 LastPing = tEnd - tStart;
-                _offset = (long)tRef - (tStart + tEnd) / 2;
+                _offset = (long)tRef - LastPing / 2 - tStart;
+                Debug.WriteLine(_offset);
             }
             catch (Exception)
             {

@@ -188,7 +188,7 @@ namespace Stormancer.Plugins
 
                         });
                     }
-                }, new Dictionary<string, string> { { "stormancer.plugins.rpc", "1.0.0" } });
+                }, new Dictionary<string, string> { { RpcClientPlugin.PluginName, RpcClientPlugin.Version} });
 
             }
             private ushort ReserveId()
