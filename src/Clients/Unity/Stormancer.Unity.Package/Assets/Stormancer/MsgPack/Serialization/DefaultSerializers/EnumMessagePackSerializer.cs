@@ -18,6 +18,49 @@
 //
 #endregion -- License Terms --
 
+#if UNITY_IOS
+
+using System;
+using System.Globalization;
+using System.Reflection;
+using System.Runtime.Serialization;
+
+namespace MsgPack.Serialization.DefaultSerializers
+{
+    internal class EnumMessagePackSerializer : MessagePackSerializer
+    {
+
+        public EnumMessagePackSerializer(Type type, PackerCompatibilityOptions packerCompatibilityOptions)
+            : base(type, packerCompatibilityOptions)
+        {
+            if (!type.GetIsEnum())
+            {
+                throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, "Type '{0}' is not enum.", type));
+            }
+        }
+
+        protected internal sealed override void PackToCore(Packer packer, object value)
+        {
+            packer.PackString(value.ToString());
+        }
+
+        protected internal sealed override object UnpackFromCore(Unpacker unpacker)
+        {
+            object value;
+            try
+            {
+                value = Enum.Parse(TargetType, unpacker.LastReadData.AsString(), false);
+            }
+            catch (ArgumentException)
+            {
+                throw new SerializationException(String.Format(CultureInfo.CurrentCulture, "'{0}' is not valid for enum type '{1}'.", unpacker.LastReadData.AsString(), TargetType));
+            }
+            return value;
+        }
+    }
+}
+
+#else
 using System;
 using System.Globalization;
 using System.Reflection;
@@ -45,3 +88,4 @@ namespace MsgPack.Serialization.DefaultSerializers
 		}
 	}
 }
+#endif

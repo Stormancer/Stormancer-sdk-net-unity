@@ -17,7 +17,61 @@
 //    limitations under the License.
 //
 #endregion -- License Terms --
+#if UNITY_IOS
+using System;
 
+namespace MsgPack.Serialization
+{
+    /// <summary>
+    ///		Callback based <see cref="MessagePackSerializer{T}"/> to implement context-based serialization.
+    /// </summary>
+    /// <typeparam name="T">The type of target type.</typeparam>
+    internal sealed class CallbackMessagePackSerializer : MessagePackSerializer
+    {
+        private readonly SerializationContext _context;
+        private readonly Action<SerializationContext, Packer, object> _packToCore;
+        private readonly Func<SerializationContext, Unpacker, object> _unpackFromCore;
+        private readonly Action<SerializationContext, Unpacker, object> _unpackToCore;
+
+        public CallbackMessagePackSerializer(Type type,
+            SerializationContext context,
+            Action<SerializationContext, Packer, object> packToCore,
+            Func<SerializationContext, Unpacker, object> unpackFromCore,
+            Action<SerializationContext, Unpacker, object> unpackToCore
+        )
+            : base(type, (context ?? SerializationContext.Default).CompatibilityOptions.PackerCompatibilityOptions)
+        {
+            this._context = context;
+            this._packToCore = packToCore;
+            this._unpackFromCore = unpackFromCore;
+            this._unpackToCore = unpackToCore;
+        }
+
+        protected internal override void PackToCore(Packer packer, object objectTree)
+        {
+            this._packToCore(this._context, packer, objectTree);
+        }
+
+        protected internal override object UnpackFromCore(Unpacker unpacker)
+        {
+            return this._unpackFromCore(this._context, unpacker);
+        }
+
+        protected internal sealed override void UnpackToCore(Unpacker unpacker, object collection)
+        {
+            if (this._unpackToCore != null)
+            {
+                this._unpackToCore(this._context, unpacker, collection);
+            }
+            else
+            {
+                base.UnpackToCore(unpacker, collection);
+            }
+        }
+    }
+}
+
+#else // UNITY_IOS
 using System;
 
 namespace MsgPack.Serialization
@@ -70,3 +124,4 @@ namespace MsgPack.Serialization
 		}
 	}
 }
+#endif

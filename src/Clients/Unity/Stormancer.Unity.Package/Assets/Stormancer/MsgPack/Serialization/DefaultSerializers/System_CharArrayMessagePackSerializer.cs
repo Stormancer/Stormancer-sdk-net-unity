@@ -17,6 +17,38 @@
 //    limitations under the License.
 //
 #endregion -- License Terms --
+#if UNITY_IOS
+
+using System;
+
+namespace MsgPack.Serialization.DefaultSerializers
+{
+    internal sealed class System_CharArrayMessagePackSerializer : MessagePackSerializer
+    {
+        public System_CharArrayMessagePackSerializer(PackerCompatibilityOptions packerCompatibilityOptions)
+            : base(typeof(char[]), packerCompatibilityOptions) { }
+
+        protected internal sealed override void PackToCore(Packer packer, object value)
+        {
+            if (value == null)
+            {
+                packer.PackNull();
+            }
+            else
+            {
+                packer.PackString((char[])value);
+            }
+        }
+
+        protected internal sealed override object UnpackFromCore(Unpacker unpacker)
+        {
+            var result = unpacker.LastReadData;
+            return result.IsNil ? null : result.AsCharArray();
+        }
+    }
+}
+
+#else // UNITY_IOS
 
 using System;
 
@@ -46,3 +78,4 @@ namespace MsgPack.Serialization.DefaultSerializers
 		}
 	}
 }
+#endif

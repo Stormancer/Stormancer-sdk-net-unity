@@ -17,7 +17,7 @@
 //    limitations under the License.
 //
 #endregion -- License Terms --
-
+#if !UNITY_IOS
 using System;
 using System.Diagnostics.Contracts;
 
@@ -114,3 +114,4 @@ namespace MsgPack.Serialization.EmittingSerializers
 		protected abstract SerializerEmitter CreateEmitterCore( Type targetType, EmitterFlavor emitterFlavor );
 	}
 }
+#endif

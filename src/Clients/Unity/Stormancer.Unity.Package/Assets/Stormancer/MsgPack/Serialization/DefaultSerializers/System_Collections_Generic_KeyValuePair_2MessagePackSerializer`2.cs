@@ -18,7 +18,7 @@
 //    limitations under the License.
 //
 #endregion -- License Terms --
-
+#if !UNITY_IOS
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -80,3 +80,4 @@ namespace MsgPack.Serialization.DefaultSerializers
 		}
 	}
 }
+#endif

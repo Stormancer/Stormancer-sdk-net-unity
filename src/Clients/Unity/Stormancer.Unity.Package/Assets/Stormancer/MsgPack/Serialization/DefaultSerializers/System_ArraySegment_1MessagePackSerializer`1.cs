@@ -17,7 +17,7 @@
 //    limitations under the License.
 //
 #endregion -- License Terms --
-
+#if !UNITY_IOS
 using System;
 #if NETFX_CORE
 using System.Linq.Expressions;
@@ -169,3 +169,4 @@ namespace MsgPack.Serialization.DefaultSerializers
 		}
 	}
 }
+#endif

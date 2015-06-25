@@ -17,7 +17,112 @@
 //    limitations under the License.
 //
 #endregion -- License Terms --
+#if UNITY_IOS
 
+using System;
+using System.Collections;
+
+namespace MsgPack.Serialization.DefaultSerializers
+{
+    internal sealed class System_Collections_DictionaryEntryMessagePackSerializer : MessagePackSerializer
+    {
+        public System_Collections_DictionaryEntryMessagePackSerializer(PackerCompatibilityOptions packerCompatibilityOptions)
+            : base(typeof(DictionaryEntry), packerCompatibilityOptions) { }
+
+        protected internal sealed override void PackToCore(Packer packer, object objectTree)
+        {
+            var entry = (DictionaryEntry)objectTree;
+            packer.PackArrayHeader(2);
+            packer.Pack(EnsureMessagePackObject(entry.Key));
+            packer.Pack(EnsureMessagePackObject(entry.Value));
+        }
+
+        private static MessagePackObject EnsureMessagePackObject(object obj)
+        {
+            if (obj == null)
+            {
+                return MessagePackObject.Nil;
+            }
+
+            if (!(obj is MessagePackObject))
+            {
+                throw new NotSupportedException("Only MessagePackObject Key/Value is supported.");
+            }
+
+            return (MessagePackObject)obj;
+        }
+
+        protected internal sealed override object UnpackFromCore(Unpacker unpacker)
+        {
+            if (unpacker.IsArrayHeader)
+            {
+                MessagePackObject key;
+                MessagePackObject value;
+
+                if (!unpacker.ReadObject(out key))
+                {
+                    throw SerializationExceptions.NewUnexpectedEndOfStream();
+                }
+
+                if (!unpacker.ReadObject(out value))
+                {
+                    throw SerializationExceptions.NewUnexpectedEndOfStream();
+                }
+
+                return new DictionaryEntry(key, value);
+            }
+            else
+            {
+                // Previous DictionaryEntry serializer accidentally pack it as map...
+                MessagePackObject key = default(MessagePackObject);
+                MessagePackObject value = default(MessagePackObject);
+                bool isKeyFound = false;
+                bool isValueFound = false;
+                string propertyName;
+
+                while ((!isKeyFound || !isValueFound) && unpacker.ReadString(out propertyName))
+                {
+                    switch (propertyName)
+                    {
+                        case "Key":
+                            {
+                                if (!unpacker.ReadObject(out key))
+                                {
+                                    throw SerializationExceptions.NewUnexpectedEndOfStream();
+                                }
+
+                                isKeyFound = true;
+                                break;
+                            }
+                        case "Value":
+                            {
+                                if (!unpacker.ReadObject(out value))
+                                {
+                                    throw SerializationExceptions.NewUnexpectedEndOfStream();
+                                }
+
+                                isValueFound = true;
+                                break;
+                            }
+                    }
+                }
+
+                if (!isKeyFound)
+                {
+                    throw SerializationExceptions.NewMissingProperty("Key");
+                }
+
+                if (!isValueFound)
+                {
+                    throw SerializationExceptions.NewMissingProperty("Value");
+                }
+
+                return new DictionaryEntry(key, value);
+            }
+        }
+    }
+}
+#else // UNITY_IOS
 using System;
 using System.Collections;
 
@@ -120,3 +225,4 @@ namespace MsgPack.Serialization.DefaultSerializers
 		}
 	}
 }
+#endif

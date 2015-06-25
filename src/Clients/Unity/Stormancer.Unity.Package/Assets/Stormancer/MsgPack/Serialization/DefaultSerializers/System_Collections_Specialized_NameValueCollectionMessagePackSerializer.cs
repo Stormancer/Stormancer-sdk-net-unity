@@ -18,6 +18,85 @@
 //
 #endregion -- License Terms --
 
+#if UNITY_IOS
+#if !SILVERLIGHT
+using System;
+using System.Collections.Specialized;
+using System.Runtime.Serialization;
+
+namespace MsgPack.Serialization.DefaultSerializers
+{
+    internal sealed class System_Collections_Specialized_NameValueCollectionMessagePackSerializer : MessagePackSerializer
+    {
+        public System_Collections_Specialized_NameValueCollectionMessagePackSerializer(PackerCompatibilityOptions packerCompatibilityOptions)
+            : base(typeof(NameValueCollection), packerCompatibilityOptions) { }
+
+        protected internal sealed override void PackToCore(Packer packer, object objectTree)
+        {
+            if (objectTree == null)
+            {
+                packer.PackNull();
+                return;
+            }
+
+            var collection = (NameValueCollection)objectTree;
+            packer.PackMapHeader(collection.Count);
+            foreach (string key in collection)
+            {
+                if (key == null)
+                {
+                    throw new NotSupportedException("null key is not supported.");
+                }
+
+                var values = collection.GetValues(key);
+                if (values == null)
+                {
+                    // Ignore
+                    continue;
+                }
+
+                packer.PackString(key);
+                packer.PackArrayHeader(values.Length);
+                foreach (var value in values)
+                {
+                    packer.PackString(value);
+                }
+            }
+        }
+
+        protected internal sealed override object UnpackFromCore(Unpacker unpacker)
+        {
+            var result = new NameValueCollection(checked((int)unpacker.ItemsCount));
+
+            while (unpacker.Read())
+            {
+                var key = unpacker.LastReadData.DeserializeAsString();
+                if (!unpacker.Read())
+                {
+                    throw SerializationExceptions.NewUnexpectedEndOfStream();
+                }
+
+                if (!unpacker.IsArrayHeader)
+                {
+                    throw new SerializationException("Invalid NameValueCollection value.");
+                }
+
+                using (var valuesUnpacker = unpacker.ReadSubtree())
+                {
+                    while (valuesUnpacker.Read())
+                    {
+                        result.Add(key, unpacker.LastReadData.DeserializeAsString());
+                    }
+                }
+            }
+
+            return result;
+        }
+    }
+}
+#endif
+
+#else // UNITY_IOS
 #if !SILVERLIGHT
 using System;
 using System.Collections.Specialized;
@@ -92,4 +171,5 @@ namespace MsgPack.Serialization.DefaultSerializers
 		}
 	}
 }
+#endif
 #endif

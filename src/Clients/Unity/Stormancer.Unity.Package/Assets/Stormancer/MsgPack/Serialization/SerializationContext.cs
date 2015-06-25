@@ -31,7 +31,7 @@ using System.Reflection;
 namespace MsgPack.Serialization
 {
     /// <summary>
-    ///		<strong>This is intened to MsgPack for CLI internal use. Do not use this type from application directly.</strong>
+    ///		<strong>This is intended to MsgPack for CLI internal use. Do not use this type from application directly.</strong>
     ///		Represents serialization context information for internal serialization logic.
     /// </summary>
     public sealed class SerializationContext
@@ -50,9 +50,9 @@ namespace MsgPack.Serialization
             get { return _default; }
             set
             {
-                if ( value == null )
+                if (value == null)
                 {
-                    throw new ArgumentNullException( "value" );
+                    throw new ArgumentNullException("value");
                 }
 
                 _default = value;
@@ -72,7 +72,7 @@ namespace MsgPack.Serialization
         {
             get
             {
-                Contract.Ensures( Contract.Result<SerializerRepository>() != null );
+                Contract.Ensures(Contract.Result<SerializerRepository>() != null);
 
                 return this._serializers;
             }
@@ -107,7 +107,7 @@ namespace MsgPack.Serialization
         {
             get
             {
-                Contract.Ensures( Contract.Result<SerializationCompatibilityOptions>() != null );
+                Contract.Ensures(Contract.Result<SerializationCompatibilityOptions>() != null);
 
                 return this._compatibilityOptions;
             }
@@ -125,23 +125,23 @@ namespace MsgPack.Serialization
         {
             get
             {
-                Contract.Ensures( Enum.IsDefined( typeof( SerializationMethod ), Contract.Result<SerializationMethod>() ) );
+                Contract.Ensures(Enum.IsDefined(typeof(SerializationMethod), Contract.Result<SerializationMethod>()));
 
                 return this._serializationMethod;
             }
             set
             {
-                switch ( value )
+                switch (value)
                 {
                     case Serialization.SerializationMethod.Array:
                     case Serialization.SerializationMethod.Map:
-                    {
-                        break;
-                    }
+                        {
+                            break;
+                        }
                     default:
-                    {
-                        throw new ArgumentOutOfRangeException( "value" );
-                    }
+                        {
+                            throw new ArgumentOutOfRangeException("value");
+                        }
                 }
 
                 Contract.EndContractBlock();
@@ -168,20 +168,20 @@ namespace MsgPack.Serialization
             }
             set
             {
-                switch ( value )
+                switch (value)
                 {
                     case SerializationMethodGeneratorOption.Fast:
 #if !SILVERLIGHT
                     case SerializationMethodGeneratorOption.CanCollect:
                     case SerializationMethodGeneratorOption.CanDump:
 #endif
-                    {
-                        break;
-                    }
+                        {
+                            break;
+                        }
                     default:
-                    {
-                        throw new ArgumentOutOfRangeException( "value" );
-                    }
+                        {
+                            throw new ArgumentOutOfRangeException("value");
+                        }
                 }
 
                 Contract.EndContractBlock();
@@ -207,19 +207,19 @@ namespace MsgPack.Serialization
         ///		Initializes a new instance of the <see cref="SerializationContext"/> class with copy of <see cref="SerializerRepository.Default"/>.
         /// </summary>
         public SerializationContext()
-            : this( new SerializerRepository( SerializerRepository.Default ), PackerCompatibilityOptions.Classic ) { }
+            : this(new SerializerRepository(SerializerRepository.Default), PackerCompatibilityOptions.Classic) { }
 
         /// <summary>
         ///		Initializes a new instance of the <see cref="SerializationContext"/> class with copy of <see cref="SerializerRepository.GetDefault(PackerCompatibilityOptions)"/> for specified <see cref="PackerCompatibilityOptions"/>.
         /// </summary>
         /// <param name="packerCompatibilityOptions"><see cref="PackerCompatibilityOptions"/> which will be used on built-in serializers.</param>
-        public SerializationContext( PackerCompatibilityOptions packerCompatibilityOptions )
-            : this( new SerializerRepository( SerializerRepository.GetDefault( packerCompatibilityOptions ) ), packerCompatibilityOptions ) { }
+        public SerializationContext(PackerCompatibilityOptions packerCompatibilityOptions)
+            : this(new SerializerRepository(SerializerRepository.GetDefault(packerCompatibilityOptions)), packerCompatibilityOptions) { }
 
         internal SerializationContext(
-            SerializerRepository serializers, PackerCompatibilityOptions packerCompatibilityOptions )
+            SerializerRepository serializers, PackerCompatibilityOptions packerCompatibilityOptions)
         {
-            Contract.Requires( serializers != null );
+            Contract.Requires(serializers != null);
 
             this._compatibilityOptions =
                 new SerializationCompatibilityOptions()
@@ -232,9 +232,9 @@ namespace MsgPack.Serialization
             this._defaultCollectionTypes = new DefaultConcreteTypeRepository();
         }
 
-        internal bool ContainsSerializer( Type rootType )
+        internal bool ContainsSerializer(Type rootType)
         {
-            return this._serializers.Contains( rootType );
+            return this._serializers.Contains(rootType);
         }
 
         /// <summary>
@@ -251,8 +251,12 @@ namespace MsgPack.Serialization
         /// </remarks>
         public MessagePackSerializer<T> GetSerializer<T>()
         {
-            Contract.Ensures( Contract.Result<MessagePackSerializer<T>>() != null );
+            Contract.Ensures(Contract.Result<MessagePackSerializer<T>>() != null);
 
+#if UNITY_IOS
+            return (MessagePackSerializer<T>)this.GetSerializer(typeof(T));
+#else
+                
             var serializer = this._serializers.Get<T>( this );
             if ( serializer == null )
             {
@@ -293,6 +297,8 @@ namespace MsgPack.Serialization
             }
 
             return serializer;
+            
+#endif
         }
 
         /// <summary>
@@ -311,18 +317,62 @@ namespace MsgPack.Serialization
         ///		Although <see cref="GetSerializer{T}"/> is preferred,
         ///		this method can be used from non-generic type or methods.
         /// </remarks>
-        public IMessagePackSingleObjectSerializer GetSerializer( Type targetType )
+        public IMessagePackSingleObjectSerializer GetSerializer(Type targetType)
         {
-            if ( targetType == null )
+            if (targetType == null)
             {
-                throw new ArgumentNullException( "targetType" );
+                throw new ArgumentNullException("targetType");
             }
 
-            Contract.Ensures( Contract.Result<IMessagePackSerializer>() != null );
+            Contract.Ensures(Contract.Result<IMessagePackSerializer>() != null);
+#if UNITY_IOS
+            var serializer = this._serializers.Get(targetType, this);
+            if (serializer == null)
+            {
+                bool lockTaken = false;
+                try
+                {
+                    try { }
+                    finally
+                    {
+                        lock (this._typeLock)
+                        {
+                            lockTaken = this._typeLock.Add(targetType);
+                        }
+                    }
 
-            return SerializerGetter.Instance.Get( this, targetType );
-        }
+                    if (!lockTaken)
+                    {
+                        return new LazyDelegatingMessagePackSerializer(targetType, this);
+                    }
 
+                    serializer = MessagePackSerializer.Create(targetType, this);
+                }
+                finally
+                {
+                    if (lockTaken)
+                    {
+                        lock (this._typeLock)
+                        {
+                            this._typeLock.Remove(targetType);
+                        }
+                    }
+                }
+
+                if (!this._serializers.Register(targetType, serializer))
+                {
+                    serializer = this._serializers.Get(targetType, this);
+                }
+            }
+
+            return serializer;
+        
+#else
+            return SerializerGetter.Instance.Get(this, targetType);
+#endif
+            }
+
+#if !UNITY_IOS
         private sealed class SerializerGetter
         {
             public static readonly SerializerGetter Instance = new SerializerGetter();
@@ -332,16 +382,16 @@ namespace MsgPack.Serialization
 
             private SerializerGetter() { }
 
-            public IMessagePackSingleObjectSerializer Get( SerializationContext context, Type targetType )
+            public IMessagePackSingleObjectSerializer Get(SerializationContext context, Type targetType)
             {
                 Func<SerializationContext, IMessagePackSingleObjectSerializer> func;
-                if ( !this._cache.TryGetValue( targetType.TypeHandle, out func ) || func == null )
+                if (!this._cache.TryGetValue(targetType.TypeHandle, out func) || func == null)
                 {
 #if !NETFX_CORE
                     func =
                         Delegate.CreateDelegate(
-                            typeof( Func<SerializationContext, IMessagePackSingleObjectSerializer> ),
-                            typeof( SerializerGetter<> ).MakeGenericType( targetType ).GetMethod( "Get" )
+                            typeof(Func<SerializationContext, IMessagePackSingleObjectSerializer>),
+                            typeof(SerializerGetter<>).MakeGenericType(targetType).GetMethod("Get")
                         ) as Func<SerializationContext, IMessagePackSingleObjectSerializer>;
 #else
                     var contextParameter = Expression.Parameter( typeof( SerializationContext ), "context" );
@@ -355,10 +405,10 @@ namespace MsgPack.Serialization
                             contextParameter
                         ).Compile();
 #endif
-                    this._cache[ targetType.TypeHandle ] = func;
+                    this._cache[targetType.TypeHandle] = func;
                 }
 
-                return func( context );
+                return func(context);
             }
         }
 
@@ -367,8 +417,8 @@ namespace MsgPack.Serialization
 #if !NETFX_CORE
             private static readonly Func<SerializationContext, MessagePackSerializer<T>> _func =
                 Delegate.CreateDelegate(
-                    typeof( Func<SerializationContext, MessagePackSerializer<T>> ),
-                    Metadata._SerializationContext.GetSerializer1_Method.MakeGenericMethod( typeof( T ) )
+                    typeof(Func<SerializationContext, MessagePackSerializer<T>>),
+                    Metadata._SerializationContext.GetSerializer1_Method.MakeGenericMethod(typeof(T))
                 ) as Func<SerializationContext, MessagePackSerializer<T>>;
 #else
             private static readonly Func<SerializationContext, MessagePackSerializer<T>> _func =
@@ -388,10 +438,12 @@ namespace MsgPack.Serialization
             }
 #endif
 
-            public static IMessagePackSingleObjectSerializer Get( SerializationContext context )
+            public static IMessagePackSingleObjectSerializer Get(SerializationContext context)
             {
-                return _func( context );
+                return _func(context);
             }
         }
+#endif
     }
 }
+        

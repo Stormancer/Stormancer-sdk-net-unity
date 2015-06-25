@@ -25,102 +25,133 @@ using MsgPack.Serialization.DefaultSerializers;
 
 namespace MsgPack.Serialization
 {
-	/// <summary>
-	///		Repository of known <see cref="MessagePackSerializer{T}"/>s.
-	/// </summary>
-	public sealed partial class SerializerRepository : IDisposable
-	{
-		private readonly SerializerTypeKeyRepository _repository;
+    /// <summary>
+    ///		Repository of known <see cref="MessagePackSerializer{T}"/>s.
+    /// </summary>
+    public sealed partial class SerializerRepository : IDisposable
+    {
+        private readonly SerializerTypeKeyRepository _repository;
 
-		/// <summary>
-		/// Initializes a new empty instance of the <see cref="SerializerRepository"/> class.
-		/// </summary>
-		public SerializerRepository()
-		{
-			this._repository = new SerializerTypeKeyRepository();
-		}
+        /// <summary>
+        /// Initializes a new empty instance of the <see cref="SerializerRepository"/> class.
+        /// </summary>
+        public SerializerRepository()
+        {
+            this._repository = new SerializerTypeKeyRepository();
+        }
 
-		/// <summary>
-		///		Initializes a new instance of the <see cref="SerializerRepository"/> class  which has copied serializers.
-		/// </summary>
-		/// <param name="copiedFrom">The repository which will be copied its contents.</param>
-		/// <exception cref="ArgumentNullException">
-		///		<paramref name="copiedFrom"/> is <c>null</c>.
-		/// </exception>
-		public SerializerRepository( SerializerRepository copiedFrom )
-		{
-			if ( copiedFrom == null )
-			{
-				throw new ArgumentNullException( "copiedFrom" );
-			}
+        /// <summary>
+        ///		Initializes a new instance of the <see cref="SerializerRepository"/> class  which has copied serializers.
+        /// </summary>
+        /// <param name="copiedFrom">The repository which will be copied its contents.</param>
+        /// <exception cref="ArgumentNullException">
+        ///		<paramref name="copiedFrom"/> is <c>null</c>.
+        /// </exception>
+        public SerializerRepository(SerializerRepository copiedFrom)
+        {
+            if (copiedFrom == null)
+            {
+                throw new ArgumentNullException("copiedFrom");
+            }
 
-			this._repository = new SerializerTypeKeyRepository( copiedFrom._repository );
-		}
+            this._repository = new SerializerTypeKeyRepository(copiedFrom._repository);
+        }
 
-		private SerializerRepository( Dictionary<RuntimeTypeHandle, object> table )
-		{
-			this._repository = new SerializerTypeKeyRepository( table );
-			this._repository.Freeze();
-		}
+        private SerializerRepository(Dictionary<RuntimeTypeHandle, object> table)
+        {
+            this._repository = new SerializerTypeKeyRepository(table);
+            this._repository.Freeze();
+        }
 
-		/// <summary>
-		///		Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-		/// </summary>
-		public void Dispose()
-		{
-			this._repository.Dispose();
-		}
+        /// <summary>
+        ///		Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose()
+        {
+            this._repository.Dispose();
+        }
 
-		/// <summary>
-		///		Gets the registered <see cref="MessagePackSerializer{T}"/> from this repository.
-		/// </summary>
-		/// <typeparam name="T">Type of the object to be marshaled/unmarshaled.</typeparam>
-		/// <returns>
-		///		<see cref="MessagePackSerializer{T}"/>. If no appropriate mashalers has benn registered, then <c>null</c>.
-		/// </returns>
+        /// <summary>
+        ///		Gets the registered <see cref="MessagePackSerializer{T}"/> from this repository.
+        /// </summary>
+        /// <typeparam name="T">Type of the object to be marshaled/unmarshaled.</typeparam>
+        /// <returns>
+        ///		<see cref="MessagePackSerializer{T}"/>. If no appropriate mashalers has benn registered, then <c>null</c>.
+        /// </returns>
+#if UNITY_IOS
+        public IMessagePackSingleObjectSerializer Get(Type type, SerializationContext context)
+        {
+#else
 		public MessagePackSerializer<T> Get<T>( SerializationContext context )
 		{
-			if ( context == null )
-			{
-				throw new ArgumentNullException( "context" );
-			}
+            var type = typeof(T);
+#endif
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
 
-			if ( typeof( T ).GetIsEnum() )
-			{
+            if (type.GetIsEnum())
+            {
+#if UNITY_IOS
+                return new EnumMessagePackSerializer(type, context.CompatibilityOptions.PackerCompatibilityOptions);
+#else
 				return new EnumMessagePackSerializer<T>( context.CompatibilityOptions.PackerCompatibilityOptions );
-			}
+#endif
+            }
 
-			if ( typeof( T ).GetIsGenericType() && typeof( T ).GetGenericTypeDefinition() == typeof( Nullable<> ) )
-			{
+            if (type.GetIsGenericType() && type.GetGenericTypeDefinition() == typeof(Nullable<>))
+            {
+#if UNITY_IOS
+                return new NullableMessagePackSerializer(type, context);
+#else                
 				return new NullableMessagePackSerializer<T>( context );
-			}
+#endif
+            }
 
-			return this._repository.Get<T, MessagePackSerializer<T>>( context );
-		}
+#if UNITY_IOS
+            return (IMessagePackSingleObjectSerializer)this._repository.Get(type, context);   
+#else
+            return this._repository.Get<T, MessagePackSerializer<T>>(context);
+#endif
+        }
 
-		/// <summary>
-		///		Registers a <see cref="MessagePackSerializer{T}"/>.
-		/// </summary>
-		/// <typeparam name="T">The type of serialization target.</typeparam>
-		/// <param name="serializer"><see cref="MessagePackSerializer{T}"/> instance.</param>
-		/// <returns>
-		///		<c>true</c> if success to register; otherwise, <c>false</c>.
-		/// </returns>
-		/// <exception cref="ArgumentNullException">
-		///		<paramref name="serializer"/> is <c>null</c>.
-		/// </exception>
-		public bool Register<T>( MessagePackSerializer<T> serializer )
-		{
-			if ( serializer == null )
-			{
-				throw new ArgumentNullException( "serializer" );
-			}
+        /// <summary>
+        ///		Registers a <see cref="MessagePackSerializer{T}"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of serialization target.</typeparam>
+        /// <param name="serializer"><see cref="MessagePackSerializer{T}"/> instance.</param>
+        /// <returns>
+        ///		<c>true</c> if success to register; otherwise, <c>false</c>.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        ///		<paramref name="serializer"/> is <c>null</c>.
+        /// </exception>
+#if UNITY_IOS
+        public bool Register(Type type, IMessagePackSingleObjectSerializer serializer)
+#else
+        public bool Register<T>(MessagePackSerializer<T> serializer)
+#endif
+        {
+            if (serializer == null)
+            {
+                throw new ArgumentNullException("serializer");
+            }
 
-			return this._repository.Register( typeof( T ), serializer,  false );
-		}
+#if UNITY_IOS
+            if (type == null)
+            {
+                throw new ArgumentNullException("null");
+            }
 
-		private static readonly Dictionary<PackerCompatibilityOptions, SerializerRepository> _defaults =
-			new Dictionary<PackerCompatibilityOptions, SerializerRepository>( 4 )
+            return this._repository.Register(type, serializer, false);        
+#else
+            return this._repository.Register(typeof(T), serializer, false);
+#endif
+        }
+
+        private static readonly Dictionary<PackerCompatibilityOptions, SerializerRepository> _defaults =
+            new Dictionary<PackerCompatibilityOptions, SerializerRepository>(4)
 			{
 				{
 					PackerCompatibilityOptions.None,
@@ -140,42 +171,42 @@ namespace MsgPack.Serialization
 				},
 			};
 
-		/// <summary>
-		///		Gets the system default repository.
-		/// </summary>
-		/// <value>
-		///		The system default repository.
-		///		This value will not be <c>null</c>.
-		///		Note that the repository is frozen.
-		/// </value>
-		public static SerializerRepository Default
-		{
-			get { return GetDefault( PackerCompatibilityOptions.Classic ); }
-		}
+        /// <summary>
+        ///		Gets the system default repository.
+        /// </summary>
+        /// <value>
+        ///		The system default repository.
+        ///		This value will not be <c>null</c>.
+        ///		Note that the repository is frozen.
+        /// </value>
+        public static SerializerRepository Default
+        {
+            get { return GetDefault(PackerCompatibilityOptions.Classic); }
+        }
 
-		/// <summary>
-		///		Gets the system default repository.
-		/// </summary>
-		/// <param name="packerCompatibilityOptions"><see cref="PackerCompatibilityOptions"/> for default serializers must use.</param>
-		/// <returns>
-		///		The system default repository.
-		///		This value will not be <c>null</c>.
-		///		Note that the repository is frozen.
-		/// </returns>
-		public static SerializerRepository GetDefault( PackerCompatibilityOptions packerCompatibilityOptions )
-		{
-			SerializerRepository repository;
-			if ( !_defaults.TryGetValue( packerCompatibilityOptions, out repository ) )
-			{
-				throw new ArgumentOutOfRangeException( String.Format( CultureInfo.CurrentCulture, "'{0}' is not valid combination.", packerCompatibilityOptions ) );
-			}
+        /// <summary>
+        ///		Gets the system default repository.
+        /// </summary>
+        /// <param name="packerCompatibilityOptions"><see cref="PackerCompatibilityOptions"/> for default serializers must use.</param>
+        /// <returns>
+        ///		The system default repository.
+        ///		This value will not be <c>null</c>.
+        ///		Note that the repository is frozen.
+        /// </returns>
+        public static SerializerRepository GetDefault(PackerCompatibilityOptions packerCompatibilityOptions)
+        {
+            SerializerRepository repository;
+            if (!_defaults.TryGetValue(packerCompatibilityOptions, out repository))
+            {
+                throw new ArgumentOutOfRangeException(String.Format(CultureInfo.CurrentCulture, "'{0}' is not valid combination.", packerCompatibilityOptions));
+            }
 
-			return repository;
-		}
+            return repository;
+        }
 
-		internal bool Contains( Type rootType )
-		{
-			return this._repository.Coontains( rootType );
-		}
-	}
+        internal bool Contains(Type rootType)
+        {
+            return this._repository.Coontains(rootType);
+        }
+    }
 }

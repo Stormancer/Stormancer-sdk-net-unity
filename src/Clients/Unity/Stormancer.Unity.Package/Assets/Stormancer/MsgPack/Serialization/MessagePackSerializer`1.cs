@@ -18,6 +18,219 @@
 //
 #endregion -- License Terms --
 
+#if UNITY_IOS
+
+using System;
+using System.Globalization;
+using System.IO;
+#if NETFX_CORE
+using System.Reflection;
+#endif
+using System.Runtime.Serialization;
+
+namespace MsgPack.Serialization
+{
+    // TODO: MessagePackEncoder/Decoder <|- ...NativeEncoder/Decoder, ...JsonEncoder/Decoder
+    /// <summary>
+    ///		Defines base contract for object serialization.
+    /// </summary>
+    /// <typeparam name="T">Target type.</typeparam>
+    /// <remarks>
+    ///		<para>
+    ///			This class implements strongly typed serialization and deserialization.
+    ///		</para>
+    ///		<para>
+    ///			When the underlying stream does not contain strongly typed or contains dynamically typed objects,
+    ///			you should use <see cref="Unpacker"/> directly and take advantage of <see cref="MessagePackObject"/>.
+    ///		</para>
+    /// </remarks>
+    /// <seealso cref="Unpacker"/>
+    /// <seealso cref="Unpacking"/>
+    public sealed class MessagePackSerializer<T> : IMessagePackSerializer, IMessagePackSingleObjectSerializer
+    {
+        private readonly MessagePackSerializer _serializer;
+
+        internal MessagePackSerializer(MessagePackSerializer serializer)
+        {
+            if (serializer.TargetType != typeof(T))
+            {
+                throw new InvalidOperationException("Incompatible types");
+            }
+            this._serializer = serializer;
+        }
+
+        /// <summary>
+        ///		Serialize specified object to the <see cref="Stream"/>.
+        /// </summary>
+        /// <param name="stream">Destination <see cref="Stream"/>.</param>
+        /// <param name="objectTree">Object to be serialized.</param>
+        /// <exception cref="ArgumentNullException">
+        ///		<paramref name="stream"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="SerializationException">
+        ///		<typeparamref name="T"/> is not serializable etc.
+        /// </exception>
+        public void Pack(Stream stream, T objectTree)
+        {
+            this._serializer.Pack(stream, objectTree);
+        }
+
+        /// <summary>
+        ///		Deserialize object from the <see cref="Stream"/>.
+        /// </summary>
+        /// <param name="stream">Source <see cref="Stream"/>.</param>
+        /// <returns>Deserialized object.</returns>
+        /// <exception cref="ArgumentNullException">
+        ///		<paramref name="stream"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="SerializationException">
+        ///		<typeparamref name="T"/> is not serializable etc.
+        /// </exception>
+        public T Unpack(Stream stream)
+        {
+            return (T)this._serializer.Unpack(stream);
+        }
+
+        /// <summary>
+        ///		Serialize specified object with specified <see cref="Packer"/>.
+        /// </summary>
+        /// <param name="packer"><see cref="Packer"/> which packs values in <paramref name="objectTree"/>.</param>
+        /// <param name="objectTree">Object to be serialized.</param>
+        /// <exception cref="ArgumentNullException">
+        ///		<paramref name="packer"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="SerializationException">
+        ///		<typeparamref name="T"/> is not serializable etc.
+        /// </exception>
+        public void PackTo(Packer packer, T objectTree)
+        {
+            this._serializer.PackTo(packer, objectTree);
+        }
+
+        /// <summary>
+        ///		Deserialize object with specified <see cref="Unpacker"/>.
+        /// </summary>
+        /// <param name="unpacker"><see cref="Unpacker"/> which unpacks values of resulting object tree.</param>
+        /// <returns>Deserialized object.</returns>
+        /// <exception cref="ArgumentNullException">
+        ///		<paramref name="unpacker"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="SerializationException">
+        ///		Failed to deserialize object due to invalid unpacker state, stream content, or so.
+        /// </exception>
+        /// <exception cref="MessageTypeException">
+        ///		Failed to deserialize object due to invalid unpacker state, stream content, or so.
+        /// </exception>
+        /// <exception cref="InvalidMessagePackStreamException">
+        ///		Failed to deserialize object due to invalid unpacker state, stream content, or so.
+        /// </exception>
+        /// <exception cref="NotSupportedException">
+        ///		<typeparamref name="T"/> is abstract type.
+        /// </exception>
+        public T UnpackFrom(Unpacker unpacker)
+        {
+            return (T)this._serializer.UnpackFrom(unpacker);
+        }
+
+        /// <summary>
+        ///		Deserialize collection items with specified <see cref="Unpacker"/> and stores them to <paramref name="collection"/>.
+        /// </summary>
+        /// <param name="unpacker"><see cref="Unpacker"/> which unpacks values of resulting object tree.</param>
+        /// <param name="collection">Collection that the items to be stored.</param>
+        /// <exception cref="ArgumentNullException">
+        ///		<paramref name="unpacker"/> is <c>null</c>.
+        ///		Or <paramref name="collection"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="SerializationException">
+        ///		Failed to deserialize object due to invalid unpacker state, stream content, or so.
+        /// </exception>
+        /// <exception cref="MessageTypeException">
+        ///		Failed to deserialize object due to invalid unpacker state, stream content, or so.
+        /// </exception>
+        /// <exception cref="InvalidMessagePackStreamException">
+        ///		Failed to deserialize object due to invalid unpacker state, stream content, or so.
+        /// </exception>
+        /// <exception cref="NotSupportedException">
+        ///		<typeparamref name="T"/> is not collection.
+        /// </exception>
+        public void UnpackTo(Unpacker unpacker, T collection)
+        {
+            this._serializer.UnpackTo(unpacker, collection);
+        }
+
+        /// <summary>
+        ///		Serialize specified object to the array of <see cref="Byte"/>.
+        /// </summary>
+        /// <param name="objectTree">Object to be serialized.</param>
+        /// <returns>An array of <see cref="Byte"/> which stores serialized value.</returns>
+        /// <exception cref="SerializationException">
+        ///		<typeparamref name="T"/> is not serializable etc.
+        /// </exception>
+        public byte[] PackSingleObject(T objectTree)
+        {
+            return this._serializer.PackSingleObject(objectTree);
+        }
+
+        /// <summary>
+        ///		Deserialize a single object from the array of <see cref="Byte"/> which contains a serialized object.
+        /// </summary>
+        /// <param name="buffer">An array of <see cref="Byte"/> serialized value to be stored.</param>
+        /// <returns>A bytes of serialized binary.</returns>
+        /// <exception cref="ArgumentNullException">
+        ///		<paramref name="buffer"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="SerializationException">
+        ///		Failed to deserialize object due to invalid unpacker state, stream content, or so.
+        /// </exception>
+        /// <exception cref="MessageTypeException">
+        ///		Failed to deserialize object due to invalid unpacker state, stream content, or so.
+        /// </exception>
+        /// <exception cref="InvalidMessagePackStreamException">
+        ///		Failed to deserialize object due to invalid unpacker state, stream content, or so.
+        /// </exception>
+        /// <remarks>
+        ///		<para>
+        ///			This method assumes that <paramref name="buffer"/> contains single serialized object dedicatedly,
+        ///			so this method does not return any information related to actual consumed bytes.
+        ///		</para>
+        ///		<para>
+        ///			This method is a counter part of <see cref="PackSingleObject"/>.
+        ///		</para>
+        /// </remarks>
+        public T UnpackSingleObject(byte[] buffer)
+        {
+            return (T)this._serializer.UnpackSingleObject(buffer);
+        }
+
+        void IMessagePackSerializer.PackTo(Packer packer, object objectTree)
+        {
+            ((IMessagePackSerializer)this._serializer).PackTo(packer, objectTree);
+        }
+
+        object IMessagePackSerializer.UnpackFrom(Unpacker unpacker)
+        {
+            return ((IMessagePackSerializer)this._serializer).UnpackFrom(unpacker);
+        }
+
+        void IMessagePackSerializer.UnpackTo(Unpacker unpacker, object collection)
+        {
+            ((IMessagePackSerializer)this._serializer).UnpackTo(unpacker, collection);
+        }
+
+        byte[] IMessagePackSingleObjectSerializer.PackSingleObject(object objectTree)
+        {
+            return ((IMessagePackSingleObjectSerializer)this._serializer).PackSingleObject(objectTree);
+        }
+
+        object IMessagePackSingleObjectSerializer.UnpackSingleObject(byte[] buffer)
+        {
+            return ((IMessagePackSingleObjectSerializer)this._serializer).UnpackSingleObject(buffer);
+        }
+    }
+}
+
+#else // UNITY_IOS
+
 using System;
 using System.Globalization;
 using System.IO;
@@ -412,3 +625,4 @@ namespace MsgPack.Serialization
         }
     }
 }
+#endif

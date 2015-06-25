@@ -17,6 +17,118 @@
 //    limitations under the License.
 //
 #endregion -- License Terms --
+#if UNITY_IOS
+
+#region -- License Terms --
+//
+// MessagePack for CLI
+//
+// Copyright (C) 2010-2012 FUJIWARA, Yusuke
+//
+//    Licensed under the Apache License, Version 2.0 (the "License");
+//    you may not use this file except in compliance with the License.
+//    You may obtain a copy of the License at
+//
+//        http://www.apache.org/licenses/LICENSE-2.0
+//
+//    Unless required by applicable law or agreed to in writing, software
+//    distributed under the License is distributed on an "AS IS" BASIS,
+//    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//    See the License for the specific language governing permissions and
+//    limitations under the License.
+//
+#endregion -- License Terms --
+
+using System;
+using System.Diagnostics.Contracts;
+using System.Globalization;
+using System.Reflection;
+
+namespace MsgPack.Serialization.DefaultSerializers
+{
+    internal sealed partial class NullableMessagePackSerializer : MessagePackSerializer
+    {
+        // TODO: -> Metadata
+        // TODO: comment
+        private readonly PropertyInfo _nullableTHasValueProperty;// = GetOnlyWhenNullable();
+        private readonly PropertyInfo _nullableTValueProperty;// = GetOnlyWhenNullable(typeof(Nullable<>).MakeGenericType(Nullable.GetUnderlyingType(typeof(T))).GetProperty("Value"));
+        private readonly MethodInfo _nullableTImplicitOperator;// = GetOnlyWhenNullable(typeof(Nullable<>).MakeGenericType(Nullable.GetUnderlyingType(typeof(T))).GetMethod("op_Implicit", new Type[] { Nullable.GetUnderlyingType(typeof(T)) }));
+
+        private static bool IsNullable(Type type)
+        {
+            return type.GetIsGenericType() && type.GetGenericTypeDefinition() == typeof(Nullable<>);
+        }
+
+        //private readonly Func<Unpacker, IMessagePackSerializer, T> _unpackFromCore;
+        private readonly IMessagePackSerializer _underlyingTypeSerializer;
+        public NullableMessagePackSerializer(Type type, SerializationContext context)
+            : this(type, context, context.EmitterFlavor)
+        { }
+
+        internal NullableMessagePackSerializer(Type type, SerializationContext context, EmitterFlavor emitterFlavor)
+            : base(type, (context ?? SerializationContext.Default).CompatibilityOptions.PackerCompatibilityOptions)
+        {
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
+
+            Contract.EndContractBlock();
+
+            if (!IsNullable(type))
+            {
+                throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, "'{0}' is not nullable type.", type));
+            }
+
+            var underlyingType = Nullable.GetUnderlyingType(type);
+
+            this._nullableTHasValueProperty = type.GetProperty("HasValue");
+            this._nullableTValueProperty = type.GetProperty("Value");
+            this._nullableTImplicitOperator = type.GetMethod("op_Implicit", new Type[] { type });
+
+
+            this._underlyingTypeSerializer = context.GetSerializer(underlyingType);
+        }
+
+        private object UnpackFromCore(Unpacker unpacker, IMessagePackSerializer underlyingTypeSerializer)
+        {
+            if (unpacker.LastReadData.IsNil)
+            {
+                return Activator.CreateInstance(TargetType);
+            }
+            else
+            {
+                return _nullableTImplicitOperator.Invoke(null, new object[] { underlyingTypeSerializer.UnpackFrom(unpacker) });
+            }
+        }
+
+        private void PackToCore(Packer packer, object target, IMessagePackSerializer underlyingTypeSerializer)
+        {
+            {
+                if (!(bool)_nullableTValueProperty.GetGetMethod().Invoke(target, new object[0]))
+                {
+                    packer.PackNull();
+                    return;
+                }
+
+                underlyingTypeSerializer.PackTo(packer, _nullableTValueProperty.GetGetMethod().Invoke(target, new object[0]));
+            };
+        }
+
+        protected internal sealed override void PackToCore(Packer packer, object value)
+        {
+            PackToCore(packer, value, this._underlyingTypeSerializer);
+        }
+
+        protected internal sealed override object UnpackFromCore(Unpacker unpacker)
+        {
+            return UnpackFromCore(unpacker, this._underlyingTypeSerializer);
+        }
+    }
+}
+
+
+#else // UNITY_IOS
 
 using System;
 using System.Diagnostics.Contracts;
@@ -300,3 +412,4 @@ namespace MsgPack.Serialization.DefaultSerializers
 		}
 	}
 }
+#endif

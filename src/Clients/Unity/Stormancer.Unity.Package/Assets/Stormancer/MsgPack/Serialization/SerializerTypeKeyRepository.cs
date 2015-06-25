@@ -44,6 +44,34 @@ namespace MsgPack.Serialization
 		{
 		}
 
+#if UNITY_IOS
+        public object Get(Type key, SerializationContext context)
+        {
+            object matched;
+            object genericDefinitionMatched;
+            if (!this.Get(key, out matched, out genericDefinitionMatched))
+            {
+                return null;
+            }
+
+            if (matched != null)
+            {
+                return matched;
+            }
+            else
+            {
+                Contract.Assert(key.GetIsGenericType());
+                Contract.Assert(!key.GetIsGenericTypeDefinition());
+                var type = genericDefinitionMatched as Type;
+                Contract.Assert(type != null);
+                Contract.Assert(type.GetIsGenericTypeDefinition());
+                var result = Activator.CreateInstance(type.MakeGenericType(key.GetGenericArguments()), context);
+                Contract.Assert(result != null);
+                return result;
+            }
+        }
+#endif
+
 		public TEntry Get<T, TEntry>( SerializationContext context )
 			where TEntry : class
 		{

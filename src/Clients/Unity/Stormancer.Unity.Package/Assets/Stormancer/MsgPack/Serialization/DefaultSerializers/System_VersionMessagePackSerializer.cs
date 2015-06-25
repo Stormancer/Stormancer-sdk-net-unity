@@ -23,35 +23,56 @@ using System.Diagnostics.Contracts;
 
 namespace MsgPack.Serialization.DefaultSerializers
 {
-	internal sealed class System_VersionMessagePackSerializer : MessagePackSerializer<Version>
-	{
-		public System_VersionMessagePackSerializer( PackerCompatibilityOptions packerCompatibilityOptions )
+    internal sealed class System_VersionMessagePackSerializer
+#if UNITY_IOS
+ : MessagePackSerializer
+#else        
+        : MessagePackSerializer<Version>
+#endif
+    {
+        public System_VersionMessagePackSerializer(PackerCompatibilityOptions packerCompatibilityOptions)
+#if UNITY_IOS
+            : base(typeof(Version), packerCompatibilityOptions) { }
+#else
 			: base( packerCompatibilityOptions ) { }
 
-		protected internal sealed override void PackToCore( Packer packer, Version objectTree )
-		{
-			packer.PackArrayHeader( 4 );
-			packer.Pack( objectTree.Major );
-			packer.Pack( objectTree.Minor );
-			packer.Pack( objectTree.Build );
-			packer.Pack( objectTree.Revision );
-		}
+#endif
 
+        
+#if UNITY_IOS
+        protected internal sealed override void PackToCore(Packer packer, object obj)
+        {
+            var objectTree = (Version)obj; 
+#else
+        protected internal sealed override void PackToCore(Packer packer, Version objectTree)            
+        {
+#endif
+            packer.PackArrayHeader(4);
+            packer.Pack(objectTree.Major);
+            packer.Pack(objectTree.Minor);
+            packer.Pack(objectTree.Build);
+            packer.Pack(objectTree.Revision);
+        }
+
+#if UNITY_IOS
+        protected internal sealed override object UnpackFromCore(Unpacker unpacker)
+#else
 		protected internal sealed override Version UnpackFromCore( Unpacker unpacker )
-		{
-			long length = unpacker.LastReadData.AsInt64();
-			int[] array = new int[ 4 ];
-			for ( int i = 0; i < length && i < 4; i++ )
-			{
-				if ( !unpacker.Read() )
-				{
-					throw SerializationExceptions.NewMissingItem( i );
-				}
+#endif
+        {
+            long length = unpacker.LastReadData.AsInt64();
+            int[] array = new int[4];
+            for (int i = 0; i < length && i < 4; i++)
+            {
+                if (!unpacker.Read())
+                {
+                    throw SerializationExceptions.NewMissingItem(i);
+                }
 
-				array[ i ] = unpacker.LastReadData.AsInt32();
-			}
+                array[i] = unpacker.LastReadData.AsInt32();
+            }
 
-			return new Version( array[ 0 ], array[ 1 ], array[ 2 ], array[ 3 ] );
-		}
-	}
+            return new Version(array[0], array[1], array[2], array[3]);
+        }
+    }
 }

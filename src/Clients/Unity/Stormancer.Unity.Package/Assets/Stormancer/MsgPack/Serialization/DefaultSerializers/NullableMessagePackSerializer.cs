@@ -23,8 +23,13 @@ using System.Reflection;
 
 namespace MsgPack.Serialization.DefaultSerializers
 {
+#if UNITY_IOS
+    internal partial class NullableMessagePackSerializer
+#else
+    
 	internal static class NullableMessagePackSerializer
-	{
+#endif
+    {
 		public static readonly PropertyInfo MessagePackObject_IsNilProperty = FromExpression.ToProperty( ( MessagePackObject value ) => value.IsNil );
 		public static readonly PropertyInfo Nullable_MessagePackObject_ValueProperty = FromExpression.ToProperty( ( MessagePackObject? value ) => value.Value );
 		public static readonly PropertyInfo UnpackerLastReadDataProperty = FromExpression.ToProperty( ( Unpacker unpacker ) => unpacker.LastReadData );
