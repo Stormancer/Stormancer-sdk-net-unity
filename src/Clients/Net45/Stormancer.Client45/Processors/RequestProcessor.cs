@@ -159,8 +159,9 @@ namespace Stormancer.Networking.Processors
         /// <param name="peer">A target peer</param>
         /// <param name="msgId">Message id</param>
         /// <param name="writer">An action writing the request parameters</param>
+        /// <param name="priority">Priority of the request.</param>
         /// <returns>An observable returning the request responses</returns>
-        public Task<Packet> SendSystemRequest(IConnection peer, byte msgId, Action<Stream> writer)
+        public Task<Packet> SendSystemRequest(IConnection peer, byte msgId, Action<Stream> writer, PacketPriority priority = PacketPriority.MEDIUM_PRIORITY)
         {
             var tcs = new TaskCompletionSource<Packet>();
             var request = ReserveRequestSlot(tcs);
@@ -173,7 +174,7 @@ namespace Stormancer.Networking.Processors
                 bw.Flush();
                 writer(bs);
 
-            });
+            },priority);
 
             return tcs.Task;
         }

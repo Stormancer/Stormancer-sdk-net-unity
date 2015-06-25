@@ -22,6 +22,7 @@ using Stormancer.Cluster.Application;
 using Stormancer.Dto;
 using Stormancer.Plugins;
 using Stormancer.Diagnostics;
+using System.Diagnostics;
 
 namespace Stormancer
 {
@@ -62,6 +63,7 @@ namespace Stormancer
         private readonly ApiClient _apiClient;
         private readonly string _accountId;
         private readonly string _applicationName;
+        private readonly int _pingInterval = 5000;
 
         private readonly PluginBuildContext _pluginCtx = new PluginBuildContext();
         private IConnection _serverConnection;
@@ -99,6 +101,7 @@ namespace Stormancer
 
 
         private ILogger _logger = NullLogger.Instance;
+        private readonly IScheduler _scheduler;
 
         /// <summary>
         /// An user specified logger.
@@ -128,11 +131,12 @@ namespace Stormancer
         /// <param name="configuration">A configuration instance containing options for the client.</param>
         public Client(ClientConfiguration configuration)
         {
+            this._scheduler = configuration.Scheduler;
             this._logger = configuration.Logger;
             this._accountId = configuration.Account;
             this._applicationName = configuration.Application;
             _apiClient = new ApiClient(configuration, _tokenHandler);
-            this._transport = configuration.TransportFactory(new Dictionary<string, object> { { "ILogger", this._logger } });
+            this._transport = configuration.TransportFactory(new Dictionary<string, object> { { "ILogger", this._logger }, { "IScheduler", this._scheduler } });
             this._dispatcher = configuration.Dispatcher;
             _requestProcessor = new Stormancer.Networking.Processors.RequestProcessor(_logger, Enumerable.Empty<IRequestModule>());
 
@@ -163,7 +167,31 @@ namespace Stormancer
             Initialize();
 
         }
+        private Stopwatch _watch = new Stopwatch();
 
+        /// <summary>
+        /// Synchronized clock with the server.
+        /// </summary>
+        public long Clock
+        {
+            get
+            {
+                return _watch.ElapsedMilliseconds + _offset;
+            }
+        }
+
+        /// <summary>
+        /// Last ping value with the cluster.
+        /// </summary>
+        /// <remarks>
+        /// 0 means that no mesure has be made yet.
+        /// </remarks>
+        public long LastPing
+        {
+            get;
+            private set;
+        }
+        private long _offset;
 
         private void Initialize()
         {
@@ -173,8 +201,10 @@ namespace Stormancer
 
                 _transport.PacketReceived += _transport_PacketReceived;
 
+                _watch.Start();
 
             }
+
         }
 
         void _transport_PacketReceived(Stormancer.Core.Packet obj)
@@ -222,6 +252,38 @@ namespace Stormancer
                 _systemSerializer.Serialize(_serverConnection.Metadata, s);
             });
         }
+        private async Task SyncClockImpl()
+        {
+            try
+            {
+                long tStart = _watch.ElapsedMilliseconds;
+                var response = await _requestProcessor.SendSystemRequest(_serverConnection, (byte)SystemRequestIDTypes.ID_PING, s =>
+                {
+                    s.Write(BitConverter.GetBytes(tStart), 0, 8);
+                }, PacketPriority.IMMEDIATE_PRIORITY);
+                ulong tRef;
+                long tEnd = _watch.ElapsedMilliseconds;
+                using (var reader = new BinaryReader(response.Stream))
+                {
+                    tRef = reader.ReadUInt64();
+
+                }
+                LastPing = tEnd - tStart;
+                _offset = (long)tRef - LastPing / 2 - tStart;
+                Debug.WriteLine(_offset);
+            }
+            catch (Exception)
+            {
+                _logger.Error("ping", "failed to ping server.");
+            };
+        }
+        private IDisposable _syncClockTaskDisposable;
+        private void StartSyncClock()
+        {
+
+            _syncClockTaskDisposable = _scheduler.SchedulePeriodic(_pingInterval, () => { var _ = SyncClockImpl(); });
+        }
+
         private async Task<Scene> GetScene(string sceneId, SceneEndpoint ci)
         {
             if (_serverConnection == null)
@@ -229,7 +291,11 @@ namespace Stormancer
                 if (!_transport.IsRunning)
                 {
                     cts = new CancellationTokenSource();
-                    await _transport.Start("client", new ConnectionHandler(), cts.Token, null, (ushort)(_maxPeers + 1));
+                    _transport.Start("client", new ConnectionHandler(), cts.Token, null, (ushort)(_maxPeers + 1));
+                    if (ci.TokenData.Version > 0)
+                    {
+                        StartSyncClock();
+                    }
                 }
                 _serverConnection = await _transport.Connect(ci.TokenData.Endpoints[_transport.Name]);
 
@@ -346,7 +412,12 @@ namespace Stormancer
             if (!this._disposed)
             {
                 this._disposed = true;
+                if (_syncClockTaskDisposable != null)
+                {
+                    _syncClockTaskDisposable.Dispose();
+                }
                 Disconnect();
+
             }
 
         }

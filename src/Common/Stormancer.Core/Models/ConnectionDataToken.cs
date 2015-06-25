@@ -23,5 +23,7 @@ namespace Stormancer.Cluster.Application
         public byte[] UserData { get; set; }
 
         public string ContentType { get; set; }
+
+        public int Version { get; set; }
     }
 }

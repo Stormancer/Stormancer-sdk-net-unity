@@ -1,5 +1,7 @@
-﻿using Stormancer.Client45.Infrastructure;
+﻿using Stormancer.Client45;
+using Stormancer.Client45.Infrastructure;
 using Stormancer.Diagnostics;
+using Stormancer.Infrastructure;
 using Stormancer.Networking;
 using Stormancer.Plugins;
 using System;
@@ -7,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 
 
 namespace Stormancer
@@ -48,6 +51,14 @@ namespace Stormancer
         /// </summary>
         public string Application { get; private set; }
 
+        /// <summary>
+        /// Enable or disable the asynchrounous dispatch of received messages.
+        /// </summary>
+        /// <remarks>
+        /// Asynchronous dispatch is enabled by default.
+        /// </remarks>
+        public bool AsynchrounousDispatch { get; set; }
+
         internal Uri GetApiEndpoint()
         {
             if (IsLocalDev)
@@ -60,7 +71,7 @@ namespace Stormancer
             }
         }
 
-     
+
         /// <summary>
         /// Creates a ClientConfiguration object targeting the public online platform.
         /// </summary>
@@ -76,8 +87,10 @@ namespace Stormancer
 
         private ClientConfiguration()
         {
+            Scheduler = new DefaultScheduler();
+
             Logger = NullLogger.Instance;
-            Dispatcher = new DefaultPacketDispatcher();
+            Dispatcher = new DefaultPacketDispatcher(new Lazy<bool>(() => this.AsynchrounousDispatch));
             TransportFactory = DefaultTransportFactory;
             //Transport = new WebSocketClientTransport(NullLogger.Instance);        
 
@@ -85,11 +98,12 @@ namespace Stormancer
             MaxPeers = 20;
             Plugins = new List<IClientPlugin>();
             Plugins.Add(new RpcClientPlugin());
+            AsynchrounousDispatch = true;
         }
 
-        private RakNetTransport DefaultTransportFactory(IDictionary<string, object> parameters) 
+        private RakNetTransport DefaultTransportFactory(IDictionary<string, object> parameters)
         {
-            return new RakNetTransport((ILogger)(parameters["ILogger"]));
+            return new RakNetTransport((ILogger)(parameters["ILogger"]), (IScheduler)(parameters["IScheduler"]));
         }
 
         /// <summary>
@@ -113,7 +127,7 @@ namespace Stormancer
         /// <summary>
         /// Gets or sets the transport to be used by the client.
         /// </summary>
-        public Func<IDictionary<string,object>,ITransport> TransportFactory { get; set; }
+        public Func<IDictionary<string, object>, ITransport> TransportFactory { get; set; }
 
 
         /// <summary>
@@ -137,6 +151,14 @@ namespace Stormancer
         /// </remarks>
         public ILogger Logger { get; set; }
 
+        /// <summary>
+        /// The scheduler used by the client to run the transport and other repeated tasks.
+        /// </summary>
+        public IScheduler Scheduler
+        {
+            get;
+            set;
+        }
         /// <summary>
         /// Adds a plugin to the client.
         /// </summary>

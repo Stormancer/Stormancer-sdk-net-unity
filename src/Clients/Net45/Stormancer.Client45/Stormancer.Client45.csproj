@@ -74,6 +74,7 @@
     <Compile Include="ApiClient.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="Configuration\ClientConfiguration.cs" />
+    <Compile Include="Infrastructure\DefaultScheduler.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Extensions\SceneExtensions.cs" />
     <Compile Include="IConnectionManager.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Infrastructure\Modules\IModule.cs" />
     <Compile Include="Infrastructure\SubStream.cs" />
     <Compile Include="IPacketProcessor.cs" />
+    <Compile Include="IScheduler.cs" />
     <Compile Include="ITransport.cs" />
     <Compile Include="MessageIDTypes.cs" />
     <Compile Include="Plugins\IClientPlugin.cs" />
