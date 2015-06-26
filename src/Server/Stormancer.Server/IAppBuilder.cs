@@ -1,5 +1,6 @@
 ﻿using Stormancer.Core;
 using Stormancer.Plugins;
+using Stormancer.Server.Admin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,5 +32,12 @@ namespace Stormancer
         /// <returns>The current 'IAppBuilder' instance.</returns>
         IAppBuilder SceneTemplate(string name, Action<ISceneHost> factory, Dictionary<string,string> metadata = null);
 
+        /// <summary>
+        /// Adds a new admin plugin
+        /// </summary>
+        /// <param name="id">id of the plugin</param>
+        /// <param name="version">target admin plugin host version</param>
+        /// <returns></returns>
+        IAdminPluginConfig AdminPlugin(string id, AdminPluginHostVersion version);
     }
 }
