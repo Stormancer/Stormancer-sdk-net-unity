@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Stormancer.Server;
 
 namespace Stormancer.Plugins
 {
@@ -13,18 +14,28 @@ namespace Stormancer.Plugins
     public class HostPluginBuildContext
     {
         /// <summary>
-        /// Fired just before the scene template is applied to a new scene.
+        /// Fires just before the scene template is applied to a new scene.
         /// </summary>
         public Action<ISceneHost> SceneCreating { get; set; }
 
         /// <summary>
-        /// Fired just after the scene template is applied to a new scene.
+        /// Fires just after the scene template is applied to a new scene.
         /// </summary>
         public Action<ISceneHost> SceneCreated { get; set; }
 
         /// <summary>
-        /// Fired after a new scene has started.
+        /// Fires after a new scene has started.
         /// </summary>
         public Action<ISceneHost> SceneStarted { get; set; }
+
+        /// <summary>
+        /// Fires when the server host is starting. 
+        /// </summary>
+        public Action<IHost> HostStarting { get; set; }
+
+        /// <summary>
+        /// Fires when the server host is shutting down
+        /// </summary>
+        public Action<IHost> HostShuttingDown { get; set; }
     }
 }

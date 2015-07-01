@@ -32,7 +32,7 @@ namespace Echo.Client
                             {
                                 //var serializer = scene.GetComponent<ISerializer>();
                                 //serializer.Serialize("hello", s);
-                                scene.HostConnection.Serializer().Serialize("hello", s);
+                                scene.Host.Serializer().Serialize("hello", s);
                             });
                         }
                         else
