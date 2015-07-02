@@ -39,5 +39,11 @@ namespace Stormancer
         /// <param name="version">target admin plugin host version</param>
         /// <returns></returns>
         IAdminPluginConfig AdminPlugin(string id, AdminPluginHostVersion version);
+
+        /// <summary>
+        /// Starts the local web server using the provided configuration class
+        /// </summary>
+        /// <typeparam name="TConfiguration">Owin configuration class</typeparam>
+        void WebServer<TConfiguration>();
     }
 }
