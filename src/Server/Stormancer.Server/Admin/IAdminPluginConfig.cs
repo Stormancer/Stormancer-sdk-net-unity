@@ -1,5 +1,6 @@
 ﻿using Stormancer.Plugins;
 using System;
+using System.Collections.Generic;
 namespace Stormancer.Server.Admin
 {
     /// <summary>
@@ -7,18 +8,7 @@ namespace Stormancer.Server.Admin
     /// </summary>
     public interface IAdminPluginConfig
     {
-        /// <summary>
-        /// Additionnal content type mappings declared in the plugin
-        /// </summary>
-        System.Collections.Generic.IReadOnlyDictionary<string, string> ContentTypeMappings { get; }
-
-        /// <summary>
-        /// Adds a new content type mapping
-        /// </summary>
-        /// <param name="extension">File extension</param>
-        /// <param name="mime">content type</param>
-        /// <returns>Current instance of the plugin config object</returns>
-        IAdminPluginConfig ContentTypeMapping(string extension, string mime);
+       
 
         /// <summary>
         /// Gets the name of the admin plugin tab
@@ -32,16 +22,26 @@ namespace Stormancer.Server.Admin
         /// <returns>Current instance of the plugin config object</returns>
         IAdminPluginConfig Name(string name);
 
+
         /// <summary>
-        /// Adds a service to the plugin
+        /// 'Get' routes for the module
         /// </summary>
-        /// <remarks>
-        /// Services can be called from the admin plugin page and use the Stormancer RPC protocol.
-        /// </remarks>
-        /// <param name="id">id of the service</param>
-        /// <param name="handler">Handler </param>
-        /// <returns>Current instance of the plugin config object</returns>
-        IAdminPluginConfig Service(string id, Func< RequestContext<IScenePeerClient>, System.Threading.Tasks.Task> handler);
+        IDictionary<string, Func<dynamic, dynamic>> Get { get; }
+
+        /// <summary>
+        /// 'Delete' routes for the module
+        /// </summary>
+        IDictionary<string, Func<dynamic, dynamic>> Delete { get; set; }
+
+        /// <summary>
+        /// 'Post' routes for the module
+        /// </summary>
+        IDictionary<string, Func<dynamic, dynamic>> Post { get; set; }
+
+        /// <summary>
+        /// 'Put' routes for the module
+        /// </summary>
+        IDictionary<string, Func<dynamic, dynamic>> Put { get; set; }
 
         /// <summary>
         /// List of registered services
