@@ -37,5 +37,9 @@ namespace Stormancer.Server
         /// <returns></returns>
         IEnumerable<ISceneHost> EnumerateScenes();
 
+        /// <summary>
+        /// Admin services registered in the application
+        /// </summary>
+        List<AdminServicesDescription> AdminServices { get; }
     }
 }

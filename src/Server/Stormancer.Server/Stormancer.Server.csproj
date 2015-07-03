@@ -61,6 +61,7 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\AdminServiceDescription.cs" />
     <Compile Include="Admin\IAdminPluginConfig.cs" />
     <Compile Include="Components\HostStatus.cs" />
     <Compile Include="Components\IEnvironment.cs" />
