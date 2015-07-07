@@ -41,5 +41,7 @@ namespace Stormancer.Server
         /// Admin services registered in the application
         /// </summary>
         List<AdminServicesDescription> AdminServices { get; }
+
+        IDictionary<string, string> Metadata { get; }
     }
 }
