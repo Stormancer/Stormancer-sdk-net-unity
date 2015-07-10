@@ -71,6 +71,7 @@
     <Compile Include="Extensions\RpcSceneHostExtensions.cs" />
     <Compile Include="Extensions\SceneHostExtensions.cs" />
     <Compile Include="IAppBuilder.cs" />
+    <Compile Include="Index.cs" />
     <Compile Include="IPeerFilter.cs" />
     <Compile Include="IScenePeerClient.cs" />
     <Compile Include="ISceneHost.cs" />
