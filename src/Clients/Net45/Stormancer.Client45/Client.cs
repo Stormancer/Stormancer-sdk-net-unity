@@ -292,10 +292,7 @@ namespace Stormancer
                 {
                     cts = new CancellationTokenSource();
                     _transport.Start("client", new ConnectionHandler(), cts.Token, null, (ushort)(_maxPeers + 1));
-                    if (ci.TokenData.Version > 0)
-                    {
-                        StartSyncClock();
-                    }
+                   
                 }
                 _serverConnection = await _transport.Connect(ci.TokenData.Endpoints[_transport.Name]);
 
@@ -305,6 +302,10 @@ namespace Stormancer
                 }
                 await UpdateServerMetadata();
 
+                if (ci.TokenData.Version > 0)
+                {
+                    StartSyncClock();
+                }
             }
             var parameter = new Stormancer.Dto.SceneInfosRequestDto { Metadata = _serverConnection.Metadata, Token = ci.Token };
 
