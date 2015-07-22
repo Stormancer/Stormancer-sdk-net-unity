@@ -18,6 +18,12 @@ namespace Stormancer.Server.Components
         Task<ApplicationInfos> GetApplicationInfos();
 
         /// <summary>
+        /// Lists the available storage indices available for the application.
+        /// </summary>
+        /// <returns></returns>
+        Task<IEnumerable<Index>> ListIndices();
+
+        /// <summary>
         /// A boolean value indicating if the running environment is currently the active deployment.
         /// </summary>
         bool IsActive { get; }
