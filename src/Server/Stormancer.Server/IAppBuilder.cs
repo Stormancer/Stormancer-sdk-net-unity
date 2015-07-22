@@ -41,9 +41,12 @@ namespace Stormancer
         IAdminPluginConfig AdminPlugin(string id, AdminPluginHostVersion version);
 
         /// <summary>
-        /// Starts the local web server using the provided configuration class
+        /// Configure the local web server using the provided configuration method.
         /// </summary>
-        /// <typeparam name="TConfiguration">Owin configuration class</typeparam>
-        void WebServer<TConfiguration>();
+        /// <remarks>
+        /// The server can't be enabled currently. <br/>The method can be called several times. In this case, the configuration methods will be applied in the order they were added.
+        /// </remarks>
+        /// <param name="config">Configuration method</param>
+        void WebServer(Action<Owin.IAppBuilder> config);
     }
 }
