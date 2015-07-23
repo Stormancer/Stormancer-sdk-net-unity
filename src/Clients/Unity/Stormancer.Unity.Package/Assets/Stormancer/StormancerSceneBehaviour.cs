@@ -43,6 +43,8 @@ namespace Stormancer
             ClientConfiguration config;
             config = ClientConfiguration.ForAccount(AccountId, Application);
 
+            config.Logger = DebugLogger.Instance;
+
             _client = new Stormancer.Client(config);
             _client.GetPublicScene(this.SceneId, "")
                 .ContinueWith<Scene>(task =>

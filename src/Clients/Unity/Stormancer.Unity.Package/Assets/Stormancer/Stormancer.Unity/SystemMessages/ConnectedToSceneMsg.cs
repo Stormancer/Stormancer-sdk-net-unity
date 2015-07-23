@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Stormancer.Dto
 {
+#if UNITY_IOS
+    public class ConnectToSceneMsg
+#else
     public struct ConnectToSceneMsg
+#endif
     {
         public string Token;
         public List<RouteDto> Routes;

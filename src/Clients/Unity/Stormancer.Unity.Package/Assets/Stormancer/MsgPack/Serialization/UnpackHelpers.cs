@@ -339,7 +339,76 @@ namespace MsgPack.Serialization
         ///		Failed to deserialization.
         /// </exception>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static void UnpackMapTo<TKey, TValue>(Unpacker unpacker, MessagePackSerializer keySerializer, MessagePackSerializer valueSerializer, IDictionary<TKey, TValue> dictionary)
+#if UNITY_IOS
+        public static void UnpackMapToDictionary(Unpacker unpacker, MessagePackSerializer keySerializer, MessagePackSerializer valueSerializer, object dictionary)
+        {
+#if DEBUG
+            if (unpacker == null)
+            {
+                throw new ArgumentNullException("unpacker");
+            }
+
+            if (dictionary == null)
+            {
+                throw new ArgumentNullException("dictionary");
+            }
+
+            if (!unpacker.IsMapHeader)
+            {
+                throw SerializationExceptions.NewIsNotMapHeader();
+            }
+
+            Contract.EndContractBlock();
+#endif
+
+            int count = GetItemsCount(unpacker);
+            for (int i = 0; i < count; i++)
+            {
+                if (!unpacker.Read())
+                {
+                    throw SerializationExceptions.NewMissingItem(i);
+                }
+
+                object key;
+                if (!unpacker.IsArrayHeader && !unpacker.IsMapHeader)
+                {
+                    key = keySerializer.UnpackFrom(unpacker);
+                }
+                else
+                {
+                    using (Unpacker subtreeUnpacker = unpacker.ReadSubtree())
+                    {
+                        key = keySerializer.UnpackFrom(subtreeUnpacker);
+                    }
+                }
+
+
+                if (!unpacker.Read())
+                {
+                    throw SerializationExceptions.NewMissingItem(i);
+                }
+
+                object value;
+                if (!unpacker.IsArrayHeader && !unpacker.IsMapHeader)
+                {
+                    value = valueSerializer.UnpackFrom(unpacker);
+                }
+                else
+                {
+                    using (Unpacker subtreeUnpacker = unpacker.ReadSubtree())
+                    {
+                        value = valueSerializer.UnpackFrom(subtreeUnpacker);
+                    }
+                }
+
+                var addMethod = dictionary.GetType().GetMethod("Add", new[] { keySerializer.TargetType, valueSerializer.TargetType });
+
+                addMethod.Invoke(dictionary, new[] { key, value });
+            }
+        }
+#else
+        public static void UnpackMapTo<TKey, TValue>(Unpacker unpacker, MessagePackSerializer keySerializer, MessagePackSerializer valueSerializer, Dictionary<TKey, TValue> dictionary)
+
         {
 #if DEBUG
             if (unpacker == null)
@@ -403,6 +472,7 @@ namespace MsgPack.Serialization
                 dictionary.Add(key, value);
             }
         }
+            #endif
 
         /// <summary>
         ///		Unpacks the dictionary with the specified method as colletion of <see cref="MessagePackObject"/>.

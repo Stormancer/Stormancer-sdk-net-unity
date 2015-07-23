@@ -328,16 +328,19 @@ namespace Stormancer
                 ConnectionMetadata = _serverConnection.Metadata
             };
             return this.SendSystemRequest<Stormancer.Dto.ConnectToSceneMsg, Stormancer.Dto.ConnectionResult>((byte)SystemRequestIDTypes.ID_CONNECT_TO_SCENE, parameter)
-                .Then(result =>
-                {
-                    scene.CompleteConnectionInitialization(result);
-                    _scenesDispatcher.AddScene(scene);
-                    if (_pluginCtx.SceneConnected != null)
+                .ContinueWith(t =>
                     {
-                        _pluginCtx.SceneConnected(scene);
-                    }
-                });
+                        var result = t.Result;
+                        this.Logger.Trace("Received connection result. Scene handle: {0}", result.SceneHandle);
+                        scene.CompleteConnectionInitialization(result);
+                        _scenesDispatcher.AddScene(scene);
+                        if (_pluginCtx.SceneConnected != null)
+                        {
+                            _pluginCtx.SceneConnected(scene);
+                        }
+                    });
         }
+        
 
         internal Task Disconnect(Scene scene, byte sceneHandle)
         {
