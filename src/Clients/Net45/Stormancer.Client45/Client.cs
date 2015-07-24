@@ -131,6 +131,7 @@ namespace Stormancer
         /// <param name="configuration">A configuration instance containing options for the client.</param>
         public Client(ClientConfiguration configuration)
         {
+            this._pingInterval = configuration.PingInterval;
             this._scheduler = configuration.Scheduler;
             this._logger = configuration.Logger;
             this._accountId = configuration.Account;
@@ -270,18 +271,17 @@ namespace Stormancer
                 }
                 LastPing = tEnd - tStart;
                 _offset = (long)tRef - LastPing / 2 - tStart;
-                Debug.WriteLine(_offset);
             }
             catch (Exception)
             {
                 _logger.Error("ping", "failed to ping server.");
             };
         }
-        private IDisposable _syncClockTaskDisposable;
+        private IDisposable _syncClockSubscription;
         private void StartSyncClock()
         {
 
-            _syncClockTaskDisposable = _scheduler.SchedulePeriodic(_pingInterval, () => { var _ = SyncClockImpl(); });
+            _syncClockSubscription = _scheduler.SchedulePeriodic(_pingInterval, () => { var _ = SyncClockImpl(); });
         }
 
         private async Task<Scene> GetScene(string sceneId, SceneEndpoint ci)
@@ -413,9 +413,9 @@ namespace Stormancer
             if (!this._disposed)
             {
                 this._disposed = true;
-                if (_syncClockTaskDisposable != null)
+                if (_syncClockSubscription != null)
                 {
-                    _syncClockTaskDisposable.Dispose();
+                    _syncClockSubscription.Dispose();
                 }
                 Disconnect();
 

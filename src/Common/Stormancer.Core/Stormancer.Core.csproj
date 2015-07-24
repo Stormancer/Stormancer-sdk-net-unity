@@ -71,7 +71,7 @@
     <Compile Include="IScene.cs" />
     <Compile Include="IScenePeer.cs" />
     <Compile Include="ISerializer.cs" />
-    <Compile Include="Models\ConnectionDataToken.cs" />
+    <Compile Include="Models\ConnectionData.cs" />
     <Compile Include="Models\RouteDto.cs" />
     <Compile Include="Packet.cs" />
     <Compile Include="PacketPriority.cs" />

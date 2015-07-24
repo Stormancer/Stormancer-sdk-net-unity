@@ -125,7 +125,14 @@ namespace Stormancer.Networking
             this._socket.Close();
         }
 
+
+
         public void SendSystem(byte msgId, Action<Stream> writer)
+        {
+            SendSystem(msgId, writer, PacketPriority.MEDIUM_PRIORITY);
+        }
+
+        public void SendSystem(byte msgId, Action<Stream> writer, PacketPriority priority)
         {
             if (writer == null)
             {
@@ -141,8 +148,6 @@ namespace Stormancer.Networking
                 this._socket.Send(stream, (int)stream.Length);
             }
         }
-
-
 
         public void SendToScene(byte sceneHandle, ushort route, Action<System.IO.Stream> writer, PacketPriority priority, PacketReliability reliability)
         {
@@ -193,5 +198,6 @@ namespace Stormancer.Networking
                 action(reason);
             }
         }
+
     }
 }
