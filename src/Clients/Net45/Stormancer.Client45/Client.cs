@@ -259,7 +259,7 @@ namespace Stormancer
                 long tStart = _watch.ElapsedMilliseconds;
                 var response = await _requestProcessor.SendSystemRequest(_serverConnection, (byte)SystemRequestIDTypes.ID_PING, s =>
                 {
-                    s.Write(BitConverter.GetBytes(tStart), 0, 8);
+                    s.Write(BitConverter.GetBytes((ulong)tStart), 0, 8);
                 }, PacketPriority.IMMEDIATE_PRIORITY);
                 ulong tRef;
                 long tEnd = _watch.ElapsedMilliseconds;
