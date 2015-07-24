@@ -140,6 +140,12 @@ namespace Stormancer.Networking.Processors
 
         public Task<Packet> SendSystemRequest(IConnection peer, byte msgId, Action<Stream> writer)
         {
+            return this.SendSystemRequest(peer, msgId, writer, PacketPriority.MEDIUM_PRIORITY);
+        }
+
+
+        public Task<Packet> SendSystemRequest(IConnection peer, byte msgId, Action<Stream> writer, PacketPriority priority)
+        {
             var tcs = new TaskCompletionSource<Packet>();
             var request = ReserveRequestSlot(tcs);
 
@@ -151,7 +157,7 @@ namespace Stormancer.Networking.Processors
                 bw.Flush();
                 writer(bs);
 
-            });
+            }, priority);
 
             return tcs.Task;
         }

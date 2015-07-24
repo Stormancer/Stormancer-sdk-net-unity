@@ -14,6 +14,7 @@ using Stormancer.Networking;
 using Stormancer.Core;
 using Stormancer.Cluster.Application;
 using Stormancer.Plugins;
+using System.Diagnostics;
 
 namespace Stormancer
 {
@@ -51,6 +52,7 @@ namespace Stormancer
         private readonly ApiClient _apiClient;
         private readonly string _accountId;
         private readonly string _applicationName;
+        private readonly int _pingInterval = 5000;
 
         private readonly PluginBuildContext _pluginCtx = new PluginBuildContext();
         private IConnection _serverConnection;
@@ -85,6 +87,7 @@ namespace Stormancer
         }
 
         private ILogger _logger = NullLogger.Instance;
+        private readonly IScheduler _scheduler;
 
         /// <summary>
         /// An user specified logger.
@@ -114,11 +117,14 @@ namespace Stormancer
         /// <param name="configuration">A configuration instance containing options for the client.</param>
         public Client(ClientConfiguration configuration)
         {
+            this._pingInterval = configuration.PingInterval;
+            this._scheduler = configuration.Scheduler;
             this._logger = configuration.Logger;
             this._accountId = configuration.Account;
             this._applicationName = configuration.Application;
             _apiClient = new ApiClient(configuration, _tokenHandler);
-            this._transport = configuration.TransportFactory(new Dictionary<string, object> { { "ILogger", this._logger } });
+            //TODO handle scheduler in the transport
+            this._transport = configuration.TransportFactory(new Dictionary<string, object> { { "ILogger", this._logger }, { "IScheduler", this._scheduler } });
             this._dispatcher = configuration.Dispatcher;
             _requestProcessor = new Stormancer.Networking.Processors.RequestProcessor(_logger, Enumerable.Empty<IRequestModule>());
 
@@ -153,6 +159,32 @@ namespace Stormancer
             Initialize();
         }
 
+        private Stopwatch _watch = new Stopwatch();
+
+        /// <summary>
+        /// Synchronized clock with the server.
+        /// </summary>
+        public long Clock
+        {
+            get
+            {
+                return _watch.ElapsedMilliseconds + _offset;
+            }
+        }
+
+        /// <summary>
+        /// Last ping value with the cluster.
+        /// </summary>
+        /// <remarks>
+        /// 0 means that no mesure has be made yet.
+        /// </remarks>
+        public long LastPing
+        {
+            get;
+            private set;
+        }
+        private long _offset;
+
         private void Initialize()
         {
             if (!_initialized)
@@ -161,7 +193,7 @@ namespace Stormancer
 
                 _transport.PacketReceived += Transport_PacketReceived;
 
-
+                this._watch.Start();
             }
         }
 
@@ -225,19 +257,23 @@ namespace Stormancer
                     _cts = new CancellationTokenSource();
                     return _transport.Start("client", new ConnectionHandler(), _cts.Token, null, (ushort)(_maxPeers + 1));
                 })
+                    .Then(() => _transport.Connect(ci.TokenData.Endpoints[_transport.Name]))
+                    .Then(connection =>
+                    {
+                        _serverConnection = connection;
+
+                        foreach (var kvp in _metadata)
+                        {
+                            _serverConnection.Metadata[kvp.Key] = kvp.Value;
+                        }
+                        return this.UpdateServerMetadata();
+                    })
                     .Then(() =>
                     {
-                        return _transport.Connect(ci.TokenData.Endpoints[_transport.Name])
-                            .Then(connection =>
-                            {
-                                _serverConnection = connection;
-
-                                foreach (var kvp in _metadata)
-                                {
-                                    _serverConnection.Metadata[kvp.Key] = kvp.Value;
-                                }
-                                return this.UpdateServerMetadata();
-                            });
+                        if (ci.TokenData.Version > 0)
+                        {
+                            StartSyncClock();
+                        }
                     });
             }).Then(() =>
             {
@@ -297,6 +333,53 @@ namespace Stormancer
             //return scene;
         }
 
+        private IDisposable _syncClockSubscription;
+        private void StartSyncClock()
+        {
+            this._syncClockSubscription = this._scheduler.SchedulePeriodic(this._pingInterval, () =>
+            {
+                var _ = this.SyncClockImpl();
+            });
+        }
+
+        private Task SyncClockImpl()
+        {
+            long timeStart = this._watch.ElapsedMilliseconds;
+
+            try
+            {
+                return this._requestProcessor.SendSystemRequest(this._serverConnection, (byte)SystemRequestIDTypes.ID_PING, s =>
+                {
+                    s.Write(BitConverter.GetBytes(timeStart), 0, 8);
+                }, PacketPriority.IMMEDIATE_PRIORITY)
+                .Then(response =>
+                {
+                    ulong timeRef = 0;
+                    var timeEnd = this._watch.ElapsedMilliseconds;
+
+                    for (var i = 0; i < 8; i++)
+                    {
+                        timeRef += (((ulong)response.Stream.ReadByte()) << (8 * i));
+                    }
+
+                    this.LastPing = timeEnd - timeStart;
+                    this._offset = (long)timeRef - (this.LastPing / 2) - timeStart;
+                })
+                .ContinueWith(t =>
+                {
+                    if (t.IsFaulted)
+                    {
+                        _logger.Error("ping", "failed to ping server.");
+                    }
+                });
+            }
+            catch (Exception)
+            {
+                _logger.Error("ping", "failed to ping server.");
+                return TaskHelper.FromResult(UniRx.Unit.Default);
+            };
+        }
+
 
         /// <summary>
         /// Returns a private scene (requires a token obtained from strong authentication with the Stormancer API.
@@ -329,18 +412,18 @@ namespace Stormancer
             };
             return this.SendSystemRequest<Stormancer.Dto.ConnectToSceneMsg, Stormancer.Dto.ConnectionResult>((byte)SystemRequestIDTypes.ID_CONNECT_TO_SCENE, parameter)
                 .ContinueWith(t =>
+                {
+                    var result = t.Result;
+                    this.Logger.Trace("Received connection result. Scene handle: {0}", result.SceneHandle);
+                    scene.CompleteConnectionInitialization(result);
+                    _scenesDispatcher.AddScene(scene);
+                    if (_pluginCtx.SceneConnected != null)
                     {
-                        var result = t.Result;
-                        this.Logger.Trace("Received connection result. Scene handle: {0}", result.SceneHandle);
-                        scene.CompleteConnectionInitialization(result);
-                        _scenesDispatcher.AddScene(scene);
-                        if (_pluginCtx.SceneConnected != null)
-                        {
-                            _pluginCtx.SceneConnected(scene);
-                        }
-                    });
+                        _pluginCtx.SceneConnected(scene);
+                    }
+                });
         }
-        
+
 
         internal Task Disconnect(Scene scene, byte sceneHandle)
         {

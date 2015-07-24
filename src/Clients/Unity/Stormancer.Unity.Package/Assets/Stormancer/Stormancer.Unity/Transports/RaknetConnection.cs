@@ -188,6 +188,17 @@ namespace Stormancer.Networking
         /// <param name="writer"></param>
         public void SendSystem(byte msgId, Action<System.IO.Stream> writer)
         {
+            this.SendSystem(msgId, writer, Stormancer.Core.PacketPriority.MEDIUM_PRIORITY);
+        }
+
+        /// <summary>
+        /// Sends a system request to the remote peer.
+        /// </summary>
+        /// <param name="msgId">Id of the system message</param>
+        /// <param name="writer"></param>
+        /// <param name="priority">The priority of the message to send</param>
+        public void SendSystem(byte msgId, Action<System.IO.Stream> writer, Stormancer.Core.PacketPriority priority)
+        {
             if (writer == null)
             {
                 throw new ArgumentNullException("writer");
@@ -196,7 +207,7 @@ namespace Stormancer.Networking
             {
                 s.WriteByte(msgId);
                 writer(s);
-            }, Core.PacketPriority.HIGH_PRIORITY, Core.PacketReliability.RELIABLE_ORDERED, (char)0);
+            }, priority, Core.PacketReliability.RELIABLE_ORDERED, (char)0);
         }
         public void SendRaw(Action<Stream> writer, Stormancer.Core.PacketPriority priority, Stormancer.Core.PacketReliability reliability, char channel)
         {

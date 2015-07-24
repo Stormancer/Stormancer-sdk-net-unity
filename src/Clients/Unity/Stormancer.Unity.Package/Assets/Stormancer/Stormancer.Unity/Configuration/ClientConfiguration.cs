@@ -48,6 +48,19 @@ namespace Stormancer
         /// </summary>
         public string Application { get; private set; }
 
+        /// <summary>
+        /// Enable or disable the asynchrounous dispatch of received messages.
+        /// </summary>
+        /// <remarks>
+        /// Asynchronous dispatch is enabled by default.
+        /// </remarks>
+        public bool AsynchrounousDispatch { get; set; }
+
+        /// <summary>
+        /// The interval between successive ping requests, in milliseconds
+        /// </summary>
+        public int PingInterval { get; set; }
+
         internal Uri GetApiEndpoint()
         {
             if (IsLocalDev)
@@ -76,8 +89,9 @@ namespace Stormancer
 
         private ClientConfiguration()
         {
+            Scheduler = new Stormancer.Infrastructure.DefaultScheduler();
             Logger = NullLogger.Instance;
-            Dispatcher = new DefaultPacketDispatcher();
+            Dispatcher = new DefaultPacketDispatcher(new Lazy<bool>(() => this.AsynchrounousDispatch));
             TransportFactory = DefaultTransportFactory;
             //Transport = new WebSocketClientTransport(NullLogger.Instance);        
 
@@ -85,6 +99,8 @@ namespace Stormancer
             MaxPeers = 20;
             Plugins = new List<IClientPlugin>();
             Plugins.Add(new RpcClientPlugin());
+            AsynchrounousDispatch = true;
+            PingInterval = 5000;
         }
 
         private RakNetTransport DefaultTransportFactory(IDictionary<string, object> parameters) 
@@ -146,5 +162,14 @@ namespace Stormancer
         }
 
         internal List<IClientPlugin> Plugins { get; private set; }
+
+        /// <summary>
+        /// The scheduler used by the client to run the transport and other repeated tasks.
+        /// </summary>
+        public IScheduler Scheduler
+        {
+            get;
+            set;
+        }
     }
 }

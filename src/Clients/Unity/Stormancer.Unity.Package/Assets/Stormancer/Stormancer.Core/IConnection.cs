@@ -65,16 +65,24 @@ namespace Stormancer.Core
         ConnectionState State { get; }
 
         /// <summary>
-        /// Close the connection
+        /// Closes the connection.
         /// </summary>
         void Close();
 
         /// <summary>
         /// Sends a system message to the peer.
         /// </summary>
-        /// <param name="msgId"></param>
+        /// <param name="msgId">Id of the system message.</param>
         /// <param name="writer"></param>
         void SendSystem(byte msgId, Action<Stream> writer);
+
+        /// <summary>
+        /// Sends a system message to the peer.
+        /// </summary>
+        /// <param name="msgId">Id of the system message.</param>
+        /// <param name="writer"></param>
+        /// <param name="priority">The priority of the message to send.</param>
+        void SendSystem(byte msgId, Action<Stream> writer, PacketPriority priority);
         
         //void SendRaw(Action<Stream> writer, Stormancer.Core.PacketPriority priority, Stormancer.Core.PacketReliability reliability, char channel);
         
@@ -94,21 +102,21 @@ namespace Stormancer.Core
             PacketReliability reliability);     
 
         /// <summary>
-        /// Event fired when the connection has been closed
+        /// Event fired when the connection has been closed.
         /// </summary>
         Action<string> ConnectionClosed { get; set; }
 
         void SetApplication(string account, string application);
 
         /// <summary>
-        /// The connection's Ping in milliseconds
+        /// The connection's Ping in milliseconds.
         /// </summary>
         int Ping { get; }
 
         /// <summary>
         /// Returns advanced statistics about the connection.
         /// </summary>
-        /// <returns>The required statistics</returns>
+        /// <returns>The required statistics.</returns>
         IConnectionStatistics GetConnectionStatistics();
     }
 }

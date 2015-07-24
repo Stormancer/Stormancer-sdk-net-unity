@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Stormancer
 {
     /// <summary>
-    /// A
+    /// A scheduler used to schedule network tasks
     /// </summary>
     public interface IScheduler
     {
