@@ -80,7 +80,7 @@ namespace Stormancer
         /// <returns>An IObservable instance that provides return values for the request.</returns>
         public static IObservable<Packet<IScenePeerClient>> Rpc(this IScenePeerClient peer, string route, Action<Stream> writer, PacketPriority priority = PacketPriority.MEDIUM_PRIORITY)
         {
-            var rpcService = peer.Host.GetComponent<Stormancer.Plugins.RpcService>();
+            var rpcService = peer.Host.DependencyResolver.Resolve<Stormancer.Plugins.RpcService>();
             if (rpcService == null)
             {
                 throw new NotSupportedException("RPC plugin not available.");
@@ -176,7 +176,7 @@ namespace Stormancer
         /// <param name="ordered">True if order of the partial responses should be preserved when sent to the client, false otherwise.</param>
         public static void AddProcedure(this ISceneHost scene, string route, Func<Stormancer.Plugins.RequestContext<IScenePeerClient>, Task> handler, bool ordered = true)
         {
-            var rpcService = scene.GetComponent<Stormancer.Plugins.RpcService>();
+            var rpcService = scene.DependencyResolver.Resolve<Stormancer.Plugins.RpcService>();
             if (rpcService == null)
             {
                 throw new NotSupportedException("RPC plugin not available.");

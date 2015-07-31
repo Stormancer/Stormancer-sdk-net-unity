@@ -35,7 +35,7 @@ namespace Stormancer.Plugins
                 scene.Metadata.Add(PluginName, Version);
 
                 var processor = new RpcService(scene);
-                scene.RegisterComponent(() => processor);
+                scene.DependencyResolver.Register(processor);
                 scene.AddRoute(NextRouteName, p =>
                 {
                     processor.Next(p);

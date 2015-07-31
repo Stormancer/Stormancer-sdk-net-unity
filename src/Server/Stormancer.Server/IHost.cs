@@ -46,5 +46,10 @@ namespace Stormancer.Server
         /// Application metadata
         /// </summary>
         IDictionary<string, string> Metadata { get; }
+
+        /// <summary>
+        /// Dependency resolver
+        /// </summary>
+        IDependencyResolver DependencyResolver { get; }
     }
 }

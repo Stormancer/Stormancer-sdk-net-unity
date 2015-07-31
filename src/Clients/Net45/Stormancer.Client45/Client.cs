@@ -131,6 +131,7 @@ namespace Stormancer
         /// <param name="configuration">A configuration instance containing options for the client.</param>
         public Client(ClientConfiguration configuration)
         {
+            this.DependencyResolver = new DefaultDependencyResolver();
             this._scheduler = configuration.Scheduler;
             this._logger = configuration.Logger;
             this._accountId = configuration.Account;
@@ -446,6 +447,15 @@ namespace Stormancer
         public IConnectionStatistics GetServerConnectionStatistics()
         {
             return this._serverConnection.GetConnectionStatistics();
+        }
+
+        /// <summary>
+        /// Client's dependency resolver
+        /// </summary>
+        public IDependencyResolver DependencyResolver
+        {
+            get;
+            private set;
         }
     }
 

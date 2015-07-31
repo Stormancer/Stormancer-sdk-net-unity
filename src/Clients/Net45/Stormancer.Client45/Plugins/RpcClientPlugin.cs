@@ -32,7 +32,7 @@ namespace Stormancer.Plugins
                 {
                     var supportsCancellation = new Version(rpcParams) > new Version(Version);
                     var processor = new RpcService(scene, supportsCancellation);
-                    scene.RegisterComponent(() => processor);
+                    scene.DependencyResolver.Register(processor);
                     scene.AddRoute(NextRouteName, p =>
                     {
                         processor.Next(p);
@@ -55,7 +55,7 @@ namespace Stormancer.Plugins
             };
             ctx.SceneDisconnected += scene =>
             {
-                var processor = scene.GetComponent<RpcService>();
+                var processor = scene.DependencyResolver.Resolve<RpcService>();
                 processor.Disconnected();
             };
         }

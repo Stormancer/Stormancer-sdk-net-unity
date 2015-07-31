@@ -83,6 +83,7 @@ namespace Stormancer
 
         internal Scene(IConnection connection, Client client, string id, string token, Stormancer.Dto.SceneInfosDto dto)
         {
+            DependencyResolver = new DefaultDependencyResolver(client.DependencyResolver);
             Id = id;
             this._peer = connection;
             _token = token;
@@ -325,43 +326,14 @@ namespace Stormancer
             get { return false; }
         }
 
-
-        private Dictionary<Type, Func<object>> _registrations = new Dictionary<Type, Func<object>>();
-
         /// <summary>
-        /// Provides the component registered for a type
+        /// Scene's dependency resolver
         /// </summary>
-        /// <typeparam name="T">A component type</typeparam>
-        /// <returns>The component object</returns>
-        /// <remarks>
-        /// usage: 
-        /// 
-        ///     var serializer = GetComponent&lt;ISerializer&gt;();
-        /// </remarks>
-        public T GetComponent<T>()
+        public IDependencyResolver DependencyResolver
         {
-            Func<object> factory;
-            if (_registrations.TryGetValue(typeof(T), out factory))
-            {
-                return (T)factory();
-            }
-            else
-            {
-                return default(T);
-            }
+            get;internal set;
         }
 
-        /// <summary>
-        /// Registers a component with the scene object
-        /// </summary>
-        /// <typeparam name="T">The type under which the component will be registered</typeparam>
-        /// <param name="component">A factory method that provides the component instance</param>
-        /// <remarks>
-        /// `T` T can be an interface implemented by the registered component
-        /// </remarks>
-        public void RegisterComponent<T>(Func<T> component)
-        {
-            _registrations[typeof(T)] = () => component();
-        }
+
     }
 }
