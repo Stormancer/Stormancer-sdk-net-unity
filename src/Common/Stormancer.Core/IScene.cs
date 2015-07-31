@@ -22,7 +22,17 @@ namespace Stormancer.Core
         /// </summary>
         bool IsHost { get; }
 
+        /// <summary>
+        /// Dependency resolver of the scene
+        /// </summary>
          IDependencyResolver DependencyResolver { get; }
+
+        /// <summary>
+        /// retrieves a component in the dependency resolver
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        T GetComponent<T>() where T : class;
     }
 
    

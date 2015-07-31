@@ -291,6 +291,8 @@ namespace Stormancer
 
         }
 
+       
+
         /// <summary>
         /// List containing the scene host connection.
         /// </summary>
@@ -334,6 +336,17 @@ namespace Stormancer
             get;internal set;
         }
 
-
+        /// <summary>
+        /// Gets a component registered in the dependency resolver
+        /// </summary>
+        /// <remarks>
+        /// Pleaser use DependencyResolver.Resolve instead.
+        /// </remarks>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public T GetComponent<T>() where T : class
+        {
+            return this.DependencyResolver.Resolve<T>();
+        }
     }
 }
