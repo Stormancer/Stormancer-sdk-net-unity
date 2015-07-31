@@ -27,8 +27,14 @@ namespace MsgPack.Serialization
 	/// <summary>
 	///		Represents serializing member information.
 	/// </summary>
-	internal struct SerializingMember
-	{
+#if UNITY_IOS
+    internal class SerializingMember
+    {
+        public SerializingMember() { }
+#else
+	internal struct SerializingMember        
+    {
+#endif
 		public readonly MemberInfo Member;
 		public readonly DataMemberContract Contract;
 

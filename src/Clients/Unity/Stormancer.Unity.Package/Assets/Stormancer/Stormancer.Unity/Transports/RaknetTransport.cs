@@ -42,8 +42,18 @@ namespace Stormancer.Networking
         private void Run(CancellationToken token, ushort? serverPort, ushort maxConnections, TaskCompletionSource<bool> startupTcs)
         {
             IsRunning = true;
-            logger.Info("starting raknet transport " + _type);
-            var server = RakPeerInterface.GetInstance();
+            logger.Info("Starting raknet transport " + _type);
+            RakPeerInterface server;
+            try
+            {
+                server = RakPeerInterface.GetInstance();
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                throw;
+            }
+
 
             var socketDescriptor = serverPort.HasValue ? new SocketDescriptor(serverPort.Value, null) : new SocketDescriptor();
             var startupResult = server.Startup(maxConnections, socketDescriptor, 1);
@@ -55,7 +65,7 @@ namespace Stormancer.Networking
 
             _peer = server;
             startupTcs.SetResult(true);
-            logger.Info("Raknet transport started " + _type);
+            logger.Info("Raknet transport " + _type+ " started");
             while (!token.IsCancellationRequested)
             {
                 for (var packet = server.Receive(); packet != null; packet = server.Receive())
@@ -121,7 +131,7 @@ namespace Stormancer.Networking
 
         private void OnConnection(RakNet.Packet packet, RakPeerInterface server)
         {
-            logger.Trace("{0} connected", packet.systemAddress);
+            logger.Trace("Connected to endpoint {0}", packet.systemAddress);
 
             var c = CreateNewConnection(packet.guid, server);
             server.DeallocatePacket(packet);
@@ -138,7 +148,7 @@ namespace Stormancer.Networking
 
         private void OnDisconnection(RakNet.Packet packet, RakPeerInterface server,string reason)
         {
-            logger.Trace("{0} disconnected", packet.systemAddress);
+            logger.Trace("Disconnected from endpoint {0}", packet.systemAddress);
             var c = RemoveConnection(packet.guid);
             server.DeallocatePacket(packet);
 
@@ -158,10 +168,12 @@ namespace Stormancer.Networking
             var buffer = new byte[packet.data.Length];
             packet.data.CopyTo(buffer, 0);
             _peer.DeallocatePacket(packet);
+            //logger.Trace("message arrived: [{0}]", string.Join(", ", buffer.Select(b => b.ToString()).ToArray()));
+
             var p = new Stormancer.Core.Packet(
                                connection,
                                new MemoryStream(buffer));
-            logger.Trace("message with id {0} arrived", packet.data[0]);
+
 
             this.PacketReceived(p);
         }
@@ -217,6 +229,8 @@ namespace Stormancer.Networking
 
         public Task<IConnection> Connect(string endpoint)
         {
+            logger.Debug("Connecting to endpoint {0}", endpoint);
+
             if (_peer == null || !_peer.IsActive())
             {
 

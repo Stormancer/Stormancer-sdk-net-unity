@@ -131,6 +131,7 @@ namespace Stormancer
         /// <param name="configuration">A configuration instance containing options for the client.</param>
         public Client(ClientConfiguration configuration)
         {
+            this._pingInterval = configuration.PingInterval;
             this.DependencyResolver = new DefaultDependencyResolver();
             this._scheduler = configuration.Scheduler;
             this._logger = configuration.Logger;
@@ -260,7 +261,7 @@ namespace Stormancer
                 long tStart = _watch.ElapsedMilliseconds;
                 var response = await _requestProcessor.SendSystemRequest(_serverConnection, (byte)SystemRequestIDTypes.ID_PING, s =>
                 {
-                    s.Write(BitConverter.GetBytes(tStart), 0, 8);
+                    s.Write(BitConverter.GetBytes((ulong)tStart), 0, 8);
                 }, PacketPriority.IMMEDIATE_PRIORITY);
                 ulong tRef;
                 long tEnd = _watch.ElapsedMilliseconds;
@@ -271,18 +272,17 @@ namespace Stormancer
                 }
                 LastPing = tEnd - tStart;
                 _offset = (long)tRef - LastPing / 2 - tStart;
-                Debug.WriteLine(_offset);
             }
             catch (Exception)
             {
                 _logger.Error("ping", "failed to ping server.");
             };
         }
-        private IDisposable _syncClockTaskDisposable;
+        private IDisposable _syncClockSubscription;
         private void StartSyncClock()
         {
 
-            _syncClockTaskDisposable = _scheduler.SchedulePeriodic(_pingInterval, () => { var _ = SyncClockImpl(); });
+            _syncClockSubscription = _scheduler.SchedulePeriodic(_pingInterval, () => { var _ = SyncClockImpl(); });
         }
 
         private async Task<Scene> GetScene(string sceneId, SceneEndpoint ci)
@@ -414,9 +414,9 @@ namespace Stormancer
             if (!this._disposed)
             {
                 this._disposed = true;
-                if (_syncClockTaskDisposable != null)
+                if (_syncClockSubscription != null)
                 {
-                    _syncClockTaskDisposable.Dispose();
+                    _syncClockSubscription.Dispose();
                 }
                 Disconnect();
 

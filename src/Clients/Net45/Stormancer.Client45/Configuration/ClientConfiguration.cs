@@ -99,6 +99,7 @@ namespace Stormancer
             Plugins = new List<IClientPlugin>();
             Plugins.Add(new RpcClientPlugin());
             AsynchrounousDispatch = true;
+            PingInterval = 5000;
         }
 
         private RakNetTransport DefaultTransportFactory(IDictionary<string, object> parameters)
@@ -159,6 +160,12 @@ namespace Stormancer
             get;
             set;
         }
+
+        /// <summary>
+        /// The interval between successive ping requests, in milliseconds
+        /// </summary>
+        public int PingInterval { get; set; }
+
         /// <summary>
         /// Adds a plugin to the client.
         /// </summary>
