@@ -31,6 +31,7 @@ namespace Stormancer.Networking.Processors
         private readonly ILogger _logger;
 
         private bool _isRegistered = false;
+        private readonly ISerializer _systemSerializer;
 
 
         /// <summary>
@@ -38,8 +39,9 @@ namespace Stormancer.Networking.Processors
         /// </summary>
         /// <param name="logger"></param>
         /// <param name="modules"></param>
-        public RequestProcessor(ILogger logger, IEnumerable<IRequestModule> modules)
+        public RequestProcessor(ILogger logger, IEnumerable<IRequestModule> modules, ISerializer systemSerializer)
         {
+            _systemSerializer = systemSerializer;
             _pendingRequests = new ConcurrentDictionary<ushort, Request>();
 
             _logger = logger;
@@ -140,8 +142,8 @@ namespace Stormancer.Networking.Processors
                 if (_pendingRequests.TryRemove(id, out request))
                 {
                     p.Metadata["request"] = request;
-
-                    var msg = p.Serializer().Deserialize<string>(p.Stream);
+                   
+                    var msg = _systemSerializer.Deserialize<string>(p.Stream);
                     request.tcs.TrySetException(new ClientException(msg));
                 }
                 else

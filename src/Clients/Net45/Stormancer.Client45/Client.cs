@@ -140,7 +140,7 @@ namespace Stormancer
             _apiClient = new ApiClient(configuration, _tokenHandler);
             this._transport = configuration.TransportFactory(new Dictionary<string, object> { { "ILogger", this._logger }, { "IScheduler", this._scheduler } });
             this._dispatcher = configuration.Dispatcher;
-            _requestProcessor = new Stormancer.Networking.Processors.RequestProcessor(_logger, Enumerable.Empty<IRequestModule>());
+            _requestProcessor = new Stormancer.Networking.Processors.RequestProcessor(_logger, Enumerable.Empty<IRequestModule>(),_systemSerializer);
 
             _scenesDispatcher = new Processors.SceneDispatcher();
             this._dispatcher.AddPRocessor(_requestProcessor);
