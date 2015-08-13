@@ -1,0 +1,837 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HelpKI>
+  <HelpKINode Title="Account property" Url="html/P_Stormancer_Core_IConnection_Account.htm" />
+  <HelpKINode Title="accountId property" Url="html/P_Stormancer_Server_Index_accountId.htm" />
+  <HelpKINode Title="AccountId property" Url="html/P_Stormancer_Server_Components_ApplicationInfos_AccountId.htm" />
+  <HelpKINode Title="ActiveDeployment property" Url="html/P_Stormancer_Server_Components_ApplicationInfos_ActiveDeployment.htm" />
+  <HelpKINode Title="ActiveDeploymentChanged event" Url="html/E_Stormancer_Server_Components_IEnvironment_ActiveDeploymentChanged.htm" />
+  <HelpKINode Title="ActiveDeploymentChangedEventArgs class">
+    <HelpKINode Title="ActiveDeploymentChangedEventArgs Class" Url="html/T_Stormancer_Server_Components_ActiveDeploymentChangedEventArgs.htm" />
+    <HelpKINode Title="about ActiveDeploymentChangedEventArgs class" Url="html/T_Stormancer_Server_Components_ActiveDeploymentChangedEventArgs.htm" />
+    <HelpKINode Title="constructor" Url="html/M_Stormancer_Server_Components_ActiveDeploymentChangedEventArgs__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_Server_Components_ActiveDeploymentChangedEventArgs.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Stormancer_Server_Components_ActiveDeploymentChangedEventArgs.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ActiveDeploymentChangedEventArgs.ActiveDeploymentChangedEventArgs constructor" Url="html/M_Stormancer_Server_Components_ActiveDeploymentChangedEventArgs__ctor.htm" />
+  <HelpKINode Title="ActiveDeploymentChangedEventArgs.ActiveDeploymentId property" Url="html/P_Stormancer_Server_Components_ActiveDeploymentChangedEventArgs_ActiveDeploymentId.htm" />
+  <HelpKINode Title="ActiveDeploymentChangedEventArgs.IsActive property" Url="html/P_Stormancer_Server_Components_ActiveDeploymentChangedEventArgs_IsActive.htm" />
+  <HelpKINode Title="ActiveDeploymentId property" Url="html/P_Stormancer_Server_Components_ActiveDeploymentChangedEventArgs_ActiveDeploymentId.htm" />
+  <HelpKINode Title="Add method">
+    <HelpKINode Title="ITaskBasedEventHandler(T).Add Method " Url="html/M_Stormancer_Core_ITaskBasedEventHandler_1_Add.htm" />
+    <HelpKINode Title="ITaskBasedEventHandler.Add Method " Url="html/M_Stormancer_Core_ITaskBasedEventHandler_Add.htm" />
+  </HelpKINode>
+  <HelpKINode Title="AddPlugin method" Url="html/M_Stormancer_IAppBuilder_AddPlugin.htm" />
+  <HelpKINode Title="AddProcedure method">
+    <HelpKINode Title="RpcSceneHostExtensions.AddProcedure Method " Url="html/M_Stormancer_RpcSceneHostExtensions_AddProcedure.htm" />
+    <HelpKINode Title="RpcService.AddProcedure Method " Url="html/M_Stormancer_Plugins_RpcService_AddProcedure.htm" />
+  </HelpKINode>
+  <HelpKINode Title="AddRoute method" Url="html/M_Stormancer_Core_ISceneHost_AddRoute.htm" />
+  <HelpKINode Title="AddRoute(Of T) method" Url="html/M_Stormancer_SceneHostExtensions_AddRoute__1.htm" />
+  <HelpKINode Title="AddRoute&lt;T&gt; method" Url="html/M_Stormancer_SceneHostExtensions_AddRoute__1.htm" />
+  <HelpKINode Title="AddSceneTemplate method" Url="html/M_Stormancer_Server_IHost_AddSceneTemplate.htm" />
+  <HelpKINode Title="AdminPlugin method" Url="html/M_Stormancer_IAppBuilder_AdminPlugin.htm" />
+  <HelpKINode Title="AdminPluginHostVersion enumeration" Url="html/T_Stormancer_Server_Admin_AdminPluginHostVersion.htm" />
+  <HelpKINode Title="AdminServices property" Url="html/P_Stormancer_Server_IHost_AdminServices.htm" />
+  <HelpKINode Title="AdminServicesDescription class">
+    <HelpKINode Title="AdminServicesDescription Class" Url="html/T_Stormancer_Server_AdminServicesDescription.htm" />
+    <HelpKINode Title="about AdminServicesDescription class" Url="html/T_Stormancer_Server_AdminServicesDescription.htm" />
+    <HelpKINode Title="constructor" Url="html/M_Stormancer_Server_AdminServicesDescription__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_Server_AdminServicesDescription.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Stormancer_Server_AdminServicesDescription.htm" />
+  </HelpKINode>
+  <HelpKINode Title="AdminServicesDescription.AdminServicesDescription constructor" Url="html/M_Stormancer_Server_AdminServicesDescription__ctor.htm" />
+  <HelpKINode Title="AdminServicesDescription.Delete property" Url="html/P_Stormancer_Server_AdminServicesDescription_Delete.htm" />
+  <HelpKINode Title="AdminServicesDescription.Get property" Url="html/P_Stormancer_Server_AdminServicesDescription_Get.htm" />
+  <HelpKINode Title="AdminServicesDescription.Post property" Url="html/P_Stormancer_Server_AdminServicesDescription_Post.htm" />
+  <HelpKINode Title="AdminServicesDescription.Prefix property" Url="html/P_Stormancer_Server_AdminServicesDescription_Prefix.htm" />
+  <HelpKINode Title="AdminServicesDescription.Put property" Url="html/P_Stormancer_Server_AdminServicesDescription_Put.htm" />
+  <HelpKINode Title="Application property" Url="html/P_Stormancer_Core_IConnection_Application.htm" />
+  <HelpKINode Title="ApplicationInfos class">
+    <HelpKINode Title="ApplicationInfos Class" Url="html/T_Stormancer_Server_Components_ApplicationInfos.htm" />
+    <HelpKINode Title="about ApplicationInfos class" Url="html/T_Stormancer_Server_Components_ApplicationInfos.htm" />
+    <HelpKINode Title="constructor" Url="html/M_Stormancer_Server_Components_ApplicationInfos__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_Server_Components_ApplicationInfos.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Stormancer_Server_Components_ApplicationInfos.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ApplicationInfos.AccountId property" Url="html/P_Stormancer_Server_Components_ApplicationInfos_AccountId.htm" />
+  <HelpKINode Title="ApplicationInfos.ActiveDeployment property" Url="html/P_Stormancer_Server_Components_ApplicationInfos_ActiveDeployment.htm" />
+  <HelpKINode Title="ApplicationInfos.ApplicationInfos constructor" Url="html/M_Stormancer_Server_Components_ApplicationInfos__ctor.htm" />
+  <HelpKINode Title="ApplicationInfos.ApplicationName property" Url="html/P_Stormancer_Server_Components_ApplicationInfos_ApplicationName.htm" />
+  <HelpKINode Title="ApplicationInfos.DeploymentId property" Url="html/P_Stormancer_Server_Components_ApplicationInfos_DeploymentId.htm" />
+  <HelpKINode Title="ApplicationInfos.PrimaryKey property" Url="html/P_Stormancer_Server_Components_ApplicationInfos_PrimaryKey.htm" />
+  <HelpKINode Title="ApplicationInfos.SecondaryKey property" Url="html/P_Stormancer_Server_Components_ApplicationInfos_SecondaryKey.htm" />
+  <HelpKINode Title="ApplicationName property" Url="html/P_Stormancer_Server_Components_ApplicationInfos_ApplicationName.htm" />
+  <HelpKINode Title="BPSLimitationType enumeration" Url="html/T_Stormancer_Core_BPSLimitationType.htm" />
+  <HelpKINode Title="Broadcast method" Url="html/Overload_Stormancer_SceneHostExtensions_Broadcast.htm" />
+  <HelpKINode Title="Build method">
+    <HelpKINode Title="IHostPlugin.Build Method " Url="html/M_Stormancer_Plugins_IHostPlugin_Build.htm" />
+    <HelpKINode Title="RpcHostPlugin.Build Method " Url="html/M_Stormancer_Plugins_RpcHostPlugin_Build.htm" />
+  </HelpKINode>
+  <HelpKINode Title="BytesPerSecondLimit property" Url="html/P_Stormancer_Core_IConnectionStatistics_BytesPerSecondLimit.htm" />
+  <HelpKINode Title="BytesPerSecondLimitationType property" Url="html/P_Stormancer_Core_IConnectionStatistics_BytesPerSecondLimitationType.htm" />
+  <HelpKINode Title="CancellationToken property" Url="html/P_Stormancer_Plugins_RequestContext_1_CancellationToken.htm" />
+  <HelpKINode Title="City property" Url="html/P_Stormancer_Server_Components_PeerDetails_City.htm" />
+  <HelpKINode Title="ClientException class">
+    <HelpKINode Title="ClientException Class" Url="html/T_Stormancer_ClientException.htm" />
+    <HelpKINode Title="about ClientException class" Url="html/T_Stormancer_ClientException.htm" />
+    <HelpKINode Title="constructor" Url="html/M_Stormancer_ClientException__ctor.htm" />
+    <HelpKINode Title="events" Url="html/Events_T_Stormancer_ClientException.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_ClientException.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Stormancer_ClientException.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ClientException.ClientException constructor" Url="html/M_Stormancer_ClientException__ctor.htm" />
+  <HelpKINode Title="Clock property" Url="html/P_Stormancer_Server_Components_IEnvironment_Clock.htm" />
+  <HelpKINode Title="Close method" Url="html/M_Stormancer_Core_IConnection_Close.htm" />
+  <HelpKINode Title="Configuration property" Url="html/P_Stormancer_Server_Components_IEnvironment_Configuration.htm" />
+  <HelpKINode Title="ConfigurationChanged event" Url="html/E_Stormancer_Server_Components_IEnvironment_ConfigurationChanged.htm" />
+  <HelpKINode Title="CongestionControl enumeration member" Url="html/T_Stormancer_Core_BPSLimitationType.htm" />
+  <HelpKINode Title="Connected enumeration member" Url="html/T_Stormancer_Core_ConnectionState.htm" />
+  <HelpKINode Title="Connected property" Url="html/P_Stormancer_Core_ISceneHost_Connected.htm" />
+  <HelpKINode Title="ConnectedOn property" Url="html/P_Stormancer_Server_Components_PeerDetails_ConnectedOn.htm" />
+  <HelpKINode Title="Connecting enumeration member" Url="html/T_Stormancer_Core_ConnectionState.htm" />
+  <HelpKINode Title="Connecting property" Url="html/P_Stormancer_Core_ISceneHost_Connecting.htm" />
+  <HelpKINode Title="Connection property" Url="html/P_Stormancer_Core_Packet_1_Connection.htm" />
+  <HelpKINode Title="ConnectionClosed property" Url="html/P_Stormancer_Core_IConnection_ConnectionClosed.htm" />
+  <HelpKINode Title="ConnectionDate property" Url="html/P_Stormancer_Core_IConnection_ConnectionDate.htm" />
+  <HelpKINode Title="ConnectionState enumeration" Url="html/T_Stormancer_Core_ConnectionState.htm" />
+  <HelpKINode Title="ContentType property" Url="html/P_Stormancer_IScenePeerClient_ContentType.htm" />
+  <HelpKINode Title="Continent property" Url="html/P_Stormancer_Server_Components_PeerDetails_Continent.htm" />
+  <HelpKINode Title="Country property" Url="html/P_Stormancer_Server_Components_PeerDetails_Country.htm" />
+  <HelpKINode Title="CreateScene method" Url="html/M_Stormancer_Server_IHost_CreateScene.htm" />
+  <HelpKINode Title="Data property" Url="html/P_Stormancer_Core_ShutdownArgs_Data.htm" />
+  <HelpKINode Title="Debug enumeration member" Url="html/T_Stormancer_Diagnostics_LogLevel.htm" />
+  <HelpKINode Title="Debug method" Url="html/M_Stormancer_Diagnostics_LoggerExtensions_Debug.htm" />
+  <HelpKINode Title="Delete property">
+    <HelpKINode Title="AdminServicesDescription.Delete Property " Url="html/P_Stormancer_Server_AdminServicesDescription_Delete.htm" />
+    <HelpKINode Title="IAdminPluginConfig.Delete Property " Url="html/P_Stormancer_Server_Admin_IAdminPluginConfig_Delete.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DependencyResolver property">
+    <HelpKINode Title="IHost.DependencyResolver Property " Url="html/P_Stormancer_Server_IHost_DependencyResolver.htm" />
+    <HelpKINode Title="IScene.DependencyResolver Property " Url="html/P_Stormancer_Core_IScene_DependencyResolver.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DeploymentId property" Url="html/P_Stormancer_Server_Components_ApplicationInfos_DeploymentId.htm" />
+  <HelpKINode Title="Deserialize(Of T) method" Url="html/M_Stormancer_ISerializer_Deserialize__1.htm" />
+  <HelpKINode Title="Deserialize&lt;T&gt; method" Url="html/M_Stormancer_ISerializer_Deserialize__1.htm" />
+  <HelpKINode Title="Disconnect method" Url="html/M_Stormancer_IScenePeerClient_Disconnect.htm" />
+  <HelpKINode Title="Disconnected enumeration member" Url="html/T_Stormancer_Core_ConnectionState.htm" />
+  <HelpKINode Title="Disconnected property" Url="html/P_Stormancer_Core_ISceneHost_Disconnected.htm" />
+  <HelpKINode Title="DisconnectedArgs class">
+    <HelpKINode Title="DisconnectedArgs Class" Url="html/T_Stormancer_Core_DisconnectedArgs.htm" />
+    <HelpKINode Title="about DisconnectedArgs class" Url="html/T_Stormancer_Core_DisconnectedArgs.htm" />
+    <HelpKINode Title="constructor" Url="html/M_Stormancer_Core_DisconnectedArgs__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_Core_DisconnectedArgs.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Stormancer_Core_DisconnectedArgs.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DisconnectedArgs.DisconnectedArgs constructor" Url="html/M_Stormancer_Core_DisconnectedArgs__ctor.htm" />
+  <HelpKINode Title="DisconnectedArgs.Peer property" Url="html/P_Stormancer_Core_DisconnectedArgs_Peer.htm" />
+  <HelpKINode Title="DisconnectedArgs.Reason property" Url="html/P_Stormancer_Core_DisconnectedArgs_Reason.htm" />
+  <HelpKINode Title="DisplayName property" Url="html/P_Stormancer_Server_Admin_IAdminPluginConfig_DisplayName.htm" />
+  <HelpKINode Title="DisposableAction class">
+    <HelpKINode Title="DisposableAction Class" Url="html/T_Stormancer_DisposableAction.htm" />
+    <HelpKINode Title="about DisposableAction class" Url="html/T_Stormancer_DisposableAction.htm" />
+    <HelpKINode Title="constructor" Url="html/M_Stormancer_DisposableAction__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_DisposableAction.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DisposableAction.DisposableAction constructor" Url="html/M_Stormancer_DisposableAction__ctor.htm" />
+  <HelpKINode Title="DisposableAction.Dispose method" Url="html/M_Stormancer_DisposableAction_Dispose.htm" />
+  <HelpKINode Title="Dispose method" Url="html/M_Stormancer_DisposableAction_Dispose.htm" />
+  <HelpKINode Title="EnumerateScenes method" Url="html/M_Stormancer_Server_IHost_EnumerateScenes.htm" />
+  <HelpKINode Title="Error enumeration member" Url="html/T_Stormancer_Diagnostics_LogLevel.htm" />
+  <HelpKINode Title="Error method" Url="html/M_Stormancer_Diagnostics_LoggerExtensions_Error.htm" />
+  <HelpKINode Title="Fatal enumeration member" Url="html/T_Stormancer_Diagnostics_LogLevel.htm" />
+  <HelpKINode Title="GeoIpEnabled property" Url="html/P_Stormancer_Server_Components_PeerDetails_GeoIpEnabled.htm" />
+  <HelpKINode Title="Get property">
+    <HelpKINode Title="AdminServicesDescription.Get Property " Url="html/P_Stormancer_Server_AdminServicesDescription_Get.htm" />
+    <HelpKINode Title="IAdminPluginConfig.Get Property " Url="html/P_Stormancer_Server_Admin_IAdminPluginConfig_Get.htm" />
+  </HelpKINode>
+  <HelpKINode Title="GetApplicationInfos method" Url="html/M_Stormancer_Server_Components_IEnvironment_GetApplicationInfos.htm" />
+  <HelpKINode Title="GetComponent(Of T) method">
+    <HelpKINode Title="IConnection.GetComponent(T) Method " Url="html/M_Stormancer_Core_IConnection_GetComponent__1.htm" />
+    <HelpKINode Title="IScene.GetComponent(T) Method " Url="html/M_Stormancer_Core_IScene_GetComponent__1.htm" />
+    <HelpKINode Title="IScenePeer.GetComponent(T) Method " Url="html/M_Stormancer_Core_IScenePeer_GetComponent__1.htm" />
+  </HelpKINode>
+  <HelpKINode Title="GetComponent&lt;T&gt; method">
+    <HelpKINode Title="IConnection.GetComponent(T) Method " Url="html/M_Stormancer_Core_IConnection_GetComponent__1.htm" />
+    <HelpKINode Title="IScene.GetComponent(T) Method " Url="html/M_Stormancer_Core_IScene_GetComponent__1.htm" />
+    <HelpKINode Title="IScenePeer.GetComponent(T) Method " Url="html/M_Stormancer_Core_IScenePeer_GetComponent__1.htm" />
+  </HelpKINode>
+  <HelpKINode Title="GetConnectionStatistics method" Url="html/M_Stormancer_Core_IConnection_GetConnectionStatistics.htm" />
+  <HelpKINode Title="GetMetadata(Of TData) method" Url="html/M_Stormancer_Core_Packet_1_GetMetadata__1.htm" />
+  <HelpKINode Title="GetMetadata&lt;TData&gt; method" Url="html/M_Stormancer_Core_Packet_1_GetMetadata__1.htm" />
+  <HelpKINode Title="GetPeerDetails method" Url="html/Overload_Stormancer_Server_Components_IPeerInfosService_GetPeerDetails.htm" />
+  <HelpKINode Title="GetUserData(Of T) method" Url="html/M_Stormancer_SceneHostExtensions_GetUserData__1.htm" />
+  <HelpKINode Title="GetUserData&lt;T&gt; method" Url="html/M_Stormancer_SceneHostExtensions_GetUserData__1.htm" />
+  <HelpKINode Title="Handle property" Url="html/P_Stormancer_Core_Route_Handle.htm" />
+  <HelpKINode Title="Handlers property" Url="html/P_Stormancer_Core_Route_Handlers.htm" />
+  <HelpKINode Title="HIGH_PRIORITY enumeration member" Url="html/T_Stormancer_Core_PacketPriority.htm" />
+  <HelpKINode Title="Host property" Url="html/P_Stormancer_IScenePeerClient_Host.htm" />
+  <HelpKINode Title="HostPluginBuildContext class">
+    <HelpKINode Title="HostPluginBuildContext Class" Url="html/T_Stormancer_Plugins_HostPluginBuildContext.htm" />
+    <HelpKINode Title="about HostPluginBuildContext class" Url="html/T_Stormancer_Plugins_HostPluginBuildContext.htm" />
+    <HelpKINode Title="constructor" Url="html/M_Stormancer_Plugins_HostPluginBuildContext__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_Plugins_HostPluginBuildContext.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Stormancer_Plugins_HostPluginBuildContext.htm" />
+  </HelpKINode>
+  <HelpKINode Title="HostPluginBuildContext.HostPluginBuildContext constructor" Url="html/M_Stormancer_Plugins_HostPluginBuildContext__ctor.htm" />
+  <HelpKINode Title="HostPluginBuildContext.HostShuttingDown property" Url="html/P_Stormancer_Plugins_HostPluginBuildContext_HostShuttingDown.htm" />
+  <HelpKINode Title="HostPluginBuildContext.HostStarting property" Url="html/P_Stormancer_Plugins_HostPluginBuildContext_HostStarting.htm" />
+  <HelpKINode Title="HostPluginBuildContext.SceneCreated property" Url="html/P_Stormancer_Plugins_HostPluginBuildContext_SceneCreated.htm" />
+  <HelpKINode Title="HostPluginBuildContext.SceneCreating property" Url="html/P_Stormancer_Plugins_HostPluginBuildContext_SceneCreating.htm" />
+  <HelpKINode Title="HostPluginBuildContext.SceneStarted property" Url="html/P_Stormancer_Plugins_HostPluginBuildContext_SceneStarted.htm" />
+  <HelpKINode Title="HostShuttingDown property" Url="html/P_Stormancer_Plugins_HostPluginBuildContext_HostShuttingDown.htm" />
+  <HelpKINode Title="HostStarting property" Url="html/P_Stormancer_Plugins_HostPluginBuildContext_HostStarting.htm" />
+  <HelpKINode Title="IAdminPluginConfig interface">
+    <HelpKINode Title="IAdminPluginConfig Interface" Url="html/T_Stormancer_Server_Admin_IAdminPluginConfig.htm" />
+    <HelpKINode Title="about IAdminPluginConfig interface" Url="html/T_Stormancer_Server_Admin_IAdminPluginConfig.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_Server_Admin_IAdminPluginConfig.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Stormancer_Server_Admin_IAdminPluginConfig.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IAdminPluginConfig.Delete property" Url="html/P_Stormancer_Server_Admin_IAdminPluginConfig_Delete.htm" />
+  <HelpKINode Title="IAdminPluginConfig.DisplayName property" Url="html/P_Stormancer_Server_Admin_IAdminPluginConfig_DisplayName.htm" />
+  <HelpKINode Title="IAdminPluginConfig.Get property" Url="html/P_Stormancer_Server_Admin_IAdminPluginConfig_Get.htm" />
+  <HelpKINode Title="IAdminPluginConfig.Name method" Url="html/M_Stormancer_Server_Admin_IAdminPluginConfig_Name.htm" />
+  <HelpKINode Title="IAdminPluginConfig.Post property" Url="html/P_Stormancer_Server_Admin_IAdminPluginConfig_Post.htm" />
+  <HelpKINode Title="IAdminPluginConfig.Put property" Url="html/P_Stormancer_Server_Admin_IAdminPluginConfig_Put.htm" />
+  <HelpKINode Title="IAdminPluginConfig.Services property" Url="html/P_Stormancer_Server_Admin_IAdminPluginConfig_Services.htm" />
+  <HelpKINode Title="IAppBuilder interface">
+    <HelpKINode Title="IAppBuilder Interface" Url="html/T_Stormancer_IAppBuilder.htm" />
+    <HelpKINode Title="about IAppBuilder interface" Url="html/T_Stormancer_IAppBuilder.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_IAppBuilder.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IAppBuilder.AddPlugin method" Url="html/M_Stormancer_IAppBuilder_AddPlugin.htm" />
+  <HelpKINode Title="IAppBuilder.AdminPlugin method" Url="html/M_Stormancer_IAppBuilder_AdminPlugin.htm" />
+  <HelpKINode Title="IAppBuilder.SceneTemplate method" Url="html/M_Stormancer_IAppBuilder_SceneTemplate.htm" />
+  <HelpKINode Title="IAppBuilder.WebServer method" Url="html/M_Stormancer_IAppBuilder_WebServer.htm" />
+  <HelpKINode Title="IConnection interface">
+    <HelpKINode Title="IConnection Interface" Url="html/T_Stormancer_Core_IConnection.htm" />
+    <HelpKINode Title="about IConnection interface" Url="html/T_Stormancer_Core_IConnection.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_Core_IConnection.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Stormancer_Core_IConnection.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IConnection.Account property" Url="html/P_Stormancer_Core_IConnection_Account.htm" />
+  <HelpKINode Title="IConnection.Application property" Url="html/P_Stormancer_Core_IConnection_Application.htm" />
+  <HelpKINode Title="IConnection.Close method" Url="html/M_Stormancer_Core_IConnection_Close.htm" />
+  <HelpKINode Title="IConnection.ConnectionClosed property" Url="html/P_Stormancer_Core_IConnection_ConnectionClosed.htm" />
+  <HelpKINode Title="IConnection.ConnectionDate property" Url="html/P_Stormancer_Core_IConnection_ConnectionDate.htm" />
+  <HelpKINode Title="IConnection.GetComponent(Of T) method" Url="html/M_Stormancer_Core_IConnection_GetComponent__1.htm" />
+  <HelpKINode Title="IConnection.GetComponent&lt;T&gt; method" Url="html/M_Stormancer_Core_IConnection_GetComponent__1.htm" />
+  <HelpKINode Title="IConnection.GetConnectionStatistics method" Url="html/M_Stormancer_Core_IConnection_GetConnectionStatistics.htm" />
+  <HelpKINode Title="IConnection.Id property" Url="html/P_Stormancer_Core_IConnection_Id.htm" />
+  <HelpKINode Title="IConnection.IpAddress property" Url="html/P_Stormancer_Core_IConnection_IpAddress.htm" />
+  <HelpKINode Title="IConnection.Metadata property" Url="html/P_Stormancer_Core_IConnection_Metadata.htm" />
+  <HelpKINode Title="IConnection.Ping property" Url="html/P_Stormancer_Core_IConnection_Ping.htm" />
+  <HelpKINode Title="IConnection.RegisterComponent(Of T) method" Url="html/M_Stormancer_Core_IConnection_RegisterComponent__1.htm" />
+  <HelpKINode Title="IConnection.RegisterComponent&lt;T&gt; method" Url="html/M_Stormancer_Core_IConnection_RegisterComponent__1.htm" />
+  <HelpKINode Title="IConnection.SendSystem method" Url="html/M_Stormancer_Core_IConnection_SendSystem.htm" />
+  <HelpKINode Title="IConnection.SendToScene method" Url="html/M_Stormancer_Core_IConnection_SendToScene.htm" />
+  <HelpKINode Title="IConnection.SetApplication method" Url="html/M_Stormancer_Core_IConnection_SetApplication.htm" />
+  <HelpKINode Title="IConnection.State property" Url="html/P_Stormancer_Core_IConnection_State.htm" />
+  <HelpKINode Title="IConnectionStatistics interface">
+    <HelpKINode Title="IConnectionStatistics Interface" Url="html/T_Stormancer_Core_IConnectionStatistics.htm" />
+    <HelpKINode Title="about IConnectionStatistics interface" Url="html/T_Stormancer_Core_IConnectionStatistics.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_Core_IConnectionStatistics.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Stormancer_Core_IConnectionStatistics.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IConnectionStatistics.BytesPerSecondLimit property" Url="html/P_Stormancer_Core_IConnectionStatistics_BytesPerSecondLimit.htm" />
+  <HelpKINode Title="IConnectionStatistics.BytesPerSecondLimitationType property" Url="html/P_Stormancer_Core_IConnectionStatistics_BytesPerSecondLimitationType.htm" />
+  <HelpKINode Title="IConnectionStatistics.PacketLossRate property" Url="html/P_Stormancer_Core_IConnectionStatistics_PacketLossRate.htm" />
+  <HelpKINode Title="IConnectionStatistics.QueuedBytes property" Url="html/P_Stormancer_Core_IConnectionStatistics_QueuedBytes.htm" />
+  <HelpKINode Title="IConnectionStatistics.QueuedBytesForPriority method" Url="html/M_Stormancer_Core_IConnectionStatistics_QueuedBytesForPriority.htm" />
+  <HelpKINode Title="IConnectionStatistics.QueuedPackets property" Url="html/P_Stormancer_Core_IConnectionStatistics_QueuedPackets.htm" />
+  <HelpKINode Title="IConnectionStatistics.QueuedPacketsForPriority method" Url="html/M_Stormancer_Core_IConnectionStatistics_QueuedPacketsForPriority.htm" />
+  <HelpKINode Title="Id property">
+    <HelpKINode Title="IConnection.Id Property " Url="html/P_Stormancer_Core_IConnection_Id.htm" />
+    <HelpKINode Title="IScene.Id Property " Url="html/P_Stormancer_Core_IScene_Id.htm" />
+    <HelpKINode Title="IScenePeer.Id Property " Url="html/P_Stormancer_Core_IScenePeer_Id.htm" />
+    <HelpKINode Title="MatchPeerFilter.Id Property " Url="html/P_Stormancer_Core_MatchPeerFilter_Id.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IDependencyResolver interface">
+    <HelpKINode Title="IDependencyResolver Interface" Url="html/T_Stormancer_IDependencyResolver.htm" />
+    <HelpKINode Title="about IDependencyResolver interface" Url="html/T_Stormancer_IDependencyResolver.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_IDependencyResolver.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IDependencyResolver.Register method" Url="html/Overload_Stormancer_IDependencyResolver_Register.htm" />
+  <HelpKINode Title="IDependencyResolver.Resolve(Of T) method" Url="html/M_Stormancer_IDependencyResolver_Resolve__1.htm" />
+  <HelpKINode Title="IDependencyResolver.Resolve&lt;T&gt; method" Url="html/M_Stormancer_IDependencyResolver_Resolve__1.htm" />
+  <HelpKINode Title="IDependencyResolver.ResolveAll(Of T) method" Url="html/M_Stormancer_IDependencyResolver_ResolveAll__1.htm" />
+  <HelpKINode Title="IDependencyResolver.ResolveAll&lt;T&gt; method" Url="html/M_Stormancer_IDependencyResolver_ResolveAll__1.htm" />
+  <HelpKINode Title="Ids property" Url="html/P_Stormancer_Core_MatchArrayFilter_Ids.htm" />
+  <HelpKINode Title="IEnvironment interface">
+    <HelpKINode Title="IEnvironment Interface" Url="html/T_Stormancer_Server_Components_IEnvironment.htm" />
+    <HelpKINode Title="about IEnvironment interface" Url="html/T_Stormancer_Server_Components_IEnvironment.htm" />
+    <HelpKINode Title="events" Url="html/Events_T_Stormancer_Server_Components_IEnvironment.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_Server_Components_IEnvironment.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Stormancer_Server_Components_IEnvironment.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IEnvironment.ActiveDeploymentChanged event" Url="html/E_Stormancer_Server_Components_IEnvironment_ActiveDeploymentChanged.htm" />
+  <HelpKINode Title="IEnvironment.Clock property" Url="html/P_Stormancer_Server_Components_IEnvironment_Clock.htm" />
+  <HelpKINode Title="IEnvironment.Configuration property" Url="html/P_Stormancer_Server_Components_IEnvironment_Configuration.htm" />
+  <HelpKINode Title="IEnvironment.ConfigurationChanged event" Url="html/E_Stormancer_Server_Components_IEnvironment_ConfigurationChanged.htm" />
+  <HelpKINode Title="IEnvironment.GetApplicationInfos method" Url="html/M_Stormancer_Server_Components_IEnvironment_GetApplicationInfos.htm" />
+  <HelpKINode Title="IEnvironment.IsActive property" Url="html/P_Stormancer_Server_Components_IEnvironment_IsActive.htm" />
+  <HelpKINode Title="IEnvironment.LastPing property" Url="html/P_Stormancer_Server_Components_IEnvironment_LastPing.htm" />
+  <HelpKINode Title="IEnvironment.ListIndices method" Url="html/M_Stormancer_Server_Components_IEnvironment_ListIndices.htm" />
+  <HelpKINode Title="IHost interface">
+    <HelpKINode Title="IHost Interface" Url="html/T_Stormancer_Server_IHost.htm" />
+    <HelpKINode Title="about IHost interface" Url="html/T_Stormancer_Server_IHost.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_Server_IHost.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Stormancer_Server_IHost.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IHost.AddSceneTemplate method" Url="html/M_Stormancer_Server_IHost_AddSceneTemplate.htm" />
+  <HelpKINode Title="IHost.AdminServices property" Url="html/P_Stormancer_Server_IHost_AdminServices.htm" />
+  <HelpKINode Title="IHost.CreateScene method" Url="html/M_Stormancer_Server_IHost_CreateScene.htm" />
+  <HelpKINode Title="IHost.DependencyResolver property" Url="html/P_Stormancer_Server_IHost_DependencyResolver.htm" />
+  <HelpKINode Title="IHost.EnumerateScenes method" Url="html/M_Stormancer_Server_IHost_EnumerateScenes.htm" />
+  <HelpKINode Title="IHost.Metadata property" Url="html/P_Stormancer_Server_IHost_Metadata.htm" />
+  <HelpKINode Title="IHostPlugin interface">
+    <HelpKINode Title="IHostPlugin Interface" Url="html/T_Stormancer_Plugins_IHostPlugin.htm" />
+    <HelpKINode Title="about IHostPlugin interface" Url="html/T_Stormancer_Plugins_IHostPlugin.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_Plugins_IHostPlugin.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IHostPlugin.Build method" Url="html/M_Stormancer_Plugins_IHostPlugin_Build.htm" />
+  <HelpKINode Title="ILogger interface">
+    <HelpKINode Title="ILogger Interface" Url="html/T_Stormancer_Diagnostics_ILogger.htm" />
+    <HelpKINode Title="about ILogger interface" Url="html/T_Stormancer_Diagnostics_ILogger.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_Diagnostics_ILogger.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ILogger.Log method" Url="html/M_Stormancer_Diagnostics_ILogger_Log.htm" />
+  <HelpKINode Title="IMMEDIATE_PRIORITY enumeration member" Url="html/T_Stormancer_Core_PacketPriority.htm" />
+  <HelpKINode Title="Index class">
+    <HelpKINode Title="Index Class" Url="html/T_Stormancer_Server_Index.htm" />
+    <HelpKINode Title="about Index class" Url="html/T_Stormancer_Server_Index.htm" />
+    <HelpKINode Title="constructor" Url="html/M_Stormancer_Server_Index__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_Server_Index.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Stormancer_Server_Index.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Index.accountId property" Url="html/P_Stormancer_Server_Index_accountId.htm" />
+  <HelpKINode Title="Index.Index constructor" Url="html/M_Stormancer_Server_Index__ctor.htm" />
+  <HelpKINode Title="Index.maxSize property" Url="html/P_Stormancer_Server_Index_maxSize.htm" />
+  <HelpKINode Title="Index.name property" Url="html/P_Stormancer_Server_Index_name.htm" />
+  <HelpKINode Title="Index.primaryKey property" Url="html/P_Stormancer_Server_Index_primaryKey.htm" />
+  <HelpKINode Title="Index.secondaryKey property" Url="html/P_Stormancer_Server_Index_secondaryKey.htm" />
+  <HelpKINode Title="Index.serverEndpoint property" Url="html/P_Stormancer_Server_Index_serverEndpoint.htm" />
+  <HelpKINode Title="Index.size property" Url="html/P_Stormancer_Server_Index_size.htm" />
+  <HelpKINode Title="Info enumeration member" Url="html/T_Stormancer_Diagnostics_LogLevel.htm" />
+  <HelpKINode Title="Info method" Url="html/M_Stormancer_Diagnostics_LoggerExtensions_Info.htm" />
+  <HelpKINode Title="InputStream property" Url="html/P_Stormancer_Plugins_RequestContext_1_InputStream.htm" />
+  <HelpKINode Title="Instance property" Url="html/P_Stormancer_Diagnostics_NullLogger_Instance.htm" />
+  <HelpKINode Title="IPAddress property" Url="html/P_Stormancer_Server_Components_PeerDetails_IPAddress.htm" />
+  <HelpKINode Title="IpAddress property">
+    <HelpKINode Title="IConnection.IpAddress Property " Url="html/P_Stormancer_Core_IConnection_IpAddress.htm" />
+    <HelpKINode Title="IScenePeerClient.IpAddress Property " Url="html/P_Stormancer_IScenePeerClient_IpAddress.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IPeerInfosService interface">
+    <HelpKINode Title="IPeerInfosService Interface" Url="html/T_Stormancer_Server_Components_IPeerInfosService.htm" />
+    <HelpKINode Title="about IPeerInfosService interface" Url="html/T_Stormancer_Server_Components_IPeerInfosService.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_Server_Components_IPeerInfosService.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IPeerInfosService.GetPeerDetails method" Url="html/Overload_Stormancer_Server_Components_IPeerInfosService_GetPeerDetails.htm" />
+  <HelpKINode Title="IsActive property">
+    <HelpKINode Title="ActiveDeploymentChangedEventArgs.IsActive Property " Url="html/P_Stormancer_Server_Components_ActiveDeploymentChangedEventArgs_IsActive.htm" />
+    <HelpKINode Title="IEnvironment.IsActive Property " Url="html/P_Stormancer_Server_Components_IEnvironment_IsActive.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IScene interface">
+    <HelpKINode Title="IScene Interface" Url="html/T_Stormancer_Core_IScene.htm" />
+    <HelpKINode Title="about IScene interface" Url="html/T_Stormancer_Core_IScene.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_Core_IScene.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Stormancer_Core_IScene.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IScene.DependencyResolver property" Url="html/P_Stormancer_Core_IScene_DependencyResolver.htm" />
+  <HelpKINode Title="IScene.GetComponent(Of T) method" Url="html/M_Stormancer_Core_IScene_GetComponent__1.htm" />
+  <HelpKINode Title="IScene.GetComponent&lt;T&gt; method" Url="html/M_Stormancer_Core_IScene_GetComponent__1.htm" />
+  <HelpKINode Title="IScene.Id property" Url="html/P_Stormancer_Core_IScene_Id.htm" />
+  <HelpKINode Title="IScene.IsHost property" Url="html/P_Stormancer_Core_IScene_IsHost.htm" />
+  <HelpKINode Title="ISceneHost interface">
+    <HelpKINode Title="ISceneHost Interface" Url="html/T_Stormancer_Core_ISceneHost.htm" />
+    <HelpKINode Title="about ISceneHost interface" Url="html/T_Stormancer_Core_ISceneHost.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_Core_ISceneHost.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Stormancer_Core_ISceneHost.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ISceneHost.AddRoute method" Url="html/M_Stormancer_Core_ISceneHost_AddRoute.htm" />
+  <HelpKINode Title="ISceneHost.Connected property" Url="html/P_Stormancer_Core_ISceneHost_Connected.htm" />
+  <HelpKINode Title="ISceneHost.Connecting property" Url="html/P_Stormancer_Core_ISceneHost_Connecting.htm" />
+  <HelpKINode Title="ISceneHost.Disconnected property" Url="html/P_Stormancer_Core_ISceneHost_Disconnected.htm" />
+  <HelpKINode Title="ISceneHost.IsPersistent property" Url="html/P_Stormancer_Core_ISceneHost_IsPersistent.htm" />
+  <HelpKINode Title="ISceneHost.IsPublic property" Url="html/P_Stormancer_Core_ISceneHost_IsPublic.htm" />
+  <HelpKINode Title="ISceneHost.Metadata property" Url="html/P_Stormancer_Core_ISceneHost_Metadata.htm" />
+  <HelpKINode Title="ISceneHost.OnMessage method" Url="html/M_Stormancer_Core_ISceneHost_OnMessage.htm" />
+  <HelpKINode Title="ISceneHost.RemotePeers property" Url="html/P_Stormancer_Core_ISceneHost_RemotePeers.htm" />
+  <HelpKINode Title="ISceneHost.RunTask method" Url="html/Overload_Stormancer_Core_ISceneHost_RunTask.htm" />
+  <HelpKINode Title="ISceneHost.Send method" Url="html/M_Stormancer_Core_ISceneHost_Send.htm" />
+  <HelpKINode Title="ISceneHost.Shuttingdown property" Url="html/P_Stormancer_Core_ISceneHost_Shuttingdown.htm" />
+  <HelpKINode Title="ISceneHost.Starting property" Url="html/P_Stormancer_Core_ISceneHost_Starting.htm" />
+  <HelpKINode Title="ISceneHost.Template property" Url="html/P_Stormancer_Core_ISceneHost_Template.htm" />
+  <HelpKINode Title="IScenePeer interface">
+    <HelpKINode Title="IScenePeer Interface" Url="html/T_Stormancer_Core_IScenePeer.htm" />
+    <HelpKINode Title="about IScenePeer interface" Url="html/T_Stormancer_Core_IScenePeer.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_Core_IScenePeer.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Stormancer_Core_IScenePeer.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IScenePeer.GetComponent(Of T) method" Url="html/M_Stormancer_Core_IScenePeer_GetComponent__1.htm" />
+  <HelpKINode Title="IScenePeer.GetComponent&lt;T&gt; method" Url="html/M_Stormancer_Core_IScenePeer_GetComponent__1.htm" />
+  <HelpKINode Title="IScenePeer.Id property" Url="html/P_Stormancer_Core_IScenePeer_Id.htm" />
+  <HelpKINode Title="IScenePeer.Send method" Url="html/M_Stormancer_Core_IScenePeer_Send.htm" />
+  <HelpKINode Title="IScenePeerClient interface">
+    <HelpKINode Title="IScenePeerClient Interface" Url="html/T_Stormancer_IScenePeerClient.htm" />
+    <HelpKINode Title="about IScenePeerClient interface" Url="html/T_Stormancer_IScenePeerClient.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_IScenePeerClient.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Stormancer_IScenePeerClient.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IScenePeerClient.ContentType property" Url="html/P_Stormancer_IScenePeerClient_ContentType.htm" />
+  <HelpKINode Title="IScenePeerClient.Disconnect method" Url="html/M_Stormancer_IScenePeerClient_Disconnect.htm" />
+  <HelpKINode Title="IScenePeerClient.Host property" Url="html/P_Stormancer_IScenePeerClient_Host.htm" />
+  <HelpKINode Title="IScenePeerClient.IpAddress property" Url="html/P_Stormancer_IScenePeerClient_IpAddress.htm" />
+  <HelpKINode Title="IScenePeerClient.Metadata property" Url="html/P_Stormancer_IScenePeerClient_Metadata.htm" />
+  <HelpKINode Title="IScenePeerClient.Routes property" Url="html/P_Stormancer_IScenePeerClient_Routes.htm" />
+  <HelpKINode Title="IScenePeerClient.UserData property" Url="html/P_Stormancer_IScenePeerClient_UserData.htm" />
+  <HelpKINode Title="ISerializer interface">
+    <HelpKINode Title="ISerializer Interface" Url="html/T_Stormancer_ISerializer.htm" />
+    <HelpKINode Title="about ISerializer interface" Url="html/T_Stormancer_ISerializer.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_ISerializer.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Stormancer_ISerializer.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ISerializer.Deserialize(Of T) method" Url="html/M_Stormancer_ISerializer_Deserialize__1.htm" />
+  <HelpKINode Title="ISerializer.Deserialize&lt;T&gt; method" Url="html/M_Stormancer_ISerializer_Deserialize__1.htm" />
+  <HelpKINode Title="ISerializer.Name property" Url="html/P_Stormancer_ISerializer_Name.htm" />
+  <HelpKINode Title="ISerializer.Serialize(Of T) method" Url="html/M_Stormancer_ISerializer_Serialize__1.htm" />
+  <HelpKINode Title="ISerializer.Serialize&lt;T&gt; method" Url="html/M_Stormancer_ISerializer_Serialize__1.htm" />
+  <HelpKINode Title="IsHost property" Url="html/P_Stormancer_Core_IScene_IsHost.htm" />
+  <HelpKINode Title="IsPersistent property" Url="html/P_Stormancer_Core_ISceneHost_IsPersistent.htm" />
+  <HelpKINode Title="IsPublic property" Url="html/P_Stormancer_Core_ISceneHost_IsPublic.htm" />
+  <HelpKINode Title="IStartup interface">
+    <HelpKINode Title="IStartup Interface" Url="html/T_Stormancer_IStartup.htm" />
+    <HelpKINode Title="about IStartup interface" Url="html/T_Stormancer_IStartup.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_IStartup.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IStartup.Run method" Url="html/M_Stormancer_IStartup_Run.htm" />
+  <HelpKINode Title="ITaskBasedEventHandler interface">
+    <HelpKINode Title="ITaskBasedEventHandler Interface" Url="html/T_Stormancer_Core_ITaskBasedEventHandler.htm" />
+    <HelpKINode Title="about ITaskBasedEventHandler interface" Url="html/T_Stormancer_Core_ITaskBasedEventHandler.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_Core_ITaskBasedEventHandler.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ITaskBasedEventHandler(Of T) interface">
+    <HelpKINode Title="ITaskBasedEventHandler(T) Interface" Url="html/T_Stormancer_Core_ITaskBasedEventHandler_1.htm" />
+    <HelpKINode Title="about ITaskBasedEventHandler(Of T) interface" Url="html/T_Stormancer_Core_ITaskBasedEventHandler_1.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_Core_ITaskBasedEventHandler_1.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ITaskBasedEventHandler(Of T).Add method" Url="html/M_Stormancer_Core_ITaskBasedEventHandler_1_Add.htm" />
+  <HelpKINode Title="ITaskBasedEventHandler.Add method" Url="html/M_Stormancer_Core_ITaskBasedEventHandler_Add.htm" />
+  <HelpKINode Title="ITaskBasedEventHandler&lt;T&gt; interface">
+    <HelpKINode Title="ITaskBasedEventHandler(T) Interface" Url="html/T_Stormancer_Core_ITaskBasedEventHandler_1.htm" />
+    <HelpKINode Title="about ITaskBasedEventHandler&lt;T&gt; interface" Url="html/T_Stormancer_Core_ITaskBasedEventHandler_1.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_Core_ITaskBasedEventHandler_1.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ITaskBasedEventHandler&lt;T&gt;.Add method" Url="html/M_Stormancer_Core_ITaskBasedEventHandler_1_Add.htm" />
+  <HelpKINode Title="LastPing property" Url="html/P_Stormancer_Server_Components_IEnvironment_LastPing.htm" />
+  <HelpKINode Title="Latitude property" Url="html/P_Stormancer_Server_Components_PeerDetails_Latitude.htm" />
+  <HelpKINode Title="ListIndices method" Url="html/M_Stormancer_Server_Components_IEnvironment_ListIndices.htm" />
+  <HelpKINode Title="Log method">
+    <HelpKINode Title="ILogger.Log Method " Url="html/M_Stormancer_Diagnostics_ILogger_Log.htm" />
+    <HelpKINode Title="NullLogger.Log Method " Url="html/M_Stormancer_Diagnostics_NullLogger_Log.htm" />
+  </HelpKINode>
+  <HelpKINode Title="LoggerExtensions class">
+    <HelpKINode Title="LoggerExtensions Class" Url="html/T_Stormancer_Diagnostics_LoggerExtensions.htm" />
+    <HelpKINode Title="about LoggerExtensions class" Url="html/T_Stormancer_Diagnostics_LoggerExtensions.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_Diagnostics_LoggerExtensions.htm" />
+  </HelpKINode>
+  <HelpKINode Title="LoggerExtensions.Debug method" Url="html/M_Stormancer_Diagnostics_LoggerExtensions_Debug.htm" />
+  <HelpKINode Title="LoggerExtensions.Error method" Url="html/M_Stormancer_Diagnostics_LoggerExtensions_Error.htm" />
+  <HelpKINode Title="LoggerExtensions.Info method" Url="html/M_Stormancer_Diagnostics_LoggerExtensions_Info.htm" />
+  <HelpKINode Title="LoggerExtensions.Step method" Url="html/M_Stormancer_Diagnostics_LoggerExtensions_Step.htm" />
+  <HelpKINode Title="LoggerExtensions.Trace method" Url="html/M_Stormancer_Diagnostics_LoggerExtensions_Trace.htm" />
+  <HelpKINode Title="LoggerExtensions.Warn method" Url="html/M_Stormancer_Diagnostics_LoggerExtensions_Warn.htm" />
+  <HelpKINode Title="LogLevel enumeration" Url="html/T_Stormancer_Diagnostics_LogLevel.htm" />
+  <HelpKINode Title="Longitude property" Url="html/P_Stormancer_Server_Components_PeerDetails_Longitude.htm" />
+  <HelpKINode Title="LOW_PRIORITY enumeration member" Url="html/T_Stormancer_Core_PacketPriority.htm" />
+  <HelpKINode Title="MatchAllFilter class">
+    <HelpKINode Title="MatchAllFilter Class" Url="html/T_Stormancer_Core_MatchAllFilter.htm" />
+    <HelpKINode Title="about MatchAllFilter class" Url="html/T_Stormancer_Core_MatchAllFilter.htm" />
+    <HelpKINode Title="constructor" Url="html/M_Stormancer_Core_MatchAllFilter__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_Core_MatchAllFilter.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Stormancer_Core_MatchAllFilter.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MatchAllFilter.MatchAllFilter constructor" Url="html/M_Stormancer_Core_MatchAllFilter__ctor.htm" />
+  <HelpKINode Title="MatchArrayFilter class">
+    <HelpKINode Title="MatchArrayFilter Class" Url="html/T_Stormancer_Core_MatchArrayFilter.htm" />
+    <HelpKINode Title="about MatchArrayFilter class" Url="html/T_Stormancer_Core_MatchArrayFilter.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_Stormancer_Core_MatchArrayFilter__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_Core_MatchArrayFilter.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Stormancer_Core_MatchArrayFilter.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MatchArrayFilter.Ids property" Url="html/P_Stormancer_Core_MatchArrayFilter_Ids.htm" />
+  <HelpKINode Title="MatchArrayFilter.MatchArrayFilter constructor" Url="html/Overload_Stormancer_Core_MatchArrayFilter__ctor.htm" />
+  <HelpKINode Title="MatchPeerFilter class">
+    <HelpKINode Title="MatchPeerFilter Class" Url="html/T_Stormancer_Core_MatchPeerFilter.htm" />
+    <HelpKINode Title="about MatchPeerFilter class" Url="html/T_Stormancer_Core_MatchPeerFilter.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_Stormancer_Core_MatchPeerFilter__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_Core_MatchPeerFilter.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Stormancer_Core_MatchPeerFilter.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MatchPeerFilter.Id property" Url="html/P_Stormancer_Core_MatchPeerFilter_Id.htm" />
+  <HelpKINode Title="MatchPeerFilter.MatchPeerFilter constructor" Url="html/Overload_Stormancer_Core_MatchPeerFilter__ctor.htm" />
+  <HelpKINode Title="maxSize property" Url="html/P_Stormancer_Server_Index_maxSize.htm" />
+  <HelpKINode Title="MEDIUM_PRIORITY enumeration member" Url="html/T_Stormancer_Core_PacketPriority.htm" />
+  <HelpKINode Title="Metadata property">
+    <HelpKINode Title="IConnection.Metadata Property " Url="html/P_Stormancer_Core_IConnection_Metadata.htm" />
+    <HelpKINode Title="IHost.Metadata Property " Url="html/P_Stormancer_Server_IHost_Metadata.htm" />
+    <HelpKINode Title="ISceneHost.Metadata Property " Url="html/P_Stormancer_Core_ISceneHost_Metadata.htm" />
+    <HelpKINode Title="IScenePeerClient.Metadata Property " Url="html/P_Stormancer_IScenePeerClient_Metadata.htm" />
+    <HelpKINode Title="Packet(T).Metadata Property " Url="html/P_Stormancer_Core_Packet_1_Metadata.htm" />
+    <HelpKINode Title="Route.Metadata Property " Url="html/P_Stormancer_Core_Route_Metadata.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Name method" Url="html/M_Stormancer_Server_Admin_IAdminPluginConfig_Name.htm" />
+  <HelpKINode Title="name property" Url="html/P_Stormancer_Server_Index_name.htm" />
+  <HelpKINode Title="Name property">
+    <HelpKINode Title="ISerializer.Name Property " Url="html/P_Stormancer_ISerializer_Name.htm" />
+    <HelpKINode Title="Route.Name Property " Url="html/P_Stormancer_Core_Route_Name.htm" />
+  </HelpKINode>
+  <HelpKINode Title="None enumeration member" Url="html/T_Stormancer_Core_BPSLimitationType.htm" />
+  <HelpKINode Title="NullLogger class">
+    <HelpKINode Title="NullLogger Class" Url="html/T_Stormancer_Diagnostics_NullLogger.htm" />
+    <HelpKINode Title="about NullLogger class" Url="html/T_Stormancer_Diagnostics_NullLogger.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_Diagnostics_NullLogger.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Stormancer_Diagnostics_NullLogger.htm" />
+  </HelpKINode>
+  <HelpKINode Title="NullLogger.Instance property" Url="html/P_Stormancer_Diagnostics_NullLogger_Instance.htm" />
+  <HelpKINode Title="NullLogger.Log method" Url="html/M_Stormancer_Diagnostics_NullLogger_Log.htm" />
+  <HelpKINode Title="OnMessage method" Url="html/M_Stormancer_Core_ISceneHost_OnMessage.htm" />
+  <HelpKINode Title="OnMessage(Of TData) method" Url="html/M_Stormancer_SceneHostExtensions_OnMessage__1.htm" />
+  <HelpKINode Title="OnMessage&lt;TData&gt; method" Url="html/M_Stormancer_SceneHostExtensions_OnMessage__1.htm" />
+  <HelpKINode Title="OutgoingBandwidth enumeration member" Url="html/T_Stormancer_Core_BPSLimitationType.htm" />
+  <HelpKINode Title="Packet class">
+    <HelpKINode Title="Packet Class" Url="html/T_Stormancer_Core_Packet.htm" />
+    <HelpKINode Title="about Packet class" Url="html/T_Stormancer_Core_Packet.htm" />
+    <HelpKINode Title="constructor" Url="html/M_Stormancer_Core_Packet__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_Core_Packet.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Stormancer_Core_Packet.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Packet(Of T) class">
+    <HelpKINode Title="Packet(T) Class" Url="html/T_Stormancer_Core_Packet_1.htm" />
+    <HelpKINode Title="about Packet(Of T) class" Url="html/T_Stormancer_Core_Packet_1.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_Stormancer_Core_Packet_1__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_Core_Packet_1.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Stormancer_Core_Packet_1.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Packet(Of T).Connection property" Url="html/P_Stormancer_Core_Packet_1_Connection.htm" />
+  <HelpKINode Title="Packet(Of T).GetMetadata(Of TData) method" Url="html/M_Stormancer_Core_Packet_1_GetMetadata__1.htm" />
+  <HelpKINode Title="Packet(Of T).Metadata property" Url="html/P_Stormancer_Core_Packet_1_Metadata.htm" />
+  <HelpKINode Title="Packet(Of T).Packet constructor" Url="html/Overload_Stormancer_Core_Packet_1__ctor.htm" />
+  <HelpKINode Title="Packet(Of T).Stream property" Url="html/P_Stormancer_Core_Packet_1_Stream.htm" />
+  <HelpKINode Title="Packet.Packet constructor" Url="html/M_Stormancer_Core_Packet__ctor.htm" />
+  <HelpKINode Title="Packet&lt;T&gt; class">
+    <HelpKINode Title="Packet(T) Class" Url="html/T_Stormancer_Core_Packet_1.htm" />
+    <HelpKINode Title="about Packet&lt;T&gt; class" Url="html/T_Stormancer_Core_Packet_1.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_Stormancer_Core_Packet_1__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_Core_Packet_1.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Stormancer_Core_Packet_1.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Packet&lt;T&gt;.Connection property" Url="html/P_Stormancer_Core_Packet_1_Connection.htm" />
+  <HelpKINode Title="Packet&lt;T&gt;.GetMetadata&lt;TData&gt; method" Url="html/M_Stormancer_Core_Packet_1_GetMetadata__1.htm" />
+  <HelpKINode Title="Packet&lt;T&gt;.Metadata property" Url="html/P_Stormancer_Core_Packet_1_Metadata.htm" />
+  <HelpKINode Title="Packet&lt;T&gt;.Packet constructor" Url="html/Overload_Stormancer_Core_Packet_1__ctor.htm" />
+  <HelpKINode Title="Packet&lt;T&gt;.Stream property" Url="html/P_Stormancer_Core_Packet_1_Stream.htm" />
+  <HelpKINode Title="PacketExtensions class">
+    <HelpKINode Title="PacketExtensions Class" Url="html/T_Stormancer_PacketExtensions.htm" />
+    <HelpKINode Title="about PacketExtensions class" Url="html/T_Stormancer_PacketExtensions.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_PacketExtensions.htm" />
+  </HelpKINode>
+  <HelpKINode Title="PacketExtensions.ReadObject(Of T) method" Url="html/M_Stormancer_PacketExtensions_ReadObject__1.htm" />
+  <HelpKINode Title="PacketExtensions.ReadObject&lt;T&gt; method" Url="html/M_Stormancer_PacketExtensions_ReadObject__1.htm" />
+  <HelpKINode Title="PacketExtensions.Serializer method" Url="html/Overload_Stormancer_PacketExtensions_Serializer.htm" />
+  <HelpKINode Title="PacketExtensions.ToObject(Of T) method" Url="html/M_Stormancer_PacketExtensions_ToObject__1.htm" />
+  <HelpKINode Title="PacketExtensions.ToObject&lt;T&gt; method" Url="html/M_Stormancer_PacketExtensions_ToObject__1.htm" />
+  <HelpKINode Title="PacketHostExtensions class">
+    <HelpKINode Title="PacketHostExtensions Class" Url="html/T_Stormancer_PacketHostExtensions.htm" />
+    <HelpKINode Title="about PacketHostExtensions class" Url="html/T_Stormancer_PacketHostExtensions.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_PacketHostExtensions.htm" />
+  </HelpKINode>
+  <HelpKINode Title="PacketHostExtensions.ReadObject(Of T) method" Url="html/M_Stormancer_PacketHostExtensions_ReadObject__1.htm" />
+  <HelpKINode Title="PacketHostExtensions.ReadObject&lt;T&gt; method" Url="html/M_Stormancer_PacketHostExtensions_ReadObject__1.htm" />
+  <HelpKINode Title="PacketHostExtensions.Serializer method" Url="html/M_Stormancer_PacketHostExtensions_Serializer.htm" />
+  <HelpKINode Title="PacketLossRate property" Url="html/P_Stormancer_Core_IConnectionStatistics_PacketLossRate.htm" />
+  <HelpKINode Title="PacketPriority enumeration" Url="html/T_Stormancer_Core_PacketPriority.htm" />
+  <HelpKINode Title="PacketReliability enumeration" Url="html/T_Stormancer_Core_PacketReliability.htm" />
+  <HelpKINode Title="Peer property" Url="html/P_Stormancer_Core_DisconnectedArgs_Peer.htm" />
+  <HelpKINode Title="PeerDetails class">
+    <HelpKINode Title="PeerDetails Class" Url="html/T_Stormancer_Server_Components_PeerDetails.htm" />
+    <HelpKINode Title="about PeerDetails class" Url="html/T_Stormancer_Server_Components_PeerDetails.htm" />
+    <HelpKINode Title="constructor" Url="html/M_Stormancer_Server_Components_PeerDetails__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_Server_Components_PeerDetails.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Stormancer_Server_Components_PeerDetails.htm" />
+  </HelpKINode>
+  <HelpKINode Title="PeerDetails.City property" Url="html/P_Stormancer_Server_Components_PeerDetails_City.htm" />
+  <HelpKINode Title="PeerDetails.ConnectedOn property" Url="html/P_Stormancer_Server_Components_PeerDetails_ConnectedOn.htm" />
+  <HelpKINode Title="PeerDetails.Continent property" Url="html/P_Stormancer_Server_Components_PeerDetails_Continent.htm" />
+  <HelpKINode Title="PeerDetails.Country property" Url="html/P_Stormancer_Server_Components_PeerDetails_Country.htm" />
+  <HelpKINode Title="PeerDetails.GeoIpEnabled property" Url="html/P_Stormancer_Server_Components_PeerDetails_GeoIpEnabled.htm" />
+  <HelpKINode Title="PeerDetails.IPAddress property" Url="html/P_Stormancer_Server_Components_PeerDetails_IPAddress.htm" />
+  <HelpKINode Title="PeerDetails.Latitude property" Url="html/P_Stormancer_Server_Components_PeerDetails_Latitude.htm" />
+  <HelpKINode Title="PeerDetails.Longitude property" Url="html/P_Stormancer_Server_Components_PeerDetails_Longitude.htm" />
+  <HelpKINode Title="PeerDetails.PeerDetails constructor" Url="html/M_Stormancer_Server_Components_PeerDetails__ctor.htm" />
+  <HelpKINode Title="PeerDetails.TimeZone property" Url="html/P_Stormancer_Server_Components_PeerDetails_TimeZone.htm" />
+  <HelpKINode Title="PeerFilter class">
+    <HelpKINode Title="PeerFilter Class" Url="html/T_Stormancer_Core_PeerFilter.htm" />
+    <HelpKINode Title="about PeerFilter class" Url="html/T_Stormancer_Core_PeerFilter.htm" />
+    <HelpKINode Title="constructor" Url="html/M_Stormancer_Core_PeerFilter__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_Core_PeerFilter.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Stormancer_Core_PeerFilter.htm" />
+  </HelpKINode>
+  <HelpKINode Title="PeerFilter.PeerFilter constructor" Url="html/M_Stormancer_Core_PeerFilter__ctor.htm" />
+  <HelpKINode Title="PeerFilter.Type property" Url="html/P_Stormancer_Core_PeerFilter_Type.htm" />
+  <HelpKINode Title="PendingRequests property" Url="html/P_Stormancer_Plugins_RpcService_PendingRequests.htm" />
+  <HelpKINode Title="Ping property" Url="html/P_Stormancer_Core_IConnection_Ping.htm" />
+  <HelpKINode Title="Post property">
+    <HelpKINode Title="AdminServicesDescription.Post Property " Url="html/P_Stormancer_Server_AdminServicesDescription_Post.htm" />
+    <HelpKINode Title="IAdminPluginConfig.Post Property " Url="html/P_Stormancer_Server_Admin_IAdminPluginConfig_Post.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Prefix property" Url="html/P_Stormancer_Server_AdminServicesDescription_Prefix.htm" />
+  <HelpKINode Title="primaryKey property" Url="html/P_Stormancer_Server_Index_primaryKey.htm" />
+  <HelpKINode Title="PrimaryKey property" Url="html/P_Stormancer_Server_Components_ApplicationInfos_PrimaryKey.htm" />
+  <HelpKINode Title="Put property">
+    <HelpKINode Title="AdminServicesDescription.Put Property " Url="html/P_Stormancer_Server_AdminServicesDescription_Put.htm" />
+    <HelpKINode Title="IAdminPluginConfig.Put Property " Url="html/P_Stormancer_Server_Admin_IAdminPluginConfig_Put.htm" />
+  </HelpKINode>
+  <HelpKINode Title="QueuedBytes property" Url="html/P_Stormancer_Core_IConnectionStatistics_QueuedBytes.htm" />
+  <HelpKINode Title="QueuedBytesForPriority method" Url="html/M_Stormancer_Core_IConnectionStatistics_QueuedBytesForPriority.htm" />
+  <HelpKINode Title="QueuedPackets property" Url="html/P_Stormancer_Core_IConnectionStatistics_QueuedPackets.htm" />
+  <HelpKINode Title="QueuedPacketsForPriority method" Url="html/M_Stormancer_Core_IConnectionStatistics_QueuedPacketsForPriority.htm" />
+  <HelpKINode Title="ReadObject(Of T) method">
+    <HelpKINode Title="PacketExtensions.ReadObject(T) Method " Url="html/M_Stormancer_PacketExtensions_ReadObject__1.htm" />
+    <HelpKINode Title="PacketHostExtensions.ReadObject(T) Method " Url="html/M_Stormancer_PacketHostExtensions_ReadObject__1.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ReadObject(Of TData) method" Url="html/M_Stormancer_RpcSceneHostExtensions_ReadObject__1.htm" />
+  <HelpKINode Title="ReadObject&lt;T&gt; method">
+    <HelpKINode Title="PacketExtensions.ReadObject(T) Method " Url="html/M_Stormancer_PacketExtensions_ReadObject__1.htm" />
+    <HelpKINode Title="PacketHostExtensions.ReadObject(T) Method " Url="html/M_Stormancer_PacketHostExtensions_ReadObject__1.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ReadObject&lt;TData&gt; method" Url="html/M_Stormancer_RpcSceneHostExtensions_ReadObject__1.htm" />
+  <HelpKINode Title="Reason property">
+    <HelpKINode Title="DisconnectedArgs.Reason Property " Url="html/P_Stormancer_Core_DisconnectedArgs_Reason.htm" />
+    <HelpKINode Title="ShutdownArgs.Reason Property " Url="html/P_Stormancer_Core_ShutdownArgs_Reason.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Register method" Url="html/Overload_Stormancer_IDependencyResolver_Register.htm" />
+  <HelpKINode Title="RegisterComponent(Of T) method" Url="html/M_Stormancer_Core_IConnection_RegisterComponent__1.htm" />
+  <HelpKINode Title="RegisterComponent&lt;T&gt; method" Url="html/M_Stormancer_Core_IConnection_RegisterComponent__1.htm" />
+  <HelpKINode Title="RegisterRoute(Of T) method" Url="html/M_Stormancer_SceneHostExtensions_RegisterRoute__1.htm" />
+  <HelpKINode Title="RegisterRoute&lt;T&gt; method" Url="html/M_Stormancer_SceneHostExtensions_RegisterRoute__1.htm" />
+  <HelpKINode Title="RELIABLE enumeration member" Url="html/T_Stormancer_Core_PacketReliability.htm" />
+  <HelpKINode Title="RELIABLE_ORDERED enumeration member" Url="html/T_Stormancer_Core_PacketReliability.htm" />
+  <HelpKINode Title="RELIABLE_SEQUENCED enumeration member" Url="html/T_Stormancer_Core_PacketReliability.htm" />
+  <HelpKINode Title="RemotePeer property" Url="html/P_Stormancer_Plugins_RequestContext_1_RemotePeer.htm" />
+  <HelpKINode Title="RemotePeers property" Url="html/P_Stormancer_Core_ISceneHost_RemotePeers.htm" />
+  <HelpKINode Title="RequestContext(Of T) class">
+    <HelpKINode Title="RequestContext(T) Class" Url="html/T_Stormancer_Plugins_RequestContext_1.htm" />
+    <HelpKINode Title="about RequestContext(Of T) class" Url="html/T_Stormancer_Plugins_RequestContext_1.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_Plugins_RequestContext_1.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Stormancer_Plugins_RequestContext_1.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RequestContext(Of T).CancellationToken property" Url="html/P_Stormancer_Plugins_RequestContext_1_CancellationToken.htm" />
+  <HelpKINode Title="RequestContext(Of T).InputStream property" Url="html/P_Stormancer_Plugins_RequestContext_1_InputStream.htm" />
+  <HelpKINode Title="RequestContext(Of T).RemotePeer property" Url="html/P_Stormancer_Plugins_RequestContext_1_RemotePeer.htm" />
+  <HelpKINode Title="RequestContext(Of T).SendValue method" Url="html/M_Stormancer_Plugins_RequestContext_1_SendValue.htm" />
+  <HelpKINode Title="RequestContext&lt;T&gt; class">
+    <HelpKINode Title="RequestContext(T) Class" Url="html/T_Stormancer_Plugins_RequestContext_1.htm" />
+    <HelpKINode Title="about RequestContext&lt;T&gt; class" Url="html/T_Stormancer_Plugins_RequestContext_1.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_Plugins_RequestContext_1.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Stormancer_Plugins_RequestContext_1.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RequestContext&lt;T&gt;.CancellationToken property" Url="html/P_Stormancer_Plugins_RequestContext_1_CancellationToken.htm" />
+  <HelpKINode Title="RequestContext&lt;T&gt;.InputStream property" Url="html/P_Stormancer_Plugins_RequestContext_1_InputStream.htm" />
+  <HelpKINode Title="RequestContext&lt;T&gt;.RemotePeer property" Url="html/P_Stormancer_Plugins_RequestContext_1_RemotePeer.htm" />
+  <HelpKINode Title="RequestContext&lt;T&gt;.SendValue method" Url="html/M_Stormancer_Plugins_RequestContext_1_SendValue.htm" />
+  <HelpKINode Title="Resolve(Of T) method" Url="html/M_Stormancer_IDependencyResolver_Resolve__1.htm" />
+  <HelpKINode Title="Resolve&lt;T&gt; method" Url="html/M_Stormancer_IDependencyResolver_Resolve__1.htm" />
+  <HelpKINode Title="ResolveAll(Of T) method" Url="html/M_Stormancer_IDependencyResolver_ResolveAll__1.htm" />
+  <HelpKINode Title="ResolveAll&lt;T&gt; method" Url="html/M_Stormancer_IDependencyResolver_ResolveAll__1.htm" />
+  <HelpKINode Title="Route class">
+    <HelpKINode Title="Route Class" Url="html/T_Stormancer_Core_Route.htm" />
+    <HelpKINode Title="about Route class" Url="html/T_Stormancer_Core_Route.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_Stormancer_Core_Route__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_Core_Route.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Stormancer_Core_Route.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Route.Handle property" Url="html/P_Stormancer_Core_Route_Handle.htm" />
+  <HelpKINode Title="Route.Handlers property" Url="html/P_Stormancer_Core_Route_Handlers.htm" />
+  <HelpKINode Title="Route.Metadata property" Url="html/P_Stormancer_Core_Route_Metadata.htm" />
+  <HelpKINode Title="Route.Name property" Url="html/P_Stormancer_Core_Route_Name.htm" />
+  <HelpKINode Title="Route.Route constructor" Url="html/Overload_Stormancer_Core_Route__ctor.htm" />
+  <HelpKINode Title="Route.Scene property" Url="html/P_Stormancer_Core_Route_Scene.htm" />
+  <HelpKINode Title="Routes property" Url="html/P_Stormancer_IScenePeerClient_Routes.htm" />
+  <HelpKINode Title="Rpc method">
+    <HelpKINode Title="RpcSceneHostExtensions.Rpc Method " Url="html/Overload_Stormancer_RpcSceneHostExtensions_Rpc.htm" />
+    <HelpKINode Title="RpcService.Rpc Method " Url="html/M_Stormancer_Plugins_RpcService_Rpc.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RpcHostPlugin class">
+    <HelpKINode Title="RpcHostPlugin Class" Url="html/T_Stormancer_Plugins_RpcHostPlugin.htm" />
+    <HelpKINode Title="about RpcHostPlugin class" Url="html/T_Stormancer_Plugins_RpcHostPlugin.htm" />
+    <HelpKINode Title="constructor" Url="html/M_Stormancer_Plugins_RpcHostPlugin__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_Plugins_RpcHostPlugin.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RpcHostPlugin.Build method" Url="html/M_Stormancer_Plugins_RpcHostPlugin_Build.htm" />
+  <HelpKINode Title="RpcHostPlugin.RpcHostPlugin constructor" Url="html/M_Stormancer_Plugins_RpcHostPlugin__ctor.htm" />
+  <HelpKINode Title="RpcSceneHostExtensions class">
+    <HelpKINode Title="RpcSceneHostExtensions Class" Url="html/T_Stormancer_RpcSceneHostExtensions.htm" />
+    <HelpKINode Title="about RpcSceneHostExtensions class" Url="html/T_Stormancer_RpcSceneHostExtensions.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_RpcSceneHostExtensions.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RpcSceneHostExtensions.AddProcedure method" Url="html/M_Stormancer_RpcSceneHostExtensions_AddProcedure.htm" />
+  <HelpKINode Title="RpcSceneHostExtensions.ReadObject(Of TData) method" Url="html/M_Stormancer_RpcSceneHostExtensions_ReadObject__1.htm" />
+  <HelpKINode Title="RpcSceneHostExtensions.ReadObject&lt;TData&gt; method" Url="html/M_Stormancer_RpcSceneHostExtensions_ReadObject__1.htm" />
+  <HelpKINode Title="RpcSceneHostExtensions.Rpc method" Url="html/Overload_Stormancer_RpcSceneHostExtensions_Rpc.htm" />
+  <HelpKINode Title="RpcSceneHostExtensions.RpcTask method" Url="html/Overload_Stormancer_RpcSceneHostExtensions_RpcTask.htm" />
+  <HelpKINode Title="RpcSceneHostExtensions.RpcVoid method" Url="html/Overload_Stormancer_RpcSceneHostExtensions_RpcVoid.htm" />
+  <HelpKINode Title="RpcSceneHostExtensions.SendRequest(Of TData, TResult) method" Url="html/M_Stormancer_RpcSceneHostExtensions_SendRequest__2.htm" />
+  <HelpKINode Title="RpcSceneHostExtensions.SendRequest&lt;TData, TResult&gt; method" Url="html/M_Stormancer_RpcSceneHostExtensions_SendRequest__2.htm" />
+  <HelpKINode Title="RpcSceneHostExtensions.SendValue(Of TData) method" Url="html/M_Stormancer_RpcSceneHostExtensions_SendValue__1.htm" />
+  <HelpKINode Title="RpcSceneHostExtensions.SendValue&lt;TData&gt; method" Url="html/M_Stormancer_RpcSceneHostExtensions_SendValue__1.htm" />
+  <HelpKINode Title="RpcSceneHostExtensions.SendVoidRequest method" Url="html/Overload_Stormancer_RpcSceneHostExtensions_SendVoidRequest.htm" />
+  <HelpKINode Title="RpcService class">
+    <HelpKINode Title="RpcService Class" Url="html/T_Stormancer_Plugins_RpcService.htm" />
+    <HelpKINode Title="about RpcService class" Url="html/T_Stormancer_Plugins_RpcService.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_Plugins_RpcService.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Stormancer_Plugins_RpcService.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RpcService.AddProcedure method" Url="html/M_Stormancer_Plugins_RpcService_AddProcedure.htm" />
+  <HelpKINode Title="RpcService.PendingRequests property" Url="html/P_Stormancer_Plugins_RpcService_PendingRequests.htm" />
+  <HelpKINode Title="RpcService.Rpc method" Url="html/M_Stormancer_Plugins_RpcService_Rpc.htm" />
+  <HelpKINode Title="RpcTask method" Url="html/Overload_Stormancer_RpcSceneHostExtensions_RpcTask.htm" />
+  <HelpKINode Title="RpcVoid method" Url="html/Overload_Stormancer_RpcSceneHostExtensions_RpcVoid.htm" />
+  <HelpKINode Title="Run method" Url="html/M_Stormancer_IStartup_Run.htm" />
+  <HelpKINode Title="RunTask method" Url="html/Overload_Stormancer_Core_ISceneHost_RunTask.htm" />
+  <HelpKINode Title="Scene property" Url="html/P_Stormancer_Core_Route_Scene.htm" />
+  <HelpKINode Title="SceneCreated property" Url="html/P_Stormancer_Plugins_HostPluginBuildContext_SceneCreated.htm" />
+  <HelpKINode Title="SceneCreating property" Url="html/P_Stormancer_Plugins_HostPluginBuildContext_SceneCreating.htm" />
+  <HelpKINode Title="SceneHostExtensions class">
+    <HelpKINode Title="SceneHostExtensions Class" Url="html/T_Stormancer_SceneHostExtensions.htm" />
+    <HelpKINode Title="about SceneHostExtensions class" Url="html/T_Stormancer_SceneHostExtensions.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_SceneHostExtensions.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SceneHostExtensions.AddRoute(Of T) method" Url="html/M_Stormancer_SceneHostExtensions_AddRoute__1.htm" />
+  <HelpKINode Title="SceneHostExtensions.AddRoute&lt;T&gt; method" Url="html/M_Stormancer_SceneHostExtensions_AddRoute__1.htm" />
+  <HelpKINode Title="SceneHostExtensions.Broadcast method" Url="html/Overload_Stormancer_SceneHostExtensions_Broadcast.htm" />
+  <HelpKINode Title="SceneHostExtensions.GetUserData(Of T) method" Url="html/M_Stormancer_SceneHostExtensions_GetUserData__1.htm" />
+  <HelpKINode Title="SceneHostExtensions.GetUserData&lt;T&gt; method" Url="html/M_Stormancer_SceneHostExtensions_GetUserData__1.htm" />
+  <HelpKINode Title="SceneHostExtensions.OnMessage(Of TData) method" Url="html/M_Stormancer_SceneHostExtensions_OnMessage__1.htm" />
+  <HelpKINode Title="SceneHostExtensions.OnMessage&lt;TData&gt; method" Url="html/M_Stormancer_SceneHostExtensions_OnMessage__1.htm" />
+  <HelpKINode Title="SceneHostExtensions.RegisterRoute(Of T) method" Url="html/M_Stormancer_SceneHostExtensions_RegisterRoute__1.htm" />
+  <HelpKINode Title="SceneHostExtensions.RegisterRoute&lt;T&gt; method" Url="html/M_Stormancer_SceneHostExtensions_RegisterRoute__1.htm" />
+  <HelpKINode Title="SceneHostExtensions.Send(Of TData) method" Url="html/M_Stormancer_SceneHostExtensions_Send__1.htm" />
+  <HelpKINode Title="SceneHostExtensions.Send&lt;TData&gt; method" Url="html/M_Stormancer_SceneHostExtensions_Send__1.htm" />
+  <HelpKINode Title="SceneStarted property" Url="html/P_Stormancer_Plugins_HostPluginBuildContext_SceneStarted.htm" />
+  <HelpKINode Title="SceneTemplate method" Url="html/M_Stormancer_IAppBuilder_SceneTemplate.htm" />
+  <HelpKINode Title="SecondaryKey property" Url="html/P_Stormancer_Server_Components_ApplicationInfos_SecondaryKey.htm" />
+  <HelpKINode Title="secondaryKey property" Url="html/P_Stormancer_Server_Index_secondaryKey.htm" />
+  <HelpKINode Title="Send method">
+    <HelpKINode Title="ISceneHost.Send Method " Url="html/M_Stormancer_Core_ISceneHost_Send.htm" />
+    <HelpKINode Title="IScenePeer.Send Method " Url="html/M_Stormancer_Core_IScenePeer_Send.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Send(Of TData) method" Url="html/M_Stormancer_SceneHostExtensions_Send__1.htm" />
+  <HelpKINode Title="Send&lt;TData&gt; method" Url="html/M_Stormancer_SceneHostExtensions_Send__1.htm" />
+  <HelpKINode Title="SendRequest(Of TData, TResult) method" Url="html/M_Stormancer_RpcSceneHostExtensions_SendRequest__2.htm" />
+  <HelpKINode Title="SendRequest&lt;TData, TResult&gt; method" Url="html/M_Stormancer_RpcSceneHostExtensions_SendRequest__2.htm" />
+  <HelpKINode Title="SendSystem method" Url="html/M_Stormancer_Core_IConnection_SendSystem.htm" />
+  <HelpKINode Title="SendToScene method" Url="html/M_Stormancer_Core_IConnection_SendToScene.htm" />
+  <HelpKINode Title="SendValue method" Url="html/M_Stormancer_Plugins_RequestContext_1_SendValue.htm" />
+  <HelpKINode Title="SendValue(Of TData) method" Url="html/M_Stormancer_RpcSceneHostExtensions_SendValue__1.htm" />
+  <HelpKINode Title="SendValue&lt;TData&gt; method" Url="html/M_Stormancer_RpcSceneHostExtensions_SendValue__1.htm" />
+  <HelpKINode Title="SendVoidRequest method" Url="html/Overload_Stormancer_RpcSceneHostExtensions_SendVoidRequest.htm" />
+  <HelpKINode Title="Serialize(Of T) method" Url="html/M_Stormancer_ISerializer_Serialize__1.htm" />
+  <HelpKINode Title="Serialize&lt;T&gt; method" Url="html/M_Stormancer_ISerializer_Serialize__1.htm" />
+  <HelpKINode Title="Serializer method">
+    <HelpKINode Title="PacketExtensions.Serializer Method " Url="html/Overload_Stormancer_PacketExtensions_Serializer.htm" />
+    <HelpKINode Title="PacketHostExtensions.Serializer Method " Url="html/M_Stormancer_PacketHostExtensions_Serializer.htm" />
+  </HelpKINode>
+  <HelpKINode Title="serverEndpoint property" Url="html/P_Stormancer_Server_Index_serverEndpoint.htm" />
+  <HelpKINode Title="Services property" Url="html/P_Stormancer_Server_Admin_IAdminPluginConfig_Services.htm" />
+  <HelpKINode Title="SetApplication method" Url="html/M_Stormancer_Core_IConnection_SetApplication.htm" />
+  <HelpKINode Title="ShutdownArgs class">
+    <HelpKINode Title="ShutdownArgs Class" Url="html/T_Stormancer_Core_ShutdownArgs.htm" />
+    <HelpKINode Title="about ShutdownArgs class" Url="html/T_Stormancer_Core_ShutdownArgs.htm" />
+    <HelpKINode Title="constructor" Url="html/M_Stormancer_Core_ShutdownArgs__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Stormancer_Core_ShutdownArgs.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_Stormancer_Core_ShutdownArgs.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ShutdownArgs.Data property" Url="html/P_Stormancer_Core_ShutdownArgs_Data.htm" />
+  <HelpKINode Title="ShutdownArgs.Reason property" Url="html/P_Stormancer_Core_ShutdownArgs_Reason.htm" />
+  <HelpKINode Title="ShutdownArgs.ShutdownArgs constructor" Url="html/M_Stormancer_Core_ShutdownArgs__ctor.htm" />
+  <HelpKINode Title="Shuttingdown property" Url="html/P_Stormancer_Core_ISceneHost_Shuttingdown.htm" />
+  <HelpKINode Title="size property" Url="html/P_Stormancer_Server_Index_size.htm" />
+  <HelpKINode Title="Starting property" Url="html/P_Stormancer_Core_ISceneHost_Starting.htm" />
+  <HelpKINode Title="State property" Url="html/P_Stormancer_Core_IConnection_State.htm" />
+  <HelpKINode Title="Step method" Url="html/M_Stormancer_Diagnostics_LoggerExtensions_Step.htm" />
+  <HelpKINode Title="Stormancer namespace" Url="html/N_Stormancer.htm" />
+  <HelpKINode Title="Stormancer.ClientException class" Url="html/T_Stormancer_ClientException.htm" />
+  <HelpKINode Title="Stormancer.Core namespace" Url="html/N_Stormancer_Core.htm" />
+  <HelpKINode Title="Stormancer.Core.BPSLimitationType enumeration" Url="html/T_Stormancer_Core_BPSLimitationType.htm" />
+  <HelpKINode Title="Stormancer.Core.ConnectionState enumeration" Url="html/T_Stormancer_Core_ConnectionState.htm" />
+  <HelpKINode Title="Stormancer.Core.DisconnectedArgs class" Url="html/T_Stormancer_Core_DisconnectedArgs.htm" />
+  <HelpKINode Title="Stormancer.Core.IConnection interface" Url="html/T_Stormancer_Core_IConnection.htm" />
+  <HelpKINode Title="Stormancer.Core.IConnectionStatistics interface" Url="html/T_Stormancer_Core_IConnectionStatistics.htm" />
+  <HelpKINode Title="Stormancer.Core.IScene interface" Url="html/T_Stormancer_Core_IScene.htm" />
+  <HelpKINode Title="Stormancer.Core.ISceneHost interface" Url="html/T_Stormancer_Core_ISceneHost.htm" />
+  <HelpKINode Title="Stormancer.Core.IScenePeer interface" Url="html/T_Stormancer_Core_IScenePeer.htm" />
+  <HelpKINode Title="Stormancer.Core.ITaskBasedEventHandler interface" Url="html/T_Stormancer_Core_ITaskBasedEventHandler.htm" />
+  <HelpKINode Title="Stormancer.Core.ITaskBasedEventHandler(Of T) interface" Url="html/T_Stormancer_Core_ITaskBasedEventHandler_1.htm" />
+  <HelpKINode Title="Stormancer.Core.ITaskBasedEventHandler&lt;T&gt; interface" Url="html/T_Stormancer_Core_ITaskBasedEventHandler_1.htm" />
+  <HelpKINode Title="Stormancer.Core.MatchAllFilter class" Url="html/T_Stormancer_Core_MatchAllFilter.htm" />
+  <HelpKINode Title="Stormancer.Core.MatchArrayFilter class" Url="html/T_Stormancer_Core_MatchArrayFilter.htm" />
+  <HelpKINode Title="Stormancer.Core.MatchPeerFilter class" Url="html/T_Stormancer_Core_MatchPeerFilter.htm" />
+  <HelpKINode Title="Stormancer.Core.Packet class" Url="html/T_Stormancer_Core_Packet.htm" />
+  <HelpKINode Title="Stormancer.Core.Packet(Of T) class" Url="html/T_Stormancer_Core_Packet_1.htm" />
+  <HelpKINode Title="Stormancer.Core.Packet&lt;T&gt; class" Url="html/T_Stormancer_Core_Packet_1.htm" />
+  <HelpKINode Title="Stormancer.Core.PacketPriority enumeration" Url="html/T_Stormancer_Core_PacketPriority.htm" />
+  <HelpKINode Title="Stormancer.Core.PacketReliability enumeration" Url="html/T_Stormancer_Core_PacketReliability.htm" />
+  <HelpKINode Title="Stormancer.Core.PeerFilter class" Url="html/T_Stormancer_Core_PeerFilter.htm" />
+  <HelpKINode Title="Stormancer.Core.Route class" Url="html/T_Stormancer_Core_Route.htm" />
+  <HelpKINode Title="Stormancer.Core.ShutdownArgs class" Url="html/T_Stormancer_Core_ShutdownArgs.htm" />
+  <HelpKINode Title="Stormancer.Diagnostics namespace" Url="html/N_Stormancer_Diagnostics.htm" />
+  <HelpKINode Title="Stormancer.Diagnostics.ILogger interface" Url="html/T_Stormancer_Diagnostics_ILogger.htm" />
+  <HelpKINode Title="Stormancer.Diagnostics.LoggerExtensions class" Url="html/T_Stormancer_Diagnostics_LoggerExtensions.htm" />
+  <HelpKINode Title="Stormancer.Diagnostics.LogLevel enumeration" Url="html/T_Stormancer_Diagnostics_LogLevel.htm" />
+  <HelpKINode Title="Stormancer.Diagnostics.NullLogger class" Url="html/T_Stormancer_Diagnostics_NullLogger.htm" />
+  <HelpKINode Title="Stormancer.DisposableAction class" Url="html/T_Stormancer_DisposableAction.htm" />
+  <HelpKINode Title="Stormancer.IAppBuilder interface" Url="html/T_Stormancer_IAppBuilder.htm" />
+  <HelpKINode Title="Stormancer.IDependencyResolver interface" Url="html/T_Stormancer_IDependencyResolver.htm" />
+  <HelpKINode Title="Stormancer.IScenePeerClient interface" Url="html/T_Stormancer_IScenePeerClient.htm" />
+  <HelpKINode Title="Stormancer.ISerializer interface" Url="html/T_Stormancer_ISerializer.htm" />
+  <HelpKINode Title="Stormancer.IStartup interface" Url="html/T_Stormancer_IStartup.htm" />
+  <HelpKINode Title="Stormancer.PacketExtensions class" Url="html/T_Stormancer_PacketExtensions.htm" />
+  <HelpKINode Title="Stormancer.PacketHostExtensions class" Url="html/T_Stormancer_PacketHostExtensions.htm" />
+  <HelpKINode Title="Stormancer.Plugins namespace" Url="html/N_Stormancer_Plugins.htm" />
+  <HelpKINode Title="Stormancer.Plugins.HostPluginBuildContext class" Url="html/T_Stormancer_Plugins_HostPluginBuildContext.htm" />
+  <HelpKINode Title="Stormancer.Plugins.IHostPlugin interface" Url="html/T_Stormancer_Plugins_IHostPlugin.htm" />
+  <HelpKINode Title="Stormancer.Plugins.RequestContext(Of T) class" Url="html/T_Stormancer_Plugins_RequestContext_1.htm" />
+  <HelpKINode Title="Stormancer.Plugins.RequestContext&lt;T&gt; class" Url="html/T_Stormancer_Plugins_RequestContext_1.htm" />
+  <HelpKINode Title="Stormancer.Plugins.RpcHostPlugin class" Url="html/T_Stormancer_Plugins_RpcHostPlugin.htm" />
+  <HelpKINode Title="Stormancer.Plugins.RpcService class" Url="html/T_Stormancer_Plugins_RpcService.htm" />
+  <HelpKINode Title="Stormancer.RpcSceneHostExtensions class" Url="html/T_Stormancer_RpcSceneHostExtensions.htm" />
+  <HelpKINode Title="Stormancer.SceneHostExtensions class" Url="html/T_Stormancer_SceneHostExtensions.htm" />
+  <HelpKINode Title="Stormancer.Server namespace" Url="html/N_Stormancer_Server.htm" />
+  <HelpKINode Title="Stormancer.Server.Admin namespace" Url="html/N_Stormancer_Server_Admin.htm" />
+  <HelpKINode Title="Stormancer.Server.Admin.AdminPluginHostVersion enumeration" Url="html/T_Stormancer_Server_Admin_AdminPluginHostVersion.htm" />
+  <HelpKINode Title="Stormancer.Server.Admin.IAdminPluginConfig interface" Url="html/T_Stormancer_Server_Admin_IAdminPluginConfig.htm" />
+  <HelpKINode Title="Stormancer.Server.AdminServicesDescription class" Url="html/T_Stormancer_Server_AdminServicesDescription.htm" />
+  <HelpKINode Title="Stormancer.Server.Components namespace" Url="html/N_Stormancer_Server_Components.htm" />
+  <HelpKINode Title="Stormancer.Server.Components.ActiveDeploymentChangedEventArgs class" Url="html/T_Stormancer_Server_Components_ActiveDeploymentChangedEventArgs.htm" />
+  <HelpKINode Title="Stormancer.Server.Components.ApplicationInfos class" Url="html/T_Stormancer_Server_Components_ApplicationInfos.htm" />
+  <HelpKINode Title="Stormancer.Server.Components.IEnvironment interface" Url="html/T_Stormancer_Server_Components_IEnvironment.htm" />
+  <HelpKINode Title="Stormancer.Server.Components.IPeerInfosService interface" Url="html/T_Stormancer_Server_Components_IPeerInfosService.htm" />
+  <HelpKINode Title="Stormancer.Server.Components.PeerDetails class" Url="html/T_Stormancer_Server_Components_PeerDetails.htm" />
+  <HelpKINode Title="Stormancer.Server.IHost interface" Url="html/T_Stormancer_Server_IHost.htm" />
+  <HelpKINode Title="Stormancer.Server.Index class" Url="html/T_Stormancer_Server_Index.htm" />
+  <HelpKINode Title="Stream property" Url="html/P_Stormancer_Core_Packet_1_Stream.htm" />
+  <HelpKINode Title="Template property" Url="html/P_Stormancer_Core_ISceneHost_Template.htm" />
+  <HelpKINode Title="TimeZone property" Url="html/P_Stormancer_Server_Components_PeerDetails_TimeZone.htm" />
+  <HelpKINode Title="ToObject(Of T) method" Url="html/M_Stormancer_PacketExtensions_ToObject__1.htm" />
+  <HelpKINode Title="ToObject&lt;T&gt; method" Url="html/M_Stormancer_PacketExtensions_ToObject__1.htm" />
+  <HelpKINode Title="Trace enumeration member" Url="html/T_Stormancer_Diagnostics_LogLevel.htm" />
+  <HelpKINode Title="Trace method" Url="html/M_Stormancer_Diagnostics_LoggerExtensions_Trace.htm" />
+  <HelpKINode Title="Type property" Url="html/P_Stormancer_Core_PeerFilter_Type.htm" />
+  <HelpKINode Title="UNRELIABLE enumeration member" Url="html/T_Stormancer_Core_PacketReliability.htm" />
+  <HelpKINode Title="UNRELIABLE_SEQUENCED enumeration member" Url="html/T_Stormancer_Core_PacketReliability.htm" />
+  <HelpKINode Title="UserData property" Url="html/P_Stormancer_IScenePeerClient_UserData.htm" />
+  <HelpKINode Title="V0_1 enumeration member" Url="html/T_Stormancer_Server_Admin_AdminPluginHostVersion.htm" />
+  <HelpKINode Title="Warn enumeration member" Url="html/T_Stormancer_Diagnostics_LogLevel.htm" />
+  <HelpKINode Title="Warn method" Url="html/M_Stormancer_Diagnostics_LoggerExtensions_Warn.htm" />
+  <HelpKINode Title="WebServer method" Url="html/M_Stormancer_IAppBuilder_WebServer.htm" />
+</HelpKI>
