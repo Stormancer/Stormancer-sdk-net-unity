@@ -85,7 +85,7 @@ namespace Stormancer
         }
 
         /// <summary>
-        /// Listen to messages on the specified route, deserialize them and execute the given handler for eah of them.
+        /// Listen to messages on the specified route, deserialize them and execute the given handler for each of them.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="scene">The scene on which the route messages will be listened.</param>

@@ -1,0 +1,476 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HelpTOC>
+
+  <HelpTOCNode Id="2df45073-afdd-4498-9b7b-11a15a9f8814" Title="Stormancer" Url="html/N_Stormancer.htm">
+    <HelpTOCNode Id="17022b4a-2368-4ef0-9f1c-73365a662448" Title="ClientException Class" Url="html/T_Stormancer_ClientException.htm">
+      <HelpTOCNode Title="ClientException Constructor " Url="html/M_Stormancer_ClientException__ctor.htm" />
+      <HelpTOCNode Title="ClientException Properties" Url="html/Properties_T_Stormancer_ClientException.htm" />
+      <HelpTOCNode Title="ClientException Methods" Url="html/Methods_T_Stormancer_ClientException.htm" />
+      <HelpTOCNode Title="ClientException Events" Url="html/Events_T_Stormancer_ClientException.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="4a4ad5b8-d237-4258-9e15-c0bdc7dc2797" Title="DisposableAction Class" Url="html/T_Stormancer_DisposableAction.htm">
+      <HelpTOCNode Title="DisposableAction Constructor " Url="html/M_Stormancer_DisposableAction__ctor.htm" />
+      <HelpTOCNode Id="17184fe5-688e-40a2-a5ce-e4a25c44cb1c" Title="DisposableAction Methods" Url="html/Methods_T_Stormancer_DisposableAction.htm">
+        <HelpTOCNode Title="Dispose Method " Url="html/M_Stormancer_DisposableAction_Dispose.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="2af574c1-fca7-4d98-9658-f96c5d8cbec1" Title="IAppBuilder Interface" Url="html/T_Stormancer_IAppBuilder.htm">
+      <HelpTOCNode Id="fc03d79e-b5c0-40e1-a025-802b3dbbe026" Title="IAppBuilder Methods" Url="html/Methods_T_Stormancer_IAppBuilder.htm">
+        <HelpTOCNode Title="AddPlugin Method " Url="html/M_Stormancer_IAppBuilder_AddPlugin.htm" />
+        <HelpTOCNode Title="AdminPlugin Method " Url="html/M_Stormancer_IAppBuilder_AdminPlugin.htm" />
+        <HelpTOCNode Title="SceneTemplate Method " Url="html/M_Stormancer_IAppBuilder_SceneTemplate.htm" />
+        <HelpTOCNode Title="WebServer Method " Url="html/M_Stormancer_IAppBuilder_WebServer.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="d3dfed87-751a-4350-a49b-7a1981fb555a" Title="IDependencyResolver Interface" Url="html/T_Stormancer_IDependencyResolver.htm">
+      <HelpTOCNode Id="2061d14b-b8da-452b-ba2c-64225267b5d7" Title="IDependencyResolver Methods" Url="html/Methods_T_Stormancer_IDependencyResolver.htm">
+        <HelpTOCNode Id="8f8ae1b1-89d9-4ae8-ab67-93d8abf1f66b" Title="Register Method " Url="html/Overload_Stormancer_IDependencyResolver_Register.htm">
+          <HelpTOCNode Title="Register(RegisterType, RegisterImpl) Method " Url="html/M_Stormancer_IDependencyResolver_Register__2.htm" />
+          <HelpTOCNode Title="Register(RegisterType) Method (RegisterType)" Url="html/M_Stormancer_IDependencyResolver_Register__1.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="Resolve(T) Method " Url="html/M_Stormancer_IDependencyResolver_Resolve__1.htm" />
+        <HelpTOCNode Title="ResolveAll(T) Method " Url="html/M_Stormancer_IDependencyResolver_ResolveAll__1.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="b5cb49d5-adef-4e5b-8c4a-d744513381cc" Title="IScenePeerClient Interface" Url="html/T_Stormancer_IScenePeerClient.htm">
+      <HelpTOCNode Id="329f328d-86f4-4cb8-be62-1736da948e1d" Title="IScenePeerClient Properties" Url="html/Properties_T_Stormancer_IScenePeerClient.htm">
+        <HelpTOCNode Title="ContentType Property " Url="html/P_Stormancer_IScenePeerClient_ContentType.htm" />
+        <HelpTOCNode Title="Host Property " Url="html/P_Stormancer_IScenePeerClient_Host.htm" />
+        <HelpTOCNode Title="IpAddress Property " Url="html/P_Stormancer_IScenePeerClient_IpAddress.htm" />
+        <HelpTOCNode Title="Metadata Property " Url="html/P_Stormancer_IScenePeerClient_Metadata.htm" />
+        <HelpTOCNode Title="Routes Property " Url="html/P_Stormancer_IScenePeerClient_Routes.htm" />
+        <HelpTOCNode Title="UserData Property " Url="html/P_Stormancer_IScenePeerClient_UserData.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="b6879805-ff6d-495a-9862-f06f44683f61" Title="IScenePeerClient Methods" Url="html/Methods_T_Stormancer_IScenePeerClient.htm">
+        <HelpTOCNode Title="Disconnect Method " Url="html/M_Stormancer_IScenePeerClient_Disconnect.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="b31acb21-204a-4e43-8d8f-4634a7d85e66" Title="ISerializer Interface" Url="html/T_Stormancer_ISerializer.htm">
+      <HelpTOCNode Id="ba52dbae-882f-4139-8dea-3f091c162c8f" Title="ISerializer Properties" Url="html/Properties_T_Stormancer_ISerializer.htm">
+        <HelpTOCNode Title="Name Property " Url="html/P_Stormancer_ISerializer_Name.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="617acd71-dc3f-4509-a954-7fe4632a672d" Title="ISerializer Methods" Url="html/Methods_T_Stormancer_ISerializer.htm">
+        <HelpTOCNode Title="Deserialize(T) Method " Url="html/M_Stormancer_ISerializer_Deserialize__1.htm" />
+        <HelpTOCNode Title="Serialize(T) Method " Url="html/M_Stormancer_ISerializer_Serialize__1.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="7d5f4098-2590-458f-b223-c43e824b5552" Title="IStartup Interface" Url="html/T_Stormancer_IStartup.htm">
+      <HelpTOCNode Id="01d1bcc0-acce-4f42-9824-c92b4422de57" Title="IStartup Methods" Url="html/Methods_T_Stormancer_IStartup.htm">
+        <HelpTOCNode Title="Run Method " Url="html/M_Stormancer_IStartup_Run.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="da56f9a3-a9dc-4f1c-af4d-6dc7947998fd" Title="PacketExtensions Class" Url="html/T_Stormancer_PacketExtensions.htm">
+      <HelpTOCNode Id="e48f6e02-926f-4315-a858-bf48c7c28391" Title="PacketExtensions Methods" Url="html/Methods_T_Stormancer_PacketExtensions.htm">
+        <HelpTOCNode Title="ReadObject(T) Method " Url="html/M_Stormancer_PacketExtensions_ReadObject__1.htm" />
+        <HelpTOCNode Id="2ac8bea0-d1e5-44d8-ae6d-406fc63321dc" Title="Serializer Method " Url="html/Overload_Stormancer_PacketExtensions_Serializer.htm">
+          <HelpTOCNode Title="Serializer Method (IConnection)" Url="html/M_Stormancer_PacketExtensions_Serializer.htm" />
+          <HelpTOCNode Title="Serializer Method (IScenePeer)" Url="html/M_Stormancer_PacketExtensions_Serializer_1.htm" />
+          <HelpTOCNode Title="Serializer Method (Packet(IScenePeer))" Url="html/M_Stormancer_PacketExtensions_Serializer_3.htm" />
+          <HelpTOCNode Title="Serializer Method (Packet)" Url="html/M_Stormancer_PacketExtensions_Serializer_2.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="ToObject(T) Method " Url="html/M_Stormancer_PacketExtensions_ToObject__1.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="912a0fa7-13f7-4f17-aef2-620c134ef8c2" Title="PacketHostExtensions Class" Url="html/T_Stormancer_PacketHostExtensions.htm">
+      <HelpTOCNode Id="f06351d4-61b6-4801-a4bc-8bb67756d0f4" Title="PacketHostExtensions Methods" Url="html/Methods_T_Stormancer_PacketHostExtensions.htm">
+        <HelpTOCNode Title="ReadObject(T) Method " Url="html/M_Stormancer_PacketHostExtensions_ReadObject__1.htm" />
+        <HelpTOCNode Title="Serializer Method " Url="html/M_Stormancer_PacketHostExtensions_Serializer.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="2d01422f-d5ef-426a-a209-36e0043afbbf" Title="RpcSceneHostExtensions Class" Url="html/T_Stormancer_RpcSceneHostExtensions.htm">
+      <HelpTOCNode Id="326788cf-5413-4337-a4e6-9ed515350802" Title="RpcSceneHostExtensions Methods" Url="html/Methods_T_Stormancer_RpcSceneHostExtensions.htm">
+        <HelpTOCNode Title="AddProcedure Method " Url="html/M_Stormancer_RpcSceneHostExtensions_AddProcedure.htm" />
+        <HelpTOCNode Title="ReadObject(TData) Method " Url="html/M_Stormancer_RpcSceneHostExtensions_ReadObject__1.htm" />
+        <HelpTOCNode Id="6a7abcfd-3671-4b5d-8c76-968eea1dff50" Title="Rpc Method " Url="html/Overload_Stormancer_RpcSceneHostExtensions_Rpc.htm">
+          <HelpTOCNode Title="Rpc Method (IScenePeerClient, String, Action(Stream), PacketPriority)" Url="html/M_Stormancer_RpcSceneHostExtensions_Rpc.htm" />
+          <HelpTOCNode Title="Rpc(TData, TResponse) Method (IScenePeerClient, String, TData, PacketPriority)" Url="html/M_Stormancer_RpcSceneHostExtensions_Rpc__2.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="c88830de-998f-4c25-b03b-3594a3ae3f65" Title="RpcTask Method " Url="html/Overload_Stormancer_RpcSceneHostExtensions_RpcTask.htm">
+          <HelpTOCNode Title="RpcTask Method (IScenePeerClient, String, Action(Stream), PacketPriority)" Url="html/M_Stormancer_RpcSceneHostExtensions_RpcTask.htm" />
+          <HelpTOCNode Title="RpcTask(TData, TResponse) Method (IScenePeerClient, String, TData, PacketPriority)" Url="html/M_Stormancer_RpcSceneHostExtensions_RpcTask__2.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="6eb727ba-6b33-4abf-8105-694f9a0df84e" Title="RpcVoid Method " Url="html/Overload_Stormancer_RpcSceneHostExtensions_RpcVoid.htm">
+          <HelpTOCNode Title="RpcVoid Method (IScenePeerClient, String, Action(Stream), PacketPriority)" Url="html/M_Stormancer_RpcSceneHostExtensions_RpcVoid.htm" />
+          <HelpTOCNode Title="RpcVoid(TData) Method (IScenePeerClient, String, TData, PacketPriority)" Url="html/M_Stormancer_RpcSceneHostExtensions_RpcVoid__1.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="SendRequest(TData, TResult) Method " Url="html/M_Stormancer_RpcSceneHostExtensions_SendRequest__2.htm" />
+        <HelpTOCNode Title="SendValue(TData) Method " Url="html/M_Stormancer_RpcSceneHostExtensions_SendValue__1.htm" />
+        <HelpTOCNode Id="a5298ade-1f7c-4c11-b93d-bad7db64bd42" Title="SendVoidRequest Method " Url="html/Overload_Stormancer_RpcSceneHostExtensions_SendVoidRequest.htm">
+          <HelpTOCNode Title="SendVoidRequest Method (IScenePeerClient, String, PacketPriority)" Url="html/M_Stormancer_RpcSceneHostExtensions_SendVoidRequest.htm" />
+          <HelpTOCNode Title="SendVoidRequest(TData) Method (IScenePeerClient, String, TData, PacketPriority)" Url="html/M_Stormancer_RpcSceneHostExtensions_SendVoidRequest__1.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="983e9541-72de-44a9-a94c-40a1c5ae6235" Title="SceneHostExtensions Class" Url="html/T_Stormancer_SceneHostExtensions.htm">
+      <HelpTOCNode Id="00d8cf45-5612-4089-b394-0121b60ffa2c" Title="SceneHostExtensions Methods" Url="html/Methods_T_Stormancer_SceneHostExtensions.htm">
+        <HelpTOCNode Title="AddRoute(T) Method " Url="html/M_Stormancer_SceneHostExtensions_AddRoute__1.htm" />
+        <HelpTOCNode Id="098e7b35-1d05-4d89-b3cc-876fd0264cb6" Title="Broadcast Method " Url="html/Overload_Stormancer_SceneHostExtensions_Broadcast.htm">
+          <HelpTOCNode Title="Broadcast Method (ISceneHost, String, Action(Stream), PacketPriority, PacketReliability)" Url="html/M_Stormancer_SceneHostExtensions_Broadcast.htm" />
+          <HelpTOCNode Title="Broadcast(TData) Method (ISceneHost, String, TData, PacketPriority, PacketReliability)" Url="html/M_Stormancer_SceneHostExtensions_Broadcast__1.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="GetUserData(T) Method " Url="html/M_Stormancer_SceneHostExtensions_GetUserData__1.htm" />
+        <HelpTOCNode Title="OnMessage(TData) Method " Url="html/M_Stormancer_SceneHostExtensions_OnMessage__1.htm" />
+        <HelpTOCNode Title="RegisterRoute(T) Method " Url="html/M_Stormancer_SceneHostExtensions_RegisterRoute__1.htm" />
+        <HelpTOCNode Title="Send(TData) Method " Url="html/M_Stormancer_SceneHostExtensions_Send__1.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+  </HelpTOCNode>
+  <HelpTOCNode Id="58830773-8b24-42ce-9236-a3f416355d36" Title="Stormancer.Core" Url="html/N_Stormancer_Core.htm">
+    <HelpTOCNode Title="BPSLimitationType Enumeration" Url="html/T_Stormancer_Core_BPSLimitationType.htm" />
+    <HelpTOCNode Title="ConnectionState Enumeration" Url="html/T_Stormancer_Core_ConnectionState.htm" />
+    <HelpTOCNode Id="8a47ea96-51c3-4378-8e17-0d7e46cfdbd7" Title="DisconnectedArgs Class" Url="html/T_Stormancer_Core_DisconnectedArgs.htm">
+      <HelpTOCNode Title="DisconnectedArgs Constructor " Url="html/M_Stormancer_Core_DisconnectedArgs__ctor.htm" />
+      <HelpTOCNode Id="6365fd55-ddcd-4856-94b6-dba594ad65cd" Title="DisconnectedArgs Properties" Url="html/Properties_T_Stormancer_Core_DisconnectedArgs.htm">
+        <HelpTOCNode Title="Peer Property " Url="html/P_Stormancer_Core_DisconnectedArgs_Peer.htm" />
+        <HelpTOCNode Title="Reason Property " Url="html/P_Stormancer_Core_DisconnectedArgs_Reason.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Title="DisconnectedArgs Methods" Url="html/Methods_T_Stormancer_Core_DisconnectedArgs.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="9c9779fb-4719-4108-92a5-d3044bcacfba" Title="IConnection Interface" Url="html/T_Stormancer_Core_IConnection.htm">
+      <HelpTOCNode Id="8fb0df0a-b812-4335-b9b5-0e8a5d61fc73" Title="IConnection Properties" Url="html/Properties_T_Stormancer_Core_IConnection.htm">
+        <HelpTOCNode Title="Account Property " Url="html/P_Stormancer_Core_IConnection_Account.htm" />
+        <HelpTOCNode Title="Application Property " Url="html/P_Stormancer_Core_IConnection_Application.htm" />
+        <HelpTOCNode Title="ConnectionClosed Property " Url="html/P_Stormancer_Core_IConnection_ConnectionClosed.htm" />
+        <HelpTOCNode Title="ConnectionDate Property " Url="html/P_Stormancer_Core_IConnection_ConnectionDate.htm" />
+        <HelpTOCNode Title="Id Property " Url="html/P_Stormancer_Core_IConnection_Id.htm" />
+        <HelpTOCNode Title="IpAddress Property " Url="html/P_Stormancer_Core_IConnection_IpAddress.htm" />
+        <HelpTOCNode Title="Metadata Property " Url="html/P_Stormancer_Core_IConnection_Metadata.htm" />
+        <HelpTOCNode Title="Ping Property " Url="html/P_Stormancer_Core_IConnection_Ping.htm" />
+        <HelpTOCNode Title="State Property " Url="html/P_Stormancer_Core_IConnection_State.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="011ca031-e846-4298-a28c-68e98be695b7" Title="IConnection Methods" Url="html/Methods_T_Stormancer_Core_IConnection.htm">
+        <HelpTOCNode Title="Close Method " Url="html/M_Stormancer_Core_IConnection_Close.htm" />
+        <HelpTOCNode Title="GetComponent(T) Method " Url="html/M_Stormancer_Core_IConnection_GetComponent__1.htm" />
+        <HelpTOCNode Title="GetConnectionStatistics Method " Url="html/M_Stormancer_Core_IConnection_GetConnectionStatistics.htm" />
+        <HelpTOCNode Title="RegisterComponent(T) Method " Url="html/M_Stormancer_Core_IConnection_RegisterComponent__1.htm" />
+        <HelpTOCNode Title="SendSystem Method " Url="html/M_Stormancer_Core_IConnection_SendSystem.htm" />
+        <HelpTOCNode Title="SendToScene Method " Url="html/M_Stormancer_Core_IConnection_SendToScene.htm" />
+        <HelpTOCNode Title="SetApplication Method " Url="html/M_Stormancer_Core_IConnection_SetApplication.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="878cd69a-db4f-4b12-ba92-e0431b6f504a" Title="IConnectionStatistics Interface" Url="html/T_Stormancer_Core_IConnectionStatistics.htm">
+      <HelpTOCNode Id="53252c74-ab26-4db8-a0bc-7d5c7257b615" Title="IConnectionStatistics Properties" Url="html/Properties_T_Stormancer_Core_IConnectionStatistics.htm">
+        <HelpTOCNode Title="BytesPerSecondLimit Property " Url="html/P_Stormancer_Core_IConnectionStatistics_BytesPerSecondLimit.htm" />
+        <HelpTOCNode Title="BytesPerSecondLimitationType Property " Url="html/P_Stormancer_Core_IConnectionStatistics_BytesPerSecondLimitationType.htm" />
+        <HelpTOCNode Title="PacketLossRate Property " Url="html/P_Stormancer_Core_IConnectionStatistics_PacketLossRate.htm" />
+        <HelpTOCNode Title="QueuedBytes Property " Url="html/P_Stormancer_Core_IConnectionStatistics_QueuedBytes.htm" />
+        <HelpTOCNode Title="QueuedPackets Property " Url="html/P_Stormancer_Core_IConnectionStatistics_QueuedPackets.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="e1480f23-8733-4bf1-a1e0-71898153d8b3" Title="IConnectionStatistics Methods" Url="html/Methods_T_Stormancer_Core_IConnectionStatistics.htm">
+        <HelpTOCNode Title="QueuedBytesForPriority Method " Url="html/M_Stormancer_Core_IConnectionStatistics_QueuedBytesForPriority.htm" />
+        <HelpTOCNode Title="QueuedPacketsForPriority Method " Url="html/M_Stormancer_Core_IConnectionStatistics_QueuedPacketsForPriority.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="3e5aa5b4-a737-484e-b50a-1f314910dab4" Title="IScene Interface" Url="html/T_Stormancer_Core_IScene.htm">
+      <HelpTOCNode Id="4bc7afa0-aa00-4dce-b0e6-617a81febbe4" Title="IScene Properties" Url="html/Properties_T_Stormancer_Core_IScene.htm">
+        <HelpTOCNode Title="DependencyResolver Property " Url="html/P_Stormancer_Core_IScene_DependencyResolver.htm" />
+        <HelpTOCNode Title="Id Property " Url="html/P_Stormancer_Core_IScene_Id.htm" />
+        <HelpTOCNode Title="IsHost Property " Url="html/P_Stormancer_Core_IScene_IsHost.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="afcea881-049e-4a8e-b985-0672b44f960c" Title="IScene Methods" Url="html/Methods_T_Stormancer_Core_IScene.htm">
+        <HelpTOCNode Title="GetComponent(T) Method " Url="html/M_Stormancer_Core_IScene_GetComponent__1.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="6c9d4e26-b36a-4281-8432-f1bc80464eff" Title="ISceneHost Interface" Url="html/T_Stormancer_Core_ISceneHost.htm">
+      <HelpTOCNode Id="3f7b36c8-0e0d-43fe-bc22-edab52d5c0ec" Title="ISceneHost Properties" Url="html/Properties_T_Stormancer_Core_ISceneHost.htm">
+        <HelpTOCNode Title="Connected Property " Url="html/P_Stormancer_Core_ISceneHost_Connected.htm" />
+        <HelpTOCNode Title="Connecting Property " Url="html/P_Stormancer_Core_ISceneHost_Connecting.htm" />
+        <HelpTOCNode Title="Disconnected Property " Url="html/P_Stormancer_Core_ISceneHost_Disconnected.htm" />
+        <HelpTOCNode Title="IsPersistent Property " Url="html/P_Stormancer_Core_ISceneHost_IsPersistent.htm" />
+        <HelpTOCNode Title="IsPublic Property " Url="html/P_Stormancer_Core_ISceneHost_IsPublic.htm" />
+        <HelpTOCNode Title="Metadata Property " Url="html/P_Stormancer_Core_ISceneHost_Metadata.htm" />
+        <HelpTOCNode Title="RemotePeers Property " Url="html/P_Stormancer_Core_ISceneHost_RemotePeers.htm" />
+        <HelpTOCNode Title="Shuttingdown Property " Url="html/P_Stormancer_Core_ISceneHost_Shuttingdown.htm" />
+        <HelpTOCNode Title="Starting Property " Url="html/P_Stormancer_Core_ISceneHost_Starting.htm" />
+        <HelpTOCNode Title="Template Property " Url="html/P_Stormancer_Core_ISceneHost_Template.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="56581cc3-93af-44a5-8d6c-ead4850f06d3" Title="ISceneHost Methods" Url="html/Methods_T_Stormancer_Core_ISceneHost.htm">
+        <HelpTOCNode Title="AddRoute Method " Url="html/M_Stormancer_Core_ISceneHost_AddRoute.htm" />
+        <HelpTOCNode Title="OnMessage Method " Url="html/M_Stormancer_Core_ISceneHost_OnMessage.htm" />
+        <HelpTOCNode Id="bf928ff1-6d3d-42ff-af62-dc22eee29b0e" Title="RunTask Method " Url="html/Overload_Stormancer_Core_ISceneHost_RunTask.htm">
+          <HelpTOCNode Title="RunTask Method (Func(Task))" Url="html/M_Stormancer_Core_ISceneHost_RunTask.htm" />
+          <HelpTOCNode Title="RunTask Method (Func(CancellationToken, Task))" Url="html/M_Stormancer_Core_ISceneHost_RunTask_1.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="Send Method " Url="html/M_Stormancer_Core_ISceneHost_Send.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="465af4f3-6299-497b-8377-403396c21a95" Title="IScenePeer Interface" Url="html/T_Stormancer_Core_IScenePeer.htm">
+      <HelpTOCNode Id="5c15e7ad-fd44-4a71-8ce6-dc8b6ed63d7f" Title="IScenePeer Properties" Url="html/Properties_T_Stormancer_Core_IScenePeer.htm">
+        <HelpTOCNode Title="Id Property " Url="html/P_Stormancer_Core_IScenePeer_Id.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="2d1a16df-5d54-4d47-ac92-bcc7ec8cc6f4" Title="IScenePeer Methods" Url="html/Methods_T_Stormancer_Core_IScenePeer.htm">
+        <HelpTOCNode Title="GetComponent(T) Method " Url="html/M_Stormancer_Core_IScenePeer_GetComponent__1.htm" />
+        <HelpTOCNode Title="Send Method " Url="html/M_Stormancer_Core_IScenePeer_Send.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="aed93110-ec52-40bb-bec0-da2bed77c6c7" Title="ITaskBasedEventHandler Interface" Url="html/T_Stormancer_Core_ITaskBasedEventHandler.htm">
+      <HelpTOCNode Id="7c7d59c9-b64d-40e9-a942-6995f27638bb" Title="ITaskBasedEventHandler Methods" Url="html/Methods_T_Stormancer_Core_ITaskBasedEventHandler.htm">
+        <HelpTOCNode Title="Add Method " Url="html/M_Stormancer_Core_ITaskBasedEventHandler_Add.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="12cfed07-cad5-41c3-ad10-d851972a78b9" Title="ITaskBasedEventHandler(T) Interface" Url="html/T_Stormancer_Core_ITaskBasedEventHandler_1.htm">
+      <HelpTOCNode Id="7a8f754b-5c70-4885-84c5-c93456dab1a3" Title="ITaskBasedEventHandler(T) Methods" Url="html/Methods_T_Stormancer_Core_ITaskBasedEventHandler_1.htm">
+        <HelpTOCNode Title="Add Method " Url="html/M_Stormancer_Core_ITaskBasedEventHandler_1_Add.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="491138e3-b4ab-4e03-af5c-f5c1f51e64dc" Title="MatchAllFilter Class" Url="html/T_Stormancer_Core_MatchAllFilter.htm">
+      <HelpTOCNode Title="MatchAllFilter Constructor " Url="html/M_Stormancer_Core_MatchAllFilter__ctor.htm" />
+      <HelpTOCNode Title="MatchAllFilter Properties" Url="html/Properties_T_Stormancer_Core_MatchAllFilter.htm" />
+      <HelpTOCNode Title="MatchAllFilter Methods" Url="html/Methods_T_Stormancer_Core_MatchAllFilter.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="716a8dad-1153-4981-aac7-ac33956f40b0" Title="MatchArrayFilter Class" Url="html/T_Stormancer_Core_MatchArrayFilter.htm">
+      <HelpTOCNode Id="d7ba18a7-32de-47dc-bb31-cc003ef6d305" Title="MatchArrayFilter Constructor " Url="html/Overload_Stormancer_Core_MatchArrayFilter__ctor.htm">
+        <HelpTOCNode Title="MatchArrayFilter Constructor (IEnumerable(Int64))" Url="html/M_Stormancer_Core_MatchArrayFilter__ctor_1.htm" />
+        <HelpTOCNode Title="MatchArrayFilter Constructor (IEnumerable(IScenePeerClient))" Url="html/M_Stormancer_Core_MatchArrayFilter__ctor.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="52687b0d-9ec4-4c66-aed2-d6ba65de0ed2" Title="MatchArrayFilter Properties" Url="html/Properties_T_Stormancer_Core_MatchArrayFilter.htm">
+        <HelpTOCNode Title="Ids Property " Url="html/P_Stormancer_Core_MatchArrayFilter_Ids.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Title="MatchArrayFilter Methods" Url="html/Methods_T_Stormancer_Core_MatchArrayFilter.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="2e804290-6c55-4635-840b-d9ed8d219ae3" Title="MatchPeerFilter Class" Url="html/T_Stormancer_Core_MatchPeerFilter.htm">
+      <HelpTOCNode Id="f3eb633b-a012-461b-9759-e669a9d07530" Title="MatchPeerFilter Constructor " Url="html/Overload_Stormancer_Core_MatchPeerFilter__ctor.htm">
+        <HelpTOCNode Title="MatchPeerFilter Constructor (Int64)" Url="html/M_Stormancer_Core_MatchPeerFilter__ctor_1.htm" />
+        <HelpTOCNode Title="MatchPeerFilter Constructor (IScenePeerClient)" Url="html/M_Stormancer_Core_MatchPeerFilter__ctor.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="6d5930b3-621b-4972-af22-53fe45051da5" Title="MatchPeerFilter Properties" Url="html/Properties_T_Stormancer_Core_MatchPeerFilter.htm">
+        <HelpTOCNode Title="Id Property " Url="html/P_Stormancer_Core_MatchPeerFilter_Id.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Title="MatchPeerFilter Methods" Url="html/Methods_T_Stormancer_Core_MatchPeerFilter.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="91e30e02-f9ed-4a1f-b957-df02e0609a6a" Title="Packet Class" Url="html/T_Stormancer_Core_Packet.htm">
+      <HelpTOCNode Title="Packet Constructor " Url="html/M_Stormancer_Core_Packet__ctor.htm" />
+      <HelpTOCNode Title="Packet Properties" Url="html/Properties_T_Stormancer_Core_Packet.htm" />
+      <HelpTOCNode Title="Packet Methods" Url="html/Methods_T_Stormancer_Core_Packet.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="a1f56784-c4ef-4fe2-a228-73ac4de6698a" Title="Packet(T) Class" Url="html/T_Stormancer_Core_Packet_1.htm">
+      <HelpTOCNode Id="8a12018c-3613-45fb-9ed0-f82007fbb13a" Title="Packet(T) Constructor " Url="html/Overload_Stormancer_Core_Packet_1__ctor.htm">
+        <HelpTOCNode Title="Packet(T) Constructor (T, Stream)" Url="html/M_Stormancer_Core_Packet_1__ctor.htm" />
+        <HelpTOCNode Title="Packet(T) Constructor (T, Stream, Dictionary(String, Object))" Url="html/M_Stormancer_Core_Packet_1__ctor_1.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="ea10fcaf-3999-4fb4-bcee-36779904a695" Title="Packet(T) Properties" Url="html/Properties_T_Stormancer_Core_Packet_1.htm">
+        <HelpTOCNode Title="Connection Property " Url="html/P_Stormancer_Core_Packet_1_Connection.htm" />
+        <HelpTOCNode Title="Metadata Property " Url="html/P_Stormancer_Core_Packet_1_Metadata.htm" />
+        <HelpTOCNode Title="Stream Property " Url="html/P_Stormancer_Core_Packet_1_Stream.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="02468e82-2406-4067-8567-7724655aa218" Title="Packet(T) Methods" Url="html/Methods_T_Stormancer_Core_Packet_1.htm">
+        <HelpTOCNode Title="GetMetadata(TData) Method " Url="html/M_Stormancer_Core_Packet_1_GetMetadata__1.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Title="PacketPriority Enumeration" Url="html/T_Stormancer_Core_PacketPriority.htm" />
+    <HelpTOCNode Title="PacketReliability Enumeration" Url="html/T_Stormancer_Core_PacketReliability.htm" />
+    <HelpTOCNode Id="817c44a8-c305-4150-81a4-aa3c6fc893a0" Title="PeerFilter Class" Url="html/T_Stormancer_Core_PeerFilter.htm">
+      <HelpTOCNode Title="PeerFilter Constructor " Url="html/M_Stormancer_Core_PeerFilter__ctor.htm" />
+      <HelpTOCNode Id="bf5ebd94-d611-4bfc-8ecc-c3a313af3393" Title="PeerFilter Properties" Url="html/Properties_T_Stormancer_Core_PeerFilter.htm">
+        <HelpTOCNode Title="Type Property " Url="html/P_Stormancer_Core_PeerFilter_Type.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Title="PeerFilter Methods" Url="html/Methods_T_Stormancer_Core_PeerFilter.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="88cc89d7-4b9e-4606-b0b2-e471593d2a12" Title="Route Class" Url="html/T_Stormancer_Core_Route.htm">
+      <HelpTOCNode Id="4b8f3af8-17a8-4a96-91b1-ea92ff0156ce" Title="Route Constructor " Url="html/Overload_Stormancer_Core_Route__ctor.htm">
+        <HelpTOCNode Title="Route Constructor (IScene, String, Dictionary(String, String))" Url="html/M_Stormancer_Core_Route__ctor.htm" />
+        <HelpTOCNode Title="Route Constructor (IScene, String, UInt16, Dictionary(String, String))" Url="html/M_Stormancer_Core_Route__ctor_1.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="d3da77ab-a989-4f38-8dbc-a78f9cbfab72" Title="Route Properties" Url="html/Properties_T_Stormancer_Core_Route.htm">
+        <HelpTOCNode Title="Handle Property " Url="html/P_Stormancer_Core_Route_Handle.htm" />
+        <HelpTOCNode Title="Handlers Property " Url="html/P_Stormancer_Core_Route_Handlers.htm" />
+        <HelpTOCNode Title="Metadata Property " Url="html/P_Stormancer_Core_Route_Metadata.htm" />
+        <HelpTOCNode Title="Name Property " Url="html/P_Stormancer_Core_Route_Name.htm" />
+        <HelpTOCNode Title="Scene Property " Url="html/P_Stormancer_Core_Route_Scene.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Title="Route Methods" Url="html/Methods_T_Stormancer_Core_Route.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="4e9fb37c-9268-41db-8dd5-4793f6e07d16" Title="ShutdownArgs Class" Url="html/T_Stormancer_Core_ShutdownArgs.htm">
+      <HelpTOCNode Title="ShutdownArgs Constructor " Url="html/M_Stormancer_Core_ShutdownArgs__ctor.htm" />
+      <HelpTOCNode Id="3a3907d5-bd97-4160-b6fa-ae4c8224c1fc" Title="ShutdownArgs Properties" Url="html/Properties_T_Stormancer_Core_ShutdownArgs.htm">
+        <HelpTOCNode Title="Data Property " Url="html/P_Stormancer_Core_ShutdownArgs_Data.htm" />
+        <HelpTOCNode Title="Reason Property " Url="html/P_Stormancer_Core_ShutdownArgs_Reason.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Title="ShutdownArgs Methods" Url="html/Methods_T_Stormancer_Core_ShutdownArgs.htm" />
+    </HelpTOCNode>
+  </HelpTOCNode>
+  <HelpTOCNode Id="d3bbde23-0687-43dc-b8cd-05c186e9638c" Title="Stormancer.Diagnostics" Url="html/N_Stormancer_Diagnostics.htm">
+    <HelpTOCNode Id="27dceb97-260a-40e5-8086-2d7c0e1cb1ca" Title="ILogger Interface" Url="html/T_Stormancer_Diagnostics_ILogger.htm">
+      <HelpTOCNode Id="ced3a343-8b0a-4371-8966-b42d04504232" Title="ILogger Methods" Url="html/Methods_T_Stormancer_Diagnostics_ILogger.htm">
+        <HelpTOCNode Title="Log Method " Url="html/M_Stormancer_Diagnostics_ILogger_Log.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="d4539c44-8bc7-4334-b2a7-9cda98380cf3" Title="LoggerExtensions Class" Url="html/T_Stormancer_Diagnostics_LoggerExtensions.htm">
+      <HelpTOCNode Id="dbf04189-1851-4ba1-8521-4bd9f8645968" Title="LoggerExtensions Methods" Url="html/Methods_T_Stormancer_Diagnostics_LoggerExtensions.htm">
+        <HelpTOCNode Title="Debug Method " Url="html/M_Stormancer_Diagnostics_LoggerExtensions_Debug.htm" />
+        <HelpTOCNode Title="Error Method " Url="html/M_Stormancer_Diagnostics_LoggerExtensions_Error.htm" />
+        <HelpTOCNode Title="Info Method " Url="html/M_Stormancer_Diagnostics_LoggerExtensions_Info.htm" />
+        <HelpTOCNode Title="Step Method " Url="html/M_Stormancer_Diagnostics_LoggerExtensions_Step.htm" />
+        <HelpTOCNode Title="Trace Method " Url="html/M_Stormancer_Diagnostics_LoggerExtensions_Trace.htm" />
+        <HelpTOCNode Title="Warn Method " Url="html/M_Stormancer_Diagnostics_LoggerExtensions_Warn.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Title="LogLevel Enumeration" Url="html/T_Stormancer_Diagnostics_LogLevel.htm" />
+    <HelpTOCNode Id="5e62240a-20f0-4952-8b69-32b4d7e9be0f" Title="NullLogger Class" Url="html/T_Stormancer_Diagnostics_NullLogger.htm">
+      <HelpTOCNode Id="e8aebcc0-eb49-412a-9932-718e4d406b15" Title="NullLogger Properties" Url="html/Properties_T_Stormancer_Diagnostics_NullLogger.htm">
+        <HelpTOCNode Title="Instance Property " Url="html/P_Stormancer_Diagnostics_NullLogger_Instance.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="821e0c18-1118-48fe-9a36-263f66cd2046" Title="NullLogger Methods" Url="html/Methods_T_Stormancer_Diagnostics_NullLogger.htm">
+        <HelpTOCNode Title="Log Method " Url="html/M_Stormancer_Diagnostics_NullLogger_Log.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+  </HelpTOCNode>
+  <HelpTOCNode Id="030075b5-47d1-4f2a-8353-19d624576467" Title="Stormancer.Plugins" Url="html/N_Stormancer_Plugins.htm">
+    <HelpTOCNode Id="0dd44ead-965e-448e-b56c-eba68f43eb55" Title="HostPluginBuildContext Class" Url="html/T_Stormancer_Plugins_HostPluginBuildContext.htm">
+      <HelpTOCNode Title="HostPluginBuildContext Constructor " Url="html/M_Stormancer_Plugins_HostPluginBuildContext__ctor.htm" />
+      <HelpTOCNode Id="da3e8389-d669-4ef7-90a8-0cab511f71c1" Title="HostPluginBuildContext Properties" Url="html/Properties_T_Stormancer_Plugins_HostPluginBuildContext.htm">
+        <HelpTOCNode Title="HostShuttingDown Property " Url="html/P_Stormancer_Plugins_HostPluginBuildContext_HostShuttingDown.htm" />
+        <HelpTOCNode Title="HostStarting Property " Url="html/P_Stormancer_Plugins_HostPluginBuildContext_HostStarting.htm" />
+        <HelpTOCNode Title="SceneCreated Property " Url="html/P_Stormancer_Plugins_HostPluginBuildContext_SceneCreated.htm" />
+        <HelpTOCNode Title="SceneCreating Property " Url="html/P_Stormancer_Plugins_HostPluginBuildContext_SceneCreating.htm" />
+        <HelpTOCNode Title="SceneStarted Property " Url="html/P_Stormancer_Plugins_HostPluginBuildContext_SceneStarted.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Title="HostPluginBuildContext Methods" Url="html/Methods_T_Stormancer_Plugins_HostPluginBuildContext.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="09879e10-37ed-4bf5-9ce4-7f62f7129caa" Title="IHostPlugin Interface" Url="html/T_Stormancer_Plugins_IHostPlugin.htm">
+      <HelpTOCNode Id="a66986db-450f-4036-878f-e0d0c1a7d4fc" Title="IHostPlugin Methods" Url="html/Methods_T_Stormancer_Plugins_IHostPlugin.htm">
+        <HelpTOCNode Title="Build Method " Url="html/M_Stormancer_Plugins_IHostPlugin_Build.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="b328c1fb-574c-46b1-9ead-5a31bed3f869" Title="RequestContext(T) Class" Url="html/T_Stormancer_Plugins_RequestContext_1.htm">
+      <HelpTOCNode Id="e6d08aa0-9ccb-4808-b7c2-decd76aea5ea" Title="RequestContext(T) Properties" Url="html/Properties_T_Stormancer_Plugins_RequestContext_1.htm">
+        <HelpTOCNode Title="CancellationToken Property " Url="html/P_Stormancer_Plugins_RequestContext_1_CancellationToken.htm" />
+        <HelpTOCNode Title="InputStream Property " Url="html/P_Stormancer_Plugins_RequestContext_1_InputStream.htm" />
+        <HelpTOCNode Title="RemotePeer Property " Url="html/P_Stormancer_Plugins_RequestContext_1_RemotePeer.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="8b010b52-0027-4039-8ac1-2b5d47ca9ac0" Title="RequestContext(T) Methods" Url="html/Methods_T_Stormancer_Plugins_RequestContext_1.htm">
+        <HelpTOCNode Title="SendValue Method " Url="html/M_Stormancer_Plugins_RequestContext_1_SendValue.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="edee407e-3eff-4897-a03c-9957b40ca4e5" Title="RpcHostPlugin Class" Url="html/T_Stormancer_Plugins_RpcHostPlugin.htm">
+      <HelpTOCNode Title="RpcHostPlugin Constructor " Url="html/M_Stormancer_Plugins_RpcHostPlugin__ctor.htm" />
+      <HelpTOCNode Id="db4b7342-a234-44e8-8657-ae37616a20ee" Title="RpcHostPlugin Methods" Url="html/Methods_T_Stormancer_Plugins_RpcHostPlugin.htm">
+        <HelpTOCNode Title="Build Method " Url="html/M_Stormancer_Plugins_RpcHostPlugin_Build.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="72e05db7-8293-4acc-b97d-e7bd688396fa" Title="RpcService Class" Url="html/T_Stormancer_Plugins_RpcService.htm">
+      <HelpTOCNode Id="29add21c-1015-4c75-b5eb-50678d1c168a" Title="RpcService Properties" Url="html/Properties_T_Stormancer_Plugins_RpcService.htm">
+        <HelpTOCNode Title="PendingRequests Property " Url="html/P_Stormancer_Plugins_RpcService_PendingRequests.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="56d77965-5d4f-40a7-a16c-ad54660cdd70" Title="RpcService Methods" Url="html/Methods_T_Stormancer_Plugins_RpcService.htm">
+        <HelpTOCNode Title="AddProcedure Method " Url="html/M_Stormancer_Plugins_RpcService_AddProcedure.htm" />
+        <HelpTOCNode Title="Rpc Method " Url="html/M_Stormancer_Plugins_RpcService_Rpc.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+  </HelpTOCNode>
+  <HelpTOCNode Id="b1a67363-f212-4350-b0ed-cb0207b9e647" Title="Stormancer.Server" Url="html/N_Stormancer_Server.htm">
+    <HelpTOCNode Id="39cdc5a7-b490-4631-b58a-4645f5b891d8" Title="AdminServicesDescription Class" Url="html/T_Stormancer_Server_AdminServicesDescription.htm">
+      <HelpTOCNode Title="AdminServicesDescription Constructor " Url="html/M_Stormancer_Server_AdminServicesDescription__ctor.htm" />
+      <HelpTOCNode Id="ac87f256-858b-40fb-a114-2d934f37226c" Title="AdminServicesDescription Properties" Url="html/Properties_T_Stormancer_Server_AdminServicesDescription.htm">
+        <HelpTOCNode Title="Delete Property " Url="html/P_Stormancer_Server_AdminServicesDescription_Delete.htm" />
+        <HelpTOCNode Title="Get Property " Url="html/P_Stormancer_Server_AdminServicesDescription_Get.htm" />
+        <HelpTOCNode Title="Post Property " Url="html/P_Stormancer_Server_AdminServicesDescription_Post.htm" />
+        <HelpTOCNode Title="Prefix Property " Url="html/P_Stormancer_Server_AdminServicesDescription_Prefix.htm" />
+        <HelpTOCNode Title="Put Property " Url="html/P_Stormancer_Server_AdminServicesDescription_Put.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Title="AdminServicesDescription Methods" Url="html/Methods_T_Stormancer_Server_AdminServicesDescription.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="d79f768e-d5cc-46ab-9a1b-53f159d2418e" Title="IHost Interface" Url="html/T_Stormancer_Server_IHost.htm">
+      <HelpTOCNode Id="6367af8f-458d-49d8-b7c3-e09880ec6509" Title="IHost Properties" Url="html/Properties_T_Stormancer_Server_IHost.htm">
+        <HelpTOCNode Title="AdminServices Property " Url="html/P_Stormancer_Server_IHost_AdminServices.htm" />
+        <HelpTOCNode Title="DependencyResolver Property " Url="html/P_Stormancer_Server_IHost_DependencyResolver.htm" />
+        <HelpTOCNode Title="Metadata Property " Url="html/P_Stormancer_Server_IHost_Metadata.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="12304bda-ae1c-4b46-8cfe-a4d4883442b3" Title="IHost Methods" Url="html/Methods_T_Stormancer_Server_IHost.htm">
+        <HelpTOCNode Title="AddSceneTemplate Method " Url="html/M_Stormancer_Server_IHost_AddSceneTemplate.htm" />
+        <HelpTOCNode Title="CreateScene Method " Url="html/M_Stormancer_Server_IHost_CreateScene.htm" />
+        <HelpTOCNode Title="EnumerateScenes Method " Url="html/M_Stormancer_Server_IHost_EnumerateScenes.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="2c429457-5722-41e7-b49f-c355fe324c39" Title="Index Class" Url="html/T_Stormancer_Server_Index.htm">
+      <HelpTOCNode Title="Index Constructor " Url="html/M_Stormancer_Server_Index__ctor.htm" />
+      <HelpTOCNode Id="d16b5d1f-e791-4596-94a9-f494c2d7737b" Title="Index Properties" Url="html/Properties_T_Stormancer_Server_Index.htm">
+        <HelpTOCNode Title="accountId Property " Url="html/P_Stormancer_Server_Index_accountId.htm" />
+        <HelpTOCNode Title="maxSize Property " Url="html/P_Stormancer_Server_Index_maxSize.htm" />
+        <HelpTOCNode Title="name Property " Url="html/P_Stormancer_Server_Index_name.htm" />
+        <HelpTOCNode Title="primaryKey Property " Url="html/P_Stormancer_Server_Index_primaryKey.htm" />
+        <HelpTOCNode Title="secondaryKey Property " Url="html/P_Stormancer_Server_Index_secondaryKey.htm" />
+        <HelpTOCNode Title="serverEndpoint Property " Url="html/P_Stormancer_Server_Index_serverEndpoint.htm" />
+        <HelpTOCNode Title="size Property " Url="html/P_Stormancer_Server_Index_size.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Title="Index Methods" Url="html/Methods_T_Stormancer_Server_Index.htm" />
+    </HelpTOCNode>
+  </HelpTOCNode>
+  <HelpTOCNode Id="5d5a3243-f953-43dd-a5d5-074bbfcba5e1" Title="Stormancer.Server.Admin" Url="html/N_Stormancer_Server_Admin.htm">
+    <HelpTOCNode Title="AdminPluginHostVersion Enumeration" Url="html/T_Stormancer_Server_Admin_AdminPluginHostVersion.htm" />
+    <HelpTOCNode Id="f85d0040-9b92-42a3-9d3f-8d0c31f7a7ee" Title="IAdminPluginConfig Interface" Url="html/T_Stormancer_Server_Admin_IAdminPluginConfig.htm">
+      <HelpTOCNode Id="12952eab-1f32-4576-95c3-12253bd6379d" Title="IAdminPluginConfig Properties" Url="html/Properties_T_Stormancer_Server_Admin_IAdminPluginConfig.htm">
+        <HelpTOCNode Title="Delete Property " Url="html/P_Stormancer_Server_Admin_IAdminPluginConfig_Delete.htm" />
+        <HelpTOCNode Title="DisplayName Property " Url="html/P_Stormancer_Server_Admin_IAdminPluginConfig_DisplayName.htm" />
+        <HelpTOCNode Title="Get Property " Url="html/P_Stormancer_Server_Admin_IAdminPluginConfig_Get.htm" />
+        <HelpTOCNode Title="Post Property " Url="html/P_Stormancer_Server_Admin_IAdminPluginConfig_Post.htm" />
+        <HelpTOCNode Title="Put Property " Url="html/P_Stormancer_Server_Admin_IAdminPluginConfig_Put.htm" />
+        <HelpTOCNode Title="Services Property " Url="html/P_Stormancer_Server_Admin_IAdminPluginConfig_Services.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="23c672fe-2d9d-44a4-b26f-daeb13ceaa67" Title="IAdminPluginConfig Methods" Url="html/Methods_T_Stormancer_Server_Admin_IAdminPluginConfig.htm">
+        <HelpTOCNode Title="Name Method " Url="html/M_Stormancer_Server_Admin_IAdminPluginConfig_Name.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+  </HelpTOCNode>
+  <HelpTOCNode Id="96ed1899-3926-4108-9a3b-29f3240275b4" Title="Stormancer.Server.Components" Url="html/N_Stormancer_Server_Components.htm">
+    <HelpTOCNode Id="49bf6463-6848-409d-a41d-7284a327195e" Title="ActiveDeploymentChangedEventArgs Class" Url="html/T_Stormancer_Server_Components_ActiveDeploymentChangedEventArgs.htm">
+      <HelpTOCNode Title="ActiveDeploymentChangedEventArgs Constructor " Url="html/M_Stormancer_Server_Components_ActiveDeploymentChangedEventArgs__ctor.htm" />
+      <HelpTOCNode Id="c9b05ea4-f584-4fd1-903e-6a6771ca6b59" Title="ActiveDeploymentChangedEventArgs Properties" Url="html/Properties_T_Stormancer_Server_Components_ActiveDeploymentChangedEventArgs.htm">
+        <HelpTOCNode Title="ActiveDeploymentId Property " Url="html/P_Stormancer_Server_Components_ActiveDeploymentChangedEventArgs_ActiveDeploymentId.htm" />
+        <HelpTOCNode Title="IsActive Property " Url="html/P_Stormancer_Server_Components_ActiveDeploymentChangedEventArgs_IsActive.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Title="ActiveDeploymentChangedEventArgs Methods" Url="html/Methods_T_Stormancer_Server_Components_ActiveDeploymentChangedEventArgs.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="dd0a9f9b-d558-43e8-bf31-ade1e30e290a" Title="ApplicationInfos Class" Url="html/T_Stormancer_Server_Components_ApplicationInfos.htm">
+      <HelpTOCNode Title="ApplicationInfos Constructor " Url="html/M_Stormancer_Server_Components_ApplicationInfos__ctor.htm" />
+      <HelpTOCNode Id="9a14a524-9381-4c80-aabe-0e4192c575d5" Title="ApplicationInfos Properties" Url="html/Properties_T_Stormancer_Server_Components_ApplicationInfos.htm">
+        <HelpTOCNode Title="AccountId Property " Url="html/P_Stormancer_Server_Components_ApplicationInfos_AccountId.htm" />
+        <HelpTOCNode Title="ActiveDeployment Property " Url="html/P_Stormancer_Server_Components_ApplicationInfos_ActiveDeployment.htm" />
+        <HelpTOCNode Title="ApplicationName Property " Url="html/P_Stormancer_Server_Components_ApplicationInfos_ApplicationName.htm" />
+        <HelpTOCNode Title="DeploymentId Property " Url="html/P_Stormancer_Server_Components_ApplicationInfos_DeploymentId.htm" />
+        <HelpTOCNode Title="PrimaryKey Property " Url="html/P_Stormancer_Server_Components_ApplicationInfos_PrimaryKey.htm" />
+        <HelpTOCNode Title="SecondaryKey Property " Url="html/P_Stormancer_Server_Components_ApplicationInfos_SecondaryKey.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Title="ApplicationInfos Methods" Url="html/Methods_T_Stormancer_Server_Components_ApplicationInfos.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="03008bd0-dbd5-4406-aae6-c9598a35c105" Title="IEnvironment Interface" Url="html/T_Stormancer_Server_Components_IEnvironment.htm">
+      <HelpTOCNode Id="87e33bcf-4743-4051-8fb5-cee9c126894d" Title="IEnvironment Properties" Url="html/Properties_T_Stormancer_Server_Components_IEnvironment.htm">
+        <HelpTOCNode Title="Clock Property " Url="html/P_Stormancer_Server_Components_IEnvironment_Clock.htm" />
+        <HelpTOCNode Title="Configuration Property " Url="html/P_Stormancer_Server_Components_IEnvironment_Configuration.htm" />
+        <HelpTOCNode Title="IsActive Property " Url="html/P_Stormancer_Server_Components_IEnvironment_IsActive.htm" />
+        <HelpTOCNode Title="LastPing Property " Url="html/P_Stormancer_Server_Components_IEnvironment_LastPing.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="58dbfb93-7d22-4226-9f48-eb10be85bea5" Title="IEnvironment Methods" Url="html/Methods_T_Stormancer_Server_Components_IEnvironment.htm">
+        <HelpTOCNode Title="GetApplicationInfos Method " Url="html/M_Stormancer_Server_Components_IEnvironment_GetApplicationInfos.htm" />
+        <HelpTOCNode Title="ListIndices Method " Url="html/M_Stormancer_Server_Components_IEnvironment_ListIndices.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="0267d68d-0f14-4970-8326-410ea5319830" Title="IEnvironment Events" Url="html/Events_T_Stormancer_Server_Components_IEnvironment.htm">
+        <HelpTOCNode Title="ActiveDeploymentChanged Event" Url="html/E_Stormancer_Server_Components_IEnvironment_ActiveDeploymentChanged.htm" />
+        <HelpTOCNode Title="ConfigurationChanged Event" Url="html/E_Stormancer_Server_Components_IEnvironment_ConfigurationChanged.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="36031fe6-2e80-47ff-bb27-c6e2da3c0a27" Title="IPeerInfosService Interface" Url="html/T_Stormancer_Server_Components_IPeerInfosService.htm">
+      <HelpTOCNode Id="54e001e0-97b6-40d4-af54-85d5ead07427" Title="IPeerInfosService Methods" Url="html/Methods_T_Stormancer_Server_Components_IPeerInfosService.htm">
+        <HelpTOCNode Id="fc41f094-db31-48c7-a274-93e626b37a03" Title="GetPeerDetails Method " Url="html/Overload_Stormancer_Server_Components_IPeerInfosService_GetPeerDetails.htm">
+          <HelpTOCNode Title="GetPeerDetails Method (Int64)" Url="html/M_Stormancer_Server_Components_IPeerInfosService_GetPeerDetails_1.htm" />
+          <HelpTOCNode Title="GetPeerDetails Method (IScenePeer)" Url="html/M_Stormancer_Server_Components_IPeerInfosService_GetPeerDetails.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="d90480ca-149d-4f52-b613-abb6be4af19a" Title="PeerDetails Class" Url="html/T_Stormancer_Server_Components_PeerDetails.htm">
+      <HelpTOCNode Title="PeerDetails Constructor " Url="html/M_Stormancer_Server_Components_PeerDetails__ctor.htm" />
+      <HelpTOCNode Id="03ef05fa-5cc3-4b01-bc33-b7655ac65631" Title="PeerDetails Properties" Url="html/Properties_T_Stormancer_Server_Components_PeerDetails.htm">
+        <HelpTOCNode Title="City Property " Url="html/P_Stormancer_Server_Components_PeerDetails_City.htm" />
+        <HelpTOCNode Title="ConnectedOn Property " Url="html/P_Stormancer_Server_Components_PeerDetails_ConnectedOn.htm" />
+        <HelpTOCNode Title="Continent Property " Url="html/P_Stormancer_Server_Components_PeerDetails_Continent.htm" />
+        <HelpTOCNode Title="Country Property " Url="html/P_Stormancer_Server_Components_PeerDetails_Country.htm" />
+        <HelpTOCNode Title="GeoIpEnabled Property " Url="html/P_Stormancer_Server_Components_PeerDetails_GeoIpEnabled.htm" />
+        <HelpTOCNode Title="IPAddress Property " Url="html/P_Stormancer_Server_Components_PeerDetails_IPAddress.htm" />
+        <HelpTOCNode Title="Latitude Property " Url="html/P_Stormancer_Server_Components_PeerDetails_Latitude.htm" />
+        <HelpTOCNode Title="Longitude Property " Url="html/P_Stormancer_Server_Components_PeerDetails_Longitude.htm" />
+        <HelpTOCNode Title="TimeZone Property " Url="html/P_Stormancer_Server_Components_PeerDetails_TimeZone.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Title="PeerDetails Methods" Url="html/Methods_T_Stormancer_Server_Components_PeerDetails.htm" />
+    </HelpTOCNode>
+  </HelpTOCNode>
+</HelpTOC>

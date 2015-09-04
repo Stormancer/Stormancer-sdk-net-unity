@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{7BDA6BD5-5308-4809-AF65-4C7EE55E324A}"
 EndProject
@@ -30,6 +30,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{E1E20F6C-E3BD-4FF2-8886-E799BFD547F6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stormancer.Server", "Server\Stormancer.Server\Stormancer.Server.csproj", "{416EC076-BBC1-452D-B850-A7167EBE33D4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{9E240DDF-1E0C-49CF-8D92-89CEBC859663}"
+EndProject
+Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "stormancerRef.ClientNET45", "doc\stormancerRef.ClientNET45\stormancerRef.ClientNET45.shfbproj", "{7B0B2369-A879-461D-88F7-3A7707079D36}"
+EndProject
+Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "StormancerRef.Server", "doc\StormancerRef.Server\StormancerRef.Server.shfbproj", "{ABFB1C88-40EA-41F3-A5C7-ED7C98EC9003}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -80,6 +86,26 @@ Global
 		{416EC076-BBC1-452D-B850-A7167EBE33D4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{416EC076-BBC1-452D-B850-A7167EBE33D4}.Staging|Any CPU.ActiveCfg = Release|Any CPU
 		{416EC076-BBC1-452D-B850-A7167EBE33D4}.Staging|Any CPU.Build.0 = Release|Any CPU
+		{7B0B2369-A879-461D-88F7-3A7707079D36}.Debug_Ubuntu|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B0B2369-A879-461D-88F7-3A7707079D36}.Debug_Ubuntu|Any CPU.Build.0 = Debug|Any CPU
+		{7B0B2369-A879-461D-88F7-3A7707079D36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B0B2369-A879-461D-88F7-3A7707079D36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B0B2369-A879-461D-88F7-3A7707079D36}.Release_Ubuntu|Any CPU.ActiveCfg = Release|Any CPU
+		{7B0B2369-A879-461D-88F7-3A7707079D36}.Release_Ubuntu|Any CPU.Build.0 = Release|Any CPU
+		{7B0B2369-A879-461D-88F7-3A7707079D36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B0B2369-A879-461D-88F7-3A7707079D36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B0B2369-A879-461D-88F7-3A7707079D36}.Staging|Any CPU.ActiveCfg = Release|Any CPU
+		{7B0B2369-A879-461D-88F7-3A7707079D36}.Staging|Any CPU.Build.0 = Release|Any CPU
+		{ABFB1C88-40EA-41F3-A5C7-ED7C98EC9003}.Debug_Ubuntu|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABFB1C88-40EA-41F3-A5C7-ED7C98EC9003}.Debug_Ubuntu|Any CPU.Build.0 = Debug|Any CPU
+		{ABFB1C88-40EA-41F3-A5C7-ED7C98EC9003}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABFB1C88-40EA-41F3-A5C7-ED7C98EC9003}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABFB1C88-40EA-41F3-A5C7-ED7C98EC9003}.Release_Ubuntu|Any CPU.ActiveCfg = Release|Any CPU
+		{ABFB1C88-40EA-41F3-A5C7-ED7C98EC9003}.Release_Ubuntu|Any CPU.Build.0 = Release|Any CPU
+		{ABFB1C88-40EA-41F3-A5C7-ED7C98EC9003}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABFB1C88-40EA-41F3-A5C7-ED7C98EC9003}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABFB1C88-40EA-41F3-A5C7-ED7C98EC9003}.Staging|Any CPU.ActiveCfg = Release|Any CPU
+		{ABFB1C88-40EA-41F3-A5C7-ED7C98EC9003}.Staging|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -90,5 +116,7 @@ Global
 		{E417EF49-99B1-453C-8E68-F72DB6D8C05A} = {7BDA6BD5-5308-4809-AF65-4C7EE55E324A}
 		{8B4DF876-A345-488E-9AE7-7295F1262863} = {E417EF49-99B1-453C-8E68-F72DB6D8C05A}
 		{416EC076-BBC1-452D-B850-A7167EBE33D4} = {E1E20F6C-E3BD-4FF2-8886-E799BFD547F6}
+		{7B0B2369-A879-461D-88F7-3A7707079D36} = {9E240DDF-1E0C-49CF-8D92-89CEBC859663}
+		{ABFB1C88-40EA-41F3-A5C7-ED7C98EC9003} = {9E240DDF-1E0C-49CF-8D92-89CEBC859663}
 	EndGlobalSection
 EndGlobal
