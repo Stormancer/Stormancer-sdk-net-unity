@@ -24,7 +24,7 @@ namespace Stormancer
     public class ClientConfiguration
     {
         //private const string Api = "http://localhost:23469/";
-        private const string ApiEndpoint = "https://api1.stormancer.com/";
+        private const string ApiEndpoint = "https://api.stormancer.com/";
 
         private const string LocalDevEndpoint = "http://localhost:42001/";
 
