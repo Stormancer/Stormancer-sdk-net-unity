@@ -36,7 +36,7 @@ namespace Stormancer
             request.AddHeader("Content-Type", "application/msgpack");
             request.AddHeader("Accept", "application/json");
             request.AddHeader("x-version", "1.0.0");
-            return request.Send().ContinueWith(t =>
+			return request.Send().ContinueWith(t =>
             {
                 try
                 {
@@ -50,6 +50,7 @@ namespace Stormancer
                     {
                         if (exception.StatusCode == HttpStatusCode.NotFound)
                         {
+							_config.Logger.Trace("GetScene failed: Unable to get the scene. Please check you entered the correct account id, application name and scene id.");
                             throw new ArgumentException("Unable to get the scene {0}/{1}/{2}. Please check you entered the correct account id, application name and scene id.", exception);
                         }
                         throw;
@@ -60,7 +61,8 @@ namespace Stormancer
                 catch (Exception ex)
                 {
                     UnityEngine.Debug.LogException(ex);
-                    throw new InvalidOperationException("An error occured while retrieving the connection token. See the inner exception for more informations.", ex);
+					_config.Logger.Trace("GetScene failed: cannot retreive the connection token.");
+					throw new InvalidOperationException("An error occured while retrieving the connection token. See the inner exception for more informations.", ex);
                 }
             });
         }

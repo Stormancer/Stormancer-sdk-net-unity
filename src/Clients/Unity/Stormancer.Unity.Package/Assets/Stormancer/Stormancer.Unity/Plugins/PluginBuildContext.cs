@@ -12,6 +12,12 @@ namespace Stormancer.Plugins
     /// </summary>
     public class PluginBuildContext
     {
+		/// <summary>
+		/// Event fired when the client is destroyed.
+		/// </summary>
+		/// <value>The client destroyed.</value>
+		public Action<Client> ClientDestroyed{get;set;}
+
         /// <summary>
         /// Event fired when a scene object is created.
         /// </summary>
@@ -31,11 +37,16 @@ namespace Stormancer.Plugins
         /// Event fired when a scene is disconnected.
         /// </summary>
         public Action<Scene> SceneDisconnected { get; set; }
+
+		/// <summary>
+		/// event fired when a route is created
+		/// </summary>
+		/// <value>The route created.</value>
+		public Action<Scene, string> RouteCreated { get; set; }
       
         /// <summary>
         /// Event fired when a packet is received from a remote peer.
         /// </summary>
-        public Action<Packet> PacketReceived { get; set; }
-      
+        public Action<Packet> PacketReceived { get; set; }      
     }
 }

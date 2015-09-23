@@ -59,6 +59,7 @@ namespace Stormancer.Networking
             var startupResult = server.Startup(maxConnections, socketDescriptor, 1);
             if(startupResult!= StartupResult.RAKNET_STARTED)
             {
+				logger.Error ("Couldn't start raknet peer :" + startupResult);
                 throw new InvalidOperationException("Couldn't start raknet peer :" + startupResult);
             }
             server.SetMaximumIncomingConnections(maxConnections);

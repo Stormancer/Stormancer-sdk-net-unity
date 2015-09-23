@@ -157,6 +157,27 @@ namespace Stormancer
         }
 
         /// <summary>
+        /// Adds a procedure to the scene.
+        /// </summary>
+        /// <remarks>
+        /// Procedures provide an asynchronous request/response pattern on top of scenes using the RPC plugin. 
+        /// Procedures can be called by remote peers using the `rpc` method. They support multiple partial responses in a single request.
+        /// </remarks>
+        /// <param name="scene">The scene to add the procedure to.</param>
+        /// <param name="route">The route of the procedure</param>
+        /// <param name="handler">A method that implement the procedure logic</param>
+        /// <param name="ordered">True if order of the partial responses should be preserved when sent to the client, false otherwise.</param>
+        public static void AddProcedure(this Scene scene, string route, Func<Stormancer.Plugins.RequestContext<IScenePeer>, Task> handler, bool ordered = true)
+        {
+            var rpcService = scene.GetComponent<Stormancer.Plugins.RpcClientPlugin.RpcService>();
+            if (rpcService == null)
+            {
+                throw new NotSupportedException("RPC plugin not available.");
+            }
+            rpcService.AddProcedure(route, handler, ordered);
+        }
+
+        /// <summary>
         /// Sends a remote procedure call using raw binary data as input, expecting no answer
         /// </summary>
         /// <param name="scene">The target scene. </param>

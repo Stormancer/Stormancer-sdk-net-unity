@@ -10,6 +10,7 @@ using System.IO;
 using Stormancer.Client45.Infrastructure;
 using Stormancer.Networking;
 using Stormancer.Core;
+using Stormancer.Plugins;
 using UniRx;
 using Stormancer.Dto;
 
@@ -29,6 +30,8 @@ namespace Stormancer
         private byte _handle;
 
         private readonly Dictionary<string, string> _metadata;
+
+		private readonly PluginBuildContext _pluginCtx;
 
         /// <summary>
         /// Returns metadata informations for the remote scene host.
@@ -89,13 +92,14 @@ namespace Stormancer
             }
         }
 
-        internal Scene(IConnection connection, Client client, string id, string token, Stormancer.Dto.SceneInfosDto dto)
+        internal Scene(IConnection connection, Client client, string id, string token, Stormancer.Dto.SceneInfosDto dto, PluginBuildContext pluginCtx)
         {
             Id = id;
             this._peer = connection;
             _token = token;
             _client = client;
             _metadata = dto.Metadata;
+			_pluginCtx = pluginCtx;
 
             foreach (var route in dto.Routes)
             {
@@ -114,23 +118,31 @@ namespace Stormancer
         {
             if (route[0] == '@')
             {
+				this.GetComponent<ILogger>().Log("Error", this.Id, "AddRoute failed: Tried to create a route with the @ character");
                 throw new ArgumentException("A route cannot start with the @ character.");
             }
             metadata = new Dictionary<string, string>();
 
             if (Connected)
             {
+				this.GetComponent<ILogger>().Error("AddRoute failed: Tried to create a route once connected");
                 throw new InvalidOperationException("You cannot register handles once the scene is connected.");
             }
 
             Route routeObj;
             if (!_localRoutesMap.TryGetValue(route, out routeObj))
             {
+				this.GetComponent<ILogger>().Trace("Created route with id : '{0}'", route);
                 routeObj = new Route(this, route, metadata);
                 _localRoutesMap.Add(route, routeObj);
             }
 
             OnMessage(route).Subscribe(handler);
+			var ev = _pluginCtx.RouteCreated;
+			if (ev != null)
+			{
+				ev(this, route);
+			}
 
         }
 
@@ -163,6 +175,7 @@ namespace Stormancer
         {
             if (Connected)
             {
+				this.GetComponent<ILogger>().Error("Tried rgister handles once connected");
                 throw new InvalidOperationException("You cannot register handles once the scene is connected.");
             }
 
@@ -186,20 +199,24 @@ namespace Stormancer
         {
             if (route == null)
             {
-                throw new ArgumentNullException("route");
+				this.GetComponent<ILogger>().Error("SendPacket failed: Tried to send a meesage on null route");
+                throw new ArgumentNullException("no route selected");
             }
             if (writer == null)
             {
-                throw new ArgumentNullException("writer");
+				this.GetComponent<ILogger>().Error("SendPacket failed: Tried to send message with a null writer");
+				throw new ArgumentNullException("no writer given");
             }
             if (!this.Connected)
             {
+				this.GetComponent<ILogger>().Error("SendPacket failed: Tried to send message without being connected");
                 throw new InvalidOperationException("The scene must be connected to perform this operation.");
             }
             Route routeObj;
             if (!_remoteRoutesMap.TryGetValue(route, out routeObj))
             {
-                throw new ArgumentException("The route " + route + " doesn't exist on the scene.");
+				this.GetComponent<ILogger>().Error("SendPacket failed: The route '{1}' doesn't exist on the scene.", route);
+				throw new ArgumentException("The route " + route + " doesn't exist on the scene.");
             }
 
             _peer.SendToScene(this.Handle, routeObj.Handle, writer, priority, reliability);//.SendPacket(routeObj, writer, priority, reliability, channel);
@@ -211,6 +228,7 @@ namespace Stormancer
         /// <returns></returns>
         public Task Disconnect()
         {
+			this.GetComponent<ILogger>().Trace("Client disconnected from the server");
             return this._client.Disconnect(this, this._handle);
             //var sysResponse = await this._client.SendWithResponse(Mess, "scene.stop", this.Id)
             //    //Handles if the server sends no response
@@ -239,6 +257,7 @@ namespace Stormancer
             return this._client.ConnectToScene(this, this._token, this._localRoutesMap.Values)
                 .Then(() =>
                 {
+					this.GetComponent<ILogger>().Error("Successfully connected to scene : '{0}'.", Id);
                     this.Connected = true;
                 });
         }
@@ -317,7 +336,8 @@ namespace Stormancer
             }
             else
             {
-                return default(T);
+
+				return _client.GetComponent<T>();
             }
         }
 
