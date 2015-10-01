@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // l'ensemble d'attributs suivant. Changez les valeurs de ces attributs pour modifier les informations
 // associées à un assembly.
 [assembly: AssemblyTitle("Stormancer.Core")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Core classes used by Stormancer, for both client and server side.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Stormancer")]
 [assembly: AssemblyProduct("Stormancer.Core")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
