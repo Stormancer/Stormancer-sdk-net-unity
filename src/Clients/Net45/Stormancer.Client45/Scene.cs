@@ -344,6 +344,7 @@ namespace Stormancer
         /// </remarks>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
+        [Obsolete]
         public T GetComponent<T>() where T : class
         {
             return this.DependencyResolver.Resolve<T>();

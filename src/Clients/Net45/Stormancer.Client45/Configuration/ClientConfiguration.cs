@@ -174,7 +174,7 @@ namespace Stormancer
         /// Plugins enable developpers to plug custom code in the Stormancer client's extensibility points. Possible uses include: custom high level protocols, logger or analyzers.
         /// 
         /// </remarks>
-        void AddPlugin(IClientPlugin plugin)
+        public void AddPlugin(IClientPlugin plugin)
         {
 
             Plugins.Add(plugin);
