@@ -15,7 +15,6 @@
     <tags>Stormancer Game</tags>
   </metadata>
   <files>
-    <file src="bin/$Configuration$/Stormancer.Core.dll" target="lib/Net45"/>
     <file src="bin/$Configuration$/Raknet.csharp.dll" target="lib/Net45"/>
     <file src="bin/$Configuration$/x86/Raknet.dll" target="content/x86"/>
     <file src="bin/$Configuration$/x64/Raknet.dll" target="content/x64"/>

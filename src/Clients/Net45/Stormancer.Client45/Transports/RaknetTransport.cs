@@ -17,16 +17,18 @@ namespace Stormancer.Networking
     {
         private IConnectionManager _handler;
         private RakPeerInterface _peer;
-        private ILogger logger;
+        private ILogger _logger;
         private string _type;
         private readonly ConcurrentDictionary<ulong, RakNetConnection> _connections = new ConcurrentDictionary<ulong, RakNetConnection>();
         private IDisposable _scheduledTransportLoop;
         private IScheduler _scheduler;
+
         public RakNetTransport(ILogger logger, IScheduler scheduler)
         {
-            this.logger = logger;
+            this._logger = logger;
             this._scheduler = scheduler;
         }
+
         public void Start(string type, IConnectionManager handler, CancellationToken token, ushort? serverPort, ushort maxConnections)
         {
             if (handler == null && serverPort.HasValue)
@@ -47,10 +49,8 @@ namespace Stormancer.Networking
         {
             try
             {
-
-
                 IsRunning = true;
-                logger.Info("transports.raknet", "starting raknet transport " + _type);
+                _logger.Info("transports.raknet", "starting raknet transport " + _type);
 
                 _peer = RakPeerInterface.GetInstance();
                 var socketDescriptor = serverPort.HasValue ? new SocketDescriptor(serverPort.Value, null) : new SocketDescriptor();
@@ -60,9 +60,6 @@ namespace Stormancer.Networking
                     throw new InvalidOperationException("Couldn't start raknet peer :" + startupResult);
                 }
                 _peer.SetMaximumIncomingConnections(maxConnections);
-
-
-
             }
             catch (Exception e)
             {
@@ -73,42 +70,49 @@ namespace Stormancer.Networking
 
         public void Run()
         {
-
             try
             {
-                logger.Info("transports.raknet", "Raknet transport started " + _type);
+                _logger.Info("transports.raknet", "Raknet transport started " + _type);
 
                 for (var packet = _peer.Receive(); packet != null; packet = _peer.Receive())
                 {
-
                     try
                     {
-
                         switch (packet.data[0])
                         {
                             case (byte)DefaultMessageIDTypes.ID_CONNECTION_REQUEST_ACCEPTED:
                                 TaskCompletionSource<IConnection> tcs;
                                 if (_pendingConnections.TryGetValue(packet.systemAddress.ToString(), out tcs))
                                 {
-                                    var c = CreateNewConnection(packet.guid, _peer);
-                                    tcs.SetResult(c);
+                                    _logger.Debug("Connection request to {0} accepted.", packet.systemAddress.ToString());
+                                    OnConnection(packet, _peer);
+
+                                    RakNetConnection c;
+                                    if (_connections.TryGetValue(packet.guid.g, out c))
+                                    {
+                                        tcs.SetResult(c);
+                                    }
+                                    else
+                                    {
+                                        _logger.Error("Can't get the peer connection.", packet.systemAddress.ToString());
+                                    }
                                 }
-                                logger.Debug("Connection request to {0} accepted.", packet.systemAddress.ToString());
-                                OnConnection(packet, _peer);
+                                else
+                                {
+                                    _logger.Error("Can't get the pending connection TCS.", packet.systemAddress.ToString());
+                                }
                                 break;
                             case (byte)DefaultMessageIDTypes.ID_NEW_INCOMING_CONNECTION:
-                                logger.Trace("Incoming connection from {0}.", packet.systemAddress.ToString());
+                                _logger.Trace("Incoming connection from {0}.", packet.systemAddress.ToString());
                                 OnConnection(packet, _peer);
                                 break;
-
                             case (byte)DefaultMessageIDTypes.ID_DISCONNECTION_NOTIFICATION:
-                                logger.Trace("{0} disconnected.", packet.systemAddress.ToString());
+                                _logger.Trace("{0} disconnected.", packet.systemAddress.ToString());
                                 OnDisconnection(packet, _peer, "CLIENT_DISCONNECTED");
                                 break;
                             case (byte)DefaultMessageIDTypes.ID_CONNECTION_LOST:
-                                logger.Trace("{0} lost the connection.", packet.systemAddress.ToString());
+                                _logger.Trace("{0} lost the connection.", packet.systemAddress.ToString());
                                 OnDisconnection(packet, _peer, "CONNECTION_LOST");
-
                                 break;
                             case (byte)DefaultMessageIDTypes.ID_CONNECTION_ATTEMPT_FAILED:
                                 if (_pendingConnections.TryGetValue(packet.systemAddress.ToString(), out tcs))
@@ -120,28 +124,22 @@ namespace Stormancer.Networking
                                 OnConnectionIdReceived(BitConverter.ToInt64(packet.data, 1));
                                 break;
                             default:
-
                                 OnMessageReceived(packet);
                                 break;
                         }
                     }
                     catch (Exception ex)
                     {
-                        logger.Log(LogLevel.Error, "transports.raknet", "An error occured while handling a message", new ExceptionMsg(ex));
+                        _logger.Log(LogLevel.Error, "transports.raknet", "An error occured while handling a message", new ExceptionMsg(ex));
                     }
                 }
-
-
-
             }
             catch (Exception ex)
             {
 
-                logger.Error("transports.raknet", "An error occured while running the transport : {0}", ex);
+                _logger.Error("transports.raknet", "An error occured while running the transport : {0}", ex);
 
             }
-
-
         }
 
         private void OnConnectionIdReceived(long p)
@@ -153,35 +151,35 @@ namespace Stormancer.Networking
 
         private void OnConnection(RakNet.Packet packet, RakPeerInterface server)
         {
-            logger.Trace("transports.raknet", "{0} connected", packet.systemAddress);
+            _logger.Trace("transports.raknet", "{0} connected", packet.systemAddress);
 
-            var c = CreateNewConnection(new RakNetGUID(packet.guid.g), server);
+            var c = CreateNewConnection(packet.guid, _peer);
             server.DeallocatePacket(packet);
             _handler.NewConnection(c);
+
             var action = ConnectionOpened;
             if (action != null)
             {
                 action(c);
             }
+
             c.SendSystem((byte)MessageIDTypes.ID_CONNECTION_RESULT, s => s.Write(BitConverter.GetBytes(c.Id), 0, 8));
         }
 
-
         private void OnDisconnection(RakNet.Packet packet, RakPeerInterface server, string reason)
         {
-            logger.Trace("transports.raknet", "{0} disconnected", packet.systemAddress);
+            _logger.Trace("transports.raknet", "{0} disconnected", packet.systemAddress);
+
             var c = RemoveConnection(packet.guid);
             server.DeallocatePacket(packet);
-
             _handler.CloseConnection(c, reason);
-
             c.RaiseConnectionClosed(reason);
+
             var action = ConnectionClosed;
             if (action != null)
             {
                 action(c);
             }
-
         }
 
         private void OnMessageReceived(RakNet.Packet packet)
@@ -193,7 +191,7 @@ namespace Stormancer.Networking
             var p = new Stormancer.Core.Packet(
                                connection,
                                new MemoryStream(buffer));
-            logger.Trace("transports.raknet", "message with id {0} arrived", buffer[0]);
+            _logger.Trace("transports.raknet", "message with id {0} arrived", buffer[0]);
 
             this.PacketReceived(p);
         }
@@ -204,13 +202,13 @@ namespace Stormancer.Networking
         {
             return _connections[guid.g];
         }
+
         private RakNetConnection CreateNewConnection(RakNetGUID raknetGuid, RakPeerInterface peer)
         {
             var cid = _handler.GenerateNewConnectionId();
             var c = new RakNetConnection(raknetGuid, cid, peer, OnRequestClose);
             _connections.TryAdd(raknetGuid.g, c);
             return c;
-
         }
 
         private RakNetConnection RemoveConnection(RakNetGUID guid)
@@ -226,8 +224,7 @@ namespace Stormancer.Networking
         }
 
         #endregion
-
-
+        
         public Action<Stormancer.Core.Packet> PacketReceived
         {
             get;
@@ -245,8 +242,7 @@ namespace Stormancer.Networking
             get;
             set;
         }
-
-
+        
         public Task<IConnection> Connect(string endpoint)
         {
             if (_peer == null || !_peer.IsActive())
@@ -274,8 +270,7 @@ namespace Stormancer.Networking
         {
             get { return "raknet"; }
         }
-
-
+        
         public bool IsRunning
         {
             get;
@@ -283,8 +278,7 @@ namespace Stormancer.Networking
         }
 
         public long? Id { get; private set; }
-
-
+        
         public void Dispose()
         {
             if (_scheduledTransportLoop != null)
@@ -299,11 +293,8 @@ namespace Stormancer.Networking
                     RakPeerInterface.DestroyInstance(_peer);
                 }
                 IsRunning = false;
-                logger.Info("transports.raknet", "Stopped raknet server.");
+                _logger.Info("transports.raknet", "Stopped raknet server.");
             }
         }
     }
-
-
-
 }

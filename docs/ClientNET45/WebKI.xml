@@ -1,0 +1,618 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HelpKI>
+  <HelpKINode Title="Account property">
+    <HelpKINode Title="ClientConfiguration.Account Property " Url="html/D629261E.htm" />
+    <HelpKINode Title="IConnection.Account Property " Url="html/C80A20B0.htm" />
+  </HelpKINode>
+  <HelpKINode Title="AddCatchAllProcessor method" Url="html/C02E4BC9.htm" />
+  <HelpKINode Title="AddProcedure method" Url="html/94B9D85E.htm" />
+  <HelpKINode Title="AddProcessor method" Url="html/9057F8F6.htm" />
+  <HelpKINode Title="AddPRocessor method" Url="html/A6D43D0E.htm" />
+  <HelpKINode Title="AddRoute method" Url="html/A6A456AF.htm" />
+  <HelpKINode Title="AddRoute(Of TData) method" Url="html/6F153C21.htm" />
+  <HelpKINode Title="AddRoute&lt;TData&gt; method" Url="html/6F153C21.htm" />
+  <HelpKINode Title="Application property">
+    <HelpKINode Title="ClientConfiguration.Application Property " Url="html/27D85AAE.htm" />
+    <HelpKINode Title="IConnection.Application Property " Url="html/DDF8074C.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ApplicationName property" Url="html/BE5C8F39.htm" />
+  <HelpKINode Title="AsynchrounousDispatch property" Url="html/318CE382.htm" />
+  <HelpKINode Title="BPSLimitationType enumeration" Url="html/4067B4B2.htm" />
+  <HelpKINode Title="BytesPerSecondLimit property" Url="html/3B37160F.htm" />
+  <HelpKINode Title="BytesPerSecondLimitationType property" Url="html/F4F04491.htm" />
+  <HelpKINode Title="CancellationToken property" Url="html/90573DFF.htm" />
+  <HelpKINode Title="Client class">
+    <HelpKINode Title="Client Class" Url="html/2947C769.htm" />
+    <HelpKINode Title="about Client class" Url="html/2947C769.htm" />
+    <HelpKINode Title="constructor" Url="html/CC060A31.htm" />
+    <HelpKINode Title="methods" Url="html/C3D99B92.htm" />
+    <HelpKINode Title="properties" Url="html/5789F3FB.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Client.ApplicationName property" Url="html/BE5C8F39.htm" />
+  <HelpKINode Title="Client.Client constructor" Url="html/CC060A31.htm" />
+  <HelpKINode Title="Client.Clock property" Url="html/ED1708CA.htm" />
+  <HelpKINode Title="Client.DependencyResolver property" Url="html/169425EF.htm" />
+  <HelpKINode Title="Client.Disconnect method" Url="html/3DD7998D.htm" />
+  <HelpKINode Title="Client.Dispose method" Url="html/82B201C8.htm" />
+  <HelpKINode Title="Client.GetPublicScene(Of T) method" Url="html/3D51E8D7.htm" />
+  <HelpKINode Title="Client.GetPublicScene&lt;T&gt; method" Url="html/3D51E8D7.htm" />
+  <HelpKINode Title="Client.GetScene method" Url="html/E37F3035.htm" />
+  <HelpKINode Title="Client.GetServerConnectionStatistics method" Url="html/DF380BC1.htm" />
+  <HelpKINode Title="Client.Id property" Url="html/48456EFC.htm" />
+  <HelpKINode Title="Client.LastPing property" Url="html/B9F15393.htm" />
+  <HelpKINode Title="Client.Logger property" Url="html/A9726399.htm" />
+  <HelpKINode Title="Client.ServerPing property" Url="html/DD3FD88E.htm" />
+  <HelpKINode Title="Client.ServerTransportType property" Url="html/D519A8A4.htm" />
+  <HelpKINode Title="ClientConfiguration class">
+    <HelpKINode Title="ClientConfiguration Class" Url="html/4F50E7C9.htm" />
+    <HelpKINode Title="about ClientConfiguration class" Url="html/4F50E7C9.htm" />
+    <HelpKINode Title="methods" Url="html/89BC6FA.htm" />
+    <HelpKINode Title="properties" Url="html/4186B221.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ClientConfiguration.Account property" Url="html/D629261E.htm" />
+  <HelpKINode Title="ClientConfiguration.Application property" Url="html/27D85AAE.htm" />
+  <HelpKINode Title="ClientConfiguration.AsynchrounousDispatch property" Url="html/318CE382.htm" />
+  <HelpKINode Title="ClientConfiguration.Dispatcher property" Url="html/296ABD4F.htm" />
+  <HelpKINode Title="ClientConfiguration.ForAccount method" Url="html/379F57B4.htm" />
+  <HelpKINode Title="ClientConfiguration.IsLocalDev property" Url="html/8D4812A2.htm" />
+  <HelpKINode Title="ClientConfiguration.Logger property" Url="html/80E529E6.htm" />
+  <HelpKINode Title="ClientConfiguration.MaxPeers property" Url="html/9CAC962E.htm" />
+  <HelpKINode Title="ClientConfiguration.PingInterval property" Url="html/64FE13F3.htm" />
+  <HelpKINode Title="ClientConfiguration.Scheduler property" Url="html/7464478D.htm" />
+  <HelpKINode Title="ClientConfiguration.Serializers property" Url="html/632BC8A6.htm" />
+  <HelpKINode Title="ClientConfiguration.ServerEndpoint property" Url="html/CF8DED0F.htm" />
+  <HelpKINode Title="ClientConfiguration.TransportFactory property" Url="html/9DDCEB1D.htm" />
+  <HelpKINode Title="ClientCreated property" Url="html/E17E4D02.htm" />
+  <HelpKINode Title="ClientException class">
+    <HelpKINode Title="ClientException Class" Url="html/1EAE00B5.htm" />
+    <HelpKINode Title="about ClientException class" Url="html/1EAE00B5.htm" />
+    <HelpKINode Title="constructor" Url="html/33AF1F52.htm" />
+    <HelpKINode Title="events" Url="html/42F05894.htm" />
+    <HelpKINode Title="methods" Url="html/45FEE9C7.htm" />
+    <HelpKINode Title="properties" Url="html/BCF0164A.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ClientException.ClientException constructor" Url="html/33AF1F52.htm" />
+  <HelpKINode Title="Clock property" Url="html/ED1708CA.htm" />
+  <HelpKINode Title="Close method" Url="html/D2F6FB83.htm" />
+  <HelpKINode Title="CloseConnection method" Url="html/71D9A6A.htm" />
+  <HelpKINode Title="CongestionControl enumeration member" Url="html/4067B4B2.htm" />
+  <HelpKINode Title="Connect method">
+    <HelpKINode Title="ITransport.Connect Method " Url="html/E55FA393.htm" />
+    <HelpKINode Title="Scene.Connect Method " Url="html/F2B75D2A.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Connected enumeration member" Url="html/6F53F8B6.htm" />
+  <HelpKINode Title="Connected property" Url="html/6690397C.htm" />
+  <HelpKINode Title="Connecting enumeration member" Url="html/6F53F8B6.htm" />
+  <HelpKINode Title="Connection property" Url="html/F695B6BE.htm" />
+  <HelpKINode Title="ConnectionClosed property">
+    <HelpKINode Title="IConnection.ConnectionClosed Property " Url="html/774BAE67.htm" />
+    <HelpKINode Title="ITransport.ConnectionClosed Property " Url="html/76332E5F.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ConnectionCount property" Url="html/5F19D26F.htm" />
+  <HelpKINode Title="ConnectionDate property" Url="html/8B7D8CB1.htm" />
+  <HelpKINode Title="ConnectionOpened property" Url="html/C445D0D6.htm" />
+  <HelpKINode Title="ConnectionState enumeration" Url="html/6F53F8B6.htm" />
+  <HelpKINode Title="Debug enumeration member" Url="html/F5201A93.htm" />
+  <HelpKINode Title="Debug method" Url="html/25E65B97.htm" />
+  <HelpKINode Title="DependencyResolver property">
+    <HelpKINode Title="Client.DependencyResolver Property " Url="html/169425EF.htm" />
+    <HelpKINode Title="IScene.DependencyResolver Property " Url="html/AA601E3D.htm" />
+    <HelpKINode Title="Scene.DependencyResolver Property " Url="html/BC6A7D7A.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Deserialize(Of T) method" Url="html/B70B7F39.htm" />
+  <HelpKINode Title="Deserialize&lt;T&gt; method" Url="html/B70B7F39.htm" />
+  <HelpKINode Title="Disconnect method">
+    <HelpKINode Title="Client.Disconnect Method " Url="html/3DD7998D.htm" />
+    <HelpKINode Title="Scene.Disconnect Method " Url="html/23678BA6.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Disconnected enumeration member" Url="html/6F53F8B6.htm" />
+  <HelpKINode Title="Dispatcher property" Url="html/296ABD4F.htm" />
+  <HelpKINode Title="DispatchPacket method" Url="html/B84F8AF0.htm" />
+  <HelpKINode Title="DisposableAction class">
+    <HelpKINode Title="DisposableAction Class" Url="html/14CA3A40.htm" />
+    <HelpKINode Title="about DisposableAction class" Url="html/14CA3A40.htm" />
+    <HelpKINode Title="constructor" Url="html/805C1E48.htm" />
+    <HelpKINode Title="methods" Url="html/817D854F.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DisposableAction.DisposableAction constructor" Url="html/805C1E48.htm" />
+  <HelpKINode Title="DisposableAction.Dispose method" Url="html/AD5F06B1.htm" />
+  <HelpKINode Title="Dispose method">
+    <HelpKINode Title="Client.Dispose Method " Url="html/82B201C8.htm" />
+    <HelpKINode Title="DisposableAction.Dispose Method " Url="html/AD5F06B1.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Error enumeration member" Url="html/F5201A93.htm" />
+  <HelpKINode Title="Error method" Url="html/DB1E443.htm" />
+  <HelpKINode Title="Fatal enumeration member" Url="html/F5201A93.htm" />
+  <HelpKINode Title="ForAccount method" Url="html/379F57B4.htm" />
+  <HelpKINode Title="GenerateNewConnectionId method" Url="html/EDF6E8C4.htm" />
+  <HelpKINode Title="GetComponent(Of T) method">
+    <HelpKINode Title="IConnection.GetComponent(T) Method " Url="html/9AB8D8F1.htm" />
+    <HelpKINode Title="IScene.GetComponent(T) Method " Url="html/28026F00.htm" />
+    <HelpKINode Title="IScenePeer.GetComponent(T) Method " Url="html/23F02984.htm" />
+    <HelpKINode Title="Scene.GetComponent(T) Method " Url="html/55AE17E.htm" />
+  </HelpKINode>
+  <HelpKINode Title="GetComponent&lt;T&gt; method">
+    <HelpKINode Title="IConnection.GetComponent(T) Method " Url="html/9AB8D8F1.htm" />
+    <HelpKINode Title="IScene.GetComponent(T) Method " Url="html/28026F00.htm" />
+    <HelpKINode Title="IScenePeer.GetComponent(T) Method " Url="html/23F02984.htm" />
+    <HelpKINode Title="Scene.GetComponent(T) Method " Url="html/55AE17E.htm" />
+  </HelpKINode>
+  <HelpKINode Title="GetConnection method" Url="html/EA6EE111.htm" />
+  <HelpKINode Title="GetConnectionStatistics method" Url="html/85C7C77B.htm" />
+  <HelpKINode Title="GetHostMetadata method" Url="html/172DCAFC.htm" />
+  <HelpKINode Title="GetMetadata(Of TData) method" Url="html/4C7DC206.htm" />
+  <HelpKINode Title="GetMetadata&lt;TData&gt; method" Url="html/4C7DC206.htm" />
+  <HelpKINode Title="GetPublicScene(Of T) method" Url="html/3D51E8D7.htm" />
+  <HelpKINode Title="GetPublicScene&lt;T&gt; method" Url="html/3D51E8D7.htm" />
+  <HelpKINode Title="GetScene method" Url="html/E37F3035.htm" />
+  <HelpKINode Title="GetServerConnectionStatistics method" Url="html/DF380BC1.htm" />
+  <HelpKINode Title="Handle property">
+    <HelpKINode Title="Route.Handle Property " Url="html/AF5532AB.htm" />
+    <HelpKINode Title="Scene.Handle Property " Url="html/BD92E8A2.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Handlers property" Url="html/230BBAB9.htm" />
+  <HelpKINode Title="HIGH_PRIORITY enumeration member" Url="html/C20D667F.htm" />
+  <HelpKINode Title="Host property" Url="html/7E649054.htm" />
+  <HelpKINode Title="IConnection interface">
+    <HelpKINode Title="IConnection Interface" Url="html/3AE643C7.htm" />
+    <HelpKINode Title="about IConnection interface" Url="html/3AE643C7.htm" />
+    <HelpKINode Title="methods" Url="html/7D655938.htm" />
+    <HelpKINode Title="properties" Url="html/B58293C8.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IConnection.Account property" Url="html/C80A20B0.htm" />
+  <HelpKINode Title="IConnection.Application property" Url="html/DDF8074C.htm" />
+  <HelpKINode Title="IConnection.Close method" Url="html/D2F6FB83.htm" />
+  <HelpKINode Title="IConnection.ConnectionClosed property" Url="html/774BAE67.htm" />
+  <HelpKINode Title="IConnection.ConnectionDate property" Url="html/8B7D8CB1.htm" />
+  <HelpKINode Title="IConnection.GetComponent(Of T) method" Url="html/9AB8D8F1.htm" />
+  <HelpKINode Title="IConnection.GetComponent&lt;T&gt; method" Url="html/9AB8D8F1.htm" />
+  <HelpKINode Title="IConnection.GetConnectionStatistics method" Url="html/85C7C77B.htm" />
+  <HelpKINode Title="IConnection.Id property" Url="html/847C9B50.htm" />
+  <HelpKINode Title="IConnection.IpAddress property" Url="html/F6CA5E5B.htm" />
+  <HelpKINode Title="IConnection.Metadata property" Url="html/CC21033A.htm" />
+  <HelpKINode Title="IConnection.Ping property" Url="html/6503A881.htm" />
+  <HelpKINode Title="IConnection.RegisterComponent(Of T) method" Url="html/D1184CE4.htm" />
+  <HelpKINode Title="IConnection.RegisterComponent&lt;T&gt; method" Url="html/D1184CE4.htm" />
+  <HelpKINode Title="IConnection.SendSystem method" Url="html/3BA558B9.htm" />
+  <HelpKINode Title="IConnection.SendToScene method" Url="html/1A794A3B.htm" />
+  <HelpKINode Title="IConnection.SetApplication method" Url="html/63F63440.htm" />
+  <HelpKINode Title="IConnection.State property" Url="html/6503A437.htm" />
+  <HelpKINode Title="IConnectionManager interface">
+    <HelpKINode Title="IConnectionManager Interface" Url="html/DFF04BED.htm" />
+    <HelpKINode Title="about IConnectionManager interface" Url="html/DFF04BED.htm" />
+    <HelpKINode Title="methods" Url="html/213C49D0.htm" />
+    <HelpKINode Title="properties" Url="html/63FF0960.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IConnectionManager.CloseConnection method" Url="html/71D9A6A.htm" />
+  <HelpKINode Title="IConnectionManager.ConnectionCount property" Url="html/5F19D26F.htm" />
+  <HelpKINode Title="IConnectionManager.GenerateNewConnectionId method" Url="html/EDF6E8C4.htm" />
+  <HelpKINode Title="IConnectionManager.GetConnection method" Url="html/EA6EE111.htm" />
+  <HelpKINode Title="IConnectionManager.NewConnection method" Url="html/E44B37D.htm" />
+  <HelpKINode Title="IConnectionStatistics interface">
+    <HelpKINode Title="IConnectionStatistics Interface" Url="html/2F2175AD.htm" />
+    <HelpKINode Title="about IConnectionStatistics interface" Url="html/2F2175AD.htm" />
+    <HelpKINode Title="methods" Url="html/19ED0C26.htm" />
+    <HelpKINode Title="properties" Url="html/4B474D6F.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IConnectionStatistics.BytesPerSecondLimit property" Url="html/3B37160F.htm" />
+  <HelpKINode Title="IConnectionStatistics.BytesPerSecondLimitationType property" Url="html/F4F04491.htm" />
+  <HelpKINode Title="IConnectionStatistics.PacketLossRate property" Url="html/2C4AE3F5.htm" />
+  <HelpKINode Title="IConnectionStatistics.QueuedBytes property" Url="html/50D703AC.htm" />
+  <HelpKINode Title="IConnectionStatistics.QueuedBytesForPriority method" Url="html/8FA1AB08.htm" />
+  <HelpKINode Title="IConnectionStatistics.QueuedPackets property" Url="html/2D84DA05.htm" />
+  <HelpKINode Title="IConnectionStatistics.QueuedPacketsForPriority method" Url="html/5C8D2BC.htm" />
+  <HelpKINode Title="Id property">
+    <HelpKINode Title="Client.Id Property " Url="html/48456EFC.htm" />
+    <HelpKINode Title="IConnection.Id Property " Url="html/847C9B50.htm" />
+    <HelpKINode Title="IScene.Id Property " Url="html/158B6A99.htm" />
+    <HelpKINode Title="IScenePeer.Id Property " Url="html/D051BE17.htm" />
+    <HelpKINode Title="ITransport.Id Property " Url="html/8A84940E.htm" />
+    <HelpKINode Title="Scene.Id Property " Url="html/974439B7.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IDependencyResolver interface">
+    <HelpKINode Title="IDependencyResolver Interface" Url="html/96E3A3FA.htm" />
+    <HelpKINode Title="about IDependencyResolver interface" Url="html/96E3A3FA.htm" />
+    <HelpKINode Title="methods" Url="html/36A39F58.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IDependencyResolver.Register method" Url="html/5D8A8701.htm" />
+  <HelpKINode Title="IDependencyResolver.Resolve(Of T) method" Url="html/55FA7A23.htm" />
+  <HelpKINode Title="IDependencyResolver.Resolve&lt;T&gt; method" Url="html/55FA7A23.htm" />
+  <HelpKINode Title="IDependencyResolver.ResolveAll(Of T) method" Url="html/1792E225.htm" />
+  <HelpKINode Title="IDependencyResolver.ResolveAll&lt;T&gt; method" Url="html/1792E225.htm" />
+  <HelpKINode Title="ILogger interface">
+    <HelpKINode Title="ILogger Interface" Url="html/CA274614.htm" />
+    <HelpKINode Title="about ILogger interface" Url="html/CA274614.htm" />
+    <HelpKINode Title="methods" Url="html/63080D52.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ILogger.Log method" Url="html/56BAEACF.htm" />
+  <HelpKINode Title="IMMEDIATE_PRIORITY enumeration member" Url="html/C20D667F.htm" />
+  <HelpKINode Title="Info enumeration member" Url="html/F5201A93.htm" />
+  <HelpKINode Title="Info method" Url="html/FAC28AF.htm" />
+  <HelpKINode Title="InputStream property" Url="html/48967983.htm" />
+  <HelpKINode Title="IPacketDispatcher interface">
+    <HelpKINode Title="IPacketDispatcher Interface" Url="html/47090904.htm" />
+    <HelpKINode Title="about IPacketDispatcher interface" Url="html/47090904.htm" />
+    <HelpKINode Title="methods" Url="html/858C5800.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IPacketDispatcher.AddPRocessor method" Url="html/A6D43D0E.htm" />
+  <HelpKINode Title="IPacketDispatcher.DispatchPacket method" Url="html/B84F8AF0.htm" />
+  <HelpKINode Title="IPacketProcessor interface">
+    <HelpKINode Title="IPacketProcessor Interface" Url="html/2463F34F.htm" />
+    <HelpKINode Title="about IPacketProcessor interface" Url="html/2463F34F.htm" />
+    <HelpKINode Title="methods" Url="html/5326357A.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IPacketProcessor.RegisterProcessor method" Url="html/4BBD9274.htm" />
+  <HelpKINode Title="IpAddress property" Url="html/F6CA5E5B.htm" />
+  <HelpKINode Title="IRequestModule interface">
+    <HelpKINode Title="IRequestModule Interface" Url="html/BFE507AC.htm" />
+    <HelpKINode Title="about IRequestModule interface" Url="html/BFE507AC.htm" />
+    <HelpKINode Title="methods" Url="html/4036D761.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IRequestModule.Register method" Url="html/D834BE81.htm" />
+  <HelpKINode Title="IScene interface">
+    <HelpKINode Title="IScene Interface" Url="html/AC486B31.htm" />
+    <HelpKINode Title="about IScene interface" Url="html/AC486B31.htm" />
+    <HelpKINode Title="methods" Url="html/48299D04.htm" />
+    <HelpKINode Title="properties" Url="html/14333CCC.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IScene.DependencyResolver property" Url="html/AA601E3D.htm" />
+  <HelpKINode Title="IScene.GetComponent(Of T) method" Url="html/28026F00.htm" />
+  <HelpKINode Title="IScene.GetComponent&lt;T&gt; method" Url="html/28026F00.htm" />
+  <HelpKINode Title="IScene.Id property" Url="html/158B6A99.htm" />
+  <HelpKINode Title="IScene.IsHost property" Url="html/4EEB76A.htm" />
+  <HelpKINode Title="IScenePeer interface">
+    <HelpKINode Title="IScenePeer Interface" Url="html/44C2A60F.htm" />
+    <HelpKINode Title="about IScenePeer interface" Url="html/44C2A60F.htm" />
+    <HelpKINode Title="methods" Url="html/BE0CB0EB.htm" />
+    <HelpKINode Title="properties" Url="html/5A4E7F4B.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IScenePeer.GetComponent(Of T) method" Url="html/23F02984.htm" />
+  <HelpKINode Title="IScenePeer.GetComponent&lt;T&gt; method" Url="html/23F02984.htm" />
+  <HelpKINode Title="IScenePeer.Id property" Url="html/D051BE17.htm" />
+  <HelpKINode Title="IScenePeer.Send method" Url="html/7AB6F9E8.htm" />
+  <HelpKINode Title="IScheduler interface">
+    <HelpKINode Title="IScheduler Interface" Url="html/5C69282E.htm" />
+    <HelpKINode Title="about IScheduler interface" Url="html/5C69282E.htm" />
+    <HelpKINode Title="methods" Url="html/F556F6AB.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IScheduler.SchedulePeriodic method" Url="html/1D762CFA.htm" />
+  <HelpKINode Title="ISerializer interface">
+    <HelpKINode Title="ISerializer Interface" Url="html/17EABDB1.htm" />
+    <HelpKINode Title="about ISerializer interface" Url="html/17EABDB1.htm" />
+    <HelpKINode Title="methods" Url="html/57C1EB19.htm" />
+    <HelpKINode Title="properties" Url="html/673F154A.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ISerializer.Deserialize(Of T) method" Url="html/B70B7F39.htm" />
+  <HelpKINode Title="ISerializer.Deserialize&lt;T&gt; method" Url="html/B70B7F39.htm" />
+  <HelpKINode Title="ISerializer.Name property" Url="html/8BD67790.htm" />
+  <HelpKINode Title="ISerializer.Serialize(Of T) method" Url="html/D83406B9.htm" />
+  <HelpKINode Title="ISerializer.Serialize&lt;T&gt; method" Url="html/D83406B9.htm" />
+  <HelpKINode Title="IsHost property">
+    <HelpKINode Title="IScene.IsHost Property " Url="html/4EEB76A.htm" />
+    <HelpKINode Title="Scene.IsHost Property " Url="html/6D9AE988.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IsLocalDev property" Url="html/8D4812A2.htm" />
+  <HelpKINode Title="IsRunning property" Url="html/BE06E91.htm" />
+  <HelpKINode Title="ITransport interface">
+    <HelpKINode Title="ITransport Interface" Url="html/21E210FE.htm" />
+    <HelpKINode Title="about ITransport interface" Url="html/21E210FE.htm" />
+    <HelpKINode Title="methods" Url="html/35A0A30D.htm" />
+    <HelpKINode Title="properties" Url="html/C7182F1C.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ITransport.Connect method" Url="html/E55FA393.htm" />
+  <HelpKINode Title="ITransport.ConnectionClosed property" Url="html/76332E5F.htm" />
+  <HelpKINode Title="ITransport.ConnectionOpened property" Url="html/C445D0D6.htm" />
+  <HelpKINode Title="ITransport.Id property" Url="html/8A84940E.htm" />
+  <HelpKINode Title="ITransport.IsRunning property" Url="html/BE06E91.htm" />
+  <HelpKINode Title="ITransport.Name property" Url="html/73BEB0FB.htm" />
+  <HelpKINode Title="ITransport.PacketReceived property" Url="html/E388762.htm" />
+  <HelpKINode Title="ITransport.Start method" Url="html/C7763158.htm" />
+  <HelpKINode Title="LastPing property" Url="html/B9F15393.htm" />
+  <HelpKINode Title="LocalRoutes property" Url="html/5B6176AF.htm" />
+  <HelpKINode Title="Log method" Url="html/56BAEACF.htm" />
+  <HelpKINode Title="Logger property">
+    <HelpKINode Title="Client.Logger Property " Url="html/A9726399.htm" />
+    <HelpKINode Title="ClientConfiguration.Logger Property " Url="html/80E529E6.htm" />
+  </HelpKINode>
+  <HelpKINode Title="LoggerExtensions class">
+    <HelpKINode Title="LoggerExtensions Class" Url="html/3BE1D378.htm" />
+    <HelpKINode Title="about LoggerExtensions class" Url="html/3BE1D378.htm" />
+    <HelpKINode Title="methods" Url="html/9F592B81.htm" />
+  </HelpKINode>
+  <HelpKINode Title="LoggerExtensions.Debug method" Url="html/25E65B97.htm" />
+  <HelpKINode Title="LoggerExtensions.Error method" Url="html/DB1E443.htm" />
+  <HelpKINode Title="LoggerExtensions.Info method" Url="html/FAC28AF.htm" />
+  <HelpKINode Title="LoggerExtensions.Step method" Url="html/98212DFE.htm" />
+  <HelpKINode Title="LoggerExtensions.Trace method" Url="html/E190F20E.htm" />
+  <HelpKINode Title="LoggerExtensions.Warn method" Url="html/AD85B81.htm" />
+  <HelpKINode Title="LogLevel enumeration" Url="html/F5201A93.htm" />
+  <HelpKINode Title="LOW_PRIORITY enumeration member" Url="html/C20D667F.htm" />
+  <HelpKINode Title="MaxPeers property" Url="html/9CAC962E.htm" />
+  <HelpKINode Title="MEDIUM_PRIORITY enumeration member" Url="html/C20D667F.htm" />
+  <HelpKINode Title="Metadata property">
+    <HelpKINode Title="IConnection.Metadata Property " Url="html/CC21033A.htm" />
+    <HelpKINode Title="Packet(T).Metadata Property " Url="html/88DF15C6.htm" />
+    <HelpKINode Title="Route.Metadata Property " Url="html/8E7E0138.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Name property">
+    <HelpKINode Title="ISerializer.Name Property " Url="html/8BD67790.htm" />
+    <HelpKINode Title="ITransport.Name Property " Url="html/73BEB0FB.htm" />
+    <HelpKINode Title="Route.Name Property " Url="html/343413B1.htm" />
+  </HelpKINode>
+  <HelpKINode Title="NewConnection method" Url="html/E44B37D.htm" />
+  <HelpKINode Title="None enumeration member" Url="html/4067B4B2.htm" />
+  <HelpKINode Title="OnMessage method" Url="html/399BE179.htm" />
+  <HelpKINode Title="OnMessage(Of T) method" Url="html/B357E432.htm" />
+  <HelpKINode Title="OnMessage&lt;T&gt; method" Url="html/B357E432.htm" />
+  <HelpKINode Title="OutgoingBandwidth enumeration member" Url="html/4067B4B2.htm" />
+  <HelpKINode Title="Packet class">
+    <HelpKINode Title="Packet Class" Url="html/4C0E2567.htm" />
+    <HelpKINode Title="about Packet class" Url="html/4C0E2567.htm" />
+    <HelpKINode Title="constructor" Url="html/5465637A.htm" />
+    <HelpKINode Title="methods" Url="html/8BFD57C4.htm" />
+    <HelpKINode Title="properties" Url="html/3029D8A3.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Packet(Of T) class">
+    <HelpKINode Title="Packet(T) Class" Url="html/9D0074A0.htm" />
+    <HelpKINode Title="about Packet(Of T) class" Url="html/9D0074A0.htm" />
+    <HelpKINode Title="constructor" Url="html/31BCA5FD.htm" />
+    <HelpKINode Title="methods" Url="html/D108642.htm" />
+    <HelpKINode Title="properties" Url="html/560EAC86.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Packet(Of T).Connection property" Url="html/F695B6BE.htm" />
+  <HelpKINode Title="Packet(Of T).GetMetadata(Of TData) method" Url="html/4C7DC206.htm" />
+  <HelpKINode Title="Packet(Of T).Metadata property" Url="html/88DF15C6.htm" />
+  <HelpKINode Title="Packet(Of T).Packet constructor" Url="html/31BCA5FD.htm" />
+  <HelpKINode Title="Packet(Of T).Stream property" Url="html/75269414.htm" />
+  <HelpKINode Title="Packet.Packet constructor" Url="html/5465637A.htm" />
+  <HelpKINode Title="Packet&lt;T&gt; class">
+    <HelpKINode Title="Packet(T) Class" Url="html/9D0074A0.htm" />
+    <HelpKINode Title="about Packet&lt;T&gt; class" Url="html/9D0074A0.htm" />
+    <HelpKINode Title="constructor" Url="html/31BCA5FD.htm" />
+    <HelpKINode Title="methods" Url="html/D108642.htm" />
+    <HelpKINode Title="properties" Url="html/560EAC86.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Packet&lt;T&gt;.Connection property" Url="html/F695B6BE.htm" />
+  <HelpKINode Title="Packet&lt;T&gt;.GetMetadata&lt;TData&gt; method" Url="html/4C7DC206.htm" />
+  <HelpKINode Title="Packet&lt;T&gt;.Metadata property" Url="html/88DF15C6.htm" />
+  <HelpKINode Title="Packet&lt;T&gt;.Packet constructor" Url="html/31BCA5FD.htm" />
+  <HelpKINode Title="Packet&lt;T&gt;.Stream property" Url="html/75269414.htm" />
+  <HelpKINode Title="PacketExtensions class">
+    <HelpKINode Title="PacketExtensions Class" Url="html/E99FB863.htm" />
+    <HelpKINode Title="about PacketExtensions class" Url="html/E99FB863.htm" />
+    <HelpKINode Title="methods" Url="html/B881CFE0.htm" />
+  </HelpKINode>
+  <HelpKINode Title="PacketExtensions.ReadObject(Of T) method" Url="html/E770B7B1.htm" />
+  <HelpKINode Title="PacketExtensions.ReadObject&lt;T&gt; method" Url="html/E770B7B1.htm" />
+  <HelpKINode Title="PacketExtensions.Serializer method" Url="html/84C5F1A5.htm" />
+  <HelpKINode Title="PacketExtensions.ToObject(Of T) method" Url="html/66A17B8.htm" />
+  <HelpKINode Title="PacketExtensions.ToObject&lt;T&gt; method" Url="html/66A17B8.htm" />
+  <HelpKINode Title="PacketLossRate property" Url="html/2C4AE3F5.htm" />
+  <HelpKINode Title="PacketPriority enumeration" Url="html/C20D667F.htm" />
+  <HelpKINode Title="PacketProcessorConfig class">
+    <HelpKINode Title="PacketProcessorConfig Class" Url="html/FEF8B084.htm" />
+    <HelpKINode Title="about PacketProcessorConfig class" Url="html/FEF8B084.htm" />
+    <HelpKINode Title="methods" Url="html/1013A236.htm" />
+  </HelpKINode>
+  <HelpKINode Title="PacketProcessorConfig.AddCatchAllProcessor method" Url="html/C02E4BC9.htm" />
+  <HelpKINode Title="PacketProcessorConfig.AddProcessor method" Url="html/9057F8F6.htm" />
+  <HelpKINode Title="PacketReceived field" Url="html/BD9F5B18.htm" />
+  <HelpKINode Title="PacketReceived property">
+    <HelpKINode Title="ITransport.PacketReceived Property " Url="html/E388762.htm" />
+    <HelpKINode Title="PluginBuildContext.PacketReceived Property " Url="html/36436191.htm" />
+  </HelpKINode>
+  <HelpKINode Title="PacketReliability enumeration" Url="html/FF44F69F.htm" />
+  <HelpKINode Title="Ping property" Url="html/6503A881.htm" />
+  <HelpKINode Title="PingInterval property" Url="html/64FE13F3.htm" />
+  <HelpKINode Title="PluginBuildContext class">
+    <HelpKINode Title="PluginBuildContext Class" Url="html/2F05C22D.htm" />
+    <HelpKINode Title="about PluginBuildContext class" Url="html/2F05C22D.htm" />
+    <HelpKINode Title="constructor" Url="html/99A28FA7.htm" />
+    <HelpKINode Title="methods" Url="html/4F3867B5.htm" />
+    <HelpKINode Title="properties" Url="html/9EE4FA09.htm" />
+  </HelpKINode>
+  <HelpKINode Title="PluginBuildContext.ClientCreated property" Url="html/E17E4D02.htm" />
+  <HelpKINode Title="PluginBuildContext.PacketReceived property" Url="html/36436191.htm" />
+  <HelpKINode Title="PluginBuildContext.PluginBuildContext constructor" Url="html/99A28FA7.htm" />
+  <HelpKINode Title="PluginBuildContext.SceneConnected property" Url="html/4B897557.htm" />
+  <HelpKINode Title="PluginBuildContext.SceneCreated property" Url="html/5887C5D.htm" />
+  <HelpKINode Title="PluginBuildContext.SceneDisconnected property" Url="html/CA7CBE.htm" />
+  <HelpKINode Title="QueuedBytes property" Url="html/50D703AC.htm" />
+  <HelpKINode Title="QueuedBytesForPriority method" Url="html/8FA1AB08.htm" />
+  <HelpKINode Title="QueuedPackets property" Url="html/2D84DA05.htm" />
+  <HelpKINode Title="QueuedPacketsForPriority method" Url="html/5C8D2BC.htm" />
+  <HelpKINode Title="ReadObject(Of T) method" Url="html/E770B7B1.htm" />
+  <HelpKINode Title="ReadObject(Of TData) method" Url="html/70C2883.htm" />
+  <HelpKINode Title="ReadObject&lt;T&gt; method" Url="html/E770B7B1.htm" />
+  <HelpKINode Title="ReadObject&lt;TData&gt; method" Url="html/70C2883.htm" />
+  <HelpKINode Title="Register method">
+    <HelpKINode Title="IDependencyResolver.Register Method " Url="html/5D8A8701.htm" />
+    <HelpKINode Title="IRequestModule.Register Method " Url="html/D834BE81.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RegisterComponent(Of T) method" Url="html/D1184CE4.htm" />
+  <HelpKINode Title="RegisterComponent&lt;T&gt; method" Url="html/D1184CE4.htm" />
+  <HelpKINode Title="RegisterProcessor method" Url="html/4BBD9274.htm" />
+  <HelpKINode Title="RegisterRoute(Of TData) method" Url="html/4D577F0D.htm" />
+  <HelpKINode Title="RegisterRoute&lt;TData&gt; method" Url="html/4D577F0D.htm" />
+  <HelpKINode Title="RELIABLE enumeration member" Url="html/FF44F69F.htm" />
+  <HelpKINode Title="RELIABLE_ORDERED enumeration member" Url="html/FF44F69F.htm" />
+  <HelpKINode Title="RELIABLE_SEQUENCED enumeration member" Url="html/FF44F69F.htm" />
+  <HelpKINode Title="RemotePeer property" Url="html/F2A44BF6.htm" />
+  <HelpKINode Title="RemotePeers property" Url="html/8750504F.htm" />
+  <HelpKINode Title="RemoteRoutes property" Url="html/1B2340CF.htm" />
+  <HelpKINode Title="RequestContext(Of T) class">
+    <HelpKINode Title="RequestContext(T) Class" Url="html/F061D32D.htm" />
+    <HelpKINode Title="about RequestContext(Of T) class" Url="html/F061D32D.htm" />
+    <HelpKINode Title="methods" Url="html/3CED2C55.htm" />
+    <HelpKINode Title="properties" Url="html/70737982.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RequestContext(Of T).CancellationToken property" Url="html/90573DFF.htm" />
+  <HelpKINode Title="RequestContext(Of T).InputStream property" Url="html/48967983.htm" />
+  <HelpKINode Title="RequestContext(Of T).RemotePeer property" Url="html/F2A44BF6.htm" />
+  <HelpKINode Title="RequestContext(Of T).SendValue method" Url="html/E1906339.htm" />
+  <HelpKINode Title="RequestContext&lt;T&gt; class">
+    <HelpKINode Title="RequestContext(T) Class" Url="html/F061D32D.htm" />
+    <HelpKINode Title="about RequestContext&lt;T&gt; class" Url="html/F061D32D.htm" />
+    <HelpKINode Title="methods" Url="html/3CED2C55.htm" />
+    <HelpKINode Title="properties" Url="html/70737982.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RequestContext&lt;T&gt;.CancellationToken property" Url="html/90573DFF.htm" />
+  <HelpKINode Title="RequestContext&lt;T&gt;.InputStream property" Url="html/48967983.htm" />
+  <HelpKINode Title="RequestContext&lt;T&gt;.RemotePeer property" Url="html/F2A44BF6.htm" />
+  <HelpKINode Title="RequestContext&lt;T&gt;.SendValue method" Url="html/E1906339.htm" />
+  <HelpKINode Title="RequestModuleBuilder class">
+    <HelpKINode Title="RequestModuleBuilder Class" Url="html/1C7B92B8.htm" />
+    <HelpKINode Title="about RequestModuleBuilder class" Url="html/1C7B92B8.htm" />
+    <HelpKINode Title="methods" Url="html/6F19DD04.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RequestModuleBuilder.Service method" Url="html/DDE0DE49.htm" />
+  <HelpKINode Title="Resolve(Of T) method" Url="html/55FA7A23.htm" />
+  <HelpKINode Title="Resolve&lt;T&gt; method" Url="html/55FA7A23.htm" />
+  <HelpKINode Title="ResolveAll(Of T) method" Url="html/1792E225.htm" />
+  <HelpKINode Title="ResolveAll&lt;T&gt; method" Url="html/1792E225.htm" />
+  <HelpKINode Title="Route class">
+    <HelpKINode Title="Route Class" Url="html/4BD27A7.htm" />
+    <HelpKINode Title="about Route class" Url="html/4BD27A7.htm" />
+    <HelpKINode Title="constructor" Url="html/DA8CF405.htm" />
+    <HelpKINode Title="methods" Url="html/4F56B530.htm" />
+    <HelpKINode Title="properties" Url="html/32A14D93.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Route.Handle property" Url="html/AF5532AB.htm" />
+  <HelpKINode Title="Route.Handlers property" Url="html/230BBAB9.htm" />
+  <HelpKINode Title="Route.Metadata property" Url="html/8E7E0138.htm" />
+  <HelpKINode Title="Route.Name property" Url="html/343413B1.htm" />
+  <HelpKINode Title="Route.Route constructor" Url="html/DA8CF405.htm" />
+  <HelpKINode Title="Route.Scene property" Url="html/FFAEE08.htm" />
+  <HelpKINode Title="Rpc method" Url="html/C78E87E8.htm" />
+  <HelpKINode Title="RpcTask method" Url="html/7474CA5A.htm" />
+  <HelpKINode Title="RpcVoid method" Url="html/270C3EFF.htm" />
+  <HelpKINode Title="Scene class">
+    <HelpKINode Title="Scene Class" Url="html/3C842D37.htm" />
+    <HelpKINode Title="about Scene class" Url="html/3C842D37.htm" />
+    <HelpKINode Title="fields" Url="html/47CD0B5D.htm" />
+    <HelpKINode Title="methods" Url="html/6982F69C.htm" />
+    <HelpKINode Title="properties" Url="html/877C2364.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Scene property" Url="html/FFAEE08.htm" />
+  <HelpKINode Title="Scene.AddRoute method" Url="html/A6A456AF.htm" />
+  <HelpKINode Title="Scene.Connect method" Url="html/F2B75D2A.htm" />
+  <HelpKINode Title="Scene.Connected property" Url="html/6690397C.htm" />
+  <HelpKINode Title="Scene.DependencyResolver property" Url="html/BC6A7D7A.htm" />
+  <HelpKINode Title="Scene.Disconnect method" Url="html/23678BA6.htm" />
+  <HelpKINode Title="Scene.GetComponent(Of T) method" Url="html/55AE17E.htm" />
+  <HelpKINode Title="Scene.GetComponent&lt;T&gt; method" Url="html/55AE17E.htm" />
+  <HelpKINode Title="Scene.GetHostMetadata method" Url="html/172DCAFC.htm" />
+  <HelpKINode Title="Scene.Handle property" Url="html/BD92E8A2.htm" />
+  <HelpKINode Title="Scene.Host property" Url="html/7E649054.htm" />
+  <HelpKINode Title="Scene.Id property" Url="html/974439B7.htm" />
+  <HelpKINode Title="Scene.IsHost property" Url="html/6D9AE988.htm" />
+  <HelpKINode Title="Scene.LocalRoutes property" Url="html/5B6176AF.htm" />
+  <HelpKINode Title="Scene.OnMessage method" Url="html/399BE179.htm" />
+  <HelpKINode Title="Scene.PacketReceived field" Url="html/BD9F5B18.htm" />
+  <HelpKINode Title="Scene.RemotePeers property" Url="html/8750504F.htm" />
+  <HelpKINode Title="Scene.RemoteRoutes property" Url="html/1B2340CF.htm" />
+  <HelpKINode Title="Scene.SendPacket method" Url="html/734B031C.htm" />
+  <HelpKINode Title="SceneConnected property" Url="html/4B897557.htm" />
+  <HelpKINode Title="SceneCreated property" Url="html/5887C5D.htm" />
+  <HelpKINode Title="SceneDisconnected property" Url="html/CA7CBE.htm" />
+  <HelpKINode Title="SceneExtensions class">
+    <HelpKINode Title="SceneExtensions Class" Url="html/48CA0DAD.htm" />
+    <HelpKINode Title="about SceneExtensions class" Url="html/48CA0DAD.htm" />
+    <HelpKINode Title="methods" Url="html/CC6F203A.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SceneExtensions.AddProcedure method" Url="html/94B9D85E.htm" />
+  <HelpKINode Title="SceneExtensions.AddRoute(Of TData) method" Url="html/6F153C21.htm" />
+  <HelpKINode Title="SceneExtensions.AddRoute&lt;TData&gt; method" Url="html/6F153C21.htm" />
+  <HelpKINode Title="SceneExtensions.OnMessage(Of T) method" Url="html/B357E432.htm" />
+  <HelpKINode Title="SceneExtensions.OnMessage&lt;T&gt; method" Url="html/B357E432.htm" />
+  <HelpKINode Title="SceneExtensions.ReadObject(Of TData) method" Url="html/70C2883.htm" />
+  <HelpKINode Title="SceneExtensions.ReadObject&lt;TData&gt; method" Url="html/70C2883.htm" />
+  <HelpKINode Title="SceneExtensions.RegisterRoute(Of TData) method" Url="html/4D577F0D.htm" />
+  <HelpKINode Title="SceneExtensions.RegisterRoute&lt;TData&gt; method" Url="html/4D577F0D.htm" />
+  <HelpKINode Title="SceneExtensions.Rpc method" Url="html/C78E87E8.htm" />
+  <HelpKINode Title="SceneExtensions.RpcTask method" Url="html/7474CA5A.htm" />
+  <HelpKINode Title="SceneExtensions.RpcVoid method" Url="html/270C3EFF.htm" />
+  <HelpKINode Title="SceneExtensions.Send(Of TData) method" Url="html/A40C5445.htm" />
+  <HelpKINode Title="SceneExtensions.Send&lt;TData&gt; method" Url="html/A40C5445.htm" />
+  <HelpKINode Title="SceneExtensions.SendRequest(Of TData, TResponse) method" Url="html/773AB913.htm" />
+  <HelpKINode Title="SceneExtensions.SendRequest&lt;TData, TResponse&gt; method" Url="html/773AB913.htm" />
+  <HelpKINode Title="SceneExtensions.SendValue(Of TData) method" Url="html/A5878FDC.htm" />
+  <HelpKINode Title="SceneExtensions.SendValue&lt;TData&gt; method" Url="html/A5878FDC.htm" />
+  <HelpKINode Title="SceneExtensions.SendVoidRequest method" Url="html/53620BEF.htm" />
+  <HelpKINode Title="SchedulePeriodic method" Url="html/1D762CFA.htm" />
+  <HelpKINode Title="Scheduler property" Url="html/7464478D.htm" />
+  <HelpKINode Title="Send method" Url="html/7AB6F9E8.htm" />
+  <HelpKINode Title="Send(Of TData) method" Url="html/A40C5445.htm" />
+  <HelpKINode Title="Send&lt;TData&gt; method" Url="html/A40C5445.htm" />
+  <HelpKINode Title="SendPacket method" Url="html/734B031C.htm" />
+  <HelpKINode Title="SendRequest(Of TData, TResponse) method" Url="html/773AB913.htm" />
+  <HelpKINode Title="SendRequest&lt;TData, TResponse&gt; method" Url="html/773AB913.htm" />
+  <HelpKINode Title="SendSystem method" Url="html/3BA558B9.htm" />
+  <HelpKINode Title="SendToScene method" Url="html/1A794A3B.htm" />
+  <HelpKINode Title="SendValue method" Url="html/E1906339.htm" />
+  <HelpKINode Title="SendValue(Of TData) method" Url="html/A5878FDC.htm" />
+  <HelpKINode Title="SendValue&lt;TData&gt; method" Url="html/A5878FDC.htm" />
+  <HelpKINode Title="SendVoidRequest method" Url="html/53620BEF.htm" />
+  <HelpKINode Title="Serialize(Of T) method" Url="html/D83406B9.htm" />
+  <HelpKINode Title="Serialize&lt;T&gt; method" Url="html/D83406B9.htm" />
+  <HelpKINode Title="Serializer method" Url="html/84C5F1A5.htm" />
+  <HelpKINode Title="Serializers property" Url="html/632BC8A6.htm" />
+  <HelpKINode Title="ServerEndpoint property" Url="html/CF8DED0F.htm" />
+  <HelpKINode Title="ServerPing property" Url="html/DD3FD88E.htm" />
+  <HelpKINode Title="ServerTransportType property" Url="html/D519A8A4.htm" />
+  <HelpKINode Title="Service method" Url="html/DDE0DE49.htm" />
+  <HelpKINode Title="SetApplication method" Url="html/63F63440.htm" />
+  <HelpKINode Title="Start method" Url="html/C7763158.htm" />
+  <HelpKINode Title="State property" Url="html/6503A437.htm" />
+  <HelpKINode Title="Step method" Url="html/98212DFE.htm" />
+  <HelpKINode Title="Stormancer namespace" Url="html/92F971C3.htm" />
+  <HelpKINode Title="Stormancer.Client class" Url="html/2947C769.htm" />
+  <HelpKINode Title="Stormancer.ClientConfiguration class" Url="html/4F50E7C9.htm" />
+  <HelpKINode Title="Stormancer.ClientException class" Url="html/1EAE00B5.htm" />
+  <HelpKINode Title="Stormancer.Core namespace" Url="html/C509E8EC.htm" />
+  <HelpKINode Title="Stormancer.Core.BPSLimitationType enumeration" Url="html/4067B4B2.htm" />
+  <HelpKINode Title="Stormancer.Core.ConnectionState enumeration" Url="html/6F53F8B6.htm" />
+  <HelpKINode Title="Stormancer.Core.IConnection interface" Url="html/3AE643C7.htm" />
+  <HelpKINode Title="Stormancer.Core.IConnectionStatistics interface" Url="html/2F2175AD.htm" />
+  <HelpKINode Title="Stormancer.Core.IScene interface" Url="html/AC486B31.htm" />
+  <HelpKINode Title="Stormancer.Core.IScenePeer interface" Url="html/44C2A60F.htm" />
+  <HelpKINode Title="Stormancer.Core.Packet class" Url="html/4C0E2567.htm" />
+  <HelpKINode Title="Stormancer.Core.Packet(Of T) class" Url="html/9D0074A0.htm" />
+  <HelpKINode Title="Stormancer.Core.Packet&lt;T&gt; class" Url="html/9D0074A0.htm" />
+  <HelpKINode Title="Stormancer.Core.PacketPriority enumeration" Url="html/C20D667F.htm" />
+  <HelpKINode Title="Stormancer.Core.PacketReliability enumeration" Url="html/FF44F69F.htm" />
+  <HelpKINode Title="Stormancer.Core.Route class" Url="html/4BD27A7.htm" />
+  <HelpKINode Title="Stormancer.Diagnostics namespace" Url="html/73521537.htm" />
+  <HelpKINode Title="Stormancer.Diagnostics.ILogger interface" Url="html/CA274614.htm" />
+  <HelpKINode Title="Stormancer.Diagnostics.LoggerExtensions class" Url="html/3BE1D378.htm" />
+  <HelpKINode Title="Stormancer.Diagnostics.LogLevel enumeration" Url="html/F5201A93.htm" />
+  <HelpKINode Title="Stormancer.DisposableAction class" Url="html/14CA3A40.htm" />
+  <HelpKINode Title="Stormancer.IDependencyResolver interface" Url="html/96E3A3FA.htm" />
+  <HelpKINode Title="Stormancer.IScheduler interface" Url="html/5C69282E.htm" />
+  <HelpKINode Title="Stormancer.ISerializer interface" Url="html/17EABDB1.htm" />
+  <HelpKINode Title="Stormancer.Networking namespace" Url="html/6A3FC7E3.htm" />
+  <HelpKINode Title="Stormancer.Networking.IConnectionManager interface" Url="html/DFF04BED.htm" />
+  <HelpKINode Title="Stormancer.Networking.IPacketDispatcher interface" Url="html/47090904.htm" />
+  <HelpKINode Title="Stormancer.Networking.IPacketProcessor interface" Url="html/2463F34F.htm" />
+  <HelpKINode Title="Stormancer.Networking.IRequestModule interface" Url="html/BFE507AC.htm" />
+  <HelpKINode Title="Stormancer.Networking.ITransport interface" Url="html/21E210FE.htm" />
+  <HelpKINode Title="Stormancer.Networking.PacketProcessorConfig class" Url="html/FEF8B084.htm" />
+  <HelpKINode Title="Stormancer.Networking.RequestModuleBuilder class" Url="html/1C7B92B8.htm" />
+  <HelpKINode Title="Stormancer.PacketExtensions class" Url="html/E99FB863.htm" />
+  <HelpKINode Title="Stormancer.Plugins namespace" Url="html/1E727DC3.htm" />
+  <HelpKINode Title="Stormancer.Plugins.PluginBuildContext class" Url="html/2F05C22D.htm" />
+  <HelpKINode Title="Stormancer.Plugins.RequestContext(Of T) class" Url="html/F061D32D.htm" />
+  <HelpKINode Title="Stormancer.Plugins.RequestContext&lt;T&gt; class" Url="html/F061D32D.htm" />
+  <HelpKINode Title="Stormancer.Scene class" Url="html/3C842D37.htm" />
+  <HelpKINode Title="Stormancer.SceneExtensions class" Url="html/48CA0DAD.htm" />
+  <HelpKINode Title="Stream property" Url="html/75269414.htm" />
+  <HelpKINode Title="ToObject(Of T) method" Url="html/66A17B8.htm" />
+  <HelpKINode Title="ToObject&lt;T&gt; method" Url="html/66A17B8.htm" />
+  <HelpKINode Title="Trace enumeration member" Url="html/F5201A93.htm" />
+  <HelpKINode Title="Trace method" Url="html/E190F20E.htm" />
+  <HelpKINode Title="TransportFactory property" Url="html/9DDCEB1D.htm" />
+  <HelpKINode Title="UNRELIABLE enumeration member" Url="html/FF44F69F.htm" />
+  <HelpKINode Title="UNRELIABLE_SEQUENCED enumeration member" Url="html/FF44F69F.htm" />
+  <HelpKINode Title="Warn enumeration member" Url="html/F5201A93.htm" />
+  <HelpKINode Title="Warn method" Url="html/AD85B81.htm" />
+</HelpKI>
