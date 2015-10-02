@@ -304,7 +304,7 @@ namespace Stormancer.Networking
         }
 
 
-        public void SetApplication(string account, string application)
+        private void SetApplication(string account, string application)
         {
             if (this.Account == null)
             {
