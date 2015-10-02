@@ -1,4 +1,5 @@
 ﻿using Stormancer.Core;
+using Stormancer.Diagnostics;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -167,7 +168,7 @@ namespace Stormancer.Plugins
                 var buffer = new byte[2];
                 p.Stream.Read(buffer, 0, 2);
                 var id = BitConverter.ToUInt16(buffer, 0);
-                
+
                 CancellationTokenSource peerCts = _peersCts.GetOrAdd(p.Connection.Id, _ => new CancellationTokenSource());
 
                 var cts = CancellationTokenSource.CreateLinkedTokenSource(peerCts.Token);
@@ -189,6 +190,10 @@ namespace Stormancer.Plugins
                             if (ex.Any())
                             {
                                 ctx.SendError(string.Join("|", ex.Select(e => e.Message)));
+                            }
+                            if (t.Exception.InnerExceptions.Any(e => !(e is ClientException)))
+                            {
+                                _scene.DependencyResolver.Resolve<ILogger>().Log(LogLevel.Error, "rpc.server", string.Format("An error occured while executing procedure '{0}'.", route), ex);
                             }
                         }
 
