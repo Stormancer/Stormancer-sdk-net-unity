@@ -100,8 +100,7 @@ namespace Stormancer.Core
         /// </summary>
         Action<string> ConnectionClosed { get; set; }
 
-        void SetApplication(string account, string application);
-
+        
         /// <summary>
         /// The connection's Ping in milliseconds
         /// </summary>
