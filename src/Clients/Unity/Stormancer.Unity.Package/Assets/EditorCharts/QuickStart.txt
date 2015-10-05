@@ -1,0 +1,7 @@
+In the Window menu you will see an Analytics Sample option. This is a sample class that uses many of the available features.
+
+You can find the code for this class in EditorCharts/Samples/Editor/AnalyticsWindow.cs
+
+The sample scene at EditorCharts/Samples/SampleScene shows how you can use a chart in an Insopector (click the GameObject).
+
+You can find the code for this class in EditorCharts/Sample/Editor/TestInspectorEditor.cs
