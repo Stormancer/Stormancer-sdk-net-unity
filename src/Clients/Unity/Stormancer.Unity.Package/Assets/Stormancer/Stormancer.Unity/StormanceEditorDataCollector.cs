@@ -11,7 +11,7 @@ namespace Stormancer.EditorPlugin
 	{
 		public Client client;
 		public ConcurrentDictionary<string, StormancerSceneViewModel> scenes = new ConcurrentDictionary<string, StormancerSceneViewModel>();
-		public ConcurrentStack<StormancerEditorLog> log = new ConcurrentStack<StormancerEditorLog>();
+		public StormancerEditorLogViewModel log = new StormancerEditorLogViewModel();
 
 		public StormancerClientViewModel(Client clt)
 		{
@@ -23,8 +23,8 @@ namespace Stormancer.EditorPlugin
 	{
 		public Scene scene;
 		public bool connected = false;
-		public ConcurrentQueue<string> routes = new ConcurrentQueue<string>();
-		public ConcurrentStack<StormancerEditorLog> log = new ConcurrentStack<StormancerEditorLog>();
+		public ConcurrentDictionary<string, StormancerRouteViewModel> routes = new ConcurrentDictionary<string, StormancerRouteViewModel>();
+		public StormancerEditorLogViewModel log = new StormancerEditorLogViewModel();
 
 		public StormancerSceneViewModel(Scene scn)
 		{
@@ -32,11 +32,58 @@ namespace Stormancer.EditorPlugin
 		}
 	}
 
+    public class StormancerRouteViewModel
+    {
+        private Route _route;
+        public string Name
+        {
+            get
+            {
+                return _route.Name;
+            }
+        }
+        public ushort Handle
+        {
+            get
+            {
+                return _route.Handle;
+            }
+        }
+
+        public AnimationCurve curve = new AnimationCurve();
+        public List<float> dataChart = new List<float>();
+        public List<float> averageSizeChart = new List<float>();
+        public List<float> messageNbrChart = new List<float>();
+        public float debit;
+        public float sizeStack;
+        public float messageNbr;
+        public float averageSize;
+        public long lastUpdate = 0;
+
+        public StormancerRouteViewModel(Route route)
+        {
+            _route = route;
+        }
+    }
+
 	public struct StormancerEditorLog
 	{
 		public string logLevel;
 		public string message;
 	}
+    
+    public class StormancerEditorLogViewModel
+    {
+        public ConcurrentQueue<StormancerEditorLog> log = new ConcurrentQueue<StormancerEditorLog>();
+
+        public void Clear()
+        {
+            StormancerEditorLog temp;
+
+            while (log.IsEmpty == false)
+                log.TryDequeue(out temp);
+        }
+    }
 
 	public class StormancerEditorDataCollector
 	{
@@ -51,7 +98,8 @@ namespace Stormancer.EditorPlugin
 			}
 		}
 
-		public ConcurrentDictionary<string, StormancerClientViewModel> clients = new ConcurrentDictionary<string, StormancerClientViewModel>();
+        public System.IO.StreamWriter temp_csv = System.IO.File.CreateText("temp.csv");
+        public ConcurrentDictionary<string, StormancerClientViewModel> clients = new ConcurrentDictionary<string, StormancerClientViewModel>();
 
 	}
 }

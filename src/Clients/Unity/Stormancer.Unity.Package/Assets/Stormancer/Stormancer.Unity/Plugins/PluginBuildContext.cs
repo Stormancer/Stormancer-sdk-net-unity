@@ -42,7 +42,7 @@ namespace Stormancer.Plugins
 		/// event fired when a route is created
 		/// </summary>
 		/// <value>The route created.</value>
-		public Action<Scene, string> RouteCreated { get; set; }
+		public Action<Scene, Route> RouteCreated { get; set; }
       
         /// <summary>
         /// Event fired when a packet is received from a remote peer.

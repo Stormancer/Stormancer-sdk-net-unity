@@ -28,7 +28,7 @@ namespace Stormancer.Plugins
 
 
                 var processor = new RpcService(scene);
-                scene.RegisterComponent(() => processor);
+                scene.resolver.RegisterComponent(() => processor);
                 scene.AddRoute(NextRouteName, p =>
                 {
                     processor.Next(p);
@@ -50,7 +50,7 @@ namespace Stormancer.Plugins
             };
             ctx.SceneDisconnected += scene =>
                 {
-                    var processor = scene.GetComponent<RpcService>();
+                    var processor = scene.resolver.GetComponent<RpcService>();
                     processor.Disconnected();
                 };
         }
@@ -98,13 +98,13 @@ namespace Stormancer.Plugins
                         var rr = _scene.RemoteRoutes.FirstOrDefault(r => r.Name == route);
                         if (rr == null)
                         {
-							_scene.GetComponent<ILogger>().Error("Tried to send a message on a non existing route");
+							_scene.resolver.GetComponent<ILogger>().Error("Tried to send a message on a non existing route");
                             throw new ArgumentException("The target route does not exist on the remote host.");
                         }
                         string version;
                         if (!rr.Metadata.TryGetValue(RpcClientPlugin.PluginName, out version) || version != RpcClientPlugin.Version)
                         {
-							_scene.GetComponent<ILogger>().Error("Target remote does not support RPC");
+							_scene.resolver.GetComponent<ILogger>().Error("Target remote does not support RPC");
                             throw new InvalidOperationException("The target remote route does not support the plugin RPC version " + Version);
                         }
 
@@ -172,7 +172,7 @@ namespace Stormancer.Plugins
                             }
                             else
                             {
-								_scene.GetComponent<ILogger>().Log("Error", _scene.Id, "failed to create procedure");
+								_scene.resolver.GetComponent<ILogger>().Log("Error", _scene.Id, "failed to create procedure");
                                 var ex = t.Exception.InnerExceptions.OfType<ClientException>();
                                 if (ex.Any())
                                 {
@@ -184,7 +184,7 @@ namespace Stormancer.Plugins
 
                     }
                 }, new Dictionary<string, string> { { "stormancer.plugins.rpc", "1.0.0" } });
-				_scene.GetComponent<ILogger>().Log("Trace", _scene.Id, "Procedure succesfully created");
+				_scene.resolver.GetComponent<ILogger>().Log("Trace", _scene.Id, "Procedure succesfully created");
             }
 
             private ushort ReserveId()
@@ -200,7 +200,7 @@ namespace Stormancer.Plugins
                             _currentRequestId++;
                             if (loop > ushort.MaxValue)
                             {
-								_scene.GetComponent<ILogger>().Log("Error", _scene.Id, "Too many request pending, unable to start a new one.");
+								_scene.resolver.GetComponent<ILogger>().Log("Error", _scene.Id, "Too many request pending, unable to start a new one.");
                                 throw new InvalidOperationException("Too many requests in progress, unable to start a new one.");
                             }
                         }
@@ -231,8 +231,6 @@ namespace Stormancer.Plugins
                 var rq = GetPendingRequest(p);
                 if (rq != null)
                 {
-					_scene.GetComponent<ILogger>().Log ("Trace", _scene.Id, "Rpc response received");
-
                     System.Threading.Interlocked.Increment(ref rq.ReceivedMsg);
                     var observer = rq.Observer;
                     observer.OnNext(p);

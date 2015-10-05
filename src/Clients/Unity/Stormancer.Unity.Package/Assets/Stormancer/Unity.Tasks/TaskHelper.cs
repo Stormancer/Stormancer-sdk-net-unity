@@ -35,6 +35,25 @@ namespace System.Threading.Tasks
             }
         }
 
+        public static Task Delay(int milliseconds)
+        {
+            return Delay(TimeSpan.FromMilliseconds(milliseconds));
+        }
+
+        public static Task Delay(TimeSpan delay)
+        {
+            var tcs = new TaskCompletionSource<Unit>();
+
+            Timer timer = null;
+            timer = new Timer(_ =>
+            {
+                tcs.SetResult(Unit.Default);
+                timer.Dispose();
+            }, null, delay, TimeSpan.FromMilliseconds(-1));
+
+
+            return tcs.Task;
+        }
     }
-  
+
 }

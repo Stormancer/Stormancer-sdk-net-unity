@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,92 +13,136 @@ using Stormancer.Plugins;
 
 namespace Stormancer.EditorPlugin
 {
-	public class StormancerEditorPlugin : IClientPlugin
-	{
+    public class StormancerEditorPlugin : IClientPlugin
+    {
 
-		private string _id = Guid.NewGuid().ToString();
-		private StormancerClientViewModel _clientVM;
-
-		public void Build(PluginBuildContext ctx)
-		{
-
-			ctx.ClientCreated += client =>
-			{
-				var innerLoggerFactory = client.GetComponentFactory<ILogger>();
-				_clientVM = new StormancerClientViewModel(client);
-				client.RegisterComponent<ILogger>(()=> new InterceptorLogger(innerLoggerFactory(), _clientVM));
-				StormancerEditorDataCollector.Instance.clients.TryAdd(_id, _clientVM);
-			};
-
-			ctx.ClientDestroyed += client =>
-			{
-				StormancerClientViewModel temp;
-				StormancerEditorDataCollector.Instance.clients.TryRemove(_id, out temp);
-			};
-
-			ctx.SceneCreated +=  scene =>
-			{
-				StormancerEditorDataCollector.Instance.clients[_id].scenes.TryAdd(scene.Id, new StormancerSceneViewModel(scene));
-			};
-
-			ctx.SceneConnected += scene =>
-			{
-				if (StormancerEditorDataCollector.Instance.clients.ContainsKey(_id))
-				{
-					if (StormancerEditorDataCollector.Instance.clients[_id].scenes.ContainsKey(scene.Id))
-						StormancerEditorDataCollector.Instance.clients[_id].scenes[scene.Id].connected = true;
-				}
-			};
-
-			ctx.SceneDisconnected += scene =>
-			{
-				if (StormancerEditorDataCollector.Instance.clients.ContainsKey(_id))
-				{
-					if (StormancerEditorDataCollector.Instance.clients[_id].scenes.ContainsKey(scene.Id))
-						StormancerEditorDataCollector.Instance.clients[_id].scenes[scene.Id].connected = false;
-				}
-			};
-
-			ctx.RouteCreated += (scene, route) =>
-			{
-				if (StormancerEditorDataCollector.Instance.clients.ContainsKey(_id))
-				{
-					if (StormancerEditorDataCollector.Instance.clients[_id].scenes.ContainsKey(scene.Id))
-						StormancerEditorDataCollector.Instance.clients[_id].scenes[scene.Id].routes.Enqueue(route);
-				}
-			};
-		}
-
-		private class InterceptorLogger : ILogger
-		{
-			private readonly ILogger _innerLogger;
-			private readonly StormancerClientViewModel _clientVM;
-			public InterceptorLogger(ILogger innerLogger, StormancerClientViewModel client)
-			{
-				_innerLogger = innerLogger;
-				_clientVM = client;
-			}
+        private string _id = Guid.NewGuid().ToString();
+        private StormancerClientViewModel _clientVM;
 
 
-			#region ILogger implementation
-			public void Log(string logLevel, string category, string message, object context = null)
-			{
-				var temp = new StormancerEditorLog();
-				temp.logLevel = logLevel;
-				temp.message = message;
-				_clientVM.log.Push(temp);
-				foreach (StormancerSceneViewModel s in _clientVM.scenes.Values)
-				{
-					if (category == s.scene.Id)
-						s.log.Push(temp);
-				}
-				_innerLogger.Log(logLevel, category, message, context);
-			}
+        public void Build(PluginBuildContext ctx)
+        {
 
-			public void Trace (string message, params object[] p)
-			{
-				var temp = new StormancerEditorLog();
-				temp.logLevel = "trace";
+            ctx.ClientCreated += client =>
+            {
+                var innerLoggerFactory = client.resolver.GetComponent<ILogger>();
+                _clientVM = new StormancerClientViewModel(client);
+                client.resolver.RegisterComponent<ILogger>(() => new InterceptorLogger(innerLoggerFactory, _clientVM));
+                StormancerEditorDataCollector.Instance.clients.TryAdd(_id, _clientVM);
+            };
+
+            ctx.ClientDestroyed += client =>
+            {
+                StormancerClientViewModel temp;
+                StormancerEditorDataCollector.Instance.clients.TryRemove(_id, out temp);
+            };
+
+            ctx.SceneCreated += scene =>
+           {
+               _clientVM.scenes.TryAdd(scene.Id, new StormancerSceneViewModel(scene));
+           };
+
+            ctx.SceneConnected += scene =>
+            {
+                if (StormancerEditorDataCollector.Instance.clients.ContainsKey(_id))
+                {
+                    if (StormancerEditorDataCollector.Instance.clients[_id].scenes.ContainsKey(scene.Id))
+                        StormancerEditorDataCollector.Instance.clients[_id].scenes[scene.Id].connected = true;
+                }
+            };
+
+            ctx.SceneDisconnected += scene =>
+            {
+                if (StormancerEditorDataCollector.Instance.clients.ContainsKey(_id))
+                {
+                    if (StormancerEditorDataCollector.Instance.clients[_id].scenes.ContainsKey(scene.Id))
+                        StormancerEditorDataCollector.Instance.clients[_id].scenes[scene.Id].connected = false;
+                }
+            };
+
+            ctx.RouteCreated += (Scene scene, Route route) =>
+            {
+                StormancerSceneViewModel sceneVM;
+                if (_clientVM.scenes.TryGetValue(scene.Id, out sceneVM))
+                {
+                    sceneVM.routes.TryAdd(route.Name, new StormancerRouteViewModel(route));
+                }
+            };
+
+            ctx.PacketReceived += (Packet packet) =>
+            {
+                if (packet.Metadata.ContainsKey("scene"))
+                {
+                    var scene = (Scene)packet.Metadata["scene"];
+                    StormancerSceneViewModel sceneVM;
+                    if (_clientVM.scenes.TryGetValue(scene.Id, out sceneVM))
+                    {
+                        var routeId = (ushort)packet.Metadata["routeId"];
+                        var temp = sceneVM.routes.Values.FirstOrDefault(r => r.Handle == routeId);
+                        if (temp != null)
+                        {
+                            temp.sizeStack += packet.Stream.Length;
+                            temp.messageNbr += 1;
+                            if (temp.messageNbr == 1)
+                                temp.averageSize = packet.Stream.Length;
+                            else
+                                temp.averageSize = (temp.averageSize * (temp.messageNbr - 1) + packet.Stream.Length) / temp.messageNbr;
+
+                            if (temp.lastUpdate + 1000 < _clientVM.client.Clock)
+                            {
+                                if (temp.dataChart.Count >= 10800)
+                                    temp.dataChart.RemoveAt(0);
+                                if (temp.messageNbrChart.Count >= 10800)
+                                    temp.messageNbrChart.RemoveAt(0);
+                                if (temp.averageSizeChart.Count >= 10800)
+                                    temp.averageSizeChart.RemoveAt(0);
+                                temp.debit = temp.sizeStack;
+                                temp.lastUpdate = _clientVM.client.Clock;
+                                temp.curve.AddKey(_clientVM.client.Clock, temp.sizeStack);
+                                temp.dataChart.Add(temp.sizeStack);
+                                temp.messageNbrChart.Add(temp.messageNbr);
+                                temp.averageSizeChart.Add(temp.averageSize);
+
+                                temp.messageNbr = 0;
+                                temp.averageSize = 0;
+                                temp.sizeStack = 0;
+                            }
+                        }
+                    }
+                }
+            };
+        }
+
+        private class InterceptorLogger : ILogger
+        {
+            private readonly ILogger _innerLogger;
+            private readonly StormancerClientViewModel _clientVM;
+            public InterceptorLogger(ILogger innerLogger, StormancerClientViewModel client)
+            {
+                _innerLogger = innerLogger;
+                _clientVM = client;
+            }
+
+
+            #region ILogger implementation
+            public void Log(string logLevel, string category, string message, object context = null)
+            {
+                var temp = new StormancerEditorLog();
+                temp.logLevel = logLevel;
+                temp.message = message;
+                _clientVM.log.log.Enqueue(temp);
+                foreach (StormancerSceneViewModel s in _clientVM.scenes.Values)
+                {
+                    if (category == s.scene.Id)
+                        s.log.log.Enqueue(temp);
+                }
+                _innerLogger.Log(logLevel, category, message, context);
+            }
+
+            public void Trace(string message, params object[] p)
+            {
+                var temp = new StormancerEditorLog();
+                temp.logLevel = "trace";
                 try
                 {
                     temp.message = string.Format(message, p);
@@ -106,14 +151,14 @@ namespace Stormancer.EditorPlugin
                 {
                     Error(ex);
                 }
-				_clientVM.log.Push(temp);
-				_innerLogger.Trace(message,p);
-			}
+                _clientVM.log.log.Enqueue(temp);
+                _innerLogger.Trace(message, p);
+            }
 
-			public void Debug (string message, params object[] p)
-			{
-				var temp = new StormancerEditorLog();
-				temp.logLevel = "Debug";
+            public void Debug(string message, params object[] p)
+            {
+                var temp = new StormancerEditorLog();
+                temp.logLevel = "Debug";
                 try
                 {
                     temp.message = string.Format(message, p);
@@ -122,23 +167,25 @@ namespace Stormancer.EditorPlugin
                 {
                     Error(ex);
                 }
-                _clientVM.log.Push(temp);
-				_innerLogger.Debug(message,p);
+                _clientVM.log.log.Enqueue(temp);
+                _innerLogger.Debug(message, p);
 
-			}
-			public void Error (Exception ex)
-			{
-				var temp = new StormancerEditorLog();
-				temp.logLevel = "Error";
-				temp.message = ex.Message;
-				_clientVM.log.Push(temp);
-				_innerLogger.Error(ex);
+            }
 
-			}
-			public void Error (string message, params object[] p)
-			{
-				var temp = new StormancerEditorLog();
-				temp.logLevel = "Error";
+            public void Error(Exception ex)
+            {
+                var temp = new StormancerEditorLog();
+                temp.logLevel = "Error";
+                temp.message = ex.Message;
+                _clientVM.log.log.Enqueue(temp);
+                _innerLogger.Error(ex);
+
+            }
+
+            public void Error(string message, params object[] p)
+            {
+                var temp = new StormancerEditorLog();
+                temp.logLevel = "Error";
                 try
                 {
                     temp.message = string.Format(message, p);
@@ -147,14 +194,14 @@ namespace Stormancer.EditorPlugin
                 {
                     Error(ex);
                 }
-                _clientVM.log.Push(temp);
-				_innerLogger.Error(message,p);
+                _clientVM.log.log.Enqueue(temp);
+                _innerLogger.Error(message, p);
 
-			}
-			public void Info (string message, params object[] p)
-			{
-				var temp = new StormancerEditorLog();
-				temp.logLevel = "Info";
+            }
+            public void Info(string message, params object[] p)
+            {
+                var temp = new StormancerEditorLog();
+                temp.logLevel = "Info";
                 try
                 {
                     temp.message = string.Format(message, p);
@@ -163,14 +210,11 @@ namespace Stormancer.EditorPlugin
                 {
                     Error(ex);
                 }
-                _clientVM.log.Push(temp);
-				_innerLogger.Info(message,p);
-		
-			}
-			#endregion
-		}
+                _clientVM.log.log.Enqueue(temp);
+                _innerLogger.Info(message, p);
 
-	}
-
-
+            }
+            #endregion
+        }
+    }
 }
