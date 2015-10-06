@@ -14,6 +14,9 @@ namespace Stormancer.Core
         Connected
     }
 
+    /// <summary>
+    /// Represents a Stormacner connection to a remote peer.
+    /// </summary>
     public interface IConnection
     {
         /// <summary>
@@ -45,7 +48,6 @@ namespace Stormancer.Core
         /// Gets a service from the object.
         /// </summary>
         /// <typeparam name="T">Type of the service to fetch.</typeparam>
-        /// <param name="key">A string containing the service key.</param>
         /// <returns>A service object.</returns>
         T GetComponent<T>();
 
@@ -74,6 +76,7 @@ namespace Stormancer.Core
         /// </summary>
         /// <param name="msgId"></param>
         /// <param name="writer"></param>
+        /// <param name="priority"></param>
         void SendSystem(byte msgId, Action<Stream> writer, PacketPriority priority = PacketPriority.MEDIUM_PRIORITY);
         
        
@@ -88,7 +91,6 @@ namespace Stormancer.Core
         /// <param name="writer"></param>
         /// <param name="priority"></param>
         /// <param name="reliability"></param>
-        /// <param name="channel"></param>
         void SendToScene(byte sceneIndex,
             ushort route,
             Action<Stream> writer,

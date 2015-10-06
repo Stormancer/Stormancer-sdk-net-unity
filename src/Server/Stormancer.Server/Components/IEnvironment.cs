@@ -69,14 +69,6 @@ namespace Stormancer.Server.Components
         {
             get;
         }
-
-        /// <summary>
-        /// The url of the Api endpoint associated with the current environment.
-        /// </summary>
-        string ApiEndpoint
-        {
-            get;
-        }
     }
 
     /// <summary>
