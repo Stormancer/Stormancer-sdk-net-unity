@@ -83,6 +83,7 @@ namespace Stormancer.Networking
 
             _rakPeer = peer;
             _closeAction = closeAction;
+            
             State = Stormancer.Core.ConnectionState.Connected;
         }
 
@@ -316,6 +317,14 @@ namespace Stormancer.Networking
         public int Ping
         {
             get { return this._rakPeer.GetLastPing(this._guid); }
+        }
+
+        public string DeploymentId
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
         }
 
         public IConnectionStatistics GetConnectionStatistics()

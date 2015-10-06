@@ -113,5 +113,10 @@ namespace Stormancer.Core
         /// </summary>
         /// <returns>The required statistics</returns>
         IConnectionStatistics GetConnectionStatistics();
+
+        /// <summary>
+        /// The id of the relevent deployment for this connection. 
+        /// </summary>
+        string DeploymentId { get; }
     }
 }
