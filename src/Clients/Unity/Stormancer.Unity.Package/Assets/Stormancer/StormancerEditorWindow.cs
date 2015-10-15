@@ -6,6 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
+using System.Linq;
 
 using Stormancer;
 using Stormancer.Core;
@@ -57,7 +58,7 @@ namespace Stormancer.EditorPluginWindow
 		
 		void OnGUI ()
 		{
-			ShowStormancerDebug ();
+    		ShowStormancerDebug ();
 		}
 	
 		void ShowStormancerDebug()
@@ -97,16 +98,26 @@ namespace Stormancer.EditorPluginWindow
                 EditorGUILayout.Separator();
                 while (folds.Count - 1 < i)
                     folds.Add(new Folds());
-                GUILayout.BeginHorizontal(GUILayout.Width(100), GUILayout.Height(20), GUILayout.MinWidth(50), GUILayout.MaxWidth(200));
+                GUILayout.BeginHorizontal(GUILayout.Width(200), GUILayout.Height(20), GUILayout.MinWidth(200), GUILayout.MaxWidth(200));
 
                 folds[i].client = EditorGUILayout.Foldout(folds[i].client, "client" + i.ToString());
-                if (GUILayout.Button("show logs") && logsToShow == null)
+                if (GUILayout.Button("show logs", GUILayout.Width(70)) && logsToShow == null)
                 {
                     logsToShow = c.log;
                     log_scroll = Vector2.zero;
                 }
+                if (c.exportLogs == false && GUILayout.Button("record", GUILayout.Width(50)))
+                {
+                    c.dateOfRecord = DateTime.UtcNow.ToString("yyyyMMdd-HH-mm-ss");
+                    c.exportLogs = true;
+                }
+                else if (c.exportLogs == true && GUILayout.Button("stop", GUILayout.Width(50)))
+                {
+                    c.exportLogs = false;
+                }
 
                 GUILayout.EndHorizontal();
+
                 if (folds[i].client == true)
                 {
                     EditorGUI.indentLevel++;
@@ -135,7 +146,7 @@ namespace Stormancer.EditorPluginWindow
                     EditorGUILayout.BeginHorizontal(GUILayout.Width(200), GUILayout.Height(20), GUILayout.MinWidth(100), GUILayout.MaxWidth(300));
     				folds[i].scenes[j].routes = EditorGUILayout.Foldout(folds[i].scenes[j].routes, v.scene.Id);
                     //EditorGUILayout.Toggle("        ", v.connected);
-                    if (GUILayout.Button("show logs", GUILayout.Width(100), GUILayout.Height(20)) && logsToShow == null)
+                    if (GUILayout.Button("show logs", GUILayout.Width(100)) && logsToShow == null)
                     {
                         logsToShow = v.log;
                         log_scroll = Vector2.zero;
@@ -149,19 +160,29 @@ namespace Stormancer.EditorPluginWindow
                         if (folds[i].scenes[j].serverRoutes == true)
                         {
                             EditorGUI.indentLevel++;
-                            foreach (Route route in v.scene.RemoteRoutes)
-                                EditorGUILayout.LabelField(route.Name);
+
+                            foreach (StormancerRouteViewModel route in v.remotes.Values.OrderBy(r=>r.Name))
+                            {
+                                GUILayout.BeginHorizontal(GUILayout.Width(400), GUILayout.Height(20), GUILayout.MinWidth(400), GUILayout.MaxWidth(window.position.width / 4));
+                                EditorGUILayout.LabelField(route.Name + "     " + route.debit.ToString() + " b/s");
+                                if (GUILayout.Button("Show Chart", GUILayout.Width(90)))
+                                {
+                                    routeToShow = route;
+                                }
+                                //EditorGUILayout.CurveField(route.curve);
+                                GUILayout.EndHorizontal();
+                            }
                             EditorGUI.indentLevel--;
                         }
                         folds[i].scenes[j].localRoutes = EditorGUILayout.Foldout(folds[i].scenes[j].localRoutes, "local routes");
                         if (folds[i].scenes[j].localRoutes == true)
                         {
                             EditorGUI.indentLevel++;
-                            foreach (StormancerRouteViewModel route in v.routes.Values)
+                            foreach (StormancerRouteViewModel route in v.routes.Values.OrderBy(r => r.Name))
                             {
-                                GUILayout.BeginHorizontal(GUILayout.Width(window.position.width / 4), GUILayout.Height(20), GUILayout.MinWidth(window.position.width / 8), GUILayout.MaxWidth(window.position.width / 2));
+                                GUILayout.BeginHorizontal(GUILayout.Width(300), GUILayout.Height(20), GUILayout.MinWidth(150), GUILayout.MaxWidth(400));
                                 EditorGUILayout.LabelField(route.Name + "     " + route.debit.ToString() + " b/s");
-                                if (GUILayout.Button("Show Chart"))
+                                if (GUILayout.Button("Show Chart", GUILayout.Width(90)))
                                 {
                                     routeToShow = route;
                                 }
@@ -250,8 +271,8 @@ namespace Stormancer.EditorPluginWindow
             GUILayout.Label("");
             foreach (StormancerEditorLog log in logsToShow.log)
 			{
-                EditorGUILayout.BeginVertical(GUILayout.Width(window.position.width), GUILayout.Height(40));
-                GUILayout.Label(log.logLevel + ": " + log.message);
+                EditorGUILayout.BeginVertical(GUILayout.Width(window.position.width), GUILayout.Height(20));
+                EditorGUILayout.SelectableLabel(log.logLevel + ": " + log.message);
                 EditorGUILayout.EndVertical();
             }
             EditorGUILayout.EndScrollView();
@@ -270,13 +291,55 @@ namespace Stormancer.EditorPluginWindow
 		private void myInit()
 		{
             initiated = true;
+            clients = StormancerEditorDataCollector.Instance.clients;
+        }
+
+        private void UpdateRouteData(StormancerClientViewModel clientVM, StormancerRouteViewModel route)
+        {
+            if (route.dataChart.Count >= 3600)
+                route.dataChart.RemoveAt(0);
+            if (route.messageNbrChart.Count >= 3600)
+                route.messageNbrChart.RemoveAt(0);
+            if (route.averageSizeChart.Count >= 3600)
+                route.averageSizeChart.RemoveAt(0);
+            route.debit = route.sizeStack;
+            route.curve.AddKey(clientVM.client.Clock, route.sizeStack);
+            route.dataChart.Add(route.sizeStack);
+            route.messageNbrChart.Add(route.messageNbr);
+            route.averageSizeChart.Add(route.averageSize);
+
+            route.messageNbr = 0;
+            route.averageSize = 0;
+            route.sizeStack = 0;
         }
 
         void Update()
 		{
 			if (initiated == false)
 				myInit();
-			clients = StormancerEditorDataCollector.Instance.clients;
+            clients = StormancerEditorDataCollector.Instance.clients;
+            foreach (StormancerClientViewModel c in clients.Values)
+            {
+                c.WriteLog();
+                if (c.lastUpdate + 1000 < c.client.Clock)
+                {
+                    c.lastUpdate = c.client.Clock;
+                    foreach (StormancerSceneViewModel s in c.scenes.Values)
+                    {
+                        if (s.scene.Connected == true)
+                        {
+                            foreach (StormancerRouteViewModel r in s.routes.Values)
+                            {
+                                UpdateRouteData(c, r);
+                            }
+                            foreach (StormancerRouteViewModel r in s.remotes.Values)
+                            {
+                                UpdateRouteData(c, r);
+                            }
+                        }
+                    }
+                }
+            }
 	
 			Repaint();
 		}

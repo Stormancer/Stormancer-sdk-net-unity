@@ -59,9 +59,15 @@ namespace Stormancer
         {
             RegisterComponent(c => component());
         }
+
         public void RegisterComponent<T>(Func<IDependencyResolver, T> factory)
         {
             _registrations[typeof(T)] = c => factory(c);
+        }
+
+        public void RegisterComponent<T>(T component)
+        {
+            RegisterComponent(c => component);
         }
 
     }

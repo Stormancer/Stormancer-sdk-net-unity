@@ -59,7 +59,7 @@ namespace Stormancer
         private readonly PluginBuildContext _pluginCtx = new PluginBuildContext();
         private IConnection _serverConnection;
 
-        private ITransport _transport;
+       
         private IPacketDispatcher _dispatcher;
 
         private bool _initialized;
@@ -89,12 +89,12 @@ namespace Stormancer
 
 
         private readonly IScheduler _scheduler;
-        private StormancerResolver _resolver;
-        public StormancerResolver resolver
+        private StormancerResolver _DependencyResolver;
+        public StormancerResolver DependencyResolver
         {
             get
             {
-                return _resolver;
+                return _DependencyResolver;
             }
         }
 
@@ -105,7 +105,7 @@ namespace Stormancer
         {
             get
             {
-                return resolver.GetComponent<ILogger>();
+                return DependencyResolver.GetComponent<ILogger>();
             }
 
         }
@@ -118,14 +118,25 @@ namespace Stormancer
         {
             this._pingInterval = configuration.PingInterval;
             this._scheduler = configuration.Scheduler;
-            _resolver = new StormancerResolver();
-            _resolver.RegisterComponent<ILogger>(() => configuration.Logger);
-            _resolver.RegisterComponent(() => new ApiClient(configuration, resolver));
-            _resolver.RegisterComponent<ITokenHandler>(() => new TokenHandler());
+            _DependencyResolver = new StormancerResolver();
+            _DependencyResolver.RegisterComponent<ILogger>(() => configuration.Logger);
+            _DependencyResolver.RegisterComponent(() => new ApiClient(configuration, DependencyResolver));
+            _DependencyResolver.RegisterComponent<ITokenHandler>(() => new TokenHandler());
+            _DependencyResolver.RegisterComponent<IConnectionHandler>(new IConnectionHandler());
+
+#if UNITY_EDITOR
+            IConnectionHandler temp = _DependencyResolver.GetComponent<IConnectionHandler>();
+            temp.PeerConnected += (PeerConnectedContext pcc) =>
+            {
+                ConnectionWrapper connection = new ConnectionWrapper(pcc.Connection, (EditorPlugin.StormancerEditorPlugin)configuration.Plugins[1]);
+                pcc.Connection = connection;
+            };
+#endif
+
+            this.DependencyResolver.RegisterComponent<ITransport>(configuration.TransportFactory);
             this._accountId = configuration.Account;
             this._applicationName = configuration.Application;
             //TODO handle scheduler in the transport
-            this._transport = configuration.TransportFactory(new Dictionary<string, object> { { "ILogger", this.Logger }, { "IScheduler", this._scheduler } });
             this._dispatcher = configuration.Dispatcher;
             _requestProcessor = new Stormancer.Networking.Processors.RequestProcessor(Logger, Enumerable.Empty<IRequestModule>());
 
@@ -139,12 +150,6 @@ namespace Stormancer
                 this._serializers.Add(serializer.Name, serializer);
             }
 
-            this._metadata.Add("serializers", string.Join(",", this._serializers.Keys.ToArray()));
-            this._metadata.Add("transport", _transport.Name);
-            this._metadata.Add("version", "1.0.0a");
-            this._metadata.Add("platform", "Unity");
-            this._metadata.Add("protocol", "2");
-
             this._maxPeers = configuration.MaxPeers;
 
             foreach (var plugin in configuration.Plugins)
@@ -157,6 +162,13 @@ namespace Stormancer
             {
                 ev(this);
             }
+
+            _transport = DependencyResolver.GetComponent<ITransport>();
+            this._metadata.Add("serializers", string.Join(",", this._serializers.Keys.ToArray()));
+            this._metadata.Add("transport", _transport.Name);
+            this._metadata.Add("version", "1.1.0");
+            this._metadata.Add("platform", "Unity");
+            this._metadata.Add("protocol", "2");
 
             Initialize();
         }
@@ -222,7 +234,7 @@ namespace Stormancer
         /// <returns>A task returning the scene</returns>
         public Task<Scene> GetPublicScene<T>(string sceneId, T userData)
         {
-            return resolver.GetComponent<ApiClient>().GetSceneEndpoint(this._accountId, this._applicationName, sceneId, userData)
+            return DependencyResolver.GetComponent<ApiClient>().GetSceneEndpoint(this._accountId, this._applicationName, sceneId, userData)
                 .Then(ci => GetScene(sceneId, ci));
         }
 
@@ -233,6 +245,7 @@ namespace Stormancer
                 _systemSerializer.Serialize(parameter, s);
             }).Then(packet => _systemSerializer.Deserialize<U>(packet.Stream));
         }
+
         private Task UpdateServerMetadata()
         {
             return _requestProcessor.SendSystemRequest(_serverConnection, (byte)SystemRequestIDTypes.ID_SET_METADATA, s =>
@@ -263,7 +276,7 @@ namespace Stormancer
                     .Then(() => _transport.Connect(ci.TokenData.Endpoints[_transport.Name]))
                     .Then(connection =>
                     {
-                        this.Logger.Log("Trace", sceneId, string.Format("Trying to connect to scene '{0}' through endpoint : '{1}' on application : '{2}' with id : '{3}'", sceneId, ci.TokenData.Endpoints[_transport.Name], ci.TokenData.Application, ci.TokenData.AccountId));
+                        this.Logger.Log(Stormancer.Diagnostics.LogLevel.Trace, sceneId, string.Format("Trying to connect to scene '{0}' through endpoint : '{1}' on application : '{2}' with id : '{3}'", sceneId, ci.TokenData.Endpoints[_transport.Name], ci.TokenData.Application, ci.TokenData.AccountId));
                         _serverConnection = connection;
 
                         foreach (var kvp in _metadata)
@@ -298,7 +311,7 @@ namespace Stormancer
                 }
                 return UpdateServerMetadata().Then(() =>
                 {
-                    var scene = new Scene(this._serverConnection, this, sceneId, ci.Token, result, _pluginCtx, resolver);
+                    var scene = new Scene(this._serverConnection, this, sceneId, ci.Token, result, _pluginCtx, DependencyResolver);
 
                     var ev = _pluginCtx.SceneCreated;
                     if (ev != null)
@@ -375,13 +388,13 @@ namespace Stormancer
                 {
                     if (t.IsFaulted)
                     {
-                        Logger.Log("Error", "ping", "failed to ping server.");
+                        Logger.Log(Stormancer.Diagnostics.LogLevel.Error, "ping", "failed to ping server.");
                     }
                 });
             }
             catch (Exception)
             {
-                Logger.Log("Error", "ping", "failed to ping server.");
+                Logger.Log(Stormancer.Diagnostics.LogLevel.Error, "ping", "failed to ping server.");
                 return TaskHelper.FromResult(UniRx.Unit.Default);
             };
         }
@@ -399,7 +412,7 @@ namespace Stormancer
         /// <returns>A task returning the scene object on completion.</returns>
         public Task<Scene> GetScene(string token)
         {
-            var ci = resolver.GetComponent<ITokenHandler>().DecodeToken(token);
+            var ci = DependencyResolver.GetComponent<ITokenHandler>().DecodeToken(token);
             return GetScene(ci.TokenData.SceneId, ci);
         }
 
@@ -422,12 +435,12 @@ namespace Stormancer
                     if (t.IsFaulted)
                     {
                         var ex = t.Exception.InnerException;
-                        this.Logger.Log("Error", scene.Id, string.Format("Failed to connect to scene '{0}' : {1}", scene.Id, ex.Message));
+                        this.Logger.Log(Stormancer.Diagnostics.LogLevel.Error, scene.Id, string.Format("Failed to connect to scene '{0}' : {1}", scene.Id, ex.Message));
                         throw t.Exception.InnerException;
 
                     }
                     var result = t.Result;
-                    this.Logger.Log("Trace", scene.Id, string.Format("Received connection result. Scene handle: {0}", result.SceneHandle));
+                    this.Logger.Log(Stormancer.Diagnostics.LogLevel.Trace, scene.Id, string.Format("Received connection result. Scene handle: {0}", result.SceneHandle));
                     scene.CompleteConnectionInitialization(result);
                     _scenesDispatcher.AddScene(scene);
                     if (_pluginCtx.SceneConnected != null)
@@ -465,6 +478,7 @@ namespace Stormancer
         }
 
         private bool _disposed;
+        private ITransport _transport;
 
         /// <summary>
         /// Disposes the client object.

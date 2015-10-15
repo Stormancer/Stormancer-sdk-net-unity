@@ -32,7 +32,7 @@ namespace Stormancer
                 data = s.ToArray();
             }
             var logger = _resolver.GetComponent<ILogger>();
-            logger.Log("Trace", "Client", "creating endpoint request for remote server");
+            logger.Log(Stormancer.Diagnostics.LogLevel.Trace, "Client", "creating endpoint request for remote server");
             var uri = new Uri(_config.GetApiEndpoint(), string.Format(CreateTokenUri, accountId, applicationName, sceneId));
             var request = new Request("POST", uri.AbsoluteUri, data);
             request.AddHeader("Content-Type", "application/msgpack");
@@ -43,7 +43,7 @@ namespace Stormancer
 
             return SendWithRetry(request, 5000, 15000).ContinueWith(t =>
             {
-                logger.Log("Trace", "Client", "Received endpoint response from remote server");
+                logger.Log(Stormancer.Diagnostics.LogLevel.Trace, "Client", "Received endpoint response from remote server");
                 try
                 {
                     var response = t.Result;
@@ -54,22 +54,22 @@ namespace Stormancer
                     }
                     catch (HTTPException exception)
                     {
-                        logger.Log("Error", "Client", "GetScene failed.");
+                        logger.Log(Stormancer.Diagnostics.LogLevel.Error, "Client", "GetScene failed.");
                         if (exception.StatusCode == HttpStatusCode.NotFound)
                         {
-                            logger.Log("Error", "Client", "GetScene failed: Unable to get the scene. Please check you entered the correct account id, application name and scene id.");
+                            logger.Log(Stormancer.Diagnostics.LogLevel.Error, "Client", "GetScene failed: Unable to get the scene. Please check you entered the correct account id, application name and scene id.");
                             throw new ArgumentException("Unable to get the scene {0}/{1}/{2}. Please check you entered the correct account id, application name and scene id.", exception);
                         }
                         throw;
                     }
 
-                    logger.Log("Trace", "Client", "Token succefully received");
+                    logger.Log(Stormancer.Diagnostics.LogLevel.Trace, "Client", "Token succefully received");
                     return _resolver.GetComponent<ITokenHandler>().DecodeToken(response.ReadAsString());
                 }
                 catch (Exception ex)
                 {
                     UnityEngine.Debug.LogException(ex);
-                    logger.Log("Error", "Client", "GetScene failed: cannot retreive the connection token.");
+                    logger.Log(Stormancer.Diagnostics.LogLevel.Error, "Client", "GetScene failed: cannot retreive the connection token.");
                     throw new InvalidOperationException("An error occured while retrieving the connection token. See the inner exception for more informations.", ex);
                 }
             });

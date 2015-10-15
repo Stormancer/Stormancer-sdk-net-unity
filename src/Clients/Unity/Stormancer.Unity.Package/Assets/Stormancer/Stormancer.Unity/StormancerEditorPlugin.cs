@@ -16,8 +16,8 @@ namespace Stormancer.EditorPlugin
     public class StormancerEditorPlugin : IClientPlugin
     {
 
-        private string _id = Guid.NewGuid().ToString();
-        private StormancerClientViewModel _clientVM;
+        public string _id = Guid.NewGuid().ToString();
+        public StormancerClientViewModel _clientVM;
 
 
         public void Build(PluginBuildContext ctx)
@@ -25,9 +25,10 @@ namespace Stormancer.EditorPlugin
 
             ctx.ClientCreated += client =>
             {
-                var innerLoggerFactory = client.resolver.GetComponent<ILogger>();
+                var innerLoggerFactory = client.DependencyResolver.GetComponent<ILogger>();
                 _clientVM = new StormancerClientViewModel(client);
-                client.resolver.RegisterComponent<ILogger>(() => new InterceptorLogger(innerLoggerFactory, _clientVM));
+                _clientVM.id = _id;
+                client.DependencyResolver.RegisterComponent<ILogger>(() => new InterceptorLogger(innerLoggerFactory, _clientVM));
                 StormancerEditorDataCollector.Instance.clients.TryAdd(_id, _clientVM);
             };
 
@@ -71,6 +72,39 @@ namespace Stormancer.EditorPlugin
 
             ctx.PacketReceived += (Packet packet) =>
             {
+                if (_clientVM != null && _clientVM.exportLogs == true)
+                {
+                    var pos = packet.Stream.Position;
+                    var message = new List<byte>();
+                    var buffer = new byte[1024];
+
+                    int readByte = 0;
+                    do
+                    {
+                        readByte = packet.Stream.Read(buffer, 0, 1024);
+                        message.AddRange(buffer.Take(readByte));
+                    }
+                    while (readByte > 0);
+                    packet.Stream.Seek(pos, SeekOrigin.Begin);
+
+                    var scene = (Scene)packet.Metadata["scene"];
+                    var routeId = (ushort)packet.Metadata["routeId"];
+
+                    StormancerRouteViewModel routeVM = null;
+                    StormancerSceneViewModel sceneVM = null;
+                    string route = "";
+                    if (_clientVM.scenes.TryGetValue(scene.Id, out sceneVM))
+                        routeVM = sceneVM.routes.Values.FirstOrDefault(r => r.Handle == routeId);
+                    if (routeVM != null)
+                        route = routeVM.Name;
+                    if (route == "")
+                        route = "system";
+                    _clientVM.WritePacketLog(true, scene.Id, route, message);
+                }
+            };
+
+            ctx.PacketReceived += (Packet packet) =>
+            {
                 if (packet.Metadata.ContainsKey("scene"))
                 {
                     var scene = (Scene)packet.Metadata["scene"];
@@ -81,32 +115,7 @@ namespace Stormancer.EditorPlugin
                         var temp = sceneVM.routes.Values.FirstOrDefault(r => r.Handle == routeId);
                         if (temp != null)
                         {
-                            temp.sizeStack += packet.Stream.Length;
-                            temp.messageNbr += 1;
-                            if (temp.messageNbr == 1)
-                                temp.averageSize = packet.Stream.Length;
-                            else
-                                temp.averageSize = (temp.averageSize * (temp.messageNbr - 1) + packet.Stream.Length) / temp.messageNbr;
-
-                            if (temp.lastUpdate + 1000 < _clientVM.client.Clock)
-                            {
-                                if (temp.dataChart.Count >= 10800)
-                                    temp.dataChart.RemoveAt(0);
-                                if (temp.messageNbrChart.Count >= 10800)
-                                    temp.messageNbrChart.RemoveAt(0);
-                                if (temp.averageSizeChart.Count >= 10800)
-                                    temp.averageSizeChart.RemoveAt(0);
-                                temp.debit = temp.sizeStack;
-                                temp.lastUpdate = _clientVM.client.Clock;
-                                temp.curve.AddKey(_clientVM.client.Clock, temp.sizeStack);
-                                temp.dataChart.Add(temp.sizeStack);
-                                temp.messageNbrChart.Add(temp.messageNbr);
-                                temp.averageSizeChart.Add(temp.averageSize);
-
-                                temp.messageNbr = 0;
-                                temp.averageSize = 0;
-                                temp.sizeStack = 0;
-                            }
+                            StormancerEditorDataCollector.Instance.GetDataStatistics(packet.Stream, _clientVM, temp);
                         }
                     }
                 }
@@ -125,10 +134,10 @@ namespace Stormancer.EditorPlugin
 
 
             #region ILogger implementation
-            public void Log(string logLevel, string category, string message, object context = null)
+            public void Log(Stormancer.Diagnostics.LogLevel logLevel, string category, string message, object context = null)
             {
                 var temp = new StormancerEditorLog();
-                temp.logLevel = logLevel;
+                temp.logLevel = logLevel.ToString();
                 temp.message = message;
                 _clientVM.log.log.Enqueue(temp);
                 foreach (StormancerSceneViewModel s in _clientVM.scenes.Values)

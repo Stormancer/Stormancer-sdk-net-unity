@@ -121,7 +121,7 @@ namespace Stormancer
         {
             if (route[0] == '@')
             {
-                resolver.GetComponent<ILogger>().Log("Error", this.Id, "AddRoute failed: Tried to create a route with the @ character");
+                resolver.GetComponent<ILogger>().Log(Stormancer.Diagnostics.LogLevel.Error, this.Id, "AddRoute failed: Tried to create a route with the @ character");
                 throw new ArgumentException("A route cannot start with the @ character.");
             }
             metadata = new Dictionary<string, string>();

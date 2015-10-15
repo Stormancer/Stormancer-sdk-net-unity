@@ -47,6 +47,6 @@ namespace Stormancer.Plugins
         /// <summary>
         /// Event fired when a packet is received from a remote peer.
         /// </summary>
-        public Action<Packet> PacketReceived { get; set; }      
+        public Action<Packet> PacketReceived { get; set; } 
     }
 }

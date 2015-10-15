@@ -82,6 +82,7 @@ namespace Stormancer.Networking.Processors
                 {
                     p.Metadata["request"] = request;
                     request.lastRefresh = DateTime.UtcNow;
+                    
                     request.tcs.TrySetResult(p);
                 }
                 else

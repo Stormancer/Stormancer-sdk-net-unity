@@ -172,7 +172,7 @@ namespace Stormancer.Plugins
                             }
                             else
                             {
-								_scene.resolver.GetComponent<ILogger>().Log("Error", _scene.Id, "failed to create procedure");
+								_scene.resolver.GetComponent<ILogger>().Log(Stormancer.Diagnostics.LogLevel.Error, _scene.Id, "failed to create procedure");
                                 var ex = t.Exception.InnerExceptions.OfType<ClientException>();
                                 if (ex.Any())
                                 {
@@ -184,7 +184,7 @@ namespace Stormancer.Plugins
 
                     }
                 }, new Dictionary<string, string> { { "stormancer.plugins.rpc", "1.0.0" } });
-				_scene.resolver.GetComponent<ILogger>().Log("Trace", _scene.Id, "Procedure succesfully created");
+				_scene.resolver.GetComponent<ILogger>().Log(Stormancer.Diagnostics.LogLevel.Trace, _scene.Id, "Procedure succesfully created");
             }
 
             private ushort ReserveId()
@@ -200,7 +200,7 @@ namespace Stormancer.Plugins
                             _currentRequestId++;
                             if (loop > ushort.MaxValue)
                             {
-								_scene.resolver.GetComponent<ILogger>().Log("Error", _scene.Id, "Too many request pending, unable to start a new one.");
+								_scene.resolver.GetComponent<ILogger>().Log(Stormancer.Diagnostics.LogLevel.Trace, _scene.Id, "Too many request pending, unable to start a new one.");
                                 throw new InvalidOperationException("Too many requests in progress, unable to start a new one.");
                             }
                         }
