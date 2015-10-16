@@ -108,7 +108,7 @@ namespace Stormancer
 
             try
             {
-                StormancerActionHandler.Initialize();
+                MainThread.Initialize();
             }
             catch (InvalidOperationException ex)
             {

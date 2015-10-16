@@ -357,7 +357,7 @@ namespace Stormancer
         {
             this._syncClockSubscription = this._scheduler.SchedulePeriodic(this._pingInterval, () =>
             {
-                var _ = this.SyncClockImpl();
+                this.SyncClockImpl();
             });
         }
 

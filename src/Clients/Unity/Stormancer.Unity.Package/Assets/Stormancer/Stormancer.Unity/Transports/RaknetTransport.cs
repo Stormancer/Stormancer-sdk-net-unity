@@ -177,7 +177,7 @@ namespace Stormancer.Networking
 
         private void OnMessageReceived(RakNet.Packet packet)
         {
-            var messageId = packet.data[0];
+            //var messageId = packet.data[0];
             var connection = GetConnection(packet.guid);
             var stream = new MemoryStream((int)packet.length);
             //var buffer = new byte[packet.data.Length];
