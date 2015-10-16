@@ -127,14 +127,12 @@ namespace Stormancer.Plugins
 
                         return () =>
                         {
-                            if (_supportsCancellation)
+                            if (_pendingRequests.TryRemove(id, out rq) && _supportsCancellation)
                             {
                                 _scene.SendPacket(CancellationRouteName, s =>
                                     {
                                         s.Write(BitConverter.GetBytes(id), 0, 2);
-                                    });
-
-                                _pendingRequests.TryRemove(id, out rq);
+                                    });                                
                             }
                         };
                     });
@@ -214,9 +212,15 @@ namespace Stormancer.Plugins
 
             private Request GetPendingRequest(Packet<IScenePeer> p)
             {
+                ushort id;
+                return GetPendingRequest(p, out id);
+            }
+
+            private Request GetPendingRequest(Packet<IScenePeer> p, out ushort id)
+            {
                 var buffer = new byte[2];
                 p.Stream.Read(buffer, 0, 2);
-                var id = BitConverter.ToUInt16(buffer, 0);
+                id = BitConverter.ToUInt16(buffer, 0);
 
                 Request request;
                 if (_pendingRequests.TryGetValue(id, out request))

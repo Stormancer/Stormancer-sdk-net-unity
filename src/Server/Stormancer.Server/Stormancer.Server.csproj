@@ -72,7 +72,7 @@
   <ItemGroup>
     <Compile Include="Admin\AdminServiceDescription.cs" />
     <Compile Include="Admin\IAdminPluginConfig.cs" />
-    <Compile Include="Components\HostStatus.cs" />
+    <Compile Include="Components\ApplicationInfos.cs" />
     <Compile Include="Components\IEnvironment.cs" />
     <Compile Include="Components\IPeerInfosService.cs" />
     <Compile Include="DisconnectedArgs.cs" />

@@ -50,6 +50,15 @@ namespace Stormancer.Diagnostics
         /// <param name="message">Log message</param>
         /// <param name="data">Additionnal data about the log.</param>
         void Log(LogLevel level, string category, string message, object data);
+
+        /// <summary>
+        /// Logs an exception
+        /// </summary>
+        /// <param name="level"></param>
+        /// <param name="category"></param>
+        /// <param name="message"></param>
+        /// <param name="ex"></param>
+        void Log(LogLevel level, string category, string message, Exception ex);
     }
 
     /// <summary>
@@ -162,6 +171,18 @@ namespace Stormancer.Diagnostics
         public void Log(LogLevel level, string category, string message, object data)
         {
 
+        }
+
+        /// <summary>
+        /// Writes a log entry using an exception
+        /// </summary>
+        /// <param name="level"></param>
+        /// <param name="category"></param>
+        /// <param name="message"></param>
+        /// <param name="ex"></param>
+        public void Log(LogLevel level, string category, string message, Exception ex)
+        {
+            
         }
     }
 }

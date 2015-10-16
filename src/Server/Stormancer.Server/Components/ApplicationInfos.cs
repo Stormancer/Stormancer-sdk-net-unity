@@ -39,5 +39,10 @@ namespace Stormancer.Server.Components
         /// A string containing the secondary access key of the application.
         /// </summary>
         public string SecondaryKey { get; set; }
+
+        /// <summary>
+        /// The url of the Api endpoint associated with the current environment.
+        /// </summary>
+        public string ApiEndpoint { get; set; }
     }
 }

@@ -16,7 +16,6 @@
     <tags>Stormancer Game</tags>
   </metadata>
   <files>
-    <file src="bin/$Configuration$/Stormancer.Core.dll" target="lib/Net45"/>	
 	<file src="_app.json" target="content" />
   </files>
 </package>
