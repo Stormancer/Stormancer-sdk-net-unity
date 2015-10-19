@@ -24,7 +24,7 @@ namespace Stormancer.Plugins
         {
             ctx.SceneCreated += scene =>
             {
-                var rpcParams = scene.GetHostMetadata(PluginName);
+                //var rpcParams = scene.GetHostMetadata(PluginName);
 
                 if (rpcParams != null)
                 {

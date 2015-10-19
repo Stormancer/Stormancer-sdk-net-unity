@@ -7,7 +7,7 @@ using System.Collections.Concurrent;
 
 namespace Stormancer
 {
-    public class StormancerActionHandler : MonoBehaviour
+    public class MainThread : MonoBehaviour
     {
         public static void Post(Action action)
         {
@@ -24,9 +24,9 @@ namespace Stormancer
             }
         }
 
-        private static StormancerActionHandler _instance;
+        private static MainThread _instance;
 
-        private static StormancerActionHandler Instance
+        private static MainThread Instance
         {
             get
             {
@@ -53,7 +53,7 @@ namespace Stormancer
             if (_instance == null)
             {
                 GameObject ActionHandler = new GameObject();
-                _instance = ActionHandler.AddComponent<StormancerActionHandler>();
+                _instance = ActionHandler.AddComponent<MainThread>();
                 ActionHandler.name = "StormancerActionHandler";
                 DontDestroyOnLoad(ActionHandler);
             }
