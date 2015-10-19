@@ -75,6 +75,10 @@ namespace Stormancer.Plugins
         /// </remarks>
         public void SendValue(Action<Stream> writer, PacketPriority priority = PacketPriority.MEDIUM_PRIORITY)
         {
+            if(CancellationToken.IsCancellationRequested)
+            {
+                return;
+            }
             _scene.Send(new MatchPeerFilter(_peer), RpcHostPlugin.NextRouteName, s =>
              {
 
@@ -87,6 +91,10 @@ namespace Stormancer.Plugins
 
         internal void SendError(string errorMsg)
         {
+            if (CancellationToken.IsCancellationRequested)
+            {
+                return;
+            }
             this._scene.Send(new MatchPeerFilter(_peer), RpcHostPlugin.ErrorRouteName, s =>
             {
                 WriteRequestId(s);
@@ -96,6 +104,10 @@ namespace Stormancer.Plugins
 
         internal void SendCompleted()
         {
+            if (CancellationToken.IsCancellationRequested)
+            {
+                return;
+            }
             this._scene.Send(new MatchPeerFilter(_peer), RpcHostPlugin.CompletedRouteName, s =>
              {
                  s.WriteByte(_msgSent);

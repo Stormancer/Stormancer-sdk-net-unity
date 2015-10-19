@@ -79,6 +79,10 @@ namespace Stormancer.Plugins
         /// </remarks>
         public void SendValue(Action<Stream> writer, PacketPriority priority)
         {
+            if (CancellationToken.IsCancellationRequested)
+            {
+                return;
+            }
             _scene.SendPacket(RpcClientPlugin.NextRouteName, s =>
             {
                 WriteRequestId(s);
@@ -90,6 +94,10 @@ namespace Stormancer.Plugins
 
         internal void SendError(string errorMsg)
         {
+            if (CancellationToken.IsCancellationRequested)
+            {
+                return;
+            }
             this._scene.SendPacket(RpcClientPlugin.ErrorRouteName, s =>
             {
                 WriteRequestId(s);
@@ -99,6 +107,10 @@ namespace Stormancer.Plugins
 
         internal void SendCompleted()
         {
+            if (CancellationToken.IsCancellationRequested)
+            {
+                return;
+            }
             this._scene.SendPacket(RpcClientPlugin.CompletedRouteName, s =>
             {
                 s.WriteByte(_msgSent);

@@ -80,7 +80,7 @@ namespace Stormancer.Plugins
         }
         private readonly object _lock = new object();
         private readonly ConcurrentDictionary<ushort, Request> _pendingRequests = new ConcurrentDictionary<ushort, Request>();
-        private ConcurrentDictionary<uint, CancellationTokenSource> _runningRequests = new ConcurrentDictionary<uint, CancellationTokenSource>();
+        private ConcurrentDictionary<Tuple<long, ushort>, CancellationTokenSource> _runningRequests = new ConcurrentDictionary<Tuple<long, ushort>, CancellationTokenSource>();
         private ConcurrentDictionary<long, CancellationTokenSource> _peersCts = new ConcurrentDictionary<long, CancellationTokenSource>();
 
         private readonly ISceneHost _scene;
@@ -163,7 +163,6 @@ namespace Stormancer.Plugins
         {
             this._scene.AddRoute(route, p =>
             {
-
                 var buffer = new byte[2];
                 p.Stream.Read(buffer, 0, 2);
                 var id = BitConverter.ToUInt16(buffer, 0);
@@ -173,11 +172,12 @@ namespace Stormancer.Plugins
                 var cts = CancellationTokenSource.CreateLinkedTokenSource(peerCts.Token);
 
                 var ctx = new RequestContext<IScenePeerClient>(p.Connection, _scene, id, ordered, new SubStream(p.Stream, false), cts.Token);
-                if (_runningRequests.TryAdd(id, cts))
+                var identifier = Tuple.Create(p.Connection.Id, id);
+                if (_runningRequests.TryAdd(identifier, cts))
                 {
-                    handler(ctx).ContinueWith(t =>
+                    handler.InvokeWrapping(ctx).ContinueWith(t =>
                     {
-                        _runningRequests.TryRemove(id, out cts);
+                        _runningRequests.TryRemove(identifier, out cts);
 
                         if (t.IsCompleted)
                         {
@@ -296,7 +296,7 @@ namespace Stormancer.Plugins
             p.Stream.Read(buffer, 0, 2);
             var id = BitConverter.ToUInt16(buffer, 0);
             CancellationTokenSource cts;
-            if (_runningRequests.TryGetValue(id, out cts))
+            if (_runningRequests.TryGetValue(Tuple.Create(p.Connection.Id, id), out cts))
             {
                 cts.Cancel();
             }
