@@ -259,7 +259,7 @@ namespace Stormancer
             return this._client.ConnectToScene(this, this._token, this._localRoutesMap.Values)
                 .Then(() =>
                 {
-                    resolver.GetComponent<ILogger>().Error("Successfully connected to scene : '{0}'.", Id);
+                    resolver.GetComponent<ILogger>().Info("Successfully connected to scene : '{0}'.", Id);
                     this.Connected = true;
                 });
         }
@@ -300,7 +300,15 @@ namespace Stormancer
 
             if (_handlers.TryGetValue(routeId, out observer))
             {
-                observer(packet);
+                try
+                {
+                    observer(packet);
+                }
+                catch (Exception ex)
+                {
+                    resolver.GetComponent<ILogger>().Log(Diagnostics.LogLevel.Error, "scene.route", "An exception occurred while trying to process a route message", ex);
+                    throw;
+                }
             }
         }
 

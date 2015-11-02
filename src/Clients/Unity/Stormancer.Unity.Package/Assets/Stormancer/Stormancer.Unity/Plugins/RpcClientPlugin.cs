@@ -26,29 +26,25 @@ namespace Stormancer.Plugins
             {
                 //var rpcParams = scene.GetHostMetadata(PluginName);
 
-                if (rpcParams != null)
-                {
-                    var supportsCancellation = new Version(rpcParams) > new Version(Version);
 
-                    var processor = new RpcService(scene, supportsCancellation);
-                    scene.resolver.RegisterComponent(() => processor);
-                    scene.AddRoute(NextRouteName, p =>
-                    {
-                        processor.Next(p);
-                    });
-                    scene.AddRoute(CancellationRouteName, p =>
-                    {
-                        processor.Cancel(p);
-                    });
-                    scene.AddRoute(ErrorRouteName, p =>
-                    {
-                        processor.Error(p);
-                    });
-                    scene.AddRoute(CompletedRouteName, p =>
-                    {
-                        processor.Complete(p);
-                    });
-                }
+                var processor = new RpcService(scene);
+                scene.resolver.RegisterComponent(() => processor);
+                scene.AddRoute(NextRouteName, p =>
+                {
+                    processor.Next(p);
+                });
+                scene.AddRoute(CancellationRouteName, p =>
+                {
+                    processor.Cancel(p);
+                });
+                scene.AddRoute(ErrorRouteName, p =>
+                {
+                    processor.Error(p);
+                });
+                scene.AddRoute(CompletedRouteName, p =>
+                {
+                    processor.Complete(p);
+                });
 
 
             };
@@ -76,18 +72,16 @@ namespace Stormancer.Plugins
                 public TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
             }
             private readonly object _lock = new object();
-            private readonly bool _supportsCancellation;
             private readonly ConcurrentDictionary<ushort, Request> _pendingRequests = new ConcurrentDictionary<ushort, Request>();
             private ConcurrentDictionary<uint, CancellationTokenSource> _runningRequests = new ConcurrentDictionary<uint, CancellationTokenSource>();
             private ConcurrentDictionary<long, CancellationTokenSource> _peersCts = new ConcurrentDictionary<long, CancellationTokenSource>();
 
-
+            
             private readonly Scene _scene;
 
-            internal RpcService(Scene scene, bool supportsCancellation)
+            internal RpcService(Scene scene)
             {
                 _scene = scene;
-                _supportsCancellation = true;
             }
             /// <summary>
             /// Starts a RPC to the scene host.
@@ -104,13 +98,13 @@ namespace Stormancer.Plugins
                         var rr = _scene.RemoteRoutes.FirstOrDefault(r => r.Name == route);
                         if (rr == null)
                         {
-                            _scene.resolver.GetComponent<ILogger>().Error("Tried to send a message on a non existing route");
+							_scene.resolver.GetComponent<ILogger>().Error("Tried to send a message on a non existing route");
                             throw new ArgumentException("The target route does not exist on the remote host.");
                         }
                         string version;
                         if (!rr.Metadata.TryGetValue(RpcClientPlugin.PluginName, out version) || version != RpcClientPlugin.Version)
                         {
-                            _scene.resolver.GetComponent<ILogger>().Error("Target remote does not support RPC");
+							_scene.resolver.GetComponent<ILogger>().Error("Target remote does not support RPC");
                             throw new InvalidOperationException("The target remote route does not support the plugin RPC version " + Version);
                         }
 
@@ -128,13 +122,12 @@ namespace Stormancer.Plugins
 
                         return () =>
                         {
-                            if (_pendingRequests.TryRemove(id, out rq) && _supportsCancellation)
+                            _scene.SendPacket(CancellationRouteName, s =>
                             {
-                                _scene.SendPacket(CancellationRouteName, s =>
-                                {
-                                    s.Write(BitConverter.GetBytes(id), 0, 2);
-                                });
-                            }
+                                s.Write(BitConverter.GetBytes(id), 0, 2);
+                            });
+                            _pendingRequests.TryRemove(id, out rq);
+
                         };
                     });
             }
@@ -167,7 +160,7 @@ namespace Stormancer.Plugins
                     p.Stream.Read(buffer, 0, 2);
                     var id = BitConverter.ToUInt16(buffer, 0);
                     var cts = new CancellationTokenSource();
-                    var ctx = new RequestContext<IScenePeer>(p.Connection, _scene, id, ordered, cts.Token);
+                    var ctx = new RequestContext<IScenePeer>(p.Connection, _scene, id, ordered,cts.Token);
                     if (_runningRequests.TryAdd(id, cts))
                     {
                         handler(ctx).ContinueWith(t =>
@@ -179,7 +172,7 @@ namespace Stormancer.Plugins
                             }
                             else
                             {
-                                _scene.resolver.GetComponent<ILogger>().Log(Stormancer.Diagnostics.LogLevel.Error, _scene.Id, "failed to create procedure");
+								_scene.resolver.GetComponent<ILogger>().Log(Stormancer.Diagnostics.LogLevel.Error, _scene.Id, "failed to create procedure");
                                 var ex = t.Exception.InnerExceptions.OfType<ClientException>();
                                 if (ex.Any())
                                 {
@@ -191,7 +184,7 @@ namespace Stormancer.Plugins
 
                     }
                 }, new Dictionary<string, string> { { "stormancer.plugins.rpc", "1.0.0" } });
-                _scene.resolver.GetComponent<ILogger>().Log(Stormancer.Diagnostics.LogLevel.Trace, _scene.Id, "Procedure succesfully created");
+				_scene.resolver.GetComponent<ILogger>().Log(Stormancer.Diagnostics.LogLevel.Trace, _scene.Id, "Procedure succesfully created");
             }
 
             private ushort ReserveId()
@@ -207,7 +200,7 @@ namespace Stormancer.Plugins
                             _currentRequestId++;
                             if (loop > ushort.MaxValue)
                             {
-                                _scene.resolver.GetComponent<ILogger>().Log(Stormancer.Diagnostics.LogLevel.Trace, _scene.Id, "Too many request pending, unable to start a new one.");
+								_scene.resolver.GetComponent<ILogger>().Log(Stormancer.Diagnostics.LogLevel.Trace, _scene.Id, "Too many request pending, unable to start a new one.");
                                 throw new InvalidOperationException("Too many requests in progress, unable to start a new one.");
                             }
                         }
@@ -216,17 +209,11 @@ namespace Stormancer.Plugins
                 }
             }
 
-            private Request GetPendingRequest(Packet<IScenePeer>p)
-            {
-                ushort id;
-                return GetPendingRequest(p, out id);
-            }
-
-            private Request GetPendingRequest(Packet<IScenePeer> p, out ushort id)
+            private Request GetPendingRequest(Packet<IScenePeer> p)
             {
                 var buffer = new byte[2];
                 p.Stream.Read(buffer, 0, 2);
-                id = BitConverter.ToUInt16(buffer, 0);
+                var id = BitConverter.ToUInt16(buffer, 0);
 
                 Request observer;
                 if (_pendingRequests.TryGetValue(id, out observer))
@@ -259,31 +246,28 @@ namespace Stormancer.Plugins
                 var rq = GetPendingRequest(p);
                 if (rq != null)
                 {
-                    rq.Observer.OnError(new ClientException(p.ReadObject<string>()));
+                   rq.Observer.OnError(new ClientException(p.ReadObject<string>()));
                 }
             }
 
             internal void Complete(Packet<IScenePeer> p)
             {
                 var messageSent = p.Stream.ReadByte() != 0;
-                ushort id;
-                var rq = GetPendingRequest(p, out id);
-                Request _;
+                var rq = GetPendingRequest(p);
                 if (rq != null)
                 {
                     if (messageSent)
                     {
                         rq.tcs.Task.ContinueWith(t =>
                         {
-                            _pendingRequests.TryRemove(id, out _);
                             rq.Observer.OnCompleted();
                         });
                     }
                     else
                     {
-                        _pendingRequests.TryRemove(id, out _);
                         rq.Observer.OnCompleted();
                     }
+
                 }
             }
 

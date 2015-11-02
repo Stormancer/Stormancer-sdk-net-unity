@@ -59,7 +59,7 @@ namespace Stormancer
         private readonly PluginBuildContext _pluginCtx = new PluginBuildContext();
         private IConnection _serverConnection;
 
-       
+
         private IPacketDispatcher _dispatcher;
 
         private bool _initialized;
@@ -128,7 +128,7 @@ namespace Stormancer
             IConnectionHandler temp = _DependencyResolver.GetComponent<IConnectionHandler>();
             temp.PeerConnected += (PeerConnectedContext pcc) =>
             {
-                ConnectionWrapper connection = new ConnectionWrapper(pcc.Connection, (EditorPlugin.StormancerEditorPlugin)configuration.Plugins[1]);
+                ConnectionWrapper connection = new ConnectionWrapper(pcc.Connection, configuration.Plugins.OfType<EditorPlugin.StormancerEditorPlugin>().First());
                 pcc.Connection = connection;
             };
 #endif
@@ -273,7 +273,11 @@ namespace Stormancer
                     _cts = new CancellationTokenSource();
                     return _transport.Start("client", new ConnectionHandler(), _cts.Token, null, (ushort)(_maxPeers + 1));
                 })
-                    .Then(() => _transport.Connect(ci.TokenData.Endpoints[_transport.Name]))
+                    .Then(() =>
+                    {
+                        UnityEngine.Debug.Log("Connecting transport...");
+                        return _transport.Connect(ci.TokenData.Endpoints[_transport.Name]);
+                    })
                     .Then(connection =>
                     {
                         this.Logger.Log(Stormancer.Diagnostics.LogLevel.Trace, sceneId, string.Format("Trying to connect to scene '{0}' through endpoint : '{1}' on application : '{2}' with id : '{3}'", sceneId, ci.TokenData.Endpoints[_transport.Name], ci.TokenData.Application, ci.TokenData.AccountId));
