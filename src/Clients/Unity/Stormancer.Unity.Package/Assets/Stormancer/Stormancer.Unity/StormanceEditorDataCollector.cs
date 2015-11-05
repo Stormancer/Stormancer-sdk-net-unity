@@ -148,7 +148,7 @@ namespace Stormancer.EditorPlugin
         {
             route.sizeStack += stream.Length;
             route.messageNbr += 1;
-            if (route.messageNbr == 1)
+            if (route.averageSizeChart.Count == 0)
                 route.averageSize = stream.Length;
             else
                 route.averageSize = (route.averageSize * (route.messageNbr - 1) + stream.Length) / route.messageNbr;

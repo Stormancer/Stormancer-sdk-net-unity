@@ -309,7 +309,6 @@ namespace Stormancer.EditorPluginWindow
             route.averageSizeChart.Add(route.averageSize);
 
             route.messageNbr = 0;
-            route.averageSize = 0;
             route.sizeStack = 0;
         }
 
