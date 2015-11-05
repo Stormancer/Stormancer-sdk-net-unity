@@ -80,14 +80,25 @@ namespace Stormancer.Networking
                     {
                         case (byte)DefaultMessageIDTypes.ID_CONNECTION_REQUEST_ACCEPTED:
                             TaskCompletionSource<IConnection> tcs;
-                            var c = OnConnection(packet, server);
+                            IConnection c;
+                            try
+                            {
+                                c = OnConnection(packet, server);
+                            }
+                            catch(Exception e)
+                            {
+                                UnityEngine.Debug.LogException(e);
+                                throw;
+                            }
+                            logger.Debug("Connection request to {0} accepted.", packet.systemAddress.ToString());
+
                             if (_pendingConnections.TryGetValue(packet.systemAddress.ToString(), out tcs))
                             {
                                
                                 tcs.SetResult(c);
+                                logger.Trace("Task for the connection request to {0} completed.", packet.systemAddress.ToString());
                             }
-                            logger.Debug("Connection request to {0} accepted.", packet.systemAddress.ToString());
-                            
+
                             break;
                         case (byte)DefaultMessageIDTypes.ID_NEW_INCOMING_CONNECTION:
                             logger.Trace("Incoming connection from {0}.", packet.systemAddress.ToString());
@@ -264,10 +275,6 @@ namespace Stormancer.Networking
             _pendingConnections.TryAdd(address.ToString(), tcs);
 
             return tcs.Task;
-
-
-
-
         }
         private ConcurrentDictionary<string, TaskCompletionSource<IConnection>> _pendingConnections = new ConcurrentDictionary<string, TaskCompletionSource<IConnection>>();
 
