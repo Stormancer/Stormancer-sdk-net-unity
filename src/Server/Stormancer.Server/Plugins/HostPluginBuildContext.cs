@@ -34,6 +34,11 @@ namespace Stormancer.Plugins
         public Action<IHost> HostStarting { get; set; }
 
         /// <summary>
+        /// Fires when the server host has started. 
+        /// </summary>
+        public Action<IHost> HostStarted { get; set; }
+
+        /// <summary>
         /// Fires when the server host is shutting down
         /// </summary>
         public Action<IHost> HostShuttingDown { get; set; }
