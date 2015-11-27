@@ -121,7 +121,7 @@ namespace Stormancer
             using (var userDataStream = new MemoryStream(client.UserData))
             {
 
-                if (client.ContentType == "application/json")
+                if (client.ContentType.Contains("application/json"))
                 {
                     var serializer = new JsonSerializer();
                     using (var sr = new StreamReader(userDataStream))
