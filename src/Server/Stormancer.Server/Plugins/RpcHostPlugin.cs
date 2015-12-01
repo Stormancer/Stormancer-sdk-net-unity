@@ -109,10 +109,10 @@ namespace Stormancer.Plugins
                         throw new ArgumentException("The target route does not exist on the remote host.");
                     }
                     string version;
-                    if (!rr.Metadata.TryGetValue(RpcHostPlugin.PluginName, out version) || version != RpcHostPlugin.Version)
-                    {
-                        throw new InvalidOperationException("The target remote route does not support the plugin RPC version " + RpcHostPlugin.Version);
-                    }
+                    //if (!rr.Metadata.TryGetValue(RpcHostPlugin.PluginName, out version) || version != RpcHostPlugin.Version)
+                    //{
+                    //    throw new InvalidOperationException("The target remote route does not support the plugin RPC version " + RpcHostPlugin.Version);
+                    //}
 
                     var rq = new Request { Observer = observer };
                     var id = this.ReserveId();
