@@ -185,20 +185,31 @@ namespace Stormancer.Plugins
                         }
                         else if (t.Status == TaskStatus.Faulted)
                         {
+                            var errorSent = false;
                             var ex = t.Exception.InnerExceptions.OfType<ClientException>();
                             if (ex.Any())
                             {
                                 ctx.SendError(string.Join("|", ex.Select(e => e.Message)));
+                                errorSent = true;
                             }
                             if (t.Exception.InnerExceptions.Any(e => !(e is ClientException)))
                             {
-                                _scene.DependencyResolver.Resolve<ILogger>().Log(LogLevel.Error, "rpc.server", string.Format("An error occured while executing procedure '{0}'.", route), t.Exception);
+                                string errorMessage = string.Format("An error occured while executing procedure '{0}'.", route);
+                                if (!errorSent)
+                                {
+                                    var errorId = Guid.NewGuid().ToString("N");
+                                    ctx.SendError($"An exception occurred on the server. Error {errorId}.");
+
+                                    errorMessage = $"Error {errorId}. " + errorMessage;
+                                }
+
+                                _scene.DependencyResolver.Resolve<ILogger>().Log(LogLevel.Error, "rpc.server", errorMessage, t.Exception);
                             }
                         }
-
                     });
                 }
-            }, new Dictionary<string, string> { { RpcHostPlugin.PluginName, RpcHostPlugin.Version } });
+            }, new Dictionary<string, string> { { RpcHostPlugin.PluginName, RpcHostPlugin.Version
+} });
         }
         private ushort ReserveId()
         {
