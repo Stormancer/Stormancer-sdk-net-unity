@@ -179,11 +179,11 @@ namespace Stormancer.Plugins
                     {
                         _runningRequests.TryRemove(identifier, out cts);
 
-                        if (t.IsCompleted)
+                        if (t.Status == TaskStatus.RanToCompletion)
                         {
                             ctx.SendCompleted();
                         }
-                        else
+                        else if (t.Status == TaskStatus.Faulted)
                         {
                             var ex = t.Exception.InnerExceptions.OfType<ClientException>();
                             if (ex.Any())
@@ -192,7 +192,7 @@ namespace Stormancer.Plugins
                             }
                             if (t.Exception.InnerExceptions.Any(e => !(e is ClientException)))
                             {
-                                _scene.DependencyResolver.Resolve<ILogger>().Log(LogLevel.Error, "rpc.server", string.Format("An error occured while executing procedure '{0}'.", route), ex);
+                                _scene.DependencyResolver.Resolve<ILogger>().Log(LogLevel.Error, "rpc.server", string.Format("An error occured while executing procedure '{0}'.", route), t.Exception);
                             }
                         }
 
