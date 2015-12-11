@@ -76,7 +76,8 @@ namespace Stormancer.Plugins
         {
             public IObserver<Packet<IScenePeerClient>> Observer { get; set; }
             public int ReceivedMsg;
-            public TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
+            public TaskCompletionSource<bool> Tcs = new TaskCompletionSource<bool>();
+            public bool HasCompleted = false;
         }
         private readonly object _lock = new object();
         private readonly ConcurrentDictionary<ushort, Request> _pendingRequests = new ConcurrentDictionary<ushort, Request>();
@@ -108,7 +109,7 @@ namespace Stormancer.Plugins
                     {
                         throw new ArgumentException("The target route does not exist on the remote host.");
                     }
-                    string version;
+                    //string version;
                     //if (!rr.Metadata.TryGetValue(RpcHostPlugin.PluginName, out version) || version != RpcHostPlugin.Version)
                     //{
                     //    throw new InvalidOperationException("The target remote route does not support the plugin RPC version " + RpcHostPlugin.Version);
@@ -261,9 +262,9 @@ namespace Stormancer.Plugins
             {
                 System.Threading.Interlocked.Increment(ref rq.ReceivedMsg);
                 rq.Observer.OnNext(p);
-                if (!rq.tcs.Task.IsCompleted)
+                if (!rq.Tcs.Task.IsCompleted)
                 {
-                    rq.tcs.TrySetResult(true);
+                    rq.Tcs.TrySetResult(true);
                 }
             }
         }
@@ -287,7 +288,7 @@ namespace Stormancer.Plugins
             {
                 if (messageSent)
                 {
-                    rq.tcs.Task.ContinueWith(t =>
+                    rq.Tcs.Task.ContinueWith(t =>
                     {
                         _pendingRequests.TryRemove(id, out _);
                         rq.Observer.OnCompleted();
