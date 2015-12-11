@@ -218,8 +218,7 @@ namespace Stormancer.Plugins
                     unchecked
                     {
                         int loop = 0;
-                        _currentRequestId++;
-                        while (_pendingRequests.ContainsKey(_currentRequestId))
+                        do
                         {
                             loop++;
                             _currentRequestId++;
@@ -227,7 +226,7 @@ namespace Stormancer.Plugins
                             {
                                 throw new InvalidOperationException("Too many requests in progress, unable to start a new one.");
                             }
-                        }
+                        } while (_pendingRequests.ContainsKey(_currentRequestId));
                         return _currentRequestId;
                     }
                 }

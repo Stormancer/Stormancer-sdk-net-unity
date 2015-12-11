@@ -74,10 +74,9 @@ namespace Stormancer.Plugins
         private ushort _currentRequestId = 0;
         private class Request
         {
-            public IObserver<Packet<IScenePeerClient>> Observer { get; set; }
-            public int ReceivedMsg;
-            public TaskCompletionSource<bool> Tcs = new TaskCompletionSource<bool>();
             public bool HasCompleted = false;
+            public IObserver<Packet<IScenePeerClient>> Observer { get; set; }
+            public TaskCompletionSource<bool> Tcs = new TaskCompletionSource<bool>();
         }
         private readonly object _lock = new object();
         private readonly ConcurrentDictionary<ushort, Request> _pendingRequests = new ConcurrentDictionary<ushort, Request>();
@@ -129,7 +128,8 @@ namespace Stormancer.Plugins
 
                     return () =>
                     {
-                        if (_pendingRequests.TryRemove(id, out rq))
+                        Request _;
+                        if (!rq.HasCompleted && _pendingRequests.TryRemove(id, out _))
                         {
                             _scene.Send(new MatchPeerFilter(peer), RpcHostPlugin.CancellationRouteName, s =>
                             {
@@ -219,7 +219,7 @@ namespace Stormancer.Plugins
                 unchecked
                 {
                     int loop = 0;
-                    while (_pendingRequests.ContainsKey(_currentRequestId))
+                    do
                     {
                         loop++;
                         _currentRequestId++;
@@ -227,7 +227,7 @@ namespace Stormancer.Plugins
                         {
                             throw new InvalidOperationException("Too many requests in progress, unable to start a new one.");
                         }
-                    }
+                    } while (_pendingRequests.ContainsKey(_currentRequestId));
                     return _currentRequestId;
                 }
             }
@@ -241,9 +241,7 @@ namespace Stormancer.Plugins
 
         private Request GetPendingRequest(Packet<IScenePeerClient> p, out ushort id)
         {
-            var buffer = new byte[2];
-            p.Stream.Read(buffer, 0, 2);
-            id = BitConverter.ToUInt16(buffer, 0);
+            id = ExtractRequestId(p);
 
             Request request;
             if (_pendingRequests.TryGetValue(id, out request))
@@ -255,12 +253,21 @@ namespace Stormancer.Plugins
                 return null;
             }
         }
+
+        private static ushort ExtractRequestId(Packet<IScenePeerClient> p)
+        {
+            ushort id;
+            var buffer = new byte[2];
+            p.Stream.Read(buffer, 0, 2);
+            id = BitConverter.ToUInt16(buffer, 0);
+            return id;
+        }
+
         internal void Next(Packet<IScenePeerClient> p)
         {
             var rq = GetPendingRequest(p);
             if (rq != null)
             {
-                System.Threading.Interlocked.Increment(ref rq.ReceivedMsg);
                 rq.Observer.OnNext(p);
                 if (!rq.Tcs.Task.IsCompleted)
                 {
@@ -271,9 +278,11 @@ namespace Stormancer.Plugins
 
         internal void Error(Packet<IScenePeerClient> p)
         {
-            var rq = GetPendingRequest(p);
-            if (rq != null)
+            var id = ExtractRequestId(p);
+            Request rq;
+            if (_pendingRequests.TryRemove(id, out rq))
             {
+                rq.HasCompleted = true;
                 rq.Observer.OnError(new ClientException(p.ReadObject<string>()));
             }
         }
@@ -286,6 +295,7 @@ namespace Stormancer.Plugins
             Request _;
             if (rq != null)
             {
+                rq.HasCompleted = true;
                 if (messageSent)
                 {
                     rq.Tcs.Task.ContinueWith(t =>
