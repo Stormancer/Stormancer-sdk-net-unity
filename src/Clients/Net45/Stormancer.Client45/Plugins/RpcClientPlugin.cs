@@ -31,7 +31,7 @@ namespace Stormancer.Plugins
 
                 if (rpcParams != null)
                 {
-                    var supportsCancellation = new Version(rpcParams) > new Version(Version);
+                    var supportsCancellation = new Version(rpcParams) >= new Version(Version);
                     var processor = new RpcService(scene, supportsCancellation);
                     scene.DependencyResolver.Register(processor);
                     scene.AddRoute(NextRouteName, p =>

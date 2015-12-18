@@ -14,7 +14,7 @@ namespace Stormancer
             {
                 if (RemoteScene != null && RemoteScene.Scene != null)
                 {
-                    return RemoteScene.Scene.DependencyResolver.GetComponent<IClock>().Clock;
+                    return RemoteScene.Scene.DependencyResolver.Resolve<IClock>().Clock;
                 }
                 throw new System.InvalidOperationException("Missing scene.");
             }

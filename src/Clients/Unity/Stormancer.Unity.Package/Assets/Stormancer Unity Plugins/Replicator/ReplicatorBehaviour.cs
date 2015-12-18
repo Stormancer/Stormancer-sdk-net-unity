@@ -35,7 +35,7 @@ namespace Stormancer
             if (s != null)
             {
                 Debug.Log("replicator initializing");
-                Clock = s.DependencyResolver.GetComponent<IClock>();
+                Clock = s.DependencyResolver.Resolve<IClock>();
                 s.AddProcedure("RequestObjects", OnRequestObjects);
                 s.AddRoute("PlayerDisconnected", OnPlayerDisconnect);
                 s.AddRoute("CreateObject", OnCreateObject);

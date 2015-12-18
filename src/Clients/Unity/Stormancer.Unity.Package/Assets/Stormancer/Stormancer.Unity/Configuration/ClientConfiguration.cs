@@ -118,7 +118,7 @@ namespace Stormancer
 
         private RakNetTransport DefaultTransportFactory(IDependencyResolver DependencyResolver) 
         {
-            return new RakNetTransport(DependencyResolver.GetComponent<ILogger>(), DependencyResolver.GetComponent<IConnectionHandler>());
+            return new RakNetTransport(DependencyResolver.Resolve<ILogger>(), DependencyResolver.Resolve<IConnectionHandler>());
         }
 
         /// <summary>

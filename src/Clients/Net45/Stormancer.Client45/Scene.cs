@@ -291,7 +291,7 @@ namespace Stormancer
 
         }
 
-       
+
 
         /// <summary>
         /// List containing the scene host connection.
@@ -333,7 +333,7 @@ namespace Stormancer
         /// </summary>
         public IDependencyResolver DependencyResolver
         {
-            get;internal set;
+            get; internal set;
         }
 
         /// <summary>

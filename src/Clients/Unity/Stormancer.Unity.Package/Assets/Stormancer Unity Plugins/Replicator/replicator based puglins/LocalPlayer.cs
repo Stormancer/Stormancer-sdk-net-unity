@@ -21,7 +21,7 @@ public class LocalPlayer : Stormancer.SyncBehaviourBase
     {
         if (Clock == null)
         {
-            Clock = Scene.Scene.DependencyResolver.GetComponent<Stormancer.IClock>();
+            Clock = Scene.Scene.DependencyResolver.Resolve<Stormancer.IClock>();
         }
         if (PlayerRigidbody == null)
         {

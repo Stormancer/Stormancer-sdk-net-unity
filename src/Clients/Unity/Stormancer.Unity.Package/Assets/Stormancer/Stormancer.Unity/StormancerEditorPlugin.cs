@@ -25,10 +25,10 @@ namespace Stormancer.EditorPlugin
 
             ctx.ClientCreated += client =>
             {
-                var innerLoggerFactory = client.DependencyResolver.GetComponent<ILogger>();
+                var innerLoggerFactory = client.DependencyResolver.Resolve<ILogger>();
                 _clientVM = new StormancerClientViewModel(client);
                 _clientVM.id = _id;
-                client.DependencyResolver.RegisterComponent<ILogger>(() => new InterceptorLogger(innerLoggerFactory, _clientVM));
+                client.DependencyResolver.Register<ILogger>(() => new InterceptorLogger(innerLoggerFactory, _clientVM));
                 StormancerEditorDataCollector.Instance.clients.TryAdd(_id, _clientVM);
             };
 

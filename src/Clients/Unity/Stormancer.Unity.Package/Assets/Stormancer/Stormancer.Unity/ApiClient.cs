@@ -31,7 +31,7 @@ namespace Stormancer
                 serializer.Serialize(userData, s);
                 data = s.ToArray();
             }
-            var logger = _resolver.GetComponent<ILogger>();
+            var logger = _resolver.Resolve<ILogger>();
             logger.Log(Stormancer.Diagnostics.LogLevel.Trace, "Client", "creating endpoint request for remote server");
             var uri = new Uri(_config.GetApiEndpoint(), string.Format(CreateTokenUri, accountId, applicationName, sceneId));
             var request = new Request("POST", uri.AbsoluteUri, data);
@@ -64,7 +64,7 @@ namespace Stormancer
                     }
 
                     logger.Log(Stormancer.Diagnostics.LogLevel.Trace, "Client", "Token succefully received");
-                    return _resolver.GetComponent<ITokenHandler>().DecodeToken(response.ReadAsString());
+                    return _resolver.Resolve<ITokenHandler>().DecodeToken(response.ReadAsString());
                 }
                 catch (Exception ex)
                 {
@@ -77,7 +77,7 @@ namespace Stormancer
 
         private Task<IResponse> SendWithRetry(Request request, int firstTry, int secondTry)
         {
-            var logger = _resolver.GetComponent<ILogger>();
+            var logger = _resolver.Resolve<ILogger>();
 
             return request.Send().TimeOut(firstTry)
                 .ContinueWith(t1 =>

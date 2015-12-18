@@ -105,7 +105,7 @@ namespace Stormancer
         {
             get
             {
-                return DependencyResolver.GetComponent<ILogger>();
+                return DependencyResolver.Resolve<ILogger>();
             }
 
         }
@@ -119,14 +119,14 @@ namespace Stormancer
             this._pingInterval = configuration.PingInterval;
             this._scheduler = configuration.Scheduler;
             _DependencyResolver = new StormancerResolver();
-            _DependencyResolver.RegisterComponent<ILogger>(() => configuration.Logger);
-            _DependencyResolver.RegisterComponent(() => new ApiClient(configuration, DependencyResolver));
-            _DependencyResolver.RegisterComponent<ITokenHandler>(() => new TokenHandler());
+            _DependencyResolver.Register<ILogger>(() => configuration.Logger);
+            _DependencyResolver.Register(() => new ApiClient(configuration, DependencyResolver));
+            _DependencyResolver.Register<ITokenHandler>(() => new TokenHandler());
             _DependencyResolver.RegisterComponent<IConnectionHandler>(new IConnectionHandler());
             _DependencyResolver.RegisterComponent<IClock>(new IClock(this));
 
 #if UNITY_EDITOR
-            IConnectionHandler temp = _DependencyResolver.GetComponent<IConnectionHandler>();
+            IConnectionHandler temp = _DependencyResolver.Resolve<IConnectionHandler>();
             temp.PeerConnected += (PeerConnectedContext pcc) =>
             {
                 ConnectionWrapper connection = new ConnectionWrapper(pcc.Connection, configuration.Plugins.OfType<EditorPlugin.StormancerEditorPlugin>().First());
@@ -134,7 +134,7 @@ namespace Stormancer
             };
 #endif
 
-            this.DependencyResolver.RegisterComponent<ITransport>(configuration.TransportFactory);
+            this.DependencyResolver.Register<ITransport>(configuration.TransportFactory);
             this._accountId = configuration.Account;
             this._applicationName = configuration.Application;
             //TODO handle scheduler in the transport
@@ -164,7 +164,7 @@ namespace Stormancer
                 ev(this);
             }
 
-            _transport = DependencyResolver.GetComponent<ITransport>();
+            _transport = DependencyResolver.Resolve<ITransport>();
             this._metadata.Add("serializers", string.Join(",", this._serializers.Keys.ToArray()));
             this._metadata.Add("transport", _transport.Name);
             this._metadata.Add("version", "1.1.0");
@@ -235,7 +235,7 @@ namespace Stormancer
         /// <returns>A task returning the scene</returns>
         public Task<Scene> GetPublicScene<T>(string sceneId, T userData)
         {
-            return DependencyResolver.GetComponent<ApiClient>().GetSceneEndpoint(this._accountId, this._applicationName, sceneId, userData)
+            return DependencyResolver.Resolve<ApiClient>().GetSceneEndpoint(this._accountId, this._applicationName, sceneId, userData)
                 .Then(ci => GetScene(sceneId, ci));
         }
 
@@ -417,7 +417,7 @@ namespace Stormancer
         /// <returns>A task returning the scene object on completion.</returns>
         public Task<Scene> GetScene(string token)
         {
-            var ci = DependencyResolver.GetComponent<ITokenHandler>().DecodeToken(token);
+            var ci = DependencyResolver.Resolve<ITokenHandler>().DecodeToken(token);
             return GetScene(ci.TokenData.SceneId, ci);
         }
 

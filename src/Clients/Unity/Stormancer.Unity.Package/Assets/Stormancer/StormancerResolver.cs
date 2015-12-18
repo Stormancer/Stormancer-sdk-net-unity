@@ -15,10 +15,10 @@ namespace Stormancer
 {
     public interface IDependencyResolver
     {
-        T GetComponent<T>();
-        Func<IDependencyResolver, T> GetComponentFactory<T>();
-        void RegisterComponent<T>(Func<T> component);
-        void RegisterComponent<T>(Func<IDependencyResolver, T> component);
+        T Resolve<T>();
+        //Func<IDependencyResolver, T> GetComponentFactory<T>();
+        void Register<T>(Func<T> component);
+        void Register<T>(Func<IDependencyResolver, T> component);
     }
 
     public class StormancerResolver : IDependencyResolver
@@ -33,12 +33,12 @@ namespace Stormancer
         }
 
 
-        public T GetComponent<T>()
+        public T Resolve<T>()
         {
             return GetComponentFactory<T>()(this);
         }
 
-        public Func<IDependencyResolver, T> GetComponentFactory<T>()
+        private Func<IDependencyResolver, T> GetComponentFactory<T>()
         {
             Func<IDependencyResolver, object> factory;
             if (_registrations.TryGetValue(typeof(T), out factory))
@@ -55,19 +55,19 @@ namespace Stormancer
             }
         }
 
-        public void RegisterComponent<T>(Func<T> component)
+        public void Register<T>(Func<T> component)
         {
-            RegisterComponent(c => component());
+            Register(c => component());
         }
 
-        public void RegisterComponent<T>(Func<IDependencyResolver, T> factory)
+        public void Register<T>(Func<IDependencyResolver, T> factory)
         {
             _registrations[typeof(T)] = c => factory(c);
         }
 
         public void RegisterComponent<T>(T component)
         {
-            RegisterComponent(c => component);
+            Register(c => component);
         }
     }
 }
