@@ -113,7 +113,7 @@ namespace Stormancer
                 dtos.Add(dto);
             }
             ctx.SendValue<List<ReplicatorDTO>>(dtos);
-            Debug.Log("receiving objects for new player. Sent " + dtos.Count + " objects.");
+            Debug.Log("receiving object request for new player. Sent " + dtos.Count + " objects.");
             return TaskHelper.FromResult(true);
         }
 

@@ -92,7 +92,7 @@ namespace Stormancer
             }
         }
 
-        public StormancerResolver resolver;
+        public StormancerResolver DependencyResolver { get; private set; }
 
         internal Scene(IConnection connection, Client client, string id, string token, Stormancer.Dto.SceneInfosDto dto, PluginBuildContext pluginCtx, StormancerResolver res)
         {
@@ -102,7 +102,7 @@ namespace Stormancer
             _client = client;
             _metadata = dto.Metadata;
             _pluginCtx = pluginCtx;
-            resolver = new StormancerResolver(res);
+            DependencyResolver = new StormancerResolver(res);
 
             foreach (var route in dto.Routes)
             {
@@ -121,21 +121,21 @@ namespace Stormancer
         {
             if (route[0] == '@')
             {
-                resolver.GetComponent<ILogger>().Log(Stormancer.Diagnostics.LogLevel.Error, this.Id, "AddRoute failed: Tried to create a route with the @ character");
+                DependencyResolver.GetComponent<ILogger>().Log(Stormancer.Diagnostics.LogLevel.Error, this.Id, "AddRoute failed: Tried to create a route with the @ character");
                 throw new ArgumentException("A route cannot start with the @ character.");
             }
             metadata = new Dictionary<string, string>();
 
             if (Connected)
             {
-                resolver.GetComponent<ILogger>().Error("AddRoute failed: Tried to create a route once connected");
+                DependencyResolver.GetComponent<ILogger>().Error("AddRoute failed: Tried to create a route once connected");
                 throw new InvalidOperationException("You cannot register handles once the scene is connected.");
             }
 
             Route routeObj;
             if (!_localRoutesMap.TryGetValue(route, out routeObj))
             {
-                resolver.GetComponent<ILogger>().Trace("Created route with id : '{0}'", route);
+                DependencyResolver.GetComponent<ILogger>().Trace("Created route with id : '{0}'", route);
                 routeObj = new Route(this, route, metadata);
                 _localRoutesMap.Add(route, routeObj);
                 var ev = _pluginCtx.RouteCreated;
@@ -177,7 +177,7 @@ namespace Stormancer
         {
             if (Connected)
             {
-                resolver.GetComponent<ILogger>().Error("Tried rgister handles once connected");
+                DependencyResolver.GetComponent<ILogger>().Error("Tried rgister handles once connected");
                 throw new InvalidOperationException("You cannot register handles once the scene is connected.");
             }
 
@@ -201,23 +201,23 @@ namespace Stormancer
         {
             if (route == null)
             {
-                resolver.GetComponent<ILogger>().Error("SendPacket failed: Tried to send a meesage on null route");
+                DependencyResolver.GetComponent<ILogger>().Error("SendPacket failed: Tried to send a meesage on null route");
                 throw new ArgumentNullException("no route selected");
             }
             if (writer == null)
             {
-                resolver.GetComponent<ILogger>().Error("SendPacket failed: Tried to send message with a null writer");
+                DependencyResolver.GetComponent<ILogger>().Error("SendPacket failed: Tried to send message with a null writer");
                 throw new ArgumentNullException("no writer given");
             }
             if (!this.Connected)
             {
-                resolver.GetComponent<ILogger>().Error("SendPacket failed: Tried to send message without being connected");
+                DependencyResolver.GetComponent<ILogger>().Error("SendPacket failed: Tried to send message without being connected");
                 throw new InvalidOperationException("The scene must be connected to perform this operation.");
             }
             Route routeObj;
             if (!_remoteRoutesMap.TryGetValue(route, out routeObj))
             {
-                resolver.GetComponent<ILogger>().Error("SendPacket failed: The route '{1}' doesn't exist on the scene.", route);
+                DependencyResolver.GetComponent<ILogger>().Error("SendPacket failed: The route '{1}' doesn't exist on the scene.", route);
                 throw new ArgumentException("The route " + route + " doesn't exist on the scene.");
             }
 
@@ -230,7 +230,7 @@ namespace Stormancer
         /// <returns></returns>
         public Task Disconnect()
         {
-            resolver.GetComponent<ILogger>().Trace("Client disconnected from the server");
+            DependencyResolver.GetComponent<ILogger>().Trace("Client disconnected from the server");
             return this._client.Disconnect(this, this._handle);
             //var sysResponse = await this._client.SendWithResponse(Mess, "scene.stop", this.Id)
             //    //Handles if the server sends no response
@@ -259,7 +259,7 @@ namespace Stormancer
             return this._client.ConnectToScene(this, this._token, this._localRoutesMap.Values)
                 .Then(() =>
                 {
-                    resolver.GetComponent<ILogger>().Info("Successfully connected to scene : '{0}'.", Id);
+                    DependencyResolver.GetComponent<ILogger>().Info("Successfully connected to scene : '{0}'.", Id);
                     this.Connected = true;
                 });
         }
@@ -306,7 +306,7 @@ namespace Stormancer
                 }
                 catch (Exception ex)
                 {
-                    resolver.GetComponent<ILogger>().Log(Diagnostics.LogLevel.Error, "scene.route", "An exception occurred while trying to process a route message", ex);
+                    DependencyResolver.GetComponent<ILogger>().Log(Diagnostics.LogLevel.Error, "scene.route", "An exception occurred while trying to process a route message", ex);
                     throw;
                 }
             }

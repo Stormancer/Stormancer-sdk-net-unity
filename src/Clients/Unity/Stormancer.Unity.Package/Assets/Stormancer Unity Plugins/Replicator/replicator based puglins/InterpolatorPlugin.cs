@@ -88,7 +88,7 @@ public class InterpolatorPlugin : Stormancer.SyncBehaviourBase
 
     public void SetNextPos(Vector3 pos, Vector3 vect, Quaternion rot)
     {
-        Debug.Log(pos + "  ||  " + vect + "  ||  " + rot);
+       // Debug.Log(pos + "  ||  " + vect + "  ||  " + rot);
         _targetSpan = ((float)timeBetweenUpdate) / 1000f;
         ReceivedNewPos = true;
 

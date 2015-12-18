@@ -69,6 +69,5 @@ namespace Stormancer
         {
             RegisterComponent(c => component);
         }
-
     }
 }

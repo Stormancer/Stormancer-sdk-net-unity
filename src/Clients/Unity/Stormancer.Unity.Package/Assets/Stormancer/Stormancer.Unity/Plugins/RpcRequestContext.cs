@@ -26,13 +26,20 @@ namespace Stormancer.Plugins
             }
         }
 
-        internal RequestContext(T peer, Scene scene, ushort id, bool ordered, CancellationToken token)
+        public Stream InputStream
+        {
+            get;
+            private set;
+        }
+
+        internal RequestContext(T peer, Scene scene, ushort id, bool ordered, Stream stream, CancellationToken token)
         {
             // TODO: Complete member initialization
             this._scene = scene;
             this.id = id;
             this._ordered = ordered;
             this._peer = peer;
+            InputStream = stream;
             CancellationToken = token;
         }
 

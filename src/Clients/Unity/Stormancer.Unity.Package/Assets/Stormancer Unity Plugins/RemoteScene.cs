@@ -67,22 +67,21 @@ namespace Stormancer
         {
             if (Scene != null && Scene.Connected)
             {
-                Scene.Disconnect();
+                ClientProvider.DisconnectScene(SceneId);
             }
-               
         }
 
-        void OnLoad()
+        void onDestroy()
         {
             if (DisconnectOnUnLoad == true)
+            {
                 Disconnect();
+            }
         }
 
         void OnApplicationQuit()
         {
-            if (Scene != null)
-                Disconnect();
-                
+            Disconnect();
         }
     }
 }

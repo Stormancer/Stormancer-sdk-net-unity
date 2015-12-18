@@ -28,7 +28,7 @@ namespace Stormancer.Plugins
 
 
                 var processor = new RpcService(scene);
-                scene.resolver.RegisterComponent(() => processor);
+                scene.DependencyResolver.RegisterComponent(() => processor);
                 scene.AddRoute(NextRouteName, p =>
                 {
                     processor.Next(p);
@@ -45,12 +45,12 @@ namespace Stormancer.Plugins
                 {
                     processor.Complete(p);
                 });
-
+                
 
             };
             ctx.SceneDisconnected += scene =>
                 {
-                    var processor = scene.resolver.GetComponent<RpcService>();
+                    var processor = scene.DependencyResolver.GetComponent<RpcService>();
                     processor.Disconnected();
                 };
         }
@@ -98,13 +98,13 @@ namespace Stormancer.Plugins
                         var rr = _scene.RemoteRoutes.FirstOrDefault(r => r.Name == route);
                         if (rr == null)
                         {
-							_scene.resolver.GetComponent<ILogger>().Error("Tried to send a message on a non existing route");
+							_scene.DependencyResolver.GetComponent<ILogger>().Error("Tried to send a message on a non existing route");
                             throw new ArgumentException("The target route does not exist on the remote host.");
                         }
                         string version;
                         if (!rr.Metadata.TryGetValue(RpcClientPlugin.PluginName, out version) || version != RpcClientPlugin.Version)
                         {
-							_scene.resolver.GetComponent<ILogger>().Error("Target remote does not support RPC");
+							_scene.DependencyResolver.GetComponent<ILogger>().Error("Target remote does not support RPC");
                             throw new InvalidOperationException("The target remote route does not support the plugin RPC version " + Version);
                         }
 
@@ -160,7 +160,7 @@ namespace Stormancer.Plugins
                     p.Stream.Read(buffer, 0, 2);
                     var id = BitConverter.ToUInt16(buffer, 0);
                     var cts = new CancellationTokenSource();
-                    var ctx = new RequestContext<IScenePeer>(p.Connection, _scene, id, ordered,cts.Token);
+                    var ctx = new RequestContext<IScenePeer>(p.Connection, _scene, id, ordered, new SubStream(p.Stream, false),cts.Token);
                     if (_runningRequests.TryAdd(id, cts))
                     {
                         handler(ctx).ContinueWith(t =>
@@ -172,7 +172,7 @@ namespace Stormancer.Plugins
                             }
                             else
                             {
-								_scene.resolver.GetComponent<ILogger>().Log(Stormancer.Diagnostics.LogLevel.Error, _scene.Id, "failed to create procedure");
+								_scene.DependencyResolver.GetComponent<ILogger>().Log(Stormancer.Diagnostics.LogLevel.Error, _scene.Id, "failed to create procedure");
                                 var ex = t.Exception.InnerExceptions.OfType<ClientException>();
                                 if (ex.Any())
                                 {
@@ -184,7 +184,7 @@ namespace Stormancer.Plugins
 
                     }
                 }, new Dictionary<string, string> { { "stormancer.plugins.rpc", "1.0.0" } });
-				_scene.resolver.GetComponent<ILogger>().Log(Stormancer.Diagnostics.LogLevel.Trace, _scene.Id, "Procedure succesfully created");
+				_scene.DependencyResolver.GetComponent<ILogger>().Log(Stormancer.Diagnostics.LogLevel.Trace, _scene.Id, "Procedure succesfully created");
             }
 
             private ushort ReserveId()
@@ -200,7 +200,7 @@ namespace Stormancer.Plugins
                             _currentRequestId++;
                             if (loop > ushort.MaxValue)
                             {
-								_scene.resolver.GetComponent<ILogger>().Log(Stormancer.Diagnostics.LogLevel.Trace, _scene.Id, "Too many request pending, unable to start a new one.");
+								_scene.DependencyResolver.GetComponent<ILogger>().Log(Stormancer.Diagnostics.LogLevel.Trace, _scene.Id, "Too many request pending, unable to start a new one.");
                                 throw new InvalidOperationException("Too many requests in progress, unable to start a new one.");
                             }
                         }

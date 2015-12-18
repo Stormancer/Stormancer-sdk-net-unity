@@ -123,6 +123,7 @@ namespace Stormancer
             _DependencyResolver.RegisterComponent(() => new ApiClient(configuration, DependencyResolver));
             _DependencyResolver.RegisterComponent<ITokenHandler>(() => new TokenHandler());
             _DependencyResolver.RegisterComponent<IConnectionHandler>(new IConnectionHandler());
+            _DependencyResolver.RegisterComponent<IClock>(new IClock(this));
 
 #if UNITY_EDITOR
             IConnectionHandler temp = _DependencyResolver.GetComponent<IConnectionHandler>();

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Collections.Concurrent;
 using Stormancer;
 
 public static class ClientProvider
@@ -18,6 +19,11 @@ public static class ClientProvider
     public static Scene GetPublicScene<T>(string sceneid, T data)
     {
         return Instance.GetPublicScene<T>(sceneid, data);
+    }
+
+    public static void DisconnectScene(string SceneId)
+    {
+        Instance.DisconnectScene(SceneId);
     }
 
     public static long GetClientId()
@@ -40,7 +46,8 @@ public static class ClientProvider
         public string AccountId = "";
         public string AplplicationName = "";
         private Client _Client;
-        private List<Scene> _scenes = new List<Scene>();
+        private ConcurrentDictionary<string, Scene> _scenes = new ConcurrentDictionary<string, Scene>();
+
 
         public long GetClientId()
         {
@@ -67,6 +74,11 @@ public static class ClientProvider
                 _Client = new Client(config);
                 UniRx.MainThreadDispatcher.Initialize();
             }
+            if (_scenes.ContainsKey(sceneId) == true)
+            {
+                Debug.LogWarning("the scene " + sceneId + " have already been retrieved");
+                return null;
+            }
             return _Client.GetPublicScene(sceneId, data).ContinueWith(t =>
             {
                 if (t.IsFaulted == true)
@@ -74,15 +86,20 @@ public static class ClientProvider
                     Debug.LogWarning("connection Failed");
                     return null;
                 }
-                if (_scenes.Contains(t.Result) == true)
-                {
-                    Debug.LogWarning("the scene " + sceneId + " have already been retrieved");
-                    return null;
-                }
                 Debug.Log("Retreived remote scene");
-                _scenes.Add(t.Result);
+                _scenes.TryAdd(sceneId, t.Result);
                 return t.Result;
             }).Result;
+        }
+
+        public void DisconnectScene(string sceneId)
+        {
+            Scene scene;
+
+            if (_scenes.ContainsKey(sceneId) && _scenes.TryRemove(sceneId, out scene) == true)
+            {
+                scene.Disconnect();
+            }
         }
     }
 }
