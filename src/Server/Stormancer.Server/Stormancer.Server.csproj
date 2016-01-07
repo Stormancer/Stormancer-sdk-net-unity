@@ -75,7 +75,10 @@
     <Compile Include="Components\ApplicationInfos.cs" />
     <Compile Include="Components\IEnvironment.cs" />
     <Compile Include="Components\IPeerInfosService.cs" />
+    <Compile Include="DependencyResolver\InstanceScope.cs" />
+    <Compile Include="DependencyResolver\InstanceScopeConfig.cs" />
     <Compile Include="DisconnectedArgs.cs" />
+    <Compile Include="Extensions\RegistrationBuilderExtensions.cs" />
     <Compile Include="Extensions\PacketExtensions.cs" />
     <Compile Include="Extensions\RpcSceneHostExtensions.cs" />
     <Compile Include="Extensions\SceneHostExtensions.cs" />
