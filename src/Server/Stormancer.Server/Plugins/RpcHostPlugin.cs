@@ -91,10 +91,16 @@ namespace Stormancer.Plugins
 
         private readonly ISceneHost _scene;
 
-        internal RpcService(ISceneHost scene)
+        /// <summary>
+        /// Creates the RPC service associated with the scene
+        /// </summary>
+        /// <param name="scene"></param>
+        /// <remarks>Do not call this constructor, use the Dependency Resolver to get the RPC service instead.</remarks>
+        public RpcService(ISceneHost scene)
         {
             _scene = scene;
         }
+
         /// <summary>
         /// Starts a RPC to the scene host.
         /// </summary>
