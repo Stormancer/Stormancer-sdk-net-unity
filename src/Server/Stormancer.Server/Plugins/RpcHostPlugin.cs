@@ -138,8 +138,19 @@ namespace Stormancer.Plugins
                         }, priority, PacketReliability.RELIABLE_ORDERED);
                     }
 
+                    var cancellationToken = GetCancellationTokenForPeer(peer);
+
+                    var linkedCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+
+                    linkedCts.Token.Register(() =>
+                    {
+                        observer.OnError(new PeerDisconnectedException("Peer disconnecter from the scene."));
+                    });
+
+
                     return () =>
                     {
+                        linkedCts.Dispose();
                         Request _;
                         if (!rq.HasCompleted && _pendingRequests.TryRemove(id, out _))
                         {
@@ -179,10 +190,9 @@ namespace Stormancer.Plugins
                 var buffer = new byte[2];
                 p.Stream.Read(buffer, 0, 2);
                 var id = BitConverter.ToUInt16(buffer, 0);
+                var peerCancellationToken = GetCancellationTokenForPeer(p.Connection);
 
-                CancellationTokenSource peerCts = _peersCts.GetOrAdd(p.Connection.Id, _ => new CancellationTokenSource());
-
-                var cts = CancellationTokenSource.CreateLinkedTokenSource(peerCts.Token);
+                var cts = CancellationTokenSource.CreateLinkedTokenSource(peerCancellationToken);
 
                 var ctx = new RequestContext<IScenePeerClient>(p.Connection, _scene, id, ordered, new SubStream(p.Stream, false), cts.Token);
                 var identifier = Tuple.Create(p.Connection.Id, id);
@@ -224,6 +234,12 @@ namespace Stormancer.Plugins
             }, new Dictionary<string, string> { { RpcHostPlugin.PluginName, RpcHostPlugin.Version
 } });
         }
+
+        private CancellationToken GetCancellationTokenForPeer(IScenePeerClient peer)
+        {
+            return _peersCts.GetOrAdd(peer.Id, _ => new CancellationTokenSource()).Token;
+        }
+
         private ushort ReserveId()
         {
             lock (this._lock)
@@ -343,6 +359,9 @@ namespace Stormancer.Plugins
             {
                 cts.Cancel();
             }
+
+
+
             return Task.FromResult(true);
         }
     }

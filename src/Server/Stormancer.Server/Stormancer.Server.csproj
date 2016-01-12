@@ -89,6 +89,7 @@
     <Compile Include="ISceneHost.cs" />
     <Compile Include="IStartup.cs" />
     <Compile Include="ITaskBasedEventHandler.cs" />
+    <Compile Include="PeerDisconnectedException.cs" />
     <Compile Include="Plugins\HostPluginBuildContext.cs" />
     <Compile Include="IHost.cs" />
     <Compile Include="Plugins\IHostPlugin.cs" />
