@@ -24,7 +24,7 @@ namespace Stormancer.Plugins
         internal const string PluginName = "stormancer.plugins.rpc";
         public void Build(PluginBuildContext ctx)
         {
-
+            
             ctx.SceneCreated += scene =>
             {
                 var rpcParams = scene.GetHostMetadata(PluginName);
