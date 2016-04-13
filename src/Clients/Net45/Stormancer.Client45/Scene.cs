@@ -263,7 +263,7 @@ namespace Stormancer
         private Client _client;
 
 
-        internal void HandleMessage(Packet packet)
+        internal bool HandleMessage(Packet packet)
         {
 
 
@@ -274,19 +274,30 @@ namespace Stormancer
             }
             var temp = new byte[2];
             //Extract the route id.
-            packet.Stream.Read(temp, 0, 2);
+            var readBytes = packet.Stream.Read(temp, 0, 2);
+            if(readBytes < 2)
+            {
+                packet.Stream.Seek(-readBytes, SeekOrigin.Current);
+                return false;
+            }
             var routeId = BitConverter.ToUInt16(temp, 0);
-
-
-            packet.Metadata["routeId"] = routeId;
-
-
 
             Action<Packet> observer;
 
             if (_handlers.TryGetValue(routeId, out observer))
             {
+                packet.Metadata["routeId"] = routeId;
+
+
+
+            
                 observer(packet);
+                return true;
+            }
+            else
+            {
+                packet.Stream.Seek(-2, SeekOrigin.Current);
+                return false;
             }
 
         }

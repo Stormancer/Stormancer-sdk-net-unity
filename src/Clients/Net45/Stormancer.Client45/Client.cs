@@ -23,6 +23,7 @@ using Stormancer.Dto;
 using Stormancer.Plugins;
 using Stormancer.Diagnostics;
 using System.Diagnostics;
+using Stormancer.Processors;
 
 namespace Stormancer
 {
@@ -142,7 +143,7 @@ namespace Stormancer
             this._dispatcher = configuration.Dispatcher;
             _requestProcessor = new Stormancer.Networking.Processors.RequestProcessor(_logger, Enumerable.Empty<IRequestModule>(),_systemSerializer);
 
-            _scenesDispatcher = new Processors.SceneDispatcher();
+            _scenesDispatcher = new Processors.SceneDispatcher(new[] {new RouteScenePacketHandler() });
             this._dispatcher.AddPRocessor(_requestProcessor);
             this._dispatcher.AddPRocessor(_scenesDispatcher);
             this._metadata = configuration._metadata;
