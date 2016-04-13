@@ -66,11 +66,19 @@
   <ItemGroup>
     <Compile Include="BPSLimitationType.cs" />
     <Compile Include="ClientException.cs" />
+    <Compile Include="DependencyResolver\DefaultConstructorRegistrationBuilder.cs" />
+    <Compile Include="DependencyResolver\DefaultDependencyBuilder.cs" />
+    <Compile Include="DependencyResolver\DefaultFactoryRegistrationBuilder.cs" />
+    <Compile Include="DependencyResolver\DefaultInstanceRegistrationBuilder.cs" />
+    <Compile Include="DependencyResolver\DefaultRegistrationBuilderBase.cs" />
+    <Compile Include="DependencyResolver\IRegistrationBuilder.cs" />
     <Compile Include="DisposableAction.cs" />
     <Compile Include="Extensions\PacketExtensions.cs" />
+    <Compile Include="Extensions\TaskExtensions.cs" />
     <Compile Include="IConnection.cs" />
     <Compile Include="IConnectionStatistics.cs" />
-    <Compile Include="IDependencyResolver.cs" />
+    <Compile Include="DependencyResolver\IDependencyBuilder.cs" />
+    <Compile Include="DependencyResolver\IDependencyResolver.cs" />
     <Compile Include="ILogger.cs" />
     <Compile Include="IScene.cs" />
     <Compile Include="IScenePeer.cs" />

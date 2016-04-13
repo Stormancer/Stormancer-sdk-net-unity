@@ -173,7 +173,13 @@ namespace Stormancer.Diagnostics
 
         }
 
-
+        /// <summary>
+        /// Writes a log entry using an exception
+        /// </summary>
+        /// <param name="level"></param>
+        /// <param name="category"></param>
+        /// <param name="message"></param>
+        /// <param name="ex"></param>
         public void Log(LogLevel level, string category, string message, Exception ex)
         {
             

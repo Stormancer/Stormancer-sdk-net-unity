@@ -23,6 +23,16 @@ namespace Stormancer
         /// </remarks>
         /// <param name="plugin">The plugin to add</param>
         void AddPlugin(IHostPlugin plugin);
+
+        /// <summary>
+        /// Configures the dependency resolver for the application.
+        /// </summary>
+        /// <param name="configurationAction">An action configuring the dependency resolver to add new dependencies to the child resolver.</param>
+        /// <remarks>
+        /// Multiple calls will result in all the configuration actions being called sequentially.
+        /// </remarks>
+        void ConfigureDependencies(Action<IDependencyBuilder> configurationAction);
+
         /// <summary>
         /// Adds a scene template in the application.
         /// </summary>

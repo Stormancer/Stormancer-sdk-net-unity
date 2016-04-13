@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Stormancer.EditorPlugin;
 
 
 namespace Stormancer
@@ -99,13 +100,25 @@ namespace Stormancer
             MaxPeers = 20;
             Plugins = new List<IClientPlugin>();
             Plugins.Add(new RpcClientPlugin());
+#if UNITY_EDITOR
+            Plugins.Add(new StormancerEditorPlugin());
+#endif
             AsynchrounousDispatch = true;
             PingInterval = 5000;
+
+            try
+            {
+                MainThread.Initialize();
+            }
+            catch (InvalidOperationException ex)
+            {
+                throw new InvalidOperationException("You must create a new ClientConfiguration in the Unity Main Thread.", ex);
+            }
         }
 
-        private RakNetTransport DefaultTransportFactory(IDictionary<string, object> parameters) 
+        private RakNetTransport DefaultTransportFactory(IDependencyResolver DependencyResolver) 
         {
-            return new RakNetTransport((ILogger)(parameters["ILogger"]));
+            return new RakNetTransport(DependencyResolver.Resolve<ILogger>(), DependencyResolver.Resolve<IConnectionHandler>());
         }
 
         /// <summary>
@@ -129,7 +142,7 @@ namespace Stormancer
         /// <summary>
         /// Gets or sets the transport to be used by the client.
         /// </summary>
-        public Func<IDictionary<string,object>,ITransport> TransportFactory { get; set; }
+        public Func<IDependencyResolver,ITransport> TransportFactory { get; set; }
 
 
         /// <summary>

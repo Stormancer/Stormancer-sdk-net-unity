@@ -40,7 +40,7 @@ namespace Stormancer.Plugins
             private set;
         }
 
-        internal RequestContext(T peer, ISceneHost scene, ushort id, bool ordered, Stream inputStream,CancellationToken token)
+        internal RequestContext(T peer, ISceneHost scene, ushort id, bool ordered, Stream inputStream, CancellationToken token)
         {
             CancellationToken = token;
             this._scene = scene;
@@ -75,18 +75,26 @@ namespace Stormancer.Plugins
         /// </remarks>
         public void SendValue(Action<Stream> writer, PacketPriority priority = PacketPriority.MEDIUM_PRIORITY)
         {
-            _scene.Send(new MatchPeerFilter(_peer),RpcHostPlugin.NextRouteName, s =>
+            if(CancellationToken.IsCancellationRequested)
             {
-                
-                WriteRequestId(s);
-                writer(s);
-            }, priority, this._ordered ? PacketReliability.RELIABLE_ORDERED : PacketReliability.RELIABLE);
+                return;
+            }
+            _scene.Send(new MatchPeerFilter(_peer), RpcHostPlugin.NextRouteName, s =>
+             {
+
+                 WriteRequestId(s);
+                 writer(s);
+             }, priority, this._ordered ? PacketReliability.RELIABLE_ORDERED : PacketReliability.RELIABLE);
             _msgSent = 1;
         }
 
 
         internal void SendError(string errorMsg)
         {
+            if (CancellationToken.IsCancellationRequested)
+            {
+                return;
+            }
             this._scene.Send(new MatchPeerFilter(_peer), RpcHostPlugin.ErrorRouteName, s =>
             {
                 WriteRequestId(s);
@@ -96,11 +104,15 @@ namespace Stormancer.Plugins
 
         internal void SendCompleted()
         {
-            this._scene.Send(new MatchPeerFilter(_peer),RpcHostPlugin.CompletedRouteName, s =>
+            if (CancellationToken.IsCancellationRequested)
             {
-                s.WriteByte(_msgSent);
-                WriteRequestId(s);
-            }, PacketPriority.MEDIUM_PRIORITY, PacketReliability.RELIABLE_ORDERED);
+                return;
+            }
+            this._scene.Send(new MatchPeerFilter(_peer), RpcHostPlugin.CompletedRouteName, s =>
+             {
+                 s.WriteByte(_msgSent);
+                 WriteRequestId(s);
+             }, PacketPriority.MEDIUM_PRIORITY, PacketReliability.RELIABLE_ORDERED);
         }
     }
 }

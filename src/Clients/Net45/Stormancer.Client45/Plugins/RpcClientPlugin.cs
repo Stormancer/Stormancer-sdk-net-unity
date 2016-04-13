@@ -1,4 +1,5 @@
 ﻿using Stormancer.Core;
+using Stormancer.Diagnostics;
 using Stormancer.Networking.Messages;
 using System;
 using System.Collections.Concurrent;
@@ -30,7 +31,7 @@ namespace Stormancer.Plugins
 
                 if (rpcParams != null)
                 {
-                    var supportsCancellation = new Version(rpcParams) > new Version(Version);
+                    var supportsCancellation = new Version(rpcParams) >= new Version(Version);
                     var processor = new RpcService(scene, supportsCancellation);
                     scene.DependencyResolver.Register(processor);
                     scene.AddRoute(NextRouteName, p =>
@@ -49,7 +50,7 @@ namespace Stormancer.Plugins
                     {
                         processor.Complete(p);
                     });
-                    
+
 
                 }
             };
@@ -73,15 +74,16 @@ namespace Stormancer.Plugins
             private ushort _currentRequestId = 0;
             private class Request
             {
+                public bool HasCompleted = false;
                 public IObserver<Packet<IScenePeer>> Observer { get; set; }
-                public int ReceivedMsg;
-                public TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
+                public TaskCompletionSource<bool> Tcs = new TaskCompletionSource<bool>();
             }
+
             private bool _supportsCancellation;
             private readonly object _lock = new object();
             private readonly ConcurrentDictionary<ushort, Request> _pendingRequests = new ConcurrentDictionary<ushort, Request>();
-            private ConcurrentDictionary<uint, CancellationTokenSource> _runningRequests = new ConcurrentDictionary<uint, CancellationTokenSource>();
-            private ConcurrentDictionary<long, CancellationTokenSource> _peersCts = new ConcurrentDictionary<long, CancellationTokenSource>();
+            private ConcurrentDictionary<Tuple<long, ushort>, CancellationTokenSource> _runningRequests = new ConcurrentDictionary<Tuple<long, ushort>, CancellationTokenSource>();
+            //  private ConcurrentDictionary<long, CancellationTokenSource> _peersCts = new ConcurrentDictionary<long, CancellationTokenSource>();
 
             private readonly Scene _scene;
 
@@ -127,14 +129,13 @@ namespace Stormancer.Plugins
 
                         return () =>
                         {
-                            if (_supportsCancellation)
+                            Request _;
+                            if (!rq.HasCompleted && _pendingRequests.TryRemove(id, out _) && _supportsCancellation)
                             {
                                 _scene.SendPacket(CancellationRouteName, s =>
                                     {
                                         s.Write(BitConverter.GetBytes(id), 0, 2);
                                     });
-
-                                _pendingRequests.TryRemove(id, out rq);
                             }
                         };
                     });
@@ -150,6 +151,7 @@ namespace Stormancer.Plugins
                     return (ushort)_pendingRequests.Count;
                 }
             }
+
             /// <summary>
             /// Adds a procedure that can be called by remote peer to the scene.
             /// </summary>
@@ -168,29 +170,47 @@ namespace Stormancer.Plugins
                     var id = BitConverter.ToUInt16(buffer, 0);
                     var cts = new CancellationTokenSource();
                     var ctx = new RequestContext<IScenePeer>(p.Connection, _scene, id, ordered, new SubStream(p.Stream, false), cts.Token);
-                    if (_runningRequests.TryAdd(id, cts))
+                    var identifier = Tuple.Create(p.Connection.Id, id);
+                    if (_runningRequests.TryAdd(identifier, cts))
                     {
-                        handler(ctx).ContinueWith(t =>
+                        handler.InvokeWrapping(ctx).ContinueWith(t =>
                         {
-                            _runningRequests.TryRemove(id, out cts);
-                            if (t.IsCompleted)
+                            _runningRequests.TryRemove(identifier, out cts);
+                            if (t.Status == TaskStatus.RanToCompletion)
                             {
                                 ctx.SendCompleted();
                             }
-                            else
+                            else if (t.Status == TaskStatus.Faulted)
                             {
+                                var errorSent = false;
+
                                 var ex = t.Exception.InnerExceptions.OfType<ClientException>();
                                 if (ex.Any())
                                 {
                                     ctx.SendError(string.Join("|", ex.Select(e => e.Message)));
+                                    errorSent = true;
                                 }
-                            }
+                                if (t.Exception.InnerExceptions.Any(e => !(e is ClientException)))
+                                {
+                                    string errorMessage = string.Format("An error occured while executing procedure '{0}'.", route);
+                                    if (!errorSent)
+                                    {
+                                        var errorId = Guid.NewGuid().ToString("N");
+                                        ctx.SendError($"An exception occurred on the remote peer. Error {errorId}.");
 
+                                        errorMessage = $"Error {errorId}. " + errorMessage;
+                                    }
+
+                                    _scene.DependencyResolver.Resolve<ILogger>().Log(LogLevel.Error, "rpc.server", errorMessage, t.Exception);
+
+                                }
+
+                            }
                         });
                     }
-                }, new Dictionary<string, string> { { RpcClientPlugin.PluginName, RpcClientPlugin.Version} });
-
+                }, new Dictionary<string, string> { { RpcClientPlugin.PluginName, RpcClientPlugin.Version } });
             }
+
             private ushort ReserveId()
             {
                 lock (this._lock)
@@ -198,7 +218,7 @@ namespace Stormancer.Plugins
                     unchecked
                     {
                         int loop = 0;
-                        while (_pendingRequests.ContainsKey(_currentRequestId))
+                        do
                         {
                             loop++;
                             _currentRequestId++;
@@ -206,7 +226,7 @@ namespace Stormancer.Plugins
                             {
                                 throw new InvalidOperationException("Too many requests in progress, unable to start a new one.");
                             }
-                        }
+                        } while (_pendingRequests.ContainsKey(_currentRequestId));
                         return _currentRequestId;
                     }
                 }
@@ -214,9 +234,13 @@ namespace Stormancer.Plugins
 
             private Request GetPendingRequest(Packet<IScenePeer> p)
             {
-                var buffer = new byte[2];
-                p.Stream.Read(buffer, 0, 2);
-                var id = BitConverter.ToUInt16(buffer, 0);
+                ushort id;
+                return GetPendingRequest(p, out id);
+            }
+
+            private Request GetPendingRequest(Packet<IScenePeer> p, out ushort id)
+            {
+                id = ExtractRequestId(p);
 
                 Request request;
                 if (_pendingRequests.TryGetValue(id, out request))
@@ -228,25 +252,36 @@ namespace Stormancer.Plugins
                     return null;
                 }
             }
+
+            private static ushort ExtractRequestId(Packet<IScenePeer> p)
+            {
+                ushort id;
+                var buffer = new byte[2];
+                p.Stream.Read(buffer, 0, 2);
+                id = BitConverter.ToUInt16(buffer, 0);
+                return id;
+            }
+
             internal void Next(Packet<IScenePeer> p)
             {
                 var rq = GetPendingRequest(p);
                 if (rq != null)
                 {
-                    System.Threading.Interlocked.Increment(ref rq.ReceivedMsg);
                     rq.Observer.OnNext(p);
-                    if (!rq.tcs.Task.IsCompleted)
+                    if (!rq.Tcs.Task.IsCompleted)
                     {
-                        rq.tcs.TrySetResult(true);
+                        rq.Tcs.TrySetResult(true);
                     }
                 }
             }
 
             internal void Error(Packet<IScenePeer> p)
             {
-                var rq = GetPendingRequest(p);
-                if (rq != null)
+                var id = ExtractRequestId(p);
+                Request rq;
+                if (_pendingRequests.TryRemove(id, out rq))
                 {
+                    rq.HasCompleted = true;
                     rq.Observer.OnError(new ClientException(p.ReadObject<string>()));
                 }
             }
@@ -254,21 +289,25 @@ namespace Stormancer.Plugins
             internal void Complete(Packet<IScenePeer> p)
             {
                 var messageSent = p.Stream.ReadByte() != 0;
-                var rq = GetPendingRequest(p);
+                ushort id;
+                var rq = GetPendingRequest(p, out id);
+                Request _;
                 if (rq != null)
                 {
+                    rq.HasCompleted = true;
                     if (messageSent)
                     {
-                        rq.tcs.Task.ContinueWith(t =>
+                        rq.Tcs.Task.ContinueWith(t =>
                         {
+                            _pendingRequests.TryRemove(id, out _);
                             rq.Observer.OnCompleted();
                         });
                     }
                     else
                     {
+                        _pendingRequests.TryRemove(id, out _);
                         rq.Observer.OnCompleted();
                     }
-
                 }
             }
 
@@ -278,7 +317,7 @@ namespace Stormancer.Plugins
                 p.Stream.Read(buffer, 0, 2);
                 var id = BitConverter.ToUInt16(buffer, 0);
                 CancellationTokenSource cts;
-                if (_runningRequests.TryGetValue(id, out cts))
+                if (_runningRequests.TryGetValue(Tuple.Create(p.Connection.Id, id), out cts))
                 {
                     cts.Cancel();
                 }
@@ -286,7 +325,7 @@ namespace Stormancer.Plugins
 
             internal void Disconnected()
             {
-                foreach(var cts in _runningRequests)
+                foreach (var cts in _runningRequests)
                 {
                     cts.Value.Cancel();
                 }

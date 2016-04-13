@@ -67,6 +67,8 @@ namespace Stormancer.Core
 
     public class Packet : Packet<IConnection>
     {
-        public Packet(IConnection source, Stream stream) : base(source, stream) { }
+        public Packet(IConnection source, Stream stream) : base(source, stream)
+        {
+        }
     }
 }

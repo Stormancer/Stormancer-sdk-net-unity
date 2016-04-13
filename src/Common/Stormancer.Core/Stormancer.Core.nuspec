@@ -10,7 +10,8 @@
     <iconUrl>http://stormancer.blob.core.windows.net/stormancer-local-public/1/1e/Logo32x32.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Initial release.</releaseNotes>
+	<summary>$description$</summary>
+    <releaseNotes></releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>Stormancer</tags>
   </metadata>
