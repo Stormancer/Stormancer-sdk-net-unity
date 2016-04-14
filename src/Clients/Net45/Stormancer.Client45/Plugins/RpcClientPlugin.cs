@@ -24,36 +24,35 @@ namespace Stormancer.Plugins
         internal const string PluginName = "stormancer.plugins.rpc";
         public void Build(PluginBuildContext ctx)
         {
-            
-            ctx.SceneCreated += scene =>
-            {
-                var rpcParams = scene.GetHostMetadata(PluginName);
+            ctx.BuildingSceneResolver += (scene, builder) =>
+             {
+                 var rpcParams = scene.GetHostMetadata(PluginName);
 
-                if (rpcParams != null)
-                {
-                    var supportsCancellation = new Version(rpcParams) >= new Version(Version);
-                    var processor = new RpcService(scene, supportsCancellation);
-                    scene.DependencyResolver.Register(processor);
-                    scene.AddRoute(NextRouteName, p =>
-                    {
-                        processor.Next(p);
-                    });
-                    scene.AddRoute(CancellationRouteName, p =>
-                        {
-                            processor.Cancel(p);
-                        });
-                    scene.AddRoute(ErrorRouteName, p =>
-                    {
-                        processor.Error(p);
-                    });
-                    scene.AddRoute(CompletedRouteName, p =>
-                    {
-                        processor.Complete(p);
-                    });
+                 if (rpcParams != null)
+                 {
+                     var supportsCancellation = new Version(rpcParams) >= new Version(Version);
+                     var processor = new RpcService(scene, supportsCancellation);
+                     builder.Register(processor);
 
+                     scene.AddRoute(NextRouteName, p =>
+                     {
+                         processor.Next(p);
+                     });
+                     scene.AddRoute(CancellationRouteName, p =>
+                     {
+                         processor.Cancel(p);
+                     });
+                     scene.AddRoute(ErrorRouteName, p =>
+                     {
+                         processor.Error(p);
+                     });
+                     scene.AddRoute(CompletedRouteName, p =>
+                     {
+                         processor.Complete(p);
+                     });
+                 }
+             };
 
-                }
-            };
             ctx.SceneDisconnected += scene =>
             {
                 var processor = scene.DependencyResolver.Resolve<RpcService>();

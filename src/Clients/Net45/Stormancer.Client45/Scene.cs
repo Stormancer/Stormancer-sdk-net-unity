@@ -81,9 +81,9 @@ namespace Stormancer
             }
         }
 
-        internal Scene(IConnection connection, Client client, string id, string token, Stormancer.Dto.SceneInfosDto dto)
+        internal Scene(IConnection connection, Client client, Action<Scene,IDependencyBuilder> resolverBuilder, string id, string token, Stormancer.Dto.SceneInfosDto dto)
         {
-            DependencyResolver = new DefaultDependencyResolver(client.DependencyResolver);
+            
             Id = id;
             this._peer = connection;
             _token = token;
@@ -93,6 +93,15 @@ namespace Stormancer
             {
                 _remoteRoutesMap.Add(route.Name, new Route(this, route.Name, route.Metadata) { Handle = route.Handle });
             }
+
+            DependencyResolver = new DefaultDependencyResolver(client.DependencyResolver, b =>
+            {
+                b.Register<Scene>(this);
+                if (resolverBuilder != null)
+                {
+                    resolverBuilder(this,b);
+                }
+            });
 
         }
 
@@ -275,7 +284,7 @@ namespace Stormancer
             var temp = new byte[2];
             //Extract the route id.
             var readBytes = packet.Stream.Read(temp, 0, 2);
-            if(readBytes < 2)
+            if (readBytes < 2)
             {
                 packet.Stream.Seek(-readBytes, SeekOrigin.Current);
                 return false;
@@ -290,7 +299,7 @@ namespace Stormancer
 
 
 
-            
+
                 observer(packet);
                 return true;
             }

@@ -248,7 +248,7 @@ namespace Stormancer
             return result;
         }
 
-        private Task UpdateServerMetadata()
+        public Task UpdateServerMetadata()
         {
             return _requestProcessor.SendSystemRequest(_serverConnection, (byte)SystemRequestIDTypes.ID_SET_METADATA, s =>
             {
@@ -323,7 +323,8 @@ namespace Stormancer
                 _serverConnection.Metadata.Add("serializer", result.SelectedSerializer);
             }
             await UpdateServerMetadata();
-            var scene = new Scene(this._serverConnection, this, sceneId, ci.Token, result);
+           
+            var scene = new Scene(this._serverConnection, this,_pluginCtx.BuildingSceneResolver, sceneId, ci.Token, result);
 
             if (_pluginCtx.SceneCreated != null)
             {

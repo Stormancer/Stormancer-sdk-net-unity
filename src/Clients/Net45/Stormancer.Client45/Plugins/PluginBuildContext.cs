@@ -13,6 +13,13 @@ namespace Stormancer.Plugins
     public class PluginBuildContext
     {
         /// <summary>
+        /// Event fired when the dependency resolver of a scene is configured.
+        /// </summary>
+        public Action<Scene,IDependencyBuilder> BuildingSceneResolver
+        {
+            get; set;
+        }
+        /// <summary>
         /// Event fired when a scene object is created.
         /// </summary>
         public Action<Scene> SceneCreated { get; set; }
