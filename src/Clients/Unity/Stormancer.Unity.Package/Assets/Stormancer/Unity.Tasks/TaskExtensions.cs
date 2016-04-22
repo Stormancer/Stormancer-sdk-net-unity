@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UniRx;
 
 namespace System.Threading.Tasks
 {
@@ -112,6 +113,40 @@ namespace System.Threading.Tasks
         public static Task<TResult> Then<T, TResult>(this Task<T> task, Func<T, Task<TResult>> continuation)
         {
             return ThenImpl(task, continuation).Unwrap();
+        }
+
+        public static Task TimeOut(this Task task, int milliseconds)
+        {
+            return task.TimeOut(TimeSpan.FromMilliseconds(milliseconds));
+        }
+
+        public static Task TimeOut(this Task task, TimeSpan delay)
+        {
+            var tcs = new TaskCompletionSource<Unit>();
+
+            TaskHelper.Delay(delay).Then((() =>
+            {
+                tcs.SetCanceled();
+            }));
+
+            return Task.Factory.ContinueWhenAny(new[] { task, tcs.Task }, t => t).Unwrap();
+        }
+
+        public static Task<TResult> TimeOut<TResult>(this Task<TResult> task, int milliseconds)
+        {
+            return task.TimeOut(TimeSpan.FromMilliseconds(milliseconds));
+        }
+
+        public static Task<TResult> TimeOut<TResult>(this Task<TResult> task, TimeSpan delay)
+        {
+            var tcs = new TaskCompletionSource<TResult>();
+
+            TaskHelper.Delay(delay).Then((() =>
+            {
+                tcs.SetCanceled();
+            }));
+
+            return Task.Factory.ContinueWhenAny(new[] { task, tcs.Task }, t => t).Unwrap();
         }
     }
 }

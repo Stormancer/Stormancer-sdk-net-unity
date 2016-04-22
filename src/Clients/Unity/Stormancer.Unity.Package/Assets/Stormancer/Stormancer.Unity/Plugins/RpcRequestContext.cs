@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+
 
 namespace Stormancer.Plugins
 {
@@ -15,6 +17,7 @@ namespace Stormancer.Plugins
         private ushort id;
         private bool _ordered;
         private T _peer;
+        private bool _msgSent;
 
         public T RemotePeer
         {
@@ -24,13 +27,30 @@ namespace Stormancer.Plugins
             }
         }
 
-        internal RequestContext(T peer, Scene scene, ushort id, bool ordered)
+        public Stream InputStream
+        {
+            get;
+            private set;
+        }
+
+        internal RequestContext(T peer, Scene scene, ushort id, bool ordered, Stream stream, CancellationToken token)
         {
             // TODO: Complete member initialization
             this._scene = scene;
             this.id = id;
             this._ordered = ordered;
             this._peer = peer;
+            InputStream = stream;
+            CancellationToken = token;
+        }
+
+        /// <summary>
+        /// A Token that gets cancelled if the client cancels the RPC.
+        /// </summary>
+        public CancellationToken CancellationToken
+        {
+            get;
+            private set;
         }
 
         private void WriteRequestId(Stream s)
@@ -39,16 +59,27 @@ namespace Stormancer.Plugins
         }
         public void SendValue(Action<Stream> writer, PacketPriority priority)
         {
+            if(CancellationToken.IsCancellationRequested)
+            {
+                return;
+            }
+
             _scene.SendPacket(RpcClientPlugin.NextRouteName, s =>
             {
                 WriteRequestId(s);
                 writer(s);
             }, priority, this._ordered ? PacketReliability.RELIABLE_ORDERED : PacketReliability.RELIABLE);
+            _msgSent = true;
         }
 
 
         internal void SendError(string errorMsg)
         {
+            if (CancellationToken.IsCancellationRequested)
+            {
+                return;
+            }
+
             this._scene.SendPacket(RpcClientPlugin.ErrorRouteName, s =>
             {
                 WriteRequestId(s);
@@ -58,8 +89,15 @@ namespace Stormancer.Plugins
 
         internal void SendCompleted()
         {
+            if (CancellationToken.IsCancellationRequested)
+            {
+                return;
+            }
+
             this._scene.SendPacket(RpcClientPlugin.CompletedRouteName, s =>
             {
+                s.WriteByte(_msgSent? (byte)1 : (byte)0);
+
                 WriteRequestId(s);
             }, PacketPriority.MEDIUM_PRIORITY, PacketReliability.RELIABLE);
         }

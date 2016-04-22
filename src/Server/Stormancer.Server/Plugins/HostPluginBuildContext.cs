@@ -14,6 +14,16 @@ namespace Stormancer.Plugins
     public class HostPluginBuildContext
     {
         /// <summary>
+        /// Fires when the host dependency resolver is built.
+        /// </summary>
+        public Action<IDependencyBuilder> HostDependenciesRegistration { get; set; }
+
+        /// <summary>
+        /// Fires when the scene dependency resolver is built.
+        /// </summary>
+        public Action<IDependencyBuilder> SceneDependenciesRegistration { get; set; }
+
+        /// <summary>
         /// Fires just before the scene template is applied to a new scene.
         /// </summary>
         public Action<ISceneHost> SceneCreating { get; set; }
@@ -32,6 +42,11 @@ namespace Stormancer.Plugins
         /// Fires when the server host is starting. 
         /// </summary>
         public Action<IHost> HostStarting { get; set; }
+
+        /// <summary>
+        /// Fires when the server host has started. 
+        /// </summary>
+        public Action<IHost> HostStarted { get; set; }
 
         /// <summary>
         /// Fires when the server host is shutting down

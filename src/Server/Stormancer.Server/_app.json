@@ -1,12 +1,8 @@
 {
     "host": {
-        "version": "1.4.*",
+        "version": "1.6.*",
         "type": "NET45"
     },
     references: [
-        "System.Reactive.Linq, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
-        "System.Reactive.Interfaces, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
-        "System.Reactive.Core, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
-        "System.Reactive.PlatformServices, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
     ]
 }

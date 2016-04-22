@@ -23,6 +23,7 @@ using Stormancer.Dto;
 using Stormancer.Plugins;
 using Stormancer.Diagnostics;
 using System.Diagnostics;
+using Stormancer.Processors;
 
 namespace Stormancer
 {
@@ -142,7 +143,7 @@ namespace Stormancer
             this._dispatcher = configuration.Dispatcher;
             _requestProcessor = new Stormancer.Networking.Processors.RequestProcessor(_logger, Enumerable.Empty<IRequestModule>(),_systemSerializer);
 
-            _scenesDispatcher = new Processors.SceneDispatcher();
+            _scenesDispatcher = new Processors.SceneDispatcher(new[] {new RouteScenePacketHandler() });
             this._dispatcher.AddPRocessor(_requestProcessor);
             this._dispatcher.AddPRocessor(_scenesDispatcher);
             this._metadata = configuration._metadata;
@@ -247,7 +248,7 @@ namespace Stormancer
             return result;
         }
 
-        private Task UpdateServerMetadata()
+        public Task UpdateServerMetadata()
         {
             return _requestProcessor.SendSystemRequest(_serverConnection, (byte)SystemRequestIDTypes.ID_SET_METADATA, s =>
             {
@@ -322,7 +323,8 @@ namespace Stormancer
                 _serverConnection.Metadata.Add("serializer", result.SelectedSerializer);
             }
             await UpdateServerMetadata();
-            var scene = new Scene(this._serverConnection, this, sceneId, ci.Token, result);
+           
+            var scene = new Scene(this._serverConnection, this,_pluginCtx.BuildingSceneResolver, sceneId, ci.Token, result);
 
             if (_pluginCtx.SceneCreated != null)
             {

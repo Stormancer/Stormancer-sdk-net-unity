@@ -24,7 +24,7 @@ namespace Stormancer
     public class ClientConfiguration
     {
         //private const string Api = "http://localhost:23469/";
-        private const string ApiEndpoint = "https://api1.stormancer.com/";
+        private const string ApiEndpoint = "https://api.stormancer.com/";
 
         private const string LocalDevEndpoint = "http://localhost:42001/";
 
@@ -174,7 +174,7 @@ namespace Stormancer
         /// Plugins enable developpers to plug custom code in the Stormancer client's extensibility points. Possible uses include: custom high level protocols, logger or analyzers.
         /// 
         /// </remarks>
-        void AddPlugin(IClientPlugin plugin)
+        public void AddPlugin(IClientPlugin plugin)
         {
 
             Plugins.Add(plugin);

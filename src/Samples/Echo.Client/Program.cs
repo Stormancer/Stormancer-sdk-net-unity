@@ -11,15 +11,15 @@ namespace Echo.Client
     {
         static void Main(string[] args)
         {
-            var config = Stormancer.ClientConfiguration.ForAccount("test", "echo");
+            var config = Stormancer.ClientConfiguration.ForAccount("d81fc876-6094-3d92-a3d0-86d42d866b96", "hello-world-tutorial");
             //config.ServerEndpoint = "http://localhost:8081";
 
             var client = new Stormancer.Client(config);
-            client.GetPublicScene("test-scene", "hello").ContinueWith(
+            client.GetPublicScene("main", "hello").ContinueWith(
                 t =>
                 {
                     var scene = t.Result;
-                    scene.AddRoute("echo.out", p =>
+                    scene.AddRoute("msg", p =>
                     {
                         Console.WriteLine(p.ReadObject<string>());
                     }, null);
@@ -28,12 +28,6 @@ namespace Echo.Client
                     {
                         if (t2.IsCompleted)
                         {
-                            scene.SendPacket("echo.in", s =>
-                            {
-                                //var serializer = scene.GetComponent<ISerializer>();
-                                //serializer.Serialize("hello", s);
-                                scene.Host.Serializer().Serialize("hello", s);
-                            });
                         }
                         else
                         {
@@ -41,6 +35,8 @@ namespace Echo.Client
                         }
                     });
                 });
+
+            Console.ReadLine();
         }
     }
 }

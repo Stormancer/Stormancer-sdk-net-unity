@@ -81,9 +81,9 @@ namespace Stormancer
             }
         }
 
-        internal Scene(IConnection connection, Client client, string id, string token, Stormancer.Dto.SceneInfosDto dto)
+        internal Scene(IConnection connection, Client client, Action<Scene,IDependencyBuilder> resolverBuilder, string id, string token, Stormancer.Dto.SceneInfosDto dto)
         {
-            DependencyResolver = new DefaultDependencyResolver(client.DependencyResolver);
+            
             Id = id;
             this._peer = connection;
             _token = token;
@@ -93,6 +93,15 @@ namespace Stormancer
             {
                 _remoteRoutesMap.Add(route.Name, new Route(this, route.Name, route.Metadata) { Handle = route.Handle });
             }
+
+            DependencyResolver = new DefaultDependencyResolver(client.DependencyResolver, b =>
+            {
+                b.Register<Scene>(this);
+                if (resolverBuilder != null)
+                {
+                    resolverBuilder(this,b);
+                }
+            });
 
         }
 
@@ -263,7 +272,7 @@ namespace Stormancer
         private Client _client;
 
 
-        internal void HandleMessage(Packet packet)
+        internal bool HandleMessage(Packet packet)
         {
 
 
@@ -274,24 +283,35 @@ namespace Stormancer
             }
             var temp = new byte[2];
             //Extract the route id.
-            packet.Stream.Read(temp, 0, 2);
+            var readBytes = packet.Stream.Read(temp, 0, 2);
+            if (readBytes < 2)
+            {
+                packet.Stream.Seek(-readBytes, SeekOrigin.Current);
+                return false;
+            }
             var routeId = BitConverter.ToUInt16(temp, 0);
-
-
-            packet.Metadata["routeId"] = routeId;
-
-
 
             Action<Packet> observer;
 
             if (_handlers.TryGetValue(routeId, out observer))
             {
+                packet.Metadata["routeId"] = routeId;
+
+
+
+
                 observer(packet);
+                return true;
+            }
+            else
+            {
+                packet.Stream.Seek(-2, SeekOrigin.Current);
+                return false;
             }
 
         }
 
-       
+
 
         /// <summary>
         /// List containing the scene host connection.
@@ -333,7 +353,7 @@ namespace Stormancer
         /// </summary>
         public IDependencyResolver DependencyResolver
         {
-            get;internal set;
+            get; internal set;
         }
 
         /// <summary>
@@ -344,6 +364,7 @@ namespace Stormancer
         /// </remarks>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
+        [Obsolete]
         public T GetComponent<T>() where T : class
         {
             return this.DependencyResolver.Resolve<T>();
