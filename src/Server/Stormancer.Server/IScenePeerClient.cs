@@ -25,6 +25,13 @@ namespace Stormancer
         Task Disconnect(string reason);
 
         /// <summary>
+        /// Disconnects the peer from the server
+        /// </summary>
+        /// <param name="reason"></param>
+        /// <returns></returns>
+        Task DisconnectFromServer(string reason);
+        
+        /// <summary>
         /// User data provided as part of the connection token.
         /// </summary>
         byte[] UserData { get; }
