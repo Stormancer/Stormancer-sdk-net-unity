@@ -1,6 +1,7 @@
 ﻿using Stormancer.Plugins;
 using System;
 using System.Collections.Generic;
+
 namespace Stormancer.Server.Admin
 {
     /// <summary>
@@ -8,13 +9,11 @@ namespace Stormancer.Server.Admin
     /// </summary>
     public interface IAdminPluginConfig
     {
-       
-
         /// <summary>
         /// Gets the name of the admin plugin tab
         /// </summary>
         string DisplayName { get; }
-
+        string Id { get; }
         /// <summary>
         /// Sets the name of the admin plugin tab
         /// </summary>
@@ -22,31 +21,12 @@ namespace Stormancer.Server.Admin
         /// <returns>Current instance of the plugin config object</returns>
         IAdminPluginConfig Name(string name);
 
-
         /// <summary>
-        /// 'Get' routes for the module
+        /// Configure Admin Web API
         /// </summary>
-        IDictionary<string, Func<dynamic, dynamic>> Get { get; }
-
-        /// <summary>
-        /// 'Delete' routes for the module
-        /// </summary>
-        IDictionary<string, Func<dynamic, dynamic>> Delete { get; set; }
-
-        /// <summary>
-        /// 'Post' routes for the module
-        /// </summary>
-        IDictionary<string, Func<dynamic, dynamic>> Post { get; set; }
-
-        /// <summary>
-        /// 'Put' routes for the module
-        /// </summary>
-        IDictionary<string, Func<dynamic, dynamic>> Put { get; set; }
-
-        /// <summary>
-        /// List of registered services
-        /// </summary>
-        System.Collections.Generic.IReadOnlyDictionary<string, Func< RequestContext<IScenePeerClient>, System.Threading.Tasks.Task>> Services { get; }
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        IAdminPluginConfig ConfigureApi(Action<Owin.IAppBuilder> builder);
     }
 
     /// <summary>
