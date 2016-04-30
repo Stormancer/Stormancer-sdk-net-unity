@@ -13,6 +13,10 @@ namespace Stormancer.Server.Admin
         /// Gets the name of the admin plugin tab
         /// </summary>
         string DisplayName { get; }
+
+        /// <summary>
+        /// Id of the plugin (directory)
+        /// </summary>
         string Id { get; }
         /// <summary>
         /// Sets the name of the admin plugin tab
