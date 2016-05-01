@@ -20,11 +20,14 @@ namespace Stormancer
             }
         }
 
-        internal DefaultDependencyResolver() : this(null)
+        internal DefaultDependencyResolver() : this(null, b => { })
         {
 
         }
+        internal DefaultDependencyResolver(Action<IDependencyBuilder> builder) : this(null, builder)
+        {
 
+        }
         internal DefaultDependencyResolver(IDependencyResolver container) : this(container, b => { })
         {
 
@@ -77,7 +80,7 @@ namespace Stormancer
 
         public IDependencyResolver CreateChild(string name)
         {
-            throw new NotSupportedException();
+            throw new NotSupportedException("Named scope not supported");
         }
 
         public IDependencyResolver CreateChild(Action<IDependencyBuilder> configurationAction)
@@ -88,13 +91,13 @@ namespace Stormancer
 
         public IDependencyResolver CreateChild(string name, Action<IDependencyBuilder> configurationAction)
         {
-            throw new NotSupportedException();
+            throw new NotSupportedException("Named scope not supported");
         }
 
 
         private void UpdateContainerFromBuilder(TinyIoCContainer _container, DefaultDependencyBuilder b)
         {
-            var groupedRegistrations = b.Registrations.SelectMany(r => r.RegistrationTypes.Select(contract => new { registration = r, contract = contract })).GroupBy(r => r.contract);
+            var groupedRegistrations = b.Registrations.SelectMany(r => r.RegistrationTypes.Select(contract => new { registration = r, contract = contract })).GroupBy(r => r.contract).ToArray() ;
             foreach (var r in groupedRegistrations)
             {
                 if (r.Count() > 1)
@@ -104,32 +107,68 @@ namespace Stormancer
                 else
                 {
                     var registration = r.First();
-                    var registrationType = registration.GetType().GetGenericTypeDefinition();
+                    var registrationType = registration.registration.GetType().GetGenericTypeDefinition();
+                    var t = registration.registration.GetType().GetGenericArguments()[0];
+
+                    if (TranslateInstanceRegistration(_container, registration.registration, t))
+                    {
+                        
+                    }
+                    else if (TranslateConstructorRegistration(_container, registration.registration, t))
+                    {
+                      
+                    }
+                    else if (TranslateFactoryRegistration(_container, registration.registration, t))
+                    {
+                        
+                    }
                 }
             }
         }
 
 
-        private static void TranslateInstanceRegistration<T>(TinyIoCContainer container, DefaultInstanceRegistrationBuilder<T> instanceRegistration) where T : class
+        private static bool TranslateInstanceRegistration(TinyIoCContainer container, DefaultRegistrationBuilderBase instanceRegistration, Type t)
         {
-            var r = container.Register(typeof(T), instanceRegistration.Instance);
+            var registrationType = instanceRegistration.GetType().GetGenericTypeDefinition();
+            if (registrationType != typeof(DefaultInstanceRegistrationBuilder<>))
+            {
+                return false;
+            }
+            var instance = instanceRegistration.GetType().GetProperty("Instance").GetGetMethod().Invoke(instanceRegistration, null);
+            var r = container.Register(t, instance);
             ApplyOptions(r, instanceRegistration);
 
+            return true;
         }
 
 
-        private static void TranslateConstructorRegistration<T>(TinyIoCContainer container, DefaultConstructorRegistrationBuilder<T> constructorRegistration) where T : class
+        private static bool TranslateConstructorRegistration(TinyIoCContainer container, DefaultRegistrationBuilderBase constructorRegistration, Type t)
         {
-            var r = container.Register(typeof(T), constructorRegistration.SelfType);
+            var registrationType = constructorRegistration.GetType().GetGenericTypeDefinition();
+            if (registrationType != typeof(DefaultConstructorRegistrationBuilder<>))
+            {
+                return false;
+            }
+
+            var r = container.Register(t, constructorRegistration.SelfType);
 
             ApplyOptions(r, constructorRegistration);
+            return true;
         }
 
-        private static void TranslateFactoryRegistration<T>(TinyIoCContainer container, DefaultFactoryRegistrationBuilder<T> factoryRegistration) where T : class
+        private static bool TranslateFactoryRegistration(TinyIoCContainer container, DefaultRegistrationBuilderBase factoryRegistration, Type t)
         {
-            var r = container.Register<T>((c,p) => factoryRegistration.Factory(new DependencyResolverWrapper(c)));
+            var registrationType = factoryRegistration.GetType().GetGenericTypeDefinition();
+            if (registrationType != typeof(DefaultFactoryRegistrationBuilder<>))
+            {
+                return false;
+            }
+            var factory = (Delegate)factoryRegistration.GetType().GetProperty("Factory").GetGetMethod().Invoke(factoryRegistration, null);
+            var r = container.Register(t, (c, p) => factory.DynamicInvoke(new DependencyResolverWrapper(c)));
 
-            ApplyOptions(r,factoryRegistration);
+            ApplyOptions(r, factoryRegistration);
+
+            return true;
         }
 
         private static void ApplyOptions(TinyIoCContainer.RegisterOptions r, DefaultRegistrationBuilderBase instanceRegistration)
@@ -186,7 +225,7 @@ namespace Stormancer
 
             public void Dispose()
             {
-                
+
             }
 
             public T Resolve<T>() where T : class
@@ -201,5 +240,22 @@ namespace Stormancer
         }
     }
 
-    
+    /// <summary>
+    /// Extension methods for Registration builder
+    /// </summary>
+    public static class RegistrationBuilderExtensions
+    {
+        /// <summary>
+        /// Declares the registration as a singleton.
+        /// </summary>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public static IRegistrationBuilder Singleton(this IRegistrationBuilder b)
+        {
+            b.AddOptions(o => o.Add("Singleton", true));
+            return b;
+        }
+    }
+
+
 }

@@ -19,6 +19,8 @@ namespace Stormancer.Plugins
         {
             get; set;
         }
+
+        public Action<IDependencyBuilder> BuildingClientResolver { get; set; }
         /// <summary>
         /// Event fired when a scene object is created.
         /// </summary>
