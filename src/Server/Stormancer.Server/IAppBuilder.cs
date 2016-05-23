@@ -46,9 +46,9 @@ namespace Stormancer
         /// Adds a new admin plugin
         /// </summary>
         /// <param name="id">id of the plugin</param>
-        /// <param name="version">target admin plugin host version</param>
-        /// <returns></returns>
-        IAdminPluginConfig AdminPlugin(string id, AdminPluginHostVersion version);
+        /// <remarks>The id is used as folder name for admin assets</remarks>
+        /// <returns>An IAdminPlugin instance used for configuration of the plugin.</returns>
+        IAdminPluginConfig AdminPlugin(string id);
 
         /// <summary>
         /// Configure the local web server using the provided configuration method.

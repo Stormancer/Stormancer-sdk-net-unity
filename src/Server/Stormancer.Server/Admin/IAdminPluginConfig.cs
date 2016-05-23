@@ -25,6 +25,7 @@ namespace Stormancer.Server.Admin
         /// <returns>Current instance of the plugin config object</returns>
         IAdminPluginConfig Name(string name);
 
+
         /// <summary>
         /// Configure Admin Web API
         /// </summary>
@@ -33,14 +34,5 @@ namespace Stormancer.Server.Admin
         IAdminPluginConfig ConfigureApi(Action<Owin.IAppBuilder> builder);
     }
 
-    /// <summary>
-    /// List of know admin plugin host versions
-    /// </summary>
-    public enum AdminPluginHostVersion
-    {
-        /// <summary>
-        /// 0.1
-        /// </summary>
-        V0_1
-    }
+   
 }

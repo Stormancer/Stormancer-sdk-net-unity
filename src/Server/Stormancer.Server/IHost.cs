@@ -38,9 +38,16 @@ namespace Stormancer.Server
         IEnumerable<ISceneHost> EnumerateScenes();
 
         /// <summary>
-        /// Admin services registered in the application
+        /// Registers an admin API in the application
         /// </summary>
-        List<AdminServicesDescription> AdminServices { get; }
+        /// <param name="apiFactory">Factory method for the API</param>
+        void RegisterAdminApiFactory(Action<Owin.IAppBuilder> apiFactory);
+
+        /// <summary>
+        /// Registers a public API Owin handler
+        /// </summary>
+        /// <param name="apiFactory"></param>
+        void RegisterPublicApiFactory(Action<Owin.IAppBuilder> apiFactory);
 
         /// <summary>
         /// Application metadata
