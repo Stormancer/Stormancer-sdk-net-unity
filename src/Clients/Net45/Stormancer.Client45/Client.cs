@@ -432,6 +432,9 @@ namespace Stormancer
                 }
                 Disconnect();
 
+                _transport.Dispose();
+                
+
             }
 
         }
