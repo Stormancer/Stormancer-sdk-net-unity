@@ -15,9 +15,9 @@ namespace Stormancer.Client45.Infrastructure
     public class MsgPackSerializer : ISerializer
     {
         private readonly IEnumerable<IMsgPackSerializationPlugin> _plugins;
-        
+
         private ConcurrentDictionary<Type, object> _serializersCache = new ConcurrentDictionary<Type, object>();
-        
+
         /// <summary>
         /// Creates a new MsgPackSerializer object
         /// </summary>
@@ -48,7 +48,8 @@ namespace Stormancer.Client45.Infrastructure
         /// </remarks>
         public void Serialize<T>(T data, System.IO.Stream stream)
         {
-            var serializer = (MsgPack.Serialization.MessagePackSerializer<T>)_serializersCache.GetOrAdd(typeof(T),k=> MsgPack.Serialization.MessagePackSerializer.Get<T>(GetSerializationContext()));
+            var ctx = GetSerializationContext();
+            var serializer = ctx.GetSerializer<T>();// (MsgPack.Serialization.MessagePackSerializer<T>)_serializersCache.GetOrAdd(typeof(T),k=> MsgPack.Serialization.MessagePackSerializer.Get<T>(GetSerializationContext()));
 
 
             serializer.PackTo(Packer.Create(stream, false), data);
@@ -65,8 +66,8 @@ namespace Stormancer.Client45.Infrastructure
         /// <returns>An instance of T deserialized from the stream</returns>
         public T Deserialize<T>(System.IO.Stream stream)
         {
-
-            var serializer = (MsgPack.Serialization.MessagePackSerializer<T>)_serializersCache.GetOrAdd(typeof(T),k=> MsgPack.Serialization.MessagePackSerializer.Get<T>(GetSerializationContext()));
+            var ctx = GetSerializationContext();
+            var serializer = ctx.GetSerializer<T>();// (MsgPack.Serialization.MessagePackSerializer<T>)_serializersCache.GetOrAdd(typeof(T),k=> MsgPack.Serialization.MessagePackSerializer.Get<T>(GetSerializationContext()));
 
             var unpacker = Unpacker.Create(stream, false);
             unpacker.Read();
@@ -81,27 +82,28 @@ namespace Stormancer.Client45.Infrastructure
         /// </returns>
         protected virtual SerializationContext GetSerializationContext()
         {
-            var ctx = new MsgPack.Serialization.SerializationContext();
-            var jobjectSerializer = new MsgPackLambdaTypeSerializer<Newtonsoft.Json.Linq.JObject>(
-                (p, o) =>
-                {
+            if (System.Threading.Interlocked.CompareExchange(ref _initialized, 1, 0) == 0)
+            {
+                InitializeSerializationContext(_ctx);
 
-                    p.PackString(o.ToString());
-                },
-                p =>
-                {
-                    var json = p.LastReadData.AsString();
-                    return Newtonsoft.Json.Linq.JObject.Parse(json);
-                },
-                ctx
-                );
-            ctx.Serializers.Register(jobjectSerializer);
+            }
+            return _ctx;
+        }
+        private static int _initialized = 0;
+        private static MsgPack.Serialization.SerializationContext _ctx = new MsgPack.Serialization.SerializationContext();
+
+        protected virtual void InitializeSerializationContext(SerializationContext ctx)
+        {
+
+
+            ctx.Serializers.Register(new JsonTypeSerializer<Newtonsoft.Json.Linq.JToken>(ctx));
+            ctx.Serializers.Register(new JsonTypeSerializer<Newtonsoft.Json.Linq.JObject>(ctx));
+            ctx.Serializers.Register(new JsonTypeSerializer<Newtonsoft.Json.Linq.JArray>(ctx));
+            ctx.Serializers.Register(new JsonTypeSerializer<Newtonsoft.Json.Linq.JValue>(ctx));
             foreach (var plugin in _plugins)
             {
                 plugin.OnCreatingSerializationContext(ctx);
             }
- 
-            return ctx;
         }
 
         /// <summary>
@@ -118,11 +120,27 @@ namespace Stormancer.Client45.Infrastructure
 
     }
 
+    internal sealed class JsonTypeSerializer<T> : MsgPackLambdaTypeSerializer<T> where T : Newtonsoft.Json.Linq.JToken
+    {
+        public JsonTypeSerializer(SerializationContext ctx) : base((p, o) =>
+        {
+
+            p.PackString(o.ToString(Newtonsoft.Json.Formatting.None));
+        },
+                   p =>
+                   {
+                       var json = p.LastReadData.AsString();
+                       return (T)Newtonsoft.Json.Linq.JToken.Parse(json);
+                   }, ctx)
+        {
+        }
+    }
+
     /// <summary>
     /// A custom msgPack serializer that allows to declare its serialization logic using lambda methods
     /// </summary>
     /// <typeparam name="T">The type that this serializer will serialize/deserialize</typeparam>
-    public sealed class MsgPackLambdaTypeSerializer<T> : MessagePackSerializer<T>
+    public class MsgPackLambdaTypeSerializer<T> : MessagePackSerializer<T>
     {
         private readonly Action<MsgPack.Packer, T> _pack;
         private readonly Func<MsgPack.Unpacker, T> _unpack;
