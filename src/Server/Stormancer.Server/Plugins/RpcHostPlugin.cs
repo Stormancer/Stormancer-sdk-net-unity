@@ -31,12 +31,12 @@ namespace Stormancer.Plugins
         /// <param name="ctx">A plugin registration context</param>
         public void Build(HostPluginBuildContext ctx)
         {
-            ctx.SceneDependenciesRegistration += (IDependencyBuilder db) =>
+            ctx.SceneDependenciesRegistration += (IDependencyBuilder db, ISceneHost scene) =>
             {
                 db.Register<RpcService>().InstancePerScene();
             };
 
-            ctx.SceneCreating += scene =>
+            ctx.SceneCreated += scene =>
             {
                 scene.Metadata.Add(PluginName, Version);
 

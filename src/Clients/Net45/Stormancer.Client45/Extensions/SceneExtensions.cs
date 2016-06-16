@@ -242,6 +242,7 @@ namespace Stormancer
         /// <param name="ordered">True if order of the partial responses should be preserved when sent to the client, false otherwise.</param>
         public static void AddProcedure(this Scene scene, string route, Func<Stormancer.Plugins.RequestContext<IScenePeer>, Task> handler, bool ordered = true)
         {
+           
             var rpcService = scene.DependencyResolver.Resolve<Stormancer.Plugins.RpcClientPlugin.RpcService>();
             if (rpcService == null)
             {
