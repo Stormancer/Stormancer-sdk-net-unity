@@ -132,8 +132,21 @@ namespace Stormancer
         /// <param name="configuration">A configuration instance containing options for the client.</param>
         public Client(ClientConfiguration configuration)
         {
+            foreach (var plugin in configuration.Plugins)
+            {
+                plugin.Build(_pluginCtx);
+            }
+
             this._pingInterval = configuration.PingInterval;
-            this.DependencyResolver = new DefaultDependencyResolver();
+
+
+            this.DependencyResolver = new DefaultDependencyResolver(b =>
+            {
+                b.Register(this);
+
+                _pluginCtx.BuildingClientResolver?.Invoke(b);
+
+            });
             this._scheduler = configuration.Scheduler;
             this._logger = configuration.Logger;
             this._accountId = configuration.Account;
@@ -141,9 +154,9 @@ namespace Stormancer
             _apiClient = new ApiClient(configuration, _tokenHandler);
             this._transport = configuration.TransportFactory(new Dictionary<string, object> { { "ILogger", this._logger }, { "IScheduler", this._scheduler } });
             this._dispatcher = configuration.Dispatcher;
-            _requestProcessor = new Stormancer.Networking.Processors.RequestProcessor(_logger, Enumerable.Empty<IRequestModule>(),_systemSerializer);
+            _requestProcessor = new Stormancer.Networking.Processors.RequestProcessor(_logger, Enumerable.Empty<IRequestModule>(), _systemSerializer);
 
-            _scenesDispatcher = new Processors.SceneDispatcher(new[] {new RouteScenePacketHandler() });
+            _scenesDispatcher = new Processors.SceneDispatcher(new[] { new RouteScenePacketHandler() });
             this._dispatcher.AddPRocessor(_requestProcessor);
             this._dispatcher.AddPRocessor(_scenesDispatcher);
             this._metadata = configuration._metadata;
@@ -161,10 +174,7 @@ namespace Stormancer
 
             this._maxPeers = configuration.MaxPeers;
 
-            foreach (var plugin in configuration.Plugins)
-            {
-                plugin.Build(_pluginCtx);
-            }
+
             if (_pluginCtx.ClientCreated != null)
                 _pluginCtx.ClientCreated(this);
             Initialize();
@@ -294,7 +304,7 @@ namespace Stormancer
                 {
                     cts = new CancellationTokenSource();
                     _transport.Start("client", new ConnectionHandler(), cts.Token, null, (ushort)(_maxPeers + 1));
-                   
+
                 }
                 _serverConnection = await _transport.Connect(ci.TokenData.Endpoints[_transport.Name]);
 
@@ -323,8 +333,8 @@ namespace Stormancer
                 _serverConnection.Metadata.Add("serializer", result.SelectedSerializer);
             }
             await UpdateServerMetadata();
-           
-            var scene = new Scene(this._serverConnection, this,_pluginCtx.BuildingSceneResolver, sceneId, ci.Token, result);
+
+            var scene = new Scene(this._serverConnection, this, _pluginCtx.BuildingSceneResolver, sceneId, ci.Token, result);
 
             if (_pluginCtx.SceneCreated != null)
             {
@@ -421,6 +431,9 @@ namespace Stormancer
                     _syncClockSubscription.Dispose();
                 }
                 Disconnect();
+
+                _transport.Dispose();
+                
 
             }
 

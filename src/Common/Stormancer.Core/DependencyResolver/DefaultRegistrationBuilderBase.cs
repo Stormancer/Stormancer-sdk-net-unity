@@ -11,7 +11,20 @@ namespace Stormancer.Core.DependencyResolver
         public abstract Type SelfType { get; }
 
         private List<Type> _registrationTypes = new List<Type>();
-        public IEnumerable<Type> RegistrationTypes => _registrationTypes.AsEnumerable();
+        public IEnumerable<Type> RegistrationTypes
+        {
+            get
+            {
+                if (!_registrationTypes.Any())
+                {
+                    return new[] { SelfType };
+                }
+                else
+                {
+                    return _registrationTypes.AsEnumerable();
+                }
+            }
+        }
 
         public bool PreserveExistingDefaults { get; private set; } = false;
 

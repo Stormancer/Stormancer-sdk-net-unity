@@ -21,7 +21,7 @@ namespace Stormancer.Plugins
         /// <summary>
         /// Fires when the scene dependency resolver is built.
         /// </summary>
-        public Action<IDependencyBuilder> SceneDependenciesRegistration { get; set; }
+        public Action<IDependencyBuilder, ISceneHost> SceneDependenciesRegistration { get; set; }
 
         /// <summary>
         /// Fires just before the scene template is applied to a new scene.

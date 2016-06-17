@@ -176,12 +176,17 @@ namespace Stormancer
         /// <param name="ordered">True if order of the partial responses should be preserved when sent to the client, false otherwise.</param>
         public static void AddProcedure(this ISceneHost scene, string route, Func<Stormancer.Plugins.RequestContext<IScenePeerClient>, Task> handler, bool ordered = true)
         {
-            var rpcService = scene.DependencyResolver.Resolve<Stormancer.Plugins.RpcService>();
-            if (rpcService == null)
+            scene.Starting.Add(_ =>
             {
-                throw new NotSupportedException("RPC plugin not available.");
-            }
-            rpcService.AddProcedure(route, handler, ordered);
+                var rpcService = scene.DependencyResolver.Resolve<Stormancer.Plugins.RpcService>();
+                if (rpcService == null)
+                {
+                    throw new NotSupportedException("RPC plugin not available.");
+                }
+                rpcService.AddProcedure(route, handler, ordered);
+                return Task.FromResult(true);
+            });
+           
         }
 
         /// <summary>

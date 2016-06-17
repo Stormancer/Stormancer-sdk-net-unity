@@ -13,6 +13,10 @@ namespace Stormancer.Server.Admin
         /// Gets the name of the admin plugin tab
         /// </summary>
         string DisplayName { get; }
+
+        /// <summary>
+        /// Id of the plugin (directory)
+        /// </summary>
         string Id { get; }
         /// <summary>
         /// Sets the name of the admin plugin tab
@@ -20,6 +24,7 @@ namespace Stormancer.Server.Admin
         /// <param name="name">Name of the plugin tab</param>
         /// <returns>Current instance of the plugin config object</returns>
         IAdminPluginConfig Name(string name);
+
 
         /// <summary>
         /// Configure Admin Web API
@@ -29,14 +34,5 @@ namespace Stormancer.Server.Admin
         IAdminPluginConfig ConfigureApi(Action<Owin.IAppBuilder> builder);
     }
 
-    /// <summary>
-    /// List of know admin plugin host versions
-    /// </summary>
-    public enum AdminPluginHostVersion
-    {
-        /// <summary>
-        /// 0.1
-        /// </summary>
-        V0_1
-    }
+   
 }
