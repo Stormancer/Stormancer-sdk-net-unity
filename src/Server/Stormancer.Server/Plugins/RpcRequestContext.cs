@@ -13,13 +13,15 @@ namespace Stormancer.Plugins
     /// Context used to interact with a request on the server
     /// </summary>
     /// <typeparam name="T">Type of the remote peer</typeparam>
-    public class RequestContext<T> where T : IScenePeerClient
+    public class RequestContext<T> : IDisposable where T : IScenePeerClient
     {
         private ISceneHost _scene;
         private ushort id;
         private bool _ordered;
         private T _peer;
         private byte _msgSent;
+
+        private CancellationTokenSource _cts;
         /// <summary>
         /// Remote peer
         /// </summary>
@@ -40,9 +42,10 @@ namespace Stormancer.Plugins
             private set;
         }
 
-        internal RequestContext(T peer, ISceneHost scene, ushort id, bool ordered, Stream inputStream, CancellationToken token)
+        internal RequestContext(T peer, ISceneHost scene, ushort id, bool ordered, Stream inputStream, CancellationTokenSource cts)
         {
-            CancellationToken = token;
+            _cts = cts;
+            CancellationToken = cts.Token;
             this._scene = scene;
             this.id = id;
             this._ordered = ordered;
@@ -75,7 +78,7 @@ namespace Stormancer.Plugins
         /// </remarks>
         public void SendValue(Action<Stream> writer, PacketPriority priority = PacketPriority.MEDIUM_PRIORITY)
         {
-            if(CancellationToken.IsCancellationRequested)
+            if (CancellationToken.IsCancellationRequested)
             {
                 return;
             }
@@ -113,6 +116,19 @@ namespace Stormancer.Plugins
                  s.WriteByte(_msgSent);
                  WriteRequestId(s);
              }, PacketPriority.MEDIUM_PRIORITY, PacketReliability.RELIABLE_ORDERED);
+        }
+
+        /// <summary>
+        /// Disposes the request context
+        /// </summary>
+        public void Dispose()
+        {
+            if (_cts != null)
+            {
+                _cts.Dispose();
+                _cts = null;
+                InputStream.Dispose();
+            }
         }
     }
 }
