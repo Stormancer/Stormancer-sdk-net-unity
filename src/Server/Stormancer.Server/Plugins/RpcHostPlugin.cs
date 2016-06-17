@@ -194,42 +194,53 @@ namespace Stormancer.Plugins
 
                 var cts = CancellationTokenSource.CreateLinkedTokenSource(peerCancellationToken);
 
-                var ctx = new RequestContext<IScenePeerClient>(p.Connection, _scene, id, ordered, new SubStream(p.Stream, false), cts.Token);
+                var ctx = new RequestContext<IScenePeerClient>(p.Connection, _scene, id, ordered, new SubStream(p.Stream, false), cts);
                 var identifier = Tuple.Create(p.Connection.Id, id);
                 if (_runningRequests.TryAdd(identifier, cts))
                 {
                     handler.InvokeWrapping(ctx).ContinueWith(t =>
                     {
-                        _runningRequests.TryRemove(identifier, out cts);
+                        try
+                        {
+                            _runningRequests.TryRemove(identifier, out cts);
 
-                        if (t.Status == TaskStatus.RanToCompletion)
-                        {
-                            ctx.SendCompleted();
-                        }
-                        else if (t.Status == TaskStatus.Faulted)
-                        {
-                            var errorSent = false;
-                            var ex = t.Exception.InnerExceptions.OfType<ClientException>();
-                            if (ex.Any())
+                            if (t.Status == TaskStatus.RanToCompletion)
                             {
-                                ctx.SendError(string.Join("|", ex.Select(e => e.Message)));
-                                errorSent = true;
+                                ctx.SendCompleted();
                             }
-                            if (t.Exception.InnerExceptions.Any(e => !(e is ClientException)))
+                            else if (t.Status == TaskStatus.Faulted)
                             {
-                                string errorMessage = string.Format("An error occured while executing procedure '{0}'.", route);
-                                if (!errorSent)
+                                var errorSent = false;
+                                var ex = t.Exception.InnerExceptions.OfType<ClientException>();
+                                if (ex.Any())
                                 {
-                                    var errorId = Guid.NewGuid().ToString("N");
-                                    ctx.SendError($"An exception occurred on the server. Error {errorId}.");
-
-                                    errorMessage = $"Error {errorId}. " + errorMessage;
+                                    ctx.SendError(string.Join("|", ex.Select(e => e.Message)));
+                                    errorSent = true;
                                 }
+                                if (t.Exception.InnerExceptions.Any(e => !(e is ClientException)))
+                                {
+                                    string errorMessage = string.Format("An error occured while executing procedure '{0}'.", route);
+                                    if (!errorSent)
+                                    {
+                                        var errorId = Guid.NewGuid().ToString("N");
+                                        ctx.SendError($"An exception occurred on the server. Error {errorId}.");
 
-                                _scene.DependencyResolver.Resolve<ILogger>().Log(LogLevel.Error, "rpc.server", errorMessage, t.Exception);
+                                        errorMessage = $"Error {errorId}. " + errorMessage;
+                                    }
+
+                                    _scene.DependencyResolver.Resolve<ILogger>().Log(LogLevel.Error, "rpc.server", errorMessage, t.Exception);
+                                }
                             }
+                        }
+                        finally
+                        {
+                            ctx.Dispose();
                         }
                     });
+                }
+                else
+                {
+                    ctx.Dispose();
                 }
             }, new Dictionary<string, string> { { RpcHostPlugin.PluginName, RpcHostPlugin.Version
 } });
