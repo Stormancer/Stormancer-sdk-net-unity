@@ -13,15 +13,15 @@ namespace Stormancer.Plugins
     /// Context used to interact with a request on the server
     /// </summary>
     /// <typeparam name="T">Type of the remote peer</typeparam>
-    public class RequestContext<T> : IDisposable where T : IScenePeerClient
+    public class RequestContext<T>:IDisposable where T : IScenePeerClient
     {
         private ISceneHost _scene;
         private ushort id;
         private bool _ordered;
         private T _peer;
         private byte _msgSent;
-
         private CancellationTokenSource _cts;
+
         /// <summary>
         /// Remote peer
         /// </summary>
@@ -119,15 +119,15 @@ namespace Stormancer.Plugins
         }
 
         /// <summary>
-        /// Disposes the request context
+        /// Disposes the context
         /// </summary>
         public void Dispose()
         {
-            if (_cts != null)
+            if(_cts!=null)
             {
+                InputStream.Dispose();
                 _cts.Dispose();
                 _cts = null;
-                InputStream.Dispose();
             }
         }
     }

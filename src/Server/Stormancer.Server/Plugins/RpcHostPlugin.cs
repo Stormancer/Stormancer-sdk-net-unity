@@ -238,6 +238,10 @@ namespace Stormancer.Plugins
                         }
                     });
                 }
+                else
+                {
+                    ctx.Dispose();
+                }
             }, new Dictionary<string, string> { { RpcHostPlugin.PluginName, RpcHostPlugin.Version
 } });
         }
