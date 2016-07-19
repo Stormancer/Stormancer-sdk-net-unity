@@ -74,6 +74,8 @@
     <Compile Include="Components\ApplicationInfos.cs" />
     <Compile Include="Components\IEnvironment.cs" />
     <Compile Include="Components\IPeerInfosService.cs" />
+    <Compile Include="Components\IResourcePools.cs" />
+    <Compile Include="Components\NodeInfos.cs" />
     <Compile Include="DependencyResolver\InstanceScope.cs" />
     <Compile Include="DependencyResolver\InstanceScopeConfig.cs" />
     <Compile Include="DisconnectedArgs.cs" />

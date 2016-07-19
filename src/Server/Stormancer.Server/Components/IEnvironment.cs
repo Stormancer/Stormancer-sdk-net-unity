@@ -18,6 +18,12 @@ namespace Stormancer.Server.Components
         Task<ApplicationInfos> GetApplicationInfos();
 
         /// <summary>
+        /// Returns informations about the node running the host.
+        /// </summary>
+        /// <returns></returns>
+        Task<NodeInfos> GetNodeInfos();
+
+        /// <summary>
         /// Lists the available storage indices available for the application.
         /// </summary>
         /// <returns></returns>
