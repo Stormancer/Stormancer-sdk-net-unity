@@ -1,6 +1,6 @@
 {
     "host": {
-        "version": "1.6.*",
+        "version": "1.9.*",
         "type": "NET45"
     },
     references: [

@@ -21,9 +21,6 @@ namespace Stormancer.Server.Components
         /// </summary>
         public string Name { get; set; }
 
-       /// <summary>
-       /// Public ip of the node, if available (empty otherwise)
-       /// </summary>
-        public string PublicIp { get; set; }
+      
     }
 }
