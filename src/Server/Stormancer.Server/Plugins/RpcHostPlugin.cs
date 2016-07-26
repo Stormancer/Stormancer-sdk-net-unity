@@ -42,7 +42,7 @@ namespace Stormancer.Plugins
 
                 var processor = scene.DependencyResolver.Resolve<RpcService>();
 
-               // Register(processor);
+                // Register(processor);
                 scene.AddRoute(NextRouteName, p =>
                 {
                     processor.Next(p);
@@ -242,8 +242,7 @@ namespace Stormancer.Plugins
                 {
                     ctx.Dispose();
                 }
-            }, new Dictionary<string, string> { { RpcHostPlugin.PluginName, RpcHostPlugin.Version
-} });
+            }, new Dictionary<string, string> { { RpcHostPlugin.PluginName, RpcHostPlugin.Version } });
         }
 
         private CancellationToken GetCancellationTokenForPeer(IScenePeerClient peer)
