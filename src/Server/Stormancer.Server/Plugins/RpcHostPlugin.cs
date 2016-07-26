@@ -42,23 +42,27 @@ namespace Stormancer.Plugins
 
                 var processor = scene.DependencyResolver.Resolve<RpcService>();
 
-               // Register(processor);
+                // Register(processor);
                 scene.AddRoute(NextRouteName, p =>
                 {
                     processor.Next(p);
-                });
+                    return Task.FromResult(true);
+                }, o => o.AutoDisposePacketStream(false));
                 scene.AddRoute(CancellationRouteName, p =>
                 {
                     processor.Cancel(p);
-                });
+                    return Task.FromResult(true);
+                }, o => o);
                 scene.AddRoute(ErrorRouteName, p =>
                 {
                     processor.Error(p);
-                });
+                    return Task.FromResult(true);
+                }, o => o);
                 scene.AddRoute(CompletedRouteName, p =>
                 {
                     processor.Complete(p);
-                });
+                    return Task.FromResult(true);
+                }, o => o);
 
                 scene.Disconnected.Add(processor.PeerDisconnected);
 
@@ -185,64 +189,64 @@ namespace Stormancer.Plugins
         /// </remarks>
         public void AddProcedure(string route, Func<RequestContext<IScenePeerClient>, Task> handler, bool ordered)
         {
-            this._scene.AddRoute(route, p =>
-            {
-                var buffer = new byte[2];
-                p.Stream.Read(buffer, 0, 2);
-                var id = BitConverter.ToUInt16(buffer, 0);
-                var peerCancellationToken = GetCancellationTokenForPeer(p.Connection);
+            this._scene.AddRoute(route, async p =>
+             {
+                 var buffer = new byte[2];
+                 p.Stream.Read(buffer, 0, 2);
+                 var id = BitConverter.ToUInt16(buffer, 0);
+                 var peerCancellationToken = GetCancellationTokenForPeer(p.Connection);
 
-                var cts = CancellationTokenSource.CreateLinkedTokenSource(peerCancellationToken);
+                 var cts = CancellationTokenSource.CreateLinkedTokenSource(peerCancellationToken);
 
-                var ctx = new RequestContext<IScenePeerClient>(p.Connection, _scene, id, ordered, new SubStream(p.Stream, false), cts);
-                var identifier = Tuple.Create(p.Connection.Id, id);
-                if (_runningRequests.TryAdd(identifier, cts))
-                {
-                    handler.InvokeWrapping(ctx).ContinueWith(t =>
-                    {
-                        try
-                        {
-                            _runningRequests.TryRemove(identifier, out cts);
+                 var ctx = new RequestContext<IScenePeerClient>(p.Connection, _scene, id, ordered, new SubStream(p.Stream, false), cts);
+                 var identifier = Tuple.Create(p.Connection.Id, id);
+                 if (_runningRequests.TryAdd(identifier, cts))
+                 {
+                     try
+                     {
+                         await handler.InvokeWrapping(ctx);
 
-                            if (t.Status == TaskStatus.RanToCompletion)
-                            {
-                                ctx.SendCompleted();
-                            }
-                            else if (t.Status == TaskStatus.Faulted)
-                            {
-                                var errorSent = false;
-                                var ex = t.Exception.InnerExceptions.OfType<ClientException>();
-                                if (ex.Any())
-                                {
-                                    ctx.SendError(string.Join("|", ex.Select(e => e.Message)));
-                                    errorSent = true;
-                                }
-                                if (t.Exception.InnerExceptions.Any(e => !(e is ClientException)))
-                                {
-                                    string errorMessage = string.Format("An error occured while executing procedure '{0}'.", route);
-                                    if (!errorSent)
-                                    {
-                                        var errorId = Guid.NewGuid().ToString("N");
-                                        ctx.SendError($"An exception occurred on the server. Error {errorId}.");
+                         _runningRequests.TryRemove(identifier, out cts);
 
-                                        errorMessage = $"Error {errorId}. " + errorMessage;
-                                    }
 
-                                    _scene.DependencyResolver.Resolve<ILogger>().Log(LogLevel.Error, "rpc.server", errorMessage, t.Exception);
-                                }
-                            }
-                        }
-                        finally
-                        {
-                            ctx.Dispose();
-                        }
-                    });
-                }
-                else
-                {
-                    ctx.Dispose();
-                }
-            }, new Dictionary<string, string> { { RpcHostPlugin.PluginName, RpcHostPlugin.Version
+                         ctx.SendCompleted();
+
+
+                     }
+                     catch (AggregateException ae)
+                     {
+                         var errorSent = false;
+                         var ex = ae.InnerExceptions.OfType<ClientException>();
+                         if (ex.Any())
+                         {
+                             ctx.SendError(string.Join("|", ex.Select(e => e.Message)));
+                             errorSent = true;
+                         }
+                         if (ae.InnerExceptions.Any(e => !(e is ClientException)))
+                         {
+                             string errorMessage = string.Format("An error occured while executing procedure '{0}'.", route);
+                             if (!errorSent)
+                             {
+                                 var errorId = Guid.NewGuid().ToString("N");
+                                 ctx.SendError($"An exception occurred on the server. Error {errorId}.");
+
+                                 errorMessage = $"Error {errorId}. " + errorMessage;
+                             }
+
+                             _scene.DependencyResolver.Resolve<ILogger>().Log(LogLevel.Error, "rpc.server", errorMessage, ae);
+                         }
+                     }
+                     finally
+                     {
+                         ctx.Dispose();
+                     }
+
+                 }
+                 else
+                 {
+                     ctx.Dispose();
+                 }
+             }, o => o, new Dictionary<string, string> { { RpcHostPlugin.PluginName, RpcHostPlugin.Version
 } });
         }
 
