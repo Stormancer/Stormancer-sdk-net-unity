@@ -9,18 +9,72 @@ using System.Threading.Tasks;
 namespace Stormancer.Core
 {
     /// <summary>
+    /// Options when registering an handler to a route.
+    /// </summary>
+    public class RouteOptions : Dictionary<string, object>
+    {
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public RouteOptions()
+        {
+            AutoDisposePacketStream();
+        }
+        /// <summary>
+        /// The packet Stream should automatically be disposed at the end of the handler task.
+        /// </summary>
+        /// <param name="autoDispose"></param>
+        /// <returns></returns>
+        public RouteOptions AutoDisposePacketStream(bool autoDispose = true)
+        {
+            this["autoDisposeStream"] = autoDispose;
+            return this;
+        }
+
+        /// <summary>
+        /// Gets an option
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public T Get<T>(string key)
+        {
+            return (T)this[key];
+        }
+
+        /// <summary>
+        /// Sets an option
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        public void Set(string key, object value)
+        {
+
+        }
+    }
+
+    /// <summary>
     /// Represents a scene host.
     /// </summary>
     public interface ISceneHost : IScene
     {
+
         /// <summary>
         /// Adds a route handler to the scene
         /// </summary>
-        /// <param name="route">The name of the route</param>
-        /// <param name="handler">The route handler</param>
-        /// <param name="metadata">Optional metadata</param>
+        /// <param name="route"></param>
+        /// <param name="handler"></param>
+        /// <param name="metadata"></param>
         void AddRoute(string route, Action<Packet<IScenePeerClient>> handler, Dictionary<string, string> metadata = null);
 
+        /// <summary>
+        /// Adds a route handler to the scene with resource lifetime control.
+        /// </summary>
+        /// <param name="route"></param>
+        /// <param name="handler"></param>
+        /// <param name="options">Route options</param>
+        /// <param name="metadata"></param>
+        void AddRoute(string route, Func<Packet<IScenePeerClient>, Task> handler, Func<RouteOptions, RouteOptions> options, Dictionary<string, string> metadata = null);
         /// <summary>
         /// Sends a packet to the selected scene client peers.
         /// </summary>
@@ -84,12 +138,12 @@ namespace Stormancer.Core
         /// <summary>
         /// The name of the template used to build the scene.
         /// </summary>
-         string Template { get;}
+        string Template { get; }
 
         /// <summary>
         /// True if the scene is accessible without secure tokens
         /// </summary>
-         bool IsPublic { get;  }
+        bool IsPublic { get; }
 
         /// <summary>
         /// True if the scene is persistent
@@ -97,23 +151,23 @@ namespace Stormancer.Core
         /// <remarks>
         /// A persistent scene can be restarted after hibernation (for inactivity for instance). When a non persistent scene is destroyed, it's completely deleted from the cluster.
         /// </remarks>
-         bool IsPersistent { get;  }
+        bool IsPersistent { get; }
 
         /// <summary>
         /// Runs a task on the thread pool whose lifecycle is linked with the scene.
         /// </summary>
         /// <param name="runAction">The method that will be run on the thread pool.</param>
         /// <remarks>The task will be forcibly stopped (with a `TaskCancelledException`) as soon as the scene closes.</remarks>
-         Task RunTask(Func<Task> runAction);
+        Task RunTask(Func<Task> runAction);
 
         /// <summary>
         /// Runs a task on the thread pool whose lifecycle is linked with the scene.
         /// </summary>
         /// <param name="runAction">The method that will be run on the thread pool.</param>
         /// <remarks>The cancelation token provided to the task factory will be cancelled as soon as the scene closes. If it does not stop on its own then, the task will be forcibly stopped (with a `TaskCancelleException`) after 30s.</remarks>
-        Task RunTask(Func<CancellationToken,Task> runAction);
+        Task RunTask(Func<CancellationToken, Task> runAction);
 
-         /// <summary>
+        /// <summary>
         /// Creates an IObservable&lt;Packet&gt; instance that listen to events on the specified route.
         /// </summary>
         /// <param name="route">A string containing the name of the route to listen to.</param>
