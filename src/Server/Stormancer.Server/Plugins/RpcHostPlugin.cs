@@ -204,40 +204,53 @@ namespace Stormancer.Plugins
                  {
                      try
                      {
-                         await handler.InvokeWrapping(ctx);
-
-                         _runningRequests.TryRemove(identifier, out cts);
-
-
-                         ctx.SendCompleted();
-
-
-                     }
-                     catch (AggregateException ae)
-                     {
-                         var errorSent = false;
-                         var ex = ae.InnerExceptions.OfType<ClientException>();
-                         if (ex.Any())
+                         Exception e = null;
+                         bool errorOccured = false;
+                         try
                          {
-                             ctx.SendError(string.Join("|", ex.Select(e => e.Message)));
-                             errorSent = true;
+                             await handler.InvokeWrapping(ctx);
                          }
-                         if (ae.InnerExceptions.Any(e => !(e is ClientException)))
+                         catch (Exception ex)
                          {
-                             string errorMessage = string.Format("An error occured while executing procedure '{0}'.", route);
-                             if (!errorSent)
+                             errorOccured = true;
+                             e = ex;
+                         }
+                        
+
+                         if (!errorOccured)
+                         {
+
+                             ctx.SendCompleted();
+
+
+                         }
+                         else
+                         {
+                             var errorSent = false;
+                             var ex = e as ClientException;
+                             if (ex !=null )
                              {
-                                 var errorId = Guid.NewGuid().ToString("N");
-                                 ctx.SendError($"An exception occurred on the server. Error {errorId}.");
-
-                                 errorMessage = $"Error {errorId}. " + errorMessage;
+                                 ctx.SendError(string.Join("|", ex.Message));
+                                 errorSent = true;
                              }
+                             else
+                             { 
+                                 string errorMessage = string.Format("An error occured while executing procedure '{0}'.", route);
+                                 if (!errorSent)
+                                 {
+                                     var errorId = Guid.NewGuid().ToString("N");
+                                     ctx.SendError($"An exception occurred on the server. Error {errorId}.");
 
-                             _scene.DependencyResolver.Resolve<ILogger>().Log(LogLevel.Error, "rpc.server", errorMessage, ae);
+                                     errorMessage = $"Error {errorId}. " + errorMessage;
+                                 }
+
+                                 _scene.DependencyResolver.Resolve<ILogger>().Log(LogLevel.Error, "rpc.server", errorMessage, e);
+                             }
                          }
                      }
                      finally
                      {
+                         _runningRequests.TryRemove(identifier, out cts);
                          ctx.Dispose();
                      }
 
