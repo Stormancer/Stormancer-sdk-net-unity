@@ -29,60 +29,6 @@ namespace MsgPack.Serialization.DefaultSerializers
     // This file generated from DefaultSerializers.tt T4Template.
     // Do not modify this file. Edit DefaultMarshalers.tt instead.
 
-    internal sealed class System_DateTimeMessagePackSerializer : MessagePackSerializer
-    {
-        public System_DateTimeMessagePackSerializer(PackerCompatibilityOptions packerCompatibilityOptions)
-            : base(typeof(System.DateTime), packerCompatibilityOptions) { }
-
-        protected internal sealed override void PackToCore(Packer packer, object value)
-        {
-            packer.Pack(MessagePackConvert.FromDateTime((DateTime)value));
-        }
-
-        protected internal sealed override object UnpackFromCore(Unpacker unpacker)
-        {
-            try
-            {
-                return MessagePackConvert.ToDateTime(unpacker.LastReadData.AsInt64());
-            }
-            catch (ArgumentException ex)
-            {
-                throw new SerializationException(String.Format(CultureInfo.CurrentCulture, "The unpacked value is not expected type. {0}", ex.Message), ex);
-            }
-            catch (InvalidOperationException ex)
-            {
-                throw new SerializationException(String.Format(CultureInfo.CurrentCulture, "The unpacked value is not expected type. {0}", ex.Message), ex);
-            }
-        }
-    }
-
-    internal sealed class System_DateTimeOffsetMessagePackSerializer : MessagePackSerializer
-    {
-        public System_DateTimeOffsetMessagePackSerializer(PackerCompatibilityOptions packerCompatibilityOptions)
-            : base(typeof(System.DateTimeOffset), packerCompatibilityOptions) { }
-
-        protected internal sealed override void PackToCore(Packer packer, object value)
-        {
-            packer.Pack(MessagePackConvert.FromDateTimeOffset((System.DateTimeOffset)value));
-        }
-
-        protected internal sealed override object UnpackFromCore(Unpacker unpacker)
-        {
-            try
-            {
-                return MessagePackConvert.ToDateTimeOffset(unpacker.LastReadData.AsInt64());
-            }
-            catch (ArgumentException ex)
-            {
-                throw new SerializationException(String.Format(CultureInfo.CurrentCulture, "The unpacked value is not expected type. {0}", ex.Message), ex);
-            }
-            catch (InvalidOperationException ex)
-            {
-                throw new SerializationException(String.Format(CultureInfo.CurrentCulture, "The unpacked value is not expected type. {0}", ex.Message), ex);
-            }
-        }
-    }
-
     internal sealed class System_BooleanMessagePackSerializer : MessagePackSerializer
     {
         public System_BooleanMessagePackSerializer(PackerCompatibilityOptions packerCompatibilityOptions)
@@ -483,60 +429,6 @@ namespace MsgPack.Serialization.DefaultSerializers
 {
 	// This file generated from DefaultSerializers.tt T4Template.
 	// Do not modify this file. Edit DefaultMarshalers.tt instead.
-
-	internal sealed class System_DateTimeMessagePackSerializer : MessagePackSerializer< System.DateTime >
-	{
-		public System_DateTimeMessagePackSerializer( PackerCompatibilityOptions packerCompatibilityOptions )
-			: base( packerCompatibilityOptions ) { }
-
-		protected internal sealed override void PackToCore( Packer packer, System.DateTime value )
-		{
-			packer.Pack( MessagePackConvert.FromDateTime( value ) );
-		}
-
-		protected internal sealed override  System.DateTime UnpackFromCore( Unpacker unpacker )
-		{
-			try
-			{
-				return MessagePackConvert.ToDateTime( unpacker.LastReadData.AsInt64() ); 
-			}
-			catch( ArgumentException ex )
-			{
-				throw new SerializationException( String.Format( CultureInfo.CurrentCulture, "The unpacked value is not expected type. {0}", ex.Message ), ex );
-			}
-			catch( InvalidOperationException ex )
-			{
-				throw new SerializationException( String.Format( CultureInfo.CurrentCulture, "The unpacked value is not expected type. {0}", ex.Message ), ex );
-			}
-		}
-	}
-
-	internal sealed class System_DateTimeOffsetMessagePackSerializer : MessagePackSerializer< System.DateTimeOffset >
-	{
-		public System_DateTimeOffsetMessagePackSerializer( PackerCompatibilityOptions packerCompatibilityOptions )
-			: base( packerCompatibilityOptions ) { }
-
-		protected internal sealed override void PackToCore( Packer packer, System.DateTimeOffset value )
-		{
-			packer.Pack( MessagePackConvert.FromDateTimeOffset( value ) );
-		}
-
-		protected internal sealed override  System.DateTimeOffset UnpackFromCore( Unpacker unpacker )
-		{
-			try
-			{
-				return MessagePackConvert.ToDateTimeOffset( unpacker.LastReadData.AsInt64() ); 
-			}
-			catch( ArgumentException ex )
-			{
-				throw new SerializationException( String.Format( CultureInfo.CurrentCulture, "The unpacked value is not expected type. {0}", ex.Message ), ex );
-			}
-			catch( InvalidOperationException ex )
-			{
-				throw new SerializationException( String.Format( CultureInfo.CurrentCulture, "The unpacked value is not expected type. {0}", ex.Message ), ex );
-			}
-		}
-	}
 
 	internal sealed class System_BooleanMessagePackSerializer : MessagePackSerializer< System.Boolean >
 	{

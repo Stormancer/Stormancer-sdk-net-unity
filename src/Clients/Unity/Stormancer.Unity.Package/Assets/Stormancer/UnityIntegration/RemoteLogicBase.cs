@@ -20,15 +20,19 @@ namespace Stormancer
             }
         }
 
-        public void Awake()
+        public virtual void Awake()
         {
             if (RemoteScene == null)
+            {
                 Debug.LogWarning("Remote has not been set on a remoteLogic !");
+            }
             else
+            {
                 RemoteScene.LocalLogics.Add(this);
+            }
         }
 
-        public abstract void Init(Scene s);
+        public abstract void Init(Scene scene);
         public abstract void OnConnected();
     }
 }

@@ -59,16 +59,16 @@ namespace Stormancer.Networking
 
             var socketDescriptor = serverPort.HasValue ? new SocketDescriptor(serverPort.Value, null) : new SocketDescriptor();
             var startupResult = server.Startup(maxConnections, socketDescriptor, 1);
-            if(startupResult!= StartupResult.RAKNET_STARTED)
+            if (startupResult != StartupResult.RAKNET_STARTED)
             {
-				logger.Error ("Couldn't start raknet peer :" + startupResult);
+                logger.Error("Couldn't start raknet peer :" + startupResult);
                 throw new InvalidOperationException("Couldn't start raknet peer :" + startupResult);
             }
             server.SetMaximumIncomingConnections(maxConnections);
 
             _peer = server;
             startupTcs.SetResult(true);
-            logger.Info("Raknet transport " + _type+ " started");
+            logger.Info("Raknet transport " + _type + " started");
             while (!token.IsCancellationRequested)
             {
                 for (var packet = server.Receive(); packet != null; packet = server.Receive())
@@ -85,7 +85,7 @@ namespace Stormancer.Networking
                             {
                                 c = OnConnection(packet, server);
                             }
-                            catch(Exception e)
+                            catch (Exception e)
                             {
                                 UnityEngine.Debug.LogException(e);
                                 throw;
@@ -94,7 +94,7 @@ namespace Stormancer.Networking
 
                             if (_pendingConnections.TryGetValue(packet.systemAddress.ToString(), out tcs))
                             {
-                               
+
                                 tcs.SetResult(c);
                                 logger.Trace("Task for the connection request to {0} completed.", packet.systemAddress.ToString());
                             }
@@ -107,7 +107,7 @@ namespace Stormancer.Networking
 
                         case (byte)DefaultMessageIDTypes.ID_DISCONNECTION_NOTIFICATION:
                             logger.Trace("{0} disconnected.", packet.systemAddress.ToString());
-                            OnDisconnection(packet, server,"CLIENT_DISCONNECTED");
+                            OnDisconnection(packet, server, "CLIENT_DISCONNECTED");
                             break;
                         case (byte)DefaultMessageIDTypes.ID_CONNECTION_LOST:
                             logger.Trace("{0} lost the connection.", packet.systemAddress.ToString());
@@ -151,11 +151,11 @@ namespace Stormancer.Networking
             IConnection c = CreateNewConnection(packet.guid, server);
             var ctx = new PeerConnectedContext { Connection = c };
             var pconnected = _connectionHandler.PeerConnected;
-            if(pconnected !=null)
+            if (pconnected != null)
             {
                 pconnected(ctx);
             }
-            
+
             c = ctx.Connection;
             server.DeallocatePacket(packet);
             _handler.NewConnection(c);
@@ -170,20 +170,28 @@ namespace Stormancer.Networking
         }
 
 
-        private void OnDisconnection(RakNet.Packet packet, RakPeerInterface server,string reason)
+        private void OnDisconnection(RakNet.Packet packet, RakPeerInterface server, string reason)
         {
             logger.Trace("Disconnected from endpoint {0}", packet.systemAddress);
             var c = RemoveConnection(packet.guid);
             server.DeallocatePacket(packet);
 
-            _handler.CloseConnection(c,reason);
+            _handler.CloseConnection(c, reason);
 
             var action = ConnectionClosed;
             if (action != null)
             {
                 action(c);
             }
-            c.ConnectionClosed(reason);
+
+            if (c != null)
+            {
+                var a = c.ConnectionClosed;
+                if (a != null)
+                {
+                    a(reason);
+                }
+            }
         }
 
         private void OnMessageReceived(RakNet.Packet packet)

@@ -137,6 +137,7 @@ namespace Stormancer
             {
                 throw new NotSupportedException("RPC plugin not available.");
             }
+            
             return rpcService.Rpc(route, writer, priority);
         }
 
@@ -188,6 +189,11 @@ namespace Stormancer
         public static Task RpcVoid(this Scene scene, string route, Action<Stream> writer, PacketPriority priority = PacketPriority.MEDIUM_PRIORITY)
         {
             return scene.Rpc(route, writer, priority).DefaultIfEmpty().ToVoidTask();
+        }
+
+        public static Task RpcVoid<TData>(this Scene scene, string route, TData data, PacketPriority priority = PacketPriority.MEDIUM_PRIORITY)
+        {
+            return scene.RpcVoid(route, stream => scene.Host.Serializer().Serialize(data, stream), priority);
         }
 
         /// <summary>

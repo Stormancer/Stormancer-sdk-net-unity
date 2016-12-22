@@ -24,6 +24,8 @@ namespace Stormancer.Cluster.Application
 
         public string ContentType { get; set; }
 
-        public int Version { get; set; } 
+        public int Version { get; set; }
+
+        public string DeploymentId { get; set; }
     }
 }

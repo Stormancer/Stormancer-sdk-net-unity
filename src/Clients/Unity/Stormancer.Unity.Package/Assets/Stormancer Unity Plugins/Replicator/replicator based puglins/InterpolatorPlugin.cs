@@ -10,16 +10,18 @@ public class InterpolatorPlugin : Stormancer.SyncBehaviourBase
     private Vector3 _lastPos = Vector3.zero;
     private Vector3 _lastVect = Vector3.zero;
     private Quaternion _lastRot = Quaternion.identity;
+    private long _lastTimeStamp;
 
     private Vector3 _targetPos = Vector3.zero;
     private Vector3 _targetVect = Vector3.zero;
     private Quaternion _targetRot = Quaternion.identity;
+    private long _targetTimeStamp;
+
+    private bool _positionSet = false;
 
     private Vector3 P1 = Vector3.zero;
     private Vector3 P2 = Vector3.zero;
-    private float _currentSpan;
-    private float _targetSpan = 0.2f;
-    
+
     public bool Bezier = true;
     public bool Extrapolate = true;
 
@@ -40,56 +42,80 @@ public class InterpolatorPlugin : Stormancer.SyncBehaviourBase
     {
         using (var reader = new BinaryReader(stream))
         {
-            var stamp = reader.ReadInt64();
+            var timeStamp = reader.ReadInt64();
+
+            if (_lastChanged >= timeStamp)
+            {
+                return;
+            }
+
+            _lastChanged = timeStamp;
 
             float x = 0;
             float y = 0;
             float z = 0;
 
-            if (ReceivePositionX == true)
+            if (ReceivePositionX)
+            {
                 x = reader.ReadSingle();
-            if (ReceivePositionY == true)
+            }
+            if (ReceivePositionY)
+            {
                 y = reader.ReadSingle();
-            if (ReceivePositionZ == true)
+            }
+            if (ReceivePositionZ)
+            {
                 z = reader.ReadSingle();
+            }
 
             float vx = 0;
             float vy = 0;
             float vz = 0;
 
-            if (ReceivePositionX == true)
+            if (ReceivePositionX)
+            {
                 vx = reader.ReadSingle();
-            if (ReceivePositionY == true)
+            }
+            if (ReceivePositionY)
+            {
                 vy = reader.ReadSingle();
-            if (ReceivePositionZ == true)
+            }
+            if (ReceivePositionZ)
+            {
                 vz = reader.ReadSingle();
+            }
 
             float rx = 0;
             float ry = 0;
             float rz = 0;
 
-            if (ReceiveRotationX == true)
+            if (ReceiveRotationX)
+            {
                 rx = reader.ReadSingle();
-            if (ReceiveRotationY == true)
+            }
+            if (ReceiveRotationY)
+            {
                 ry = reader.ReadSingle();
-            if (ReceiveRotationZ == true)
+            }
+            if (ReceiveRotationZ)
+            {
                 rz = reader.ReadSingle();
+            }
 
             var rot = new Quaternion();
             rot = Quaternion.Euler(rx, ry, rz);
 
-            if (LastChanged < stamp)
-            {
-                LastChanged = stamp;
-                    SetNextPos(new Vector3(x, y, z), new Vector3(vx, vy, vz), rot);
-            }
+
+            SetNextPos(new Vector3(x, y, z), new Vector3(vx, vy, vz), rot, timeStamp);
         }
     }
 
-    public void SetNextPos(Vector3 pos, Vector3 vect, Quaternion rot)
+    public void SetNextPos(Vector3 pos, Vector3 vect, Quaternion rot, long timeStamp)
     {
-       // Debug.Log(pos + "  ||  " + vect + "  ||  " + rot);
-        _targetSpan = ((float)timeBetweenUpdate) / 1000f;
+
+        // Debug.Log(pos + "  ||  " + vect + "  ||  " + rot);
+        _lastTimeStamp = TimeStamp;
+        _targetTimeStamp = timeStamp;
         ReceivedNewPos = true;
 
         _lastVect = _targetVect;
@@ -98,33 +124,41 @@ public class InterpolatorPlugin : Stormancer.SyncBehaviourBase
         _targetVect = vect;
         _targetRot = rot;
 
-        _currentSpan = 0;
+        _positionSet = true;
     }
 
-    void Update ()
+    void Update()
     {
+        if (!_positionSet)
+        {
+            return;
+        }
+
+        var span = (float)(_targetTimeStamp - _lastTimeStamp) / 1000;
+        var dt = (float)(TimeStamp - _lastTimeStamp) / 1000;
+        var perc = dt / span;
+
         if (ReceivedNewPos == true)
         {
             _lastPos = transform.position;
             _lastRot = transform.rotation;
-            P1 = _lastPos + _lastVect * _targetSpan / 3;
-            P2 = _targetPos - _targetVect * _targetSpan / 3;
+            P1 = _lastPos + _lastVect * span / 3;
+            P2 = _targetPos - _targetVect * span / 3;
             ReceivedNewPos = false;
             Debug.DrawLine(_lastPos, P1, Color.gray, 1.0f);
             Debug.DrawLine(P1, P2, Color.gray, 1.0f);
             Debug.DrawLine(P2, _targetPos, Color.gray, 1.0f);
         }
 
-
-        _currentSpan += Time.deltaTime;
-        if (_currentSpan < _targetSpan)
+        if (dt < span)
         {
-            float perc = _currentSpan / _targetSpan;
-            if (Bezier == false)
+            if (!Bezier)
+            {
                 transform.position = Vector3.Lerp(_lastPos, _targetPos, perc);
+            }
             else
             {
-                var l1 = Vector3.Lerp(_lastPos, P1 , perc);
+                var l1 = Vector3.Lerp(_lastPos, P1, perc);
                 var l2 = Vector3.Lerp(P1, P2, perc);
                 var l3 = Vector3.Lerp(P2, _targetPos, perc);
 
@@ -140,17 +174,9 @@ public class InterpolatorPlugin : Stormancer.SyncBehaviourBase
             }
             transform.rotation = Quaternion.Lerp(_lastRot, _targetRot, perc);
         }
-        else if (Extrapolate == true)
+        else if (Extrapolate)
         {
-            _lastPos = transform.position;
-            _lastVect = _targetVect;
-            _lastRot = transform.rotation;
-
-            _targetPos = _targetPos + (_targetVect * _targetSpan);
-
-            P1 = _lastPos + _lastVect * _targetSpan / 3;
-            P2 = _targetPos - _targetVect * _targetSpan / 3;
-            _currentSpan = 0;
+            transform.position = (dt - span) * _targetVect + _targetPos;
         }
-	}
+    }
 }
