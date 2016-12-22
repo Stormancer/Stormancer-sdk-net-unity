@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reactive.Linq;
 using Stormancer.Plugins;
+using Stormancer.Diagnostics;
 
 namespace Stormancer
 {
@@ -176,9 +177,11 @@ namespace Stormancer
         /// <param name="ordered">True if order of the partial responses should be preserved when sent to the client, false otherwise.</param>
         public static void AddProcedure(this ISceneHost scene, string route, Func<Stormancer.Plugins.RequestContext<IScenePeerClient>, Task> handler, bool ordered = true)
         {
+           
             scene.Starting.Add(_ =>
             {
                 var rpcService = scene.DependencyResolver.Resolve<Stormancer.Plugins.RpcService>();
+                scene.DependencyResolver.Resolve<ILogger>().Trace("rpc", $"Adding procedure in starting event'{route}'");
                 if (rpcService == null)
                 {
                     throw new NotSupportedException("RPC plugin not available.");

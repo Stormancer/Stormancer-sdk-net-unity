@@ -60,14 +60,6 @@ namespace Stormancer.Core
     {
 
         /// <summary>
-        /// Adds a route handler to the scene
-        /// </summary>
-        /// <param name="route"></param>
-        /// <param name="handler"></param>
-        /// <param name="metadata"></param>
-        void AddRoute(string route, Action<Packet<IScenePeerClient>> handler, Dictionary<string, string> metadata = null);
-
-        /// <summary>
         /// Adds a route handler to the scene with resource lifetime control.
         /// </summary>
         /// <param name="route"></param>
