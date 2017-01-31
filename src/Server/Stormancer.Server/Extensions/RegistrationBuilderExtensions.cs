@@ -74,7 +74,7 @@ namespace Stormancer
 
             return builder.AddOptions(data =>
             {
-                data["InstanceScope"] = InstanceScope.PerDependency;
+                data["InstanceScope"] = new InstanceScopeConfig { Scope= InstanceScope.PerDependency };
             });
         }
     }
