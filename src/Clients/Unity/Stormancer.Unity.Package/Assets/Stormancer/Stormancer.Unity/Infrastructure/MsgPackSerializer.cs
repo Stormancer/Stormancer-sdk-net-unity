@@ -41,7 +41,7 @@ namespace Stormancer.Client45.Infrastructure
         {
 
             var serializer = (MsgPack.Serialization.MessagePackSerializer<T>)_serializersCache.GetOrAdd(typeof(T), k => MsgPack.Serialization.MessagePackSerializer.Create<T>(GetSerializationContext()));
-
+            
             var unpacker = Unpacker.Create(stream, false);
             unpacker.Read();
             return serializer.UnpackFrom(unpacker);

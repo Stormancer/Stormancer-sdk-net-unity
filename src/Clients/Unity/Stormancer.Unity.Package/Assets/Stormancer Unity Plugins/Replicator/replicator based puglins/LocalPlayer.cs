@@ -31,28 +31,47 @@ public class LocalPlayer : Stormancer.SyncBehaviourBase
         {
 
             writer.Write(Clock.Clock);
-            if (SendPositionX == true)
+            if (SendPositionX)
+            {
                 writer.Write(this.transform.position.x);
-            if (SendPositionY == true)
+            }
+            if (SendPositionY)
+            {
                 writer.Write(this.transform.position.y);
-            if (SendPositionZ == true)
+            }
+            if (SendPositionZ)
+            {
                 writer.Write(this.transform.position.z);
-
-            if (SendPositionX == true)
-                writer.Write(PlayerRigidbody.velocity.x);
-            if (SendPositionY == true)
+            }
+            if (SendPositionX)
+            {
+                writer.Write(PlayerRigidbody.velocity.x);               
+            }
+            if (SendPositionY)
+            {
                 writer.Write(PlayerRigidbody.velocity.y);
-            if (SendPositionZ == true)
+            }
+            if (SendPositionZ)
+            {
                 writer.Write(PlayerRigidbody.velocity.z);
+            }
+
+            
 
             var rot = this.transform.rotation.eulerAngles;
 
-            if (SendRotationX == true)
+            if (SendRotationX)
+            {
                 writer.Write(rot.x);
-            if (SendRotationY == true)
+            }
+            if (SendRotationY)
+            {
                 writer.Write(rot.y);
-            if (SendRotationZ == true)
+            }
+            if (SendRotationZ)
+            {
                 writer.Write(rot.z);
+            }
         }
     }
 
@@ -74,9 +93,9 @@ public class LocalPlayer : Stormancer.SyncBehaviourBase
             var rz = reader.ReadSingle();
             var rw = reader.ReadSingle();
 
-            if (LastChanged < stamp)
+            if (_lastChanged < stamp)
             {
-                LastChanged = stamp;
+                _lastChanged = stamp;
                 Stormancer.MainThread.Post(() =>
                 {
                     this.transform.position = new Vector3(x, y, z);

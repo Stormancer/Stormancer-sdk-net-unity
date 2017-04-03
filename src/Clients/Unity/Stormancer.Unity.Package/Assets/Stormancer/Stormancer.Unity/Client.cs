@@ -89,14 +89,7 @@ namespace Stormancer
 
 
         private readonly IScheduler _scheduler;
-        private StormancerResolver _DependencyResolver;
-        public StormancerResolver DependencyResolver
-        {
-            get
-            {
-                return _DependencyResolver;
-            }
-        }
+        public StormancerResolver DependencyResolver { get; private set; }
 
         /// <summary>
         /// An user specified logger.
@@ -118,15 +111,15 @@ namespace Stormancer
         {
             this._pingInterval = configuration.PingInterval;
             this._scheduler = configuration.Scheduler;
-            _DependencyResolver = new StormancerResolver();
-            _DependencyResolver.Register<ILogger>(() => configuration.Logger);
-            _DependencyResolver.Register(() => new ApiClient(configuration, DependencyResolver));
-            _DependencyResolver.Register<ITokenHandler>(() => new TokenHandler());
-            _DependencyResolver.RegisterComponent<IConnectionHandler>(new IConnectionHandler());
-            _DependencyResolver.RegisterComponent<IClock>(new IClock(this));
+            DependencyResolver = new StormancerResolver();
+            DependencyResolver.Register<ILogger>(() => configuration.Logger);
+            DependencyResolver.Register(() => new ApiClient(configuration, DependencyResolver));
+            DependencyResolver.Register<ITokenHandler>(() => new TokenHandler());
+            DependencyResolver.RegisterComponent<IConnectionHandler>(new IConnectionHandler());
+            DependencyResolver.RegisterComponent<IClock>(new IClock(this));
 
 #if UNITY_EDITOR
-            IConnectionHandler temp = _DependencyResolver.Resolve<IConnectionHandler>();
+            IConnectionHandler temp = DependencyResolver.Resolve<IConnectionHandler>();
             temp.PeerConnected += (PeerConnectedContext pcc) =>
             {
                 ConnectionWrapper connection = new ConnectionWrapper(pcc.Connection, configuration.Plugins.OfType<EditorPlugin.StormancerEditorPlugin>().First());
@@ -360,6 +353,10 @@ namespace Stormancer
         private IDisposable _syncClockSubscription;
         private void StartSyncClock()
         {
+            if (this._syncClockSubscription != null)
+            {
+                return;
+            }
             this._syncClockSubscription = this._scheduler.SchedulePeriodic(this._pingInterval, () =>
             {
                 this.SyncClockImpl();
@@ -475,6 +472,8 @@ namespace Stormancer
         /// </summary>
         public void Disconnect()
         {
+            using (this._syncClockSubscription)
+            { };
             if (_serverConnection != null)
             {
                 _serverConnection.Close();

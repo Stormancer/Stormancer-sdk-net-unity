@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Collections;
 using Stormancer;
 using Stormancer.Core;
+using System;
+using System.Threading.Tasks;
 
 namespace Stormancer
 {
@@ -13,22 +15,20 @@ namespace Stormancer
         public bool DisconnectOnUnLoad = true;
         public bool Connected = false;
 
-        private List<RemoteLogicBase> _LocalLogics;
+        private List<RemoteLogicBase> _localLogics = new List<RemoteLogicBase>();
         public List<RemoteLogicBase> LocalLogics
-        { get
+        {
+            get
             {
-                if (_LocalLogics == null)
-                    _LocalLogics = new List<RemoteLogicBase>();
-                return _LocalLogics;
+                return _localLogics;
             }
-            private set { }
         }
-        
-        public Scene Scene;
+
+        public Scene Scene { get; private set; }
 
         void Start()
         {
-            if (ConnectOnLoad == true)
+            if (ConnectOnLoad)
             {
                 ConnectScene();
             }
@@ -36,9 +36,19 @@ namespace Stormancer
 
         public void ConnectScene()
         {
-            Scene = ClientProvider.GetPublicScene(SceneId, "");
-            if (Scene != null)
+            ClientProvider.GetPublicScene(SceneId, "").Then(scene => InitSceneAndConnect(scene));
+        }
+
+        public void ConnectPrivateScene(string token)
+        {
+            ClientProvider.GetPrivateScene(token).Then(scene => InitSceneAndConnect(scene));
+        }
+
+        private void InitSceneAndConnect(Scene scene)
+        {
+            if (scene != null)
             {
+                Scene = scene;
                 foreach (RemoteLogicBase logic in LocalLogics)
                 {
                     logic.Init(Scene);
@@ -46,7 +56,7 @@ namespace Stormancer
 
                 Scene.Connect().ContinueWith(t =>
                 {
-                    if (Scene.Connected == true)
+                    if (Scene.Connected)
                     {
                         Debug.Log("connected to scene: " + SceneId);
                         Connected = true;
@@ -61,6 +71,7 @@ namespace Stormancer
                     }
                 });
             }
+
         }
 
         void Disconnect()
@@ -70,10 +81,11 @@ namespace Stormancer
                 ClientProvider.DisconnectScene(SceneId);
             }
         }
+        
 
-        void onDestroy()
+        void OnDestroy()
         {
-            if (DisconnectOnUnLoad == true)
+            if (DisconnectOnUnLoad)
             {
                 Disconnect();
             }
@@ -82,6 +94,7 @@ namespace Stormancer
         void OnApplicationQuit()
         {
             Disconnect();
+            ClientProvider.CloseClient();
         }
     }
 }

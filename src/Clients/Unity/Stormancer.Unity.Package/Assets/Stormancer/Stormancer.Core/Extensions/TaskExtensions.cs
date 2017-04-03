@@ -8,24 +8,6 @@ namespace Stormancer
 {
     public static class TaskExtensions
     {
-        public static Task FromException(Exception ex)
-        {
-            var tcs = new TaskCompletionSource<bool>();
-
-            tcs.SetException(ex);
-
-            return tcs.Task;
-        }
-
-        public static Task<TResult> FromException<TResult>(Exception ex)
-        {
-            var tcs = new TaskCompletionSource<TResult>();
-
-            tcs.SetException(ex);
-
-            return tcs.Task;
-        }
-
         public static Task InvokeWrapping(this Func<Task> func)
         {
             try
@@ -34,7 +16,7 @@ namespace Stormancer
             }
             catch  (Exception ex)
             {
-                return FromException(ex);
+                return TaskHelper.FromException(ex);
             }
         }
 
@@ -46,7 +28,7 @@ namespace Stormancer
             }
             catch (Exception ex)
             {
-                return FromException<TResult>(ex);
+                return TaskHelper.FromException<TResult>(ex);
             }
         }
 
@@ -58,7 +40,7 @@ namespace Stormancer
             }
             catch (Exception ex)
             {
-                return FromException(ex);
+                return TaskHelper.FromException(ex);
             }
         }
 
@@ -70,8 +52,9 @@ namespace Stormancer
             }
             catch (Exception ex)
             {
-                return FromException<TResult>(ex);
+                return TaskHelper.FromException<TResult>(ex);
             }
         }
+        
     }
 }
