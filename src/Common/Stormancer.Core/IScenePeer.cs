@@ -30,5 +30,10 @@ namespace Stormancer.Core
 
         long Id { get; }
 
+        string SceneId { get; set; }
+        uint ShardId { get; set; }
+
     }
+
+    
 }

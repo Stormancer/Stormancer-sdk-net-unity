@@ -13,7 +13,7 @@ namespace Stormancer.Plugins
     /// Context used to interact with a request on the server
     /// </summary>
     /// <typeparam name="T">Type of the remote peer</typeparam>
-    public class RequestContext<T>:IDisposable where T : IScenePeerClient
+    public class RequestContext<T>:IDisposable where T : IScenePeer
     {
         private ISceneHost _scene;
         private ushort id;
@@ -82,7 +82,7 @@ namespace Stormancer.Plugins
             {
                 return;
             }
-            _scene.Send(new MatchPeerFilter(_peer), RpcHostPlugin.NextRouteName, s =>
+            _scene.Send(GetFilter(_peer), RpcHostPlugin.NextRouteName, s =>
              {
 
                  WriteRequestId(s);
@@ -91,14 +91,29 @@ namespace Stormancer.Plugins
             _msgSent = 1;
         }
 
-
+        private PeerFilter GetFilter(T peer)
+        {
+            if(typeof(T) is IScenePeer)
+            {
+                var scenePeer = (IScenePeer)peer;
+                return new MatchSceneFilter(scenePeer.SceneId) { ShardId = scenePeer.ShardId };
+            }
+            else if(typeof(T) is IScenePeerClient)
+            {
+                return new MatchPeerFilter((IScenePeerClient)peer);
+            }
+            else
+            {
+                throw new InvalidOperationException($"T is {typeof(T)}. Expecting IScenePeer or IScenePeerClient");
+            }
+        }
         internal void SendError(string errorMsg)
         {
             if (CancellationToken.IsCancellationRequested)
             {
                 return;
             }
-            this._scene.Send(new MatchPeerFilter(_peer), RpcHostPlugin.ErrorRouteName, s =>
+            this._scene.Send(GetFilter(_peer), RpcHostPlugin.ErrorRouteName, s =>
             {
                 WriteRequestId(s);
                 _peer.Serializer().Serialize(errorMsg, s);
@@ -111,7 +126,7 @@ namespace Stormancer.Plugins
             {
                 return;
             }
-            this._scene.Send(new MatchPeerFilter(_peer), RpcHostPlugin.CompletedRouteName, s =>
+            this._scene.Send(GetFilter(_peer), RpcHostPlugin.CompletedRouteName, s =>
              {
                  s.WriteByte(_msgSent);
                  WriteRequestId(s);

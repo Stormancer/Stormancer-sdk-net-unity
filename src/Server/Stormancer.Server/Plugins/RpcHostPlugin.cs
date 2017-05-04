@@ -20,7 +20,8 @@ namespace Stormancer.Plugins
         internal const string NextRouteName = "stormancer.rpc.next";
         internal const string ErrorRouteName = "stormancer.rpc.error";
         internal const string CompletedRouteName = "stormancer.rpc.completed";
-        internal const string CancellationRouteName = "stormancer.rpc.cancel";
+        internal const string CancellationRouteName = "stormancer.rpc.cancel.client";
+
 
         internal const string Version = "1.1.0";
         internal const string PluginName = "stormancer.plugins.rpc";
@@ -36,7 +37,7 @@ namespace Stormancer.Plugins
                 db.Register<RpcService>().InstancePerScene();
             };
 
-            ctx.SceneCreated += scene =>
+            ctx.SceneCreated += (ISceneHost scene) =>
             {
                 scene.Metadata.Add(PluginName, Version);
 
@@ -64,7 +65,30 @@ namespace Stormancer.Plugins
                     return Task.FromResult(true);
                 }, o => o);
 
+
+                scene.AddInternalRoute(NextRouteName, async p =>
+                {
+                    processor.Next(p);
+                    await Task.FromResult(true);
+                }, o => o.AutoDisposePacketStream(false));
+                scene.AddInternalRoute(CancellationRouteName, p =>
+                {
+                    processor.Cancel(p);
+                    return Task.FromResult(true);
+                }, o => o);
+                scene.AddInternalRoute(ErrorRouteName, p =>
+                {
+                    processor.Error(p);
+                    return Task.FromResult(true);
+                }, o => o);
+                scene.AddInternalRoute(CompletedRouteName, p =>
+                {
+                    processor.Complete(p);
+                    return Task.FromResult(true);
+                }, o => o);
+
                 scene.Disconnected.Add(processor.PeerDisconnected);
+                scene.Shuttingdown.Add(processor.SceneShuttingDown);
 
 
             };
@@ -82,16 +106,28 @@ namespace Stormancer.Plugins
     {
 
         private ushort _currentRequestId = 0;
-        private class Request
+        private class Request<T> where T : IScenePeer
         {
             public bool HasCompleted = false;
-            public IObserver<Packet<IScenePeerClient>> Observer { get; set; }
+            public IObserver<Packet<T>> Observer { get; set; }
             public TaskCompletionSource<bool> Tcs = new TaskCompletionSource<bool>();
         }
+        private class RunningRequest<T> where T : IScenePeer
+        {
+            public RequestContext<T> ctx;
+            public CancellationTokenSource cts;
+        }
+
         private readonly object _lock = new object();
-        private readonly ConcurrentDictionary<ushort, Request> _pendingRequests = new ConcurrentDictionary<ushort, Request>();
+        private readonly ConcurrentDictionary<ushort, Request<IScenePeerClient>> _pendingRequests = new ConcurrentDictionary<ushort, Request<IScenePeerClient>>();
+        private readonly ConcurrentDictionary<ushort, Request<IScenePeer>> _pendingInternalRequests = new ConcurrentDictionary<ushort, Request<IScenePeer>>();
+
+
         private ConcurrentDictionary<Tuple<long, ushort>, CancellationTokenSource> _runningRequests = new ConcurrentDictionary<Tuple<long, ushort>, CancellationTokenSource>();
+        private ConcurrentDictionary<Tuple<string, uint, ushort>, RunningRequest<IScenePeer>> _runningInternalRequests = new ConcurrentDictionary<Tuple<string, uint, ushort>, RunningRequest<IScenePeer>>();
+
         private ConcurrentDictionary<long, CancellationTokenSource> _peersCts = new ConcurrentDictionary<long, CancellationTokenSource>();
+        private ConcurrentDictionary<string, CancellationTokenSource> _sceneCts = new ConcurrentDictionary<string, CancellationTokenSource>();
 
         private readonly ISceneHost _scene;
 
@@ -106,7 +142,7 @@ namespace Stormancer.Plugins
         }
 
         /// <summary>
-        /// Starts a RPC to the scene host.
+        /// Starts a RPC to the provided peer.
         /// </summary>
         /// <param name="route">The remote route on which the message will be sent.</param>
         /// <param name="writer">The writer used to build the request's content.</param>
@@ -130,7 +166,7 @@ namespace Stormancer.Plugins
                     //    throw new InvalidOperationException("The target remote route does not support the plugin RPC version " + RpcHostPlugin.Version);
                     //}
 
-                    var rq = new Request { Observer = observer };
+                    var rq = new Request<IScenePeerClient> { Observer = observer };
                     var id = this.ReserveId();
                     if (_pendingRequests.TryAdd(id, rq))
                     {
@@ -155,7 +191,7 @@ namespace Stormancer.Plugins
                     return () =>
                     {
                         linkedCts.Dispose();
-                        Request _;
+                        Request<IScenePeerClient> _;
                         if (!rq.HasCompleted && _pendingRequests.TryRemove(id, out _))
                         {
                             _scene.Send(new MatchPeerFilter(peer), RpcHostPlugin.CancellationRouteName, s =>
@@ -178,6 +214,89 @@ namespace Stormancer.Plugins
             }
         }
 
+
+
+        /// <summary>
+        /// Adds a procedure which can be called from another scene host.
+        /// </summary>
+        /// <param name="route"></param>
+        /// <param name="handler"></param>
+        /// <param name="ordered"></param>
+        public void AddInternalProcedure(string route, Func<RequestContext<IScenePeer>, Task> handler, bool ordered)
+        {
+            this._scene.AddInternalRoute(route, async p =>
+            {
+                var buffer = new byte[2];
+                p.Stream.Read(buffer, 0, 2);
+                var id = BitConverter.ToUInt16(buffer, 0);
+                var peerCancellationToken = GetCancellationTokenForScene(p.Connection);
+
+                var cts = CancellationTokenSource.CreateLinkedTokenSource(peerCancellationToken);
+
+                var ctx = new RequestContext<IScenePeer>(p.Connection, _scene, id, ordered, new SubStream(p.Stream, false), cts);
+                var identifier = Tuple.Create(p.Connection.SceneId, p.Connection.ShardId, id);
+                var rq = new RunningRequest<IScenePeer> { ctx = ctx, cts = cts };
+                if (_runningInternalRequests.TryAdd(identifier,rq))
+                {
+                    try
+                    {
+                        Exception e = null;
+                        bool errorOccured = false;
+                        try
+                        {
+                            await handler.InvokeWrapping(ctx);
+                        }
+                        catch (Exception ex)
+                        {
+                            errorOccured = true;
+                            e = ex;
+                        }
+
+
+                        if (!errorOccured)
+                        {
+
+                            ctx.SendCompleted();
+
+
+                        }
+                        else
+                        {
+                            var errorSent = false;
+                            var ex = e as ClientException;
+                            if (ex != null)
+                            {
+                                ctx.SendError(string.Join("|", ex.Message));
+                                errorSent = true;
+                            }
+                            else
+                            {
+                                string errorMessage = string.Format("An error occured while executing procedure '{0}'.", route);
+                                if (!errorSent)
+                                {
+                                    var errorId = Guid.NewGuid().ToString("N");
+                                    ctx.SendError($"An exception occurred on the server. Error {errorId}.");
+
+                                    errorMessage = $"Error {errorId}. " + errorMessage;
+                                }
+
+                                _scene.DependencyResolver.Resolve<ILogger>().Log(LogLevel.Error, "rpc.host.server", errorMessage, e);
+                            }
+                        }
+                    }
+                    finally
+                    {
+                        _runningInternalRequests.TryRemove(identifier, out rq);
+                        ctx.Dispose();
+                    }
+
+                }
+                else
+                {
+                    ctx.Dispose();
+                }
+            }, o => o);
+        }
         /// <summary>
         /// Adds a procedure that can be called by remote peer to the scene.
         /// </summary>
@@ -215,7 +334,7 @@ namespace Stormancer.Plugins
                              errorOccured = true;
                              e = ex;
                          }
-                        
+
 
                          if (!errorOccured)
                          {
@@ -228,13 +347,13 @@ namespace Stormancer.Plugins
                          {
                              var errorSent = false;
                              var ex = e as ClientException;
-                             if (ex !=null )
+                             if (ex != null)
                              {
                                  ctx.SendError(string.Join("|", ex.Message));
                                  errorSent = true;
                              }
                              else
-                             { 
+                             {
                                  string errorMessage = string.Format("An error occured while executing procedure '{0}'.", route);
                                  if (!errorSent)
                                  {
@@ -244,7 +363,7 @@ namespace Stormancer.Plugins
                                      errorMessage = $"Error {errorId}. " + errorMessage;
                                  }
 
-                                 _scene.DependencyResolver.Resolve<ILogger>().Log(LogLevel.Error, "rpc.server", errorMessage, e);
+                                 _scene.DependencyResolver.Resolve<ILogger>().Log(LogLevel.Error, "rpc.client.server", errorMessage, e);
                              }
                          }
                      }
@@ -268,6 +387,11 @@ namespace Stormancer.Plugins
             return _peersCts.GetOrAdd(peer.Id, _ => new CancellationTokenSource()).Token;
         }
 
+        private CancellationToken GetCancellationTokenForScene(IScenePeer peer)
+        {
+            return _sceneCts.GetOrAdd($"{peer.SceneId}/{peer.ShardId}", _ => new CancellationTokenSource()).Token;
+        }
+
         private ushort ReserveId()
         {
             lock (this._lock)
@@ -289,17 +413,23 @@ namespace Stormancer.Plugins
             }
         }
 
-        private Request GetPendingRequest(Packet<IScenePeerClient> p)
+        private Request<IScenePeerClient> GetPendingRequest(Packet<IScenePeerClient> p)
+        {
+            ushort id;
+            return GetPendingRequest(p, out id);
+        }
+        private Request<IScenePeer> GetPendingRequest(Packet<IScenePeer> p)
         {
             ushort id;
             return GetPendingRequest(p, out id);
         }
 
-        private Request GetPendingRequest(Packet<IScenePeerClient> p, out ushort id)
+        private Request<IScenePeerClient> GetPendingRequest(Packet<IScenePeerClient> p, out ushort id)
         {
             id = ExtractRequestId(p);
 
-            Request request;
+
+            Request<IScenePeerClient> request;
             if (_pendingRequests.TryGetValue(id, out request))
             {
                 return request;
@@ -308,9 +438,26 @@ namespace Stormancer.Plugins
             {
                 return null;
             }
+
+        }
+        private Request<IScenePeer> GetPendingRequest(Packet<IScenePeer> p, out ushort id)
+        {
+            id = ExtractRequestId(p);
+
+
+            Request<IScenePeer> request;
+            if (_pendingInternalRequests.TryGetValue(id, out request))
+            {
+                return request;
+            }
+            else
+            {
+                return null;
+            }
+
         }
 
-        private static ushort ExtractRequestId(Packet<IScenePeerClient> p)
+        private static ushort ExtractRequestId<T>(Packet<T> p)
         {
             ushort id;
             var buffer = new byte[2];
@@ -332,23 +479,47 @@ namespace Stormancer.Plugins
             }
         }
 
+        internal void Next(Packet<IScenePeer> p)
+        {
+            var rq = GetPendingRequest(p);
+            if (rq != null)
+            {
+                rq.Observer.OnNext(p);
+                if (!rq.Tcs.Task.IsCompleted)
+                {
+                    rq.Tcs.TrySetResult(true);
+                }
+            }
+        }
+
         internal void Error(Packet<IScenePeerClient> p)
         {
             var id = ExtractRequestId(p);
-            Request rq;
+            Request<IScenePeerClient> rq;
             if (_pendingRequests.TryRemove(id, out rq))
             {
                 rq.HasCompleted = true;
                 rq.Observer.OnError(new ClientException(p.ReadObject<string>()));
             }
         }
+        internal void Error(Packet<IScenePeer> p)
+        {
+            var id = ExtractRequestId(p);
+            Request<IScenePeer> rq;
+            if (_pendingInternalRequests.TryRemove(id, out rq))
+            {
+                rq.HasCompleted = true;
+                rq.Observer.OnError(new ClientException(p.ReadObject<string>()));
+            }
+        }
+
 
         internal void Complete(Packet<IScenePeerClient> p)
         {
             var messageSent = p.Stream.ReadByte() != 0;
             ushort id;
             var rq = GetPendingRequest(p, out id);
-            Request _;
+            Request<IScenePeerClient> _;
             if (rq != null)
             {
                 rq.HasCompleted = true;
@@ -368,6 +539,31 @@ namespace Stormancer.Plugins
             }
         }
 
+        internal void Complete(Packet<IScenePeer> p)
+        {
+            var messageSent = p.Stream.ReadByte() != 0;
+            ushort id;
+            var rq = GetPendingRequest(p, out id);
+            Request<IScenePeer> _;
+            if (rq != null)
+            {
+                rq.HasCompleted = true;
+                if (messageSent)
+                {
+                    rq.Tcs.Task.ContinueWith(t =>
+                    {
+                        _pendingInternalRequests.TryRemove(id, out _);
+                        rq.Observer.OnCompleted();
+                    });
+                }
+                else
+                {
+                    _pendingInternalRequests.TryRemove(id, out _);
+                    rq.Observer.OnCompleted();
+                }
+            }
+        }
+
         internal void Cancel(Packet<IScenePeerClient> p)
         {
             var buffer = new byte[2];
@@ -380,6 +576,19 @@ namespace Stormancer.Plugins
             }
         }
 
+        internal void Cancel(Packet<IScenePeer> p)
+        {
+            var buffer = new byte[2];
+            p.Stream.Read(buffer, 0, 2);
+            var id = BitConverter.ToUInt16(buffer, 0);
+            RunningRequest<IScenePeer> ctx;
+            if (_runningInternalRequests.TryGetValue(Tuple.Create(p.Connection.SceneId, p.Connection.ShardId, id), out ctx))
+            {
+                ctx.cts.Cancel();
+            }
+        }
+
+
         internal Task PeerDisconnected(DisconnectedArgs arg)
         {
             CancellationTokenSource cts;
@@ -391,6 +600,16 @@ namespace Stormancer.Plugins
 
 
             return Task.FromResult(true);
+        }
+
+        internal async Task SceneShuttingDown(ShutdownArgs arg)
+        {
+            foreach (var rq in _runningInternalRequests.Values.ToArray())
+            {
+                rq.ctx.SendError("Scene shutting down");
+            }
+            await Task.FromResult(true);
+
         }
     }
 }

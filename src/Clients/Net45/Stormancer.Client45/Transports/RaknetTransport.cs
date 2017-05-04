@@ -72,7 +72,6 @@ namespace Stormancer.Networking
         {
             try
             {
-                _logger.Info("transports.raknet", "Raknet transport started " + _type);
 
                 for (var packet = _peer.Receive(); packet != null; packet = _peer.Receive())
                 {

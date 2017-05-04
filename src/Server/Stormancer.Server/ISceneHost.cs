@@ -60,13 +60,22 @@ namespace Stormancer.Core
     {
 
         /// <summary>
-        /// Adds a route handler to the scene with resource lifetime control.
+        /// Adds a route handler for client messages.
         /// </summary>
         /// <param name="route"></param>
         /// <param name="handler"></param>
-        /// <param name="options">Route options</param>
+        /// <param name="options">Route options.</param>
         /// <param name="metadata"></param>
         void AddRoute(string route, Func<Packet<IScenePeerClient>, Task> handler, Func<RouteOptions, RouteOptions> options, Dictionary<string, string> metadata = null);
+
+        /// <summary>
+        /// Adds a route handler for messages from other scene hosts.
+        /// </summary>
+        /// <param name="route"></param>
+        /// <param name="handler"></param>
+        /// <param name="options"></param>
+        void AddInternalRoute(string route, Func<Packet<IScenePeer>, Task> handler, Func<RouteOptions, RouteOptions> options);
+
         /// <summary>
         /// Sends a packet to the selected scene client peers.
         /// </summary>

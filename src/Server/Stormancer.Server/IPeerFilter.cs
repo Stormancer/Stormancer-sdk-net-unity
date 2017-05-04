@@ -6,6 +6,32 @@ using System.Threading.Tasks;
 
 namespace Stormancer.Core
 {
+
+    /// <summary>
+    /// Infos required to select a partition for an object.
+    /// </summary>
+    public class PartitioningDescriptor
+    {
+        /// <summary>
+        /// Creates a partitioningDescriptor object.
+        /// </summary>
+        public PartitioningDescriptor()
+        {
+            Data = new Dictionary<string, byte[]>();
+        }
+
+        /// <summary>
+        /// Id of the object (used by default)
+        /// </summary>
+        public ulong Id { get; set; }
+
+        /// <summary>
+        /// Additionnal partitioning informations
+        /// </summary>
+        public Dictionary<string, byte[]> Data { get; set; }
+
+    }
+
     /// <summary>
     /// Abstract parent class for peer filters
     /// </summary>
@@ -25,6 +51,38 @@ namespace Stormancer.Core
             }
         }
 
+    }
+
+    /// <summary>
+    /// Matches a scene
+    /// </summary>
+    public sealed class MatchSceneFilter: PeerFilter
+    {
+        /// <summary>
+        /// Creates a MatchSceneFilter object
+        /// </summary>
+        /// <param name="id">scene id</param>
+        public MatchSceneFilter(string id)
+        {
+            Id = id;
+        }
+
+        /// <summary>
+        /// Scene id
+        /// </summary>
+        public string Id { get; set; }
+
+        /// <summary>
+        /// Targeted shard (optional)
+        /// </summary>
+        public uint? ShardId { get; set; }
+        /// <summary>
+        /// partition key (optional)
+        /// </summary>
+        /// <remarks>
+        /// Shard &amp; partition key cannot be both set .
+        /// </remarks>
+        public PartitioningDescriptor PartitionKey { get; set; }
     }
 
     /// <summary>
