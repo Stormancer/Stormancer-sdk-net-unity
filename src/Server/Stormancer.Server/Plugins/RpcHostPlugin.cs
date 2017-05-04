@@ -204,6 +204,65 @@ namespace Stormancer.Plugins
         }
 
         /// <summary>
+        /// Starts a RPC to another scene. Use AddInternalProcedure to handle RPC called by this method
+        /// </summary>
+        /// <param name="route">The remote route on which the message will be sent.</param>
+        /// <param name="writer">The writer used to build the request's content.</param>
+        /// <param name="priority">The priority used to send the request.</param>
+        /// <param name="filter">Filter that describes the target scene</param>
+        /// <returns>An IObservable instance returning the RPC responses.</returns>
+        public IObservable<Packet<IScenePeer>> Rpc(string route, MatchSceneFilter filter, Action<Stream> writer, PacketPriority priority)
+        {
+
+            return Observable.Create<Packet<IScenePeer>>(
+                observer =>
+                {
+                   
+                    //string version;
+                    //if (!rr.Metadata.TryGetValue(RpcHostPlugin.PluginName, out version) || version != RpcHostPlugin.Version)
+                    //{
+                    //    throw new InvalidOperationException("The target remote route does not support the plugin RPC version " + RpcHostPlugin.Version);
+                    //}
+
+                    var rq = new Request<IScenePeer> { Observer = observer };
+                    var id = this.ReserveId();
+                    if (_pendingInternalRequests.TryAdd(id, rq))
+                    {
+
+                        _scene.Send(filter, route, s =>
+                        {
+                            s.Write(BitConverter.GetBytes(id), 0, 2);
+                            writer(s);
+                        }, priority, PacketReliability.RELIABLE_ORDERED);
+                    }
+
+                    //var cancellationToken = GetCancellationTokenForPeer(peer);
+
+                    //var linkedCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+
+                    //linkedCts.Token.Register(() =>
+                    //{
+                    //    observer.OnError(new PeerDisconnectedException("Peer disconnecter from the scene."));
+                    //});
+
+
+                    return () =>
+                    {
+                       
+                        Request<IScenePeer> _;
+                        if (!rq.HasCompleted && _pendingInternalRequests.TryRemove(id, out _))
+                        {
+                            _scene.Send(filter, RpcHostPlugin.CancellationRouteName, s =>
+                            {
+                                s.Write(BitConverter.GetBytes(id), 0, 2);
+                            }, priority, PacketReliability.RELIABLE_ORDERED);
+                        }
+                    };
+                });
+        }
+
+
+        /// <summary>
         /// Number of pending RPCs.
         /// </summary>
         public ushort PendingRequests

@@ -42,6 +42,22 @@ namespace Stormancer
             get { return _connection.Id; }
         }
 
+        public string SceneId
+        {
+            get
+            {
+                return _scene.Id;
+            }
+        }
+
+        public uint ShardId
+        {
+            get
+            {
+                throw new NotSupportedException();
+            }
+        }
+
         private Dictionary<Type, object> _components = new Dictionary<Type, object>();
         public T GetComponent<T>()
         {
