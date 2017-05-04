@@ -72,6 +72,7 @@ namespace Stormancer.Networking
         {
             try
             {
+               
 
                 for (var packet = _peer.Receive(); packet != null; packet = _peer.Receive())
                 {

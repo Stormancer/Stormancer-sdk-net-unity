@@ -306,6 +306,10 @@ namespace Stormancer
                     _transport.Start("client", new ConnectionHandler(), cts.Token, null, (ushort)(_maxPeers + 1));
 
                 }
+                if(!ci.TokenData.Endpoints.ContainsKey(_transport.Name))
+                {
+                    throw new InvalidOperationException($"No endpoint available on server for transport '{_transport.Name}'");
+                }
                 _serverConnection = await _transport.Connect(ci.TokenData.Endpoints[_transport.Name]);
 
                 foreach (var kvp in _metadata)
