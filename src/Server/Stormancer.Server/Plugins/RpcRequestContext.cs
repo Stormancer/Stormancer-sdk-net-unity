@@ -93,12 +93,12 @@ namespace Stormancer.Plugins
 
         private PeerFilter GetFilter(T peer)
         {
-            if(typeof(T) is IScenePeer)
+            if(typeof(T) == typeof(IScenePeer))
             {
                 var scenePeer = (IScenePeer)peer;
                 return new MatchSceneFilter(scenePeer.SceneId) { ShardId = scenePeer.ShardId };
             }
-            else if(typeof(T) is IScenePeerClient)
+            else if(typeof(T) == typeof(IScenePeerClient))
             {
                 return new MatchPeerFilter((IScenePeerClient)peer);
             }
