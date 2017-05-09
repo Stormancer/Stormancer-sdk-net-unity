@@ -157,8 +157,8 @@ namespace Stormancer
             _requestProcessor = new Stormancer.Networking.Processors.RequestProcessor(_logger, Enumerable.Empty<IRequestModule>(), _systemSerializer);
 
             _scenesDispatcher = new Processors.SceneDispatcher(new[] { new RouteScenePacketHandler() });
-            this._dispatcher.AddPRocessor(_requestProcessor);
-            this._dispatcher.AddPRocessor(_scenesDispatcher);
+            this._dispatcher.AddProcessor(_requestProcessor);
+            this._dispatcher.AddProcessor(_scenesDispatcher);
             this._metadata = configuration._metadata;
 
             foreach (var serializer in configuration.Serializers)
@@ -400,8 +400,7 @@ namespace Stormancer
         {
             await this.SendSystemRequest<byte, Stormancer.Dto.Empty>((byte)SystemRequestIDTypes.ID_DISCONNECT_FROM_SCENE, sceneHandle);
             this._scenesDispatcher.RemoveScene(sceneHandle);
-            if (_pluginCtx.SceneDisconnected != null)
-                _pluginCtx.SceneDisconnected(scene);
+            _pluginCtx.SceneDisconnected?.Invoke(scene);
         }
 
 
@@ -437,7 +436,7 @@ namespace Stormancer
                 Disconnect();
 
                 _transport.Dispose();
-                
+
 
             }
 

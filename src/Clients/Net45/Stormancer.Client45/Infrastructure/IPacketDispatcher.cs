@@ -29,6 +29,6 @@ namespace Stormancer.Networking
         /// Adds a packet processor to the dispatcher
         /// </summary>
         /// <param name="processor">An `IPacketProcessor` object</param>
-        void AddPRocessor(IPacketProcessor processor);
+        void AddProcessor(IPacketProcessor processor);
     }
 }

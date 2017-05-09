@@ -66,7 +66,7 @@ namespace Stormancer.Networking
             }
         }
 
-        public void AddPRocessor(IPacketProcessor processor)
+        public void AddProcessor(IPacketProcessor processor)
         {
             processor.RegisterProcessor(new PacketProcessorConfig(_handlers, _defaultProcessors));
         }
