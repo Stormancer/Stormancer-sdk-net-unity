@@ -20,7 +20,7 @@ namespace Stormancer.Plugins
         internal const string NextRouteName = "stormancer.rpc.next";
         internal const string ErrorRouteName = "stormancer.rpc.error";
         internal const string CompletedRouteName = "stormancer.rpc.completed";
-        internal const string CancellationRouteName = "stormancer.rpc.cancel.client";
+        internal const string CancellationRouteName = "stormancer.rpc.cancel";
 
 
         internal const string Version = "1.1.0";
