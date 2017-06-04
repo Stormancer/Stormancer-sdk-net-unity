@@ -27,6 +27,13 @@ namespace Stormancer.Server.Components
         /// <param name="peer">The peer object.</param>
         /// <returns>An object containing details about the peer.</returns>
         Task<PeerDetails> GetPeerDetails(IScenePeer peer);
+
+        /// <summary>
+        /// Creates a token to establish a P2P connection to the provided peerId.
+        /// </summary>
+        /// <param name="peerId">Id of the peer</param>
+        /// <returns></returns>
+        Task<string> CreateP2pToken(long peerId);
        
     }
 
