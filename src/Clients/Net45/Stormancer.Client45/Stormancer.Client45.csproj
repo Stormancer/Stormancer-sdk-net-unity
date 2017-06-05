@@ -90,6 +90,10 @@
     <Compile Include="IScheduler.cs" />
     <Compile Include="ITransport.cs" />
     <Compile Include="MessageIDTypes.cs" />
+    <Compile Include="p2p\IP2pMediator.cs" />
+    <Compile Include="p2p\IP2pMethod.cs" />
+    <Compile Include="p2p\IP2pServers.cs" />
+    <Compile Include="p2p\P2pConnection.cs" />
     <Compile Include="Plugins\IClientPlugin.cs" />
     <Compile Include="Extensions\Buffers.cs" />
     <Compile Include="Infrastructure\BSStream.cs" />
@@ -147,6 +151,7 @@
   <PropertyGroup>
     <PostBuildEvent>xcopy /y /i "$(SolutionDir)..\libs\Raknet\x86\Raknet.dll" "$(ProjectDir)$(OutputPath)x86\"
 	xcopy /y /i "$(SolutionDir)..\libs\Raknet\x64\Raknet.dll" "$(ProjectDir)$(OutputPath)x64\"
+  xcopy /y /i "$(OutputDir)*.nupkg" "$(SolutionDir)..\output\"
 	</PostBuildEvent>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

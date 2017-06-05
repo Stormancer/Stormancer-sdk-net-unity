@@ -1,4 +1,5 @@
-﻿using Stormancer.Core;
+﻿using Stormancer.p2p;
+using Stormancer.Core;
 using Stormancer.Dto;
 using System;
 using System.Collections.Concurrent;
@@ -9,6 +10,49 @@ using System.Threading.Tasks;
 
 namespace Stormancer
 {
+    /// <summary>
+    /// Represents the network protocol used by a P2P server
+    /// </summary>
+    public enum NetworkProtocol
+    {
+        /// <summary>
+        /// User Datagram Protocol
+        /// </summary>
+        Udp,
+        /// <summary>
+        /// Transmission Control Protocol
+        /// </summary>
+        Tcp
+    }
+
+    /// <summary>
+    /// Represents a P2P server endpoint, containing all informations necessary to join the server.
+    /// </summary>
+    /// <remarks>
+    /// Dispose the object to close the P2P connection
+    /// </remarks>
+    public interface IP2PServerEndpoint : IDisposable
+    {
+        /// <summary>
+        /// Id of the remote server
+        /// </summary>
+        string Id { get; }
+
+        /// <summary>
+        /// Ip used to join the server
+        /// </summary>
+        string Ip { get; }
+
+        /// <summary>
+        /// Port used to join the server
+        /// </summary>
+        ushort Port { get; }
+
+        /// <summary>
+        /// Network protocol of the server
+        /// </summary>
+        NetworkProtocol ServerProtocol { get; }
+    }
     /// <summary>
     /// Represents a clientside Stormancer scene.
     /// </summary>
@@ -81,9 +125,9 @@ namespace Stormancer
             }
         }
 
-        internal Scene(IConnection connection, Client client, Action<Scene,IDependencyBuilder> resolverBuilder, string id, string token, Stormancer.Dto.SceneInfosDto dto)
+        internal Scene(IConnection connection, Client client, Action<Scene, IDependencyBuilder> resolverBuilder, string id, string token, Stormancer.Dto.SceneInfosDto dto)
         {
-            
+
             Id = id;
             this._peer = connection;
             _token = token;
@@ -99,7 +143,7 @@ namespace Stormancer
                 b.Register<Scene>(this);
                 if (resolverBuilder != null)
                 {
-                    resolverBuilder(this,b);
+                    resolverBuilder(this, b);
                 }
             });
 
@@ -357,17 +401,42 @@ namespace Stormancer
         }
 
         /// <summary>
-        /// Gets a component registered in the dependency resolver
+        /// Registers a server running locally in the library so that it can be joined by other peers.
         /// </summary>
-        /// <remarks>
-        /// Pleaser use DependencyResolver.Resolve instead.
-        /// </remarks>
-        /// <typeparam name="T"></typeparam>
+        /// <param name="p2pServerId">Id of the server</param>
+        /// <param name="port">Port on which the server is running</param>
+        /// <param name="protocol">Protocol of the server (UDP or TCP)</param>
+        /// <param name="host">server host, * (meaning all local network interfaces) by default</param>
+        /// <returns></returns>
+        public Task<IDisposable> RegisterP2PServer(string p2pServerId, string port, NetworkProtocol protocol, string host = "*")
+        {
+            var mediator = DependencyResolver.Resolve<IP2pMediator>();
+
+            return mediator.RegisterP2PServer(Id + "." + p2pServerId, port, protocol, host);
+        }
+
+        /// <summary>
+        /// Obsolete: Get a component registered in the DI system.
+        /// </summary>
+        /// <typeparam name="T">Type of the component</typeparam>
         /// <returns></returns>
         [Obsolete]
         public T GetComponent<T>() where T : class
         {
-            return this.DependencyResolver.Resolve<T>();
+            return DependencyResolver.Resolve<T>();
+        }
+
+        /// <summary>
+        /// Open a P2P connection to a remote server
+        /// </summary>
+        /// <param name="token">A signed token created by the server application using IPeerInfosService.CreateP2PToken which represents</param>
+        /// <param name="p2pServerId"></param>
+        /// <returns></returns>
+        public Task<IP2PServerEndpoint> OpenP2PConnection(string token, string p2pServerId)
+        {
+            var mediator = DependencyResolver.Resolve<IP2pMediator>();
+
+            return mediator.OpenP2PConnection(token, Id + "." + p2pServerId);
         }
     }
 }
