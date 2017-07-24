@@ -33,6 +33,21 @@ namespace Stormancer
             return Login(authContext);
         }
 
+        public Task<Scene> DeviceIdentifierLogin()
+        {
+            var identifier = UnityEngine.SystemInfo.deviceUniqueIdentifier;
+
+#if UNITY_EDITOR
+            identifier = identifier + "editor";
+#endif
+
+            UnityEngine.Debug.Log(identifier);
+            var authContext = new Dictionary<string, string> { { "provider", "deviceidentifier" }, { "deviceidentifier", identifier } };
+
+            _client.DependencyResolver.Resolve<ILogger>().Log(Diagnostics.LogLevel.Debug, "authenticationservice", "Logging in with identifier " + identifier);
+            return Login(authContext);
+        }
+
         public Task<Scene> Login(Dictionary<string, string> authContext)
         {
             if (_authenticated)
@@ -65,7 +80,7 @@ namespace Stormancer
         public Task<Scene> GetPrivateScene(string sceneId)
         {
             return GetAuthenticationScene()
-                .Then(authScene =>            authScene.RpcTask<string, string>("sceneauthorization.gettoken", sceneId))
+                .Then(authScene => authScene.RpcTask<string, string>("sceneauthorization.gettoken", sceneId))
                 .Then(token => _client.GetScene(token));
         }
 

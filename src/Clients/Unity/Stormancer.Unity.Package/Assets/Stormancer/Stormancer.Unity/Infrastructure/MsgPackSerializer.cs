@@ -68,16 +68,12 @@ namespace Stormancer.Client45.Infrastructure
     }
 
     public class MsgPackLambdaTypeSerializer<T> 
-#if UNITY_IOS
-        :MessagePackSerializer
-#else
         : MessagePackSerializer<T>
-#endif
         {
         private readonly Action<MsgPack.Packer, T> _pack;
         private readonly Func<MsgPack.Unpacker, T> _unpack;
         public MsgPackLambdaTypeSerializer(Action<MsgPack.Packer, T> pack, Func<MsgPack.Unpacker, T> unpack, SerializationContext ctx)
-#if UNITY_IOS
+#if UNITY_IOS && false
             :base(typeof(T), ctx.CompatibilityOptions.PackerCompatibilityOptions)
 #else
             : base(ctx.CompatibilityOptions.PackerCompatibilityOptions)
@@ -86,18 +82,19 @@ namespace Stormancer.Client45.Infrastructure
             _pack = pack;
             _unpack = unpack;
         }
-#if UNITY_IOS
+#if UNITY_IOS && false
         protected internal override void PackToCore(Packer packer, object objectTree)
 #else
-        protected internal override void PackToCore(MsgPack.Packer packer, T objectTree)
+        protected override void PackToCore(MsgPack.Packer packer, T objectTree)
 #endif
         {
             _pack(packer, (T)objectTree);
         }
-#if UNITY_IOS
+
+#if UNITY_IOS && false
         protected internal override object UnpackFromCore(MsgPack.Unpacker unpacker)
 #else
-        protected internal override T UnpackFromCore(MsgPack.Unpacker unpacker)
+        protected override T UnpackFromCore(MsgPack.Unpacker unpacker)
 #endif
         {
             return _unpack(unpacker);

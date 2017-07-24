@@ -52,6 +52,7 @@ namespace Stormancer.Networking
         /// </summary>
         Action<IConnection> ConnectionClosed { get; set; }
 
+
         /// <summary>
         /// The name of the transport.
         /// </summary>

@@ -11,7 +11,7 @@ namespace Stormancer
     public class GameSessionService
     {
         private readonly Scene _scene;
-        private readonly TaskCompletionSource<GameServerInformation> _waitServerTce = new TaskCompletionSource<GameServerInformation>();
+        private readonly TaskCompletionSource<bool> _waitServerTce = new TaskCompletionSource<bool>();
         private readonly ConcurrentDictionary<string, SessionPlayer> _users = new ConcurrentDictionary<string, SessionPlayer>();
 
         public IEnumerable<SessionPlayer> ConnectedPlayers
@@ -22,15 +22,23 @@ namespace Stormancer
             }
         }
 
+        public string SceneId
+        {
+            get
+            {
+                return _scene != null ? _scene.Id : null;
+            }
+        }
+
         public Action<SessionPlayer> OnConnectedPlayersChanged { get; set; }
 
         public GameSessionService(Scene scene)
         {
             this._scene = scene;
 
-            _scene.AddRoute<GameServerInformation>("server.started", serverInfo =>
+            _scene.AddRoute("server.started", packet =>
             {
-                _waitServerTce.TrySetResult(serverInfo);
+                _waitServerTce.TrySetResult(true);
             });
 
             _scene.AddRoute<PlayerUpdate>("player.update", OnPlayerUpdate);
@@ -48,7 +56,7 @@ namespace Stormancer
             }
         }
 
-        public Task<GameServerInformation> WaitServerReady()
+        public Task WaitServerReady()
         {
             return _waitServerTce.Task;
         }
@@ -61,6 +69,16 @@ namespace Stormancer
         public void Ready()
         {
             _scene.SendPacket("player.ready", _ => { });
+        }
+
+        public Task<TOut> SendGameResult<Tin, TOut>(Tin result)
+        {
+            return _scene.RpcTask<Tin, TOut>("gamesession.postresults", result);
+        }
+
+        public Task LeaveSession()
+        {
+            return _scene.Disconnect();
         }
     }
 }

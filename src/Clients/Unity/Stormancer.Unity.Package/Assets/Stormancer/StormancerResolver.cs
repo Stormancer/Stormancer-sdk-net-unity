@@ -16,6 +16,7 @@ namespace Stormancer
     public interface IDependencyResolver
     {
         T Resolve<T>();
+        bool TryResolve<T>(out T dependency);
         //Func<IDependencyResolver, T> GetComponentFactory<T>();
         void Register<T>(Func<T> component);
         void Register<T>(Func<IDependencyResolver, T> component);
@@ -35,7 +36,27 @@ namespace Stormancer
 
         public T Resolve<T>()
         {
-            return GetComponentFactory<T>()(this);
+            T result;
+            if (!TryResolve(out result))
+            {
+                throw new InvalidOperationException(string.Format("The requested component of type {0} was not registered.", typeof(T)));
+            }
+            return result;
+        }
+
+        public bool TryResolve<T>(out T dependency)
+        {
+            var factory = GetComponentFactory<T>();
+            if (factory != null)
+            {
+                dependency = factory(this);
+                return true;
+            }
+            else
+            {
+                dependency = default(T);
+                return false;
+            }
         }
 
         private Func<IDependencyResolver, T> GetComponentFactory<T>()
@@ -51,7 +72,7 @@ namespace Stormancer
             }
             else
             {
-                throw new InvalidOperationException(string.Format("The requested component of type {0} was not registered.", typeof(T)));
+                return null;
             }
         }
 

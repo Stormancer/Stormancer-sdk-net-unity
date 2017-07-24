@@ -103,6 +103,8 @@ namespace Stormancer
 
         }
 
+        public event Action<string> OnDisconnected;
+
         /// <summary>
         /// Creates a Stormancer client instance.
         /// </summary>
@@ -276,6 +278,14 @@ namespace Stormancer
                     {
                         this.Logger.Log(Stormancer.Diagnostics.LogLevel.Trace, sceneId, string.Format("Trying to connect to scene '{0}' through endpoint : '{1}' on application : '{2}' with id : '{3}'", sceneId, ci.TokenData.Endpoints[_transport.Name], ci.TokenData.Application, ci.TokenData.AccountId));
                         _serverConnection = connection;
+                        connection.ConnectionClosed += reason =>
+                        {
+                            var action = OnDisconnected;
+                            if (action != null)
+                            {
+                                action(reason);
+                            }
+                        };
 
                         foreach (var kvp in _metadata)
                         {

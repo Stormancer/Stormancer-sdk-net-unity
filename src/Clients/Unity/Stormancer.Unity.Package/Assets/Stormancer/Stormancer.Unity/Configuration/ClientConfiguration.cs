@@ -22,7 +22,7 @@ namespace Stormancer
     public class ClientConfiguration
     {
         //private const string Api = "http://localhost:23469/";
-        private const string ApiEndpoint = "https://api1.stormancer.com/";
+        private const string ApiEndpoint = "https://api.stormancer.com/";
 
         private const string LocalDevEndpoint = "http://localhost:42001/";
 
@@ -37,7 +37,7 @@ namespace Stormancer
         /// <remarks>
         /// This value overrides the *IsLocalDev* property.
         /// </remarks>
-        public string ServerEndpoint { get; set; }
+        public List<string> ServerEndpoints { get; set; }
 
         /// <summary>
         /// A string containing the account name of the application.
@@ -62,19 +62,37 @@ namespace Stormancer
         /// </summary>
         public int PingInterval { get; set; }
 
+
+        private bool _started = false;
+        private int _index;
         internal Uri GetApiEndpoint()
         {
-            if (IsLocalDev)
+            if (!ServerEndpoints.Any())
             {
-                return new Uri(ServerEndpoint ?? LocalDevEndpoint);
+
+                if (IsLocalDev)
+                {
+                    return new Uri(LocalDevEndpoint);
+                }
+                else
+                {
+                    return new Uri(ApiEndpoint);
+                }
             }
-            else
+
+            if (!_started)
             {
-                return new Uri(ServerEndpoint ?? ApiEndpoint);
+                var rand = new Random();
+                _index = rand.Next() % ServerEndpoints.Count;
+                _started = true;
             }
+
+            var result = new Uri(ServerEndpoints[_index % ServerEndpoints.Count]);
+            _index++;
+            return result;
         }
 
-     
+
         /// <summary>
         /// Creates a ClientConfiguration object targeting the public online platform.
         /// </summary>
@@ -116,7 +134,7 @@ namespace Stormancer
             }
         }
 
-        private RakNetTransport DefaultTransportFactory(IDependencyResolver DependencyResolver) 
+        private RakNetTransport DefaultTransportFactory(IDependencyResolver DependencyResolver)
         {
             return new RakNetTransport(DependencyResolver.Resolve<ILogger>(), DependencyResolver.Resolve<IConnectionHandler>());
         }
@@ -142,7 +160,7 @@ namespace Stormancer
         /// <summary>
         /// Gets or sets the transport to be used by the client.
         /// </summary>
-        public Func<IDependencyResolver,ITransport> TransportFactory { get; set; }
+        public Func<IDependencyResolver, ITransport> TransportFactory { get; set; }
 
 
         /// <summary>

@@ -6,6 +6,9 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.NetworkInformation;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -56,9 +59,38 @@ namespace Stormancer.Networking
                 throw;
             }
 
+            var socketDescriptorList = new RakNetListSocketDescriptor();
 
-            var socketDescriptor = serverPort.HasValue ? new SocketDescriptor(serverPort.Value, null) : new SocketDescriptor();
-            var startupResult = server.Startup(maxConnections, socketDescriptor, 1);
+            var networkInterfaces = NetworkInterface.GetAllNetworkInterfaces();
+
+            //if (Socket.SupportsIPv4
+            //    && networkInterfaces.Any(ni => ni.Supports(NetworkInterfaceComponent.IPv4)
+            //                                    && ni.GetIPProperties().UnicastAddresses.Any(addr => addr.Address.AddressFamily == AddressFamily.InterNetwork)))
+            //{
+            //    logger.Info("A valid ipv4 address was found.");
+            //    var socketDescriptorIpv4 = new SocketDescriptor(serverPort.GetValueOrDefault(), null);
+            //    socketDescriptorList.Push(socketDescriptorIpv4, null, 0);
+            //}
+            //else
+            //{
+            //    logger.Info("No valid ipv4 address was found.");
+            //}
+
+            if (Socket.OSSupportsIPv6
+          && networkInterfaces.Any(ni => ni.Supports(NetworkInterfaceComponent.IPv6)
+                                          && ni.GetIPProperties().UnicastAddresses.Any(addr => addr.Address.AddressFamily == AddressFamily.InterNetworkV6)))
+            {
+                logger.Info("A valid ipv6 address was found.");
+                var socketDescriptorIpv6 = new SocketDescriptor(serverPort.GetValueOrDefault(), null);
+                socketDescriptorIpv6.socketFamily = 23; // AF_INET6
+                socketDescriptorList.Push(socketDescriptorIpv6, null, 0);
+            }
+            else
+            {
+                logger.Info("No valid ipv6 address was found.");
+            }
+
+            var startupResult = server.Startup(maxConnections, socketDescriptorList, 1);
             if (startupResult != StartupResult.RAKNET_STARTED)
             {
                 logger.Error("Couldn't start raknet peer :" + startupResult);
@@ -79,7 +111,6 @@ namespace Stormancer.Networking
                     switch (packet.data[0])
                     {
                         case (byte)DefaultMessageIDTypes.ID_CONNECTION_REQUEST_ACCEPTED:
-                            TaskCompletionSource<IConnection> tcs;
                             IConnection c;
                             try
                             {
@@ -92,13 +123,20 @@ namespace Stormancer.Networking
                             }
                             logger.Debug("Connection request to {0} accepted.", packet.systemAddress.ToString());
 
-                            if (_pendingConnections.TryGetValue(packet.systemAddress.ToString(), out tcs))
+                            lock (_pendingConnections)
                             {
-
-                                tcs.SetResult(c);
-                                logger.Trace("Task for the connection request to {0} completed.", packet.systemAddress.ToString());
+                                var pendingConnection = _pendingConnections.FirstOrDefault(pc => pc.Endpoints.Contains(packet.systemAddress.ToString()));
+                                if(pendingConnection != null)
+                                {
+                                    _pendingConnections.Remove(pendingConnection);
+                                    pendingConnection.Tcs.SetResult(c);
+                                    logger.Trace("Task for the connection request to {0} completed.", packet.systemAddress.ToString());
+                                }
+                                else
+                                {
+                                    logger.Log(Diagnostics.LogLevel.Warn, "RaknetTransport", "Unknown pending connection accepted: '" + packet.systemAddress.ToString() +"'");
+                                }
                             }
-
                             break;
                         case (byte)DefaultMessageIDTypes.ID_NEW_INCOMING_CONNECTION:
                             logger.Trace("Incoming connection from {0}.", packet.systemAddress.ToString());
@@ -119,9 +157,18 @@ namespace Stormancer.Networking
                             break;
 
                         case (byte)DefaultMessageIDTypes.ID_CONNECTION_ATTEMPT_FAILED:
-                            if (_pendingConnections.TryGetValue(packet.systemAddress.ToString(), out tcs))
+                            lock (_pendingConnections)
                             {
-                                tcs.SetException(new InvalidOperationException("Connection attempt failed."));
+                                var pendingConnection = _pendingConnections.FirstOrDefault(pc => pc.Endpoints.Contains(packet.systemAddress.ToString()));
+                                if (pendingConnection != null)
+                                {
+                                    _pendingConnections.Remove(pendingConnection);
+                                    pendingConnection.Tcs.SetException(new InvalidOperationException("Connection attempt failed."));
+                                }
+                                else
+                                {
+                                    logger.Log(Diagnostics.LogLevel.Warn, "RaknetTransport", "Unknown pending connection failed: '" + packet.systemAddress.ToString() + "'");
+                                }
                             }
                             break;
 
@@ -237,7 +284,13 @@ namespace Stormancer.Networking
 
         private void OnRequestClose(RakNetConnection c)
         {
-            _peer.CloseConnection(c.Guid, true);
+            if (_peer != null)
+            {
+                _peer.CloseConnection(c.Guid, true);
+                _peer.Shutdown(1000);
+                RakNet.RakPeerInterface.DestroyInstance(_peer);
+                _peer = null;
+            }
         }
 
         #endregion
@@ -272,19 +325,42 @@ namespace Stormancer.Networking
                 throw new InvalidOperationException("Transport not started. Call Start before connect.");
             }
             var infos = endpoint.Split(':');
-            var host = infos[0];
-            var port = ushort.Parse(infos[1]);
-            _peer.Connect(host, port, null, 0);
+            var portString = infos[infos.Length - 1];
+            var port = ushort.Parse(portString);
 
-            var address = new SystemAddress(host, port);
+            var host = endpoint.Substring(0, endpoint.Length - portString.Length - 1);
+            var connectResult = _peer.Connect(host, port, null, 0);
+
+            if (connectResult != ConnectionAttemptResult.CONNECTION_ATTEMPT_STARTED)
+            {
+                throw new Exception("Raknet connection failed: " + connectResult);
+            }
+            
+            //for (int i = 0; i < 1; i++)
+            //{
+            //    UnityEngine.Debug.Log("before Fix for ip");
+            //    var sa = _peer.GetMyBoundAddress(i);
+            //    address.FixForIPVersion(sa);
+            //    var str = address.ToString();
+            //    UnityEngine.Debug.Log("address = " + str);
+
+            //}
+
 
             var tcs = new TaskCompletionSource<IConnection>();
 
-            _pendingConnections.TryAdd(address.ToString(), tcs);
+            var ips = Dns.GetHostAddresses(host);
+
+            var pendingConnection = new PendingConnection(ips.Select(ip => ip.ToString() + "|" + port).ToList(), tcs);
+
+            lock (_pendingConnections)
+            {
+                _pendingConnections.Add(pendingConnection);
+            }
 
             return tcs.Task;
         }
-        private ConcurrentDictionary<string, TaskCompletionSource<IConnection>> _pendingConnections = new ConcurrentDictionary<string, TaskCompletionSource<IConnection>>();
+        private List<PendingConnection> _pendingConnections = new List<PendingConnection>();
 
         public string Name
         {

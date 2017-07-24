@@ -46,14 +46,14 @@ namespace Stormancer.Plugins
                 {
                     processor.Complete(p);
                 });
-                
+
 
             };
             ctx.SceneDisconnected += scene =>
-                {
-                    var processor = scene.DependencyResolver.Resolve<RpcService>();
-                    processor.Disconnected();
-                };
+            {
+                var processor = scene.DependencyResolver.Resolve<RpcService>();
+                processor.Disconnected();
+            };
         }
 
         /// <summary>
@@ -102,12 +102,12 @@ namespace Stormancer.Plugins
                         var rr = _scene.RemoteRoutes.FirstOrDefault(r => r.Name == route);
                         if (rr == null)
                         {
-                            throw new ArgumentException("The target route does not exist on the remote host.");
+                            throw new ArgumentException("The target route (" + route +  ") does not exist on the remote host.");
                         }
                         string version;
                         if (!rr.Metadata.TryGetValue(RpcClientPlugin.PluginName, out version) || version != RpcClientPlugin.Version)
                         {
-                            throw new InvalidOperationException("The target remote route does not support the plugin RPC version " + Version);
+                            throw new InvalidOperationException("The target remote route (" + route + ") does not support the plugin RPC version " + Version);
                         }
 
                         var rq = new Request { Observer = observer };
@@ -122,7 +122,7 @@ namespace Stormancer.Plugins
                             }, priority, PacketReliability.RELIABLE_ORDERED);
                         }
 
-                        return () =>
+                        return UniRx.Disposable.Create(() =>
                         {
                             Request _;
                             if (!rq.HasCompleted && _pendingRequests.TryRemove(id, out _) && _supportsCancellation)
@@ -132,7 +132,7 @@ namespace Stormancer.Plugins
                                     s.Write(BitConverter.GetBytes(id), 0, 2);
                                 });
                             }
-                        };
+                        });
                     });
             }
 
@@ -277,7 +277,8 @@ namespace Stormancer.Plugins
                 if (_pendingRequests.TryRemove(id, out rq))
                 {
                     rq.HasCompleted = true;
-                    rq.Observer.OnError(new ClientException(p.ReadObject<string>()));
+                    var message = p.ReadObject<string>();
+                    rq.Observer.OnError(new ClientException(message));
                 }
             }
 

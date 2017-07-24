@@ -22,6 +22,12 @@ namespace Stormancer
 
             _scene.AddRoute<string>("tbt.desync", OnDesynchCallBack);
             _scene.AddProcedure("transaction.execute", OnExecuteTransaction, true);
+            _scene.AddProcedure("tbt.replayTLog", OnReplayLogs, true);
+        }
+
+        private Task OnReplayLogs(RequestContext<IScenePeer> arg1)
+        {
+            return TaskHelper.Completed;
         }
 
         private void OnDesynchCallBack(string input)

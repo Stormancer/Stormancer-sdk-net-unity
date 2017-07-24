@@ -126,9 +126,28 @@ namespace Stormancer.Networking.Processors
                 if (_pendingRequests.TryRemove(id, out request))
                 {
                     p.Metadata["request"] = request;
+                    var serializer = p.Serializer();
+                    string msg;
+                    if(serializer != null)
+                    {
+                     msg = serializer.Deserialize<string>(p.Stream);
+                    }
+                    else
+                    {
+                        serializer = new Client45.Infrastructure.MsgPackSerializer();
+                        try
+                        {
+                            msg = serializer.Deserialize<string>(p.Stream);
+                        }
+                        catch (Exception)
+                        {
+                            msg = null;
+                        }
 
-                    var msg = p.Serializer().Deserialize<string>(p.Stream);
+                        msg = msg ?? "An error occured on a Stormancer system request, and a serializer could not be found.";
+                    }
                     request.tcs.TrySetException(new ClientException(msg));
+                    
                 }
                 else
                 {

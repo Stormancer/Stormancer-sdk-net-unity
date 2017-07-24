@@ -2,6 +2,7 @@
 using Stormancer.Networking;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,7 +49,13 @@ namespace Stormancer.Networking
             }
             if (!processed)
             {
-                throw new NotSupportedException(string.Format("Couldn't process message. msgId: {0}", msgType));
+                using (var memStream = new MemoryStream())
+                {
+                    memStream.WriteByte(msgType);
+                    packet.Stream.CopyTo(memStream);
+
+                    throw new NotSupportedException(string.Format("Couldn't process message. msgId: {0}, content: {1}", msgType, Convert.ToBase64String(memStream.ToArray())));
+                }
             }
         }
 
@@ -58,12 +65,26 @@ namespace Stormancer.Networking
             {
                 Task.Factory.StartNew(() =>
                 {
-                    DispatchImpl(packet);
+                    try
+                    {
+                        DispatchImpl(packet);
+                    }
+                    catch(Exception ex)
+                    {
+                        MainThread.Post(() => UnityEngine.Debug.LogError(ex));
+                    }
                 });
             }
             else
             {
-                DispatchImpl(packet);
+                try
+                {
+                    DispatchImpl(packet);
+                }
+                catch (Exception ex)
+                {
+                    MainThread.Post(() => UnityEngine.Debug.LogError(ex));
+                }
             }
         }
 

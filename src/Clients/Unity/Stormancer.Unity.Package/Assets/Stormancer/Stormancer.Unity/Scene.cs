@@ -161,10 +161,10 @@ namespace Stormancer
                 };
                 route.Handlers += action;
 
-                return () =>
+                return UniRx.Disposable.Create(() =>
                 {
                     route.Handlers -= action;
-                };
+                });
             });
             return observable;
         }
@@ -217,7 +217,7 @@ namespace Stormancer
             Route routeObj;
             if (!_remoteRoutesMap.TryGetValue(route, out routeObj))
             {
-                DependencyResolver.Resolve<ILogger>().Error("SendPacket failed: The route '{1}' doesn't exist on the scene.", route);
+                DependencyResolver.Resolve<ILogger>().Error("SendPacket failed: The route '{0}' doesn't exist on the scene.", route);
                 throw new ArgumentException("The route " + route + " doesn't exist on the scene.");
             }
 
@@ -261,6 +261,8 @@ namespace Stormancer
                 {
                     DependencyResolver.Resolve<ILogger>().Info("Successfully connected to scene : '{0}'.", Id);
                     this.Connected = true;
+
+                    _client.OnDisconnected += reason => this.Connected = false;
                 });
         }
 

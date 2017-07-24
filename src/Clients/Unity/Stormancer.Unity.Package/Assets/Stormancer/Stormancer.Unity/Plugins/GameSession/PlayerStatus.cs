@@ -4,7 +4,7 @@
     {
         NotConnected = 0,
         Connected = 1,
-        Reasy = 2,
+        Ready = 2,
         Faulted = 3,
         Disconnected = 4
     }

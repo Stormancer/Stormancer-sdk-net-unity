@@ -33,15 +33,8 @@ namespace Stormancer
             }
             var logger = _resolver.Resolve<ILogger>();
             logger.Log(Stormancer.Diagnostics.LogLevel.Trace, "Client", "creating endpoint request for remote server");
-            var uri = new Uri(_config.GetApiEndpoint(), string.Format(CreateTokenUri, accountId, applicationName, sceneId));
-            var request = new Request("POST", uri.AbsoluteUri, data);
-            request.AddHeader("Content-Type", "application/msgpack");
-            request.AddHeader("Accept", "application/json");
-            request.AddHeader("x-version", "1.0.0");
-            logger.Trace("Sending endpoint request to remote server");
-
-
-            return SendWithRetry(request, 5000, 15000).ContinueWith(t =>
+    
+            return SendWithRetry(() => CreateRequest(accountId, applicationName, sceneId, data, logger), 5000, 15000).ContinueWith(t =>
             {
                 logger.Log(Stormancer.Diagnostics.LogLevel.Trace, "Client", "Received endpoint response from remote server");
                 try
@@ -75,9 +68,22 @@ namespace Stormancer
             });
         }
 
-        private Task<IResponse> SendWithRetry(Request request, int firstTry, int secondTry)
+        private Request CreateRequest(string accountId, string applicationName, string sceneId, byte[] data, ILogger logger)
+        {
+            var uri = new Uri(_config.GetApiEndpoint(), string.Format(CreateTokenUri, accountId, applicationName, sceneId));
+            var request = new Request("POST", uri.AbsoluteUri, data);
+            request.AddHeader("Content-Type", "application/msgpack");
+            request.AddHeader("Accept", "application/json");
+            request.AddHeader("x-version", "1.0.0");
+            logger.Trace("Sending endpoint request to remote server");
+            return request;
+        }
+
+        private Task<IResponse> SendWithRetry(Func<Request> requestFactory, int firstTry, int secondTry)
         {
             var logger = _resolver.Resolve<ILogger>();
+
+            var request = requestFactory();
 
             return request.Send().TimeOut(firstTry)
                 .ContinueWith(t1 =>

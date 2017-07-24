@@ -71,21 +71,21 @@ namespace Stormancer
 
         public static readonly DebugLogger Instance = new DebugLogger();
 
-		public void Log(Stormancer.Diagnostics.LogLevel logLevel, string category, string message, object context = null)
-        {
-            switch (logLevel)
-            {
-                case Diagnostics.LogLevel.Fatal:
-                case Diagnostics.LogLevel.Error:
-                    UnityEngine.Debug.LogError(logLevel.ToString() + ": " + category + ": " + message);
-                    break;
-                case Diagnostics.LogLevel.Warn:
-                    UnityEngine.Debug.LogWarning(logLevel.ToString() + ": " + category + ": " + message);
-                    break;
-                default:
-                    UnityEngine.Debug.Log(logLevel.ToString() + ": " + category + ": " + message);
-                    break;
-            }
+        public void Log(Stormancer.Diagnostics.LogLevel logLevel, string category, string message, object context = null) {
+            MainThread.Post(() => {
+                switch(logLevel) {
+                    case Diagnostics.LogLevel.Fatal:
+                    case Diagnostics.LogLevel.Error:
+                        UnityEngine.Debug.LogError(logLevel.ToString() + ": " + category + ": " + message);
+                        break;
+                    case Diagnostics.LogLevel.Warn:
+                        UnityEngine.Debug.LogWarning(logLevel.ToString() + ": " + category + ": " + message);
+                        break;
+                    default:
+                        UnityEngine.Debug.Log(logLevel.ToString() + ": " + category + ": " + message);
+                        break;
+                }
+            });
         }
 
         public void Trace(string message, params object[] p)

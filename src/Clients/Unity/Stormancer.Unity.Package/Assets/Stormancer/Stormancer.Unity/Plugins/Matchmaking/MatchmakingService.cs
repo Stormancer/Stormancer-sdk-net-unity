@@ -65,7 +65,7 @@ namespace Stormancer
             }
         }
 
-        public Task FindMatch(string provider)
+        public Task FindMatch(string provider, int deckIndex)
         {
             var tcs = new TaskCompletionSource<bool>();
 
@@ -73,7 +73,9 @@ namespace Stormancer
 
             var observable = _scene.Rpc("match.find", stream =>
             {
-                _scene.Host.Serializer().Serialize(provider, stream);
+                var serializer = _scene.Host.Serializer();
+                serializer.Serialize(provider, stream);
+                serializer.Serialize(deckIndex, stream);
             }, PacketPriority.MEDIUM_PRIORITY);
 
             Action<Packet<IScenePeer>> onNext = packet =>
@@ -109,7 +111,7 @@ namespace Stormancer
             }, PacketPriority.MEDIUM_PRIORITY, PacketReliability.RELIABLE);
         }
 
-        void Cancel()
+        public void Cancel()
         {
             if (_isMatching)
             {
