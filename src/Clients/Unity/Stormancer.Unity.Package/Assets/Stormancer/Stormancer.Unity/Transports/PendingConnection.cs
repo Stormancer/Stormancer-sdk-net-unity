@@ -9,13 +9,13 @@ namespace Stormancer.Networking
 {
     public class PendingConnection
     {
-        public PendingConnection (IEnumerable<string> endpoints, TaskCompletionSource<IConnection> tcs)
+        public PendingConnection (string endpoint, TaskCompletionSource<IConnection> tcs)
         {
-            Endpoints = endpoints;
+            Endpoint = endpoint;
             Tcs = tcs;
         }
 
-        public IEnumerable<string> Endpoints { get; private set; }
+        public string Endpoint { get; private set; }
         public TaskCompletionSource<IConnection> Tcs { get; private set; }
     }
 }

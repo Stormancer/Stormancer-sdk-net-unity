@@ -482,6 +482,14 @@ namespace Stormancer
         /// </summary>
         public void Disconnect()
         {
+            if (_cts != null)
+            {
+                using (_cts)
+                {
+                    _cts.Cancel();
+                    _cts = null;
+                }
+            }
             using (this._syncClockSubscription)
             { };
             if (_serverConnection != null)
