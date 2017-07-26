@@ -40,11 +40,7 @@ namespace RakNet
             static ExceptionArgumentDelegate argumentOutOfRangeDelegate = new ExceptionArgumentDelegate(SetPendingArgumentOutOfRangeException);
 
 
-            [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "SWIGRegisterExceptionCallbacks_RakNet"
-#endif
-)]
+            [DllImport(Const.LibraryName, EntryPoint = "SWIGRegisterExceptionCallbacks_RakNet")]
             public static extern void SWIGRegisterExceptionCallbacks_RakNet(
                                         ExceptionDelegate applicationDelegate,
                                         ExceptionDelegate arithmeticDelegate,
@@ -58,11 +54,7 @@ namespace RakNet
                                         ExceptionDelegate overflowDelegate,
                                         ExceptionDelegate systemExceptionDelegate);
 
-            [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "SWIGRegisterExceptionArgumentCallbacks_RakNet"
-#endif
-)]
+            [DllImport(Const.LibraryName, EntryPoint = "SWIGRegisterExceptionArgumentCallbacks_RakNet")]
             public static extern void SWIGRegisterExceptionCallbacksArgument_RakNet(
                                         ExceptionArgumentDelegate argumentDelegate,
                                         ExceptionArgumentDelegate argumentNullDelegate,
@@ -290,3707 +282,1591 @@ namespace RakNet
         }
 
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SWIG_CSHARP_NO_IMCLASS_STATIC_CONSTRUCTOR_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SWIG_CSHARP_NO_IMCLASS_STATIC_CONSTRUCTOR_get")]
         public static extern int SWIG_CSHARP_NO_IMCLASS_STATIC_CONSTRUCTOR_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_ColumnDescriptor__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_ColumnDescriptor__SWIG_0")]
         public static extern IntPtr new_ColumnDescriptor__SWIG_0();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_ColumnDescriptor"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_ColumnDescriptor")]
         public static extern void delete_ColumnDescriptor(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_ColumnDescriptor__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_ColumnDescriptor__SWIG_1")]
         public static extern IntPtr new_ColumnDescriptor__SWIG_1(string jarg1, int jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_ColumnDescriptor_columnName_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_ColumnDescriptor_columnName_set")]
         public static extern void ColumnDescriptor_columnName_set(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_ColumnDescriptor_columnName_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_ColumnDescriptor_columnName_get")]
         public static extern string ColumnDescriptor_columnName_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_ColumnDescriptor_columnType_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_ColumnDescriptor_columnType_set")]
         public static extern void ColumnDescriptor_columnType_set(HandleRef jarg1, int jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_ColumnDescriptor_columnType_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_ColumnDescriptor_columnType_get")]
         public static extern int ColumnDescriptor_columnType_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_Cell__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_Cell__SWIG_0")]
         public static extern IntPtr new_Cell__SWIG_0();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_Cell"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_Cell")]
         public static extern void delete_Cell(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Cell_Clear"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Cell_Clear")]
         public static extern void Cell_Clear(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Cell_Set__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Cell_Set__SWIG_0")]
         public static extern void Cell_Set__SWIG_0(HandleRef jarg1, int jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Cell_Set__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Cell_Set__SWIG_1")]
         public static extern void Cell_Set__SWIG_1(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Cell_Set__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Cell_Set__SWIG_2")]
         public static extern void Cell_Set__SWIG_2(HandleRef jarg1, double jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Cell_Set__SWIG_3"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Cell_Set__SWIG_3")]
         public static extern void Cell_Set__SWIG_3(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Cell_Get__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Cell_Get__SWIG_0")]
         public static extern void Cell_Get__SWIG_0(HandleRef jarg1, out int jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Cell_Get__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Cell_Get__SWIG_1")]
         public static extern void Cell_Get__SWIG_1(HandleRef jarg1, out double jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Cell_ToString"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Cell_ToString")]
         public static extern IntPtr Cell_ToString(HandleRef jarg1, int jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Cell_CopyData"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Cell_CopyData")]
         public static extern IntPtr Cell_CopyData(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_Cell__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_Cell__SWIG_1")]
         public static extern IntPtr new_Cell__SWIG_1(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Cell_EstimateColumnType"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Cell_EstimateColumnType")]
         public static extern int Cell_EstimateColumnType(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Cell_isEmpty_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Cell_isEmpty_set")]
         public static extern void Cell_isEmpty_set(HandleRef jarg1, bool jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Cell_isEmpty_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Cell_isEmpty_get")]
         public static extern bool Cell_isEmpty_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Cell_i_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Cell_i_set")]
         public static extern void Cell_i_set(HandleRef jarg1, double jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Cell_i_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Cell_i_get")]
         public static extern double Cell_i_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Cell_Set__SWIG_4"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Cell_Set__SWIG_4")]
         public static extern void Cell_Set__SWIG_4(HandleRef jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2, int jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Cell_Get__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Cell_Get__SWIG_2")]
         public static extern void Cell_Get__SWIG_2(HandleRef jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2, out int jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Cell_GetHelper"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Cell_GetHelper")]
         public static extern string Cell_GetHelper(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Row_cells_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Row_cells_set")]
         public static extern void Row_cells_set(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Row_cells_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Row_cells_get")]
         public static extern IntPtr Row_cells_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Row_UpdateCell__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Row_UpdateCell__SWIG_0")]
         public static extern void Row_UpdateCell__SWIG_0(HandleRef jarg1, uint jarg2, double jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Row_UpdateCell__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Row_UpdateCell__SWIG_1")]
         public static extern void Row_UpdateCell__SWIG_1(HandleRef jarg1, uint jarg2, string jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Row_UpdateCell__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Row_UpdateCell__SWIG_2")]
         public static extern void Row_UpdateCell__SWIG_2(HandleRef jarg1, uint jarg2, int jarg3, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_Row"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_Row")]
         public static extern IntPtr new_Row();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_Row"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_Row")]
         public static extern void delete_Row(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_FilterQuery__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_FilterQuery__SWIG_0")]
         public static extern IntPtr new_FilterQuery__SWIG_0();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_FilterQuery"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_FilterQuery")]
         public static extern void delete_FilterQuery(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_FilterQuery__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_FilterQuery__SWIG_1")]
         public static extern IntPtr new_FilterQuery__SWIG_1(uint jarg1, HandleRef jarg2, int jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_FilterQuery_columnName_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_FilterQuery_columnName_set")]
         public static extern void FilterQuery_columnName_set(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_FilterQuery_columnName_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_FilterQuery_columnName_get")]
         public static extern string FilterQuery_columnName_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_FilterQuery_columnIndex_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_FilterQuery_columnIndex_set")]
         public static extern void FilterQuery_columnIndex_set(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_FilterQuery_columnIndex_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_FilterQuery_columnIndex_get")]
         public static extern uint FilterQuery_columnIndex_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_FilterQuery_cellValue_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_FilterQuery_cellValue_set")]
         public static extern void FilterQuery_cellValue_set(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_FilterQuery_cellValue_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_FilterQuery_cellValue_get")]
         public static extern IntPtr FilterQuery_cellValue_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_FilterQuery_operation_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_FilterQuery_operation_set")]
         public static extern void FilterQuery_operation_set(HandleRef jarg1, int jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_FilterQuery_operation_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_FilterQuery_operation_get")]
         public static extern int FilterQuery_operation_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SortQuery_columnIndex_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SortQuery_columnIndex_set")]
         public static extern void SortQuery_columnIndex_set(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SortQuery_columnIndex_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SortQuery_columnIndex_get")]
         public static extern uint SortQuery_columnIndex_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SortQuery_operation_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SortQuery_operation_set")]
         public static extern void SortQuery_operation_set(HandleRef jarg1, int jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SortQuery_operation_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SortQuery_operation_get")]
         public static extern int SortQuery_operation_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_SortQuery"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_SortQuery")]
         public static extern IntPtr new_SortQuery();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_SortQuery"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_SortQuery")]
         public static extern void delete_SortQuery(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_OnFileStruct_fileIndex_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_OnFileStruct_fileIndex_set")]
         public static extern void OnFileStruct_fileIndex_set(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_OnFileStruct_fileIndex_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_OnFileStruct_fileIndex_get")]
         public static extern uint OnFileStruct_fileIndex_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_OnFileStruct_fileName_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_OnFileStruct_fileName_set")]
         public static extern void OnFileStruct_fileName_set(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_OnFileStruct_fileName_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_OnFileStruct_fileName_get")]
         public static extern string OnFileStruct_fileName_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_OnFileStruct_fileData_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_OnFileStruct_fileData_set")]
         public static extern void OnFileStruct_fileData_set(HandleRef jarg1, IntPtr jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_OnFileStruct_fileData_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_OnFileStruct_fileData_get")]
         public static extern IntPtr OnFileStruct_fileData_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_OnFileStruct_byteLengthOfThisFile_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_OnFileStruct_byteLengthOfThisFile_set")]
         public static extern void OnFileStruct_byteLengthOfThisFile_set(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_OnFileStruct_byteLengthOfThisFile_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_OnFileStruct_byteLengthOfThisFile_get")]
         public static extern uint OnFileStruct_byteLengthOfThisFile_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_OnFileStruct_bytesDownloadedForThisFile_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_OnFileStruct_bytesDownloadedForThisFile_set")]
         public static extern void OnFileStruct_bytesDownloadedForThisFile_set(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_OnFileStruct_bytesDownloadedForThisFile_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_OnFileStruct_bytesDownloadedForThisFile_get")]
         public static extern uint OnFileStruct_bytesDownloadedForThisFile_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_OnFileStruct_setID_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_OnFileStruct_setID_set")]
         public static extern void OnFileStruct_setID_set(HandleRef jarg1, ushort jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_OnFileStruct_setID_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_OnFileStruct_setID_get")]
         public static extern ushort OnFileStruct_setID_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_OnFileStruct_numberOfFilesInThisSet_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_OnFileStruct_numberOfFilesInThisSet_set")]
         public static extern void OnFileStruct_numberOfFilesInThisSet_set(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_OnFileStruct_numberOfFilesInThisSet_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_OnFileStruct_numberOfFilesInThisSet_get")]
         public static extern uint OnFileStruct_numberOfFilesInThisSet_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_OnFileStruct_byteLengthOfThisSet_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_OnFileStruct_byteLengthOfThisSet_set")]
         public static extern void OnFileStruct_byteLengthOfThisSet_set(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_OnFileStruct_byteLengthOfThisSet_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_OnFileStruct_byteLengthOfThisSet_get")]
         public static extern uint OnFileStruct_byteLengthOfThisSet_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_OnFileStruct_bytesDownloadedForThisSet_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_OnFileStruct_bytesDownloadedForThisSet_set")]
         public static extern void OnFileStruct_bytesDownloadedForThisSet_set(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_OnFileStruct_bytesDownloadedForThisSet_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_OnFileStruct_bytesDownloadedForThisSet_get")]
         public static extern uint OnFileStruct_bytesDownloadedForThisSet_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_OnFileStruct_context_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_OnFileStruct_context_set")]
         public static extern void OnFileStruct_context_set(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_OnFileStruct_context_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_OnFileStruct_context_get")]
         public static extern IntPtr OnFileStruct_context_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_OnFileStruct_senderSystemAddress_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_OnFileStruct_senderSystemAddress_set")]
         public static extern void OnFileStruct_senderSystemAddress_set(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_OnFileStruct_senderSystemAddress_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_OnFileStruct_senderSystemAddress_get")]
         public static extern IntPtr OnFileStruct_senderSystemAddress_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_OnFileStruct_senderGuid_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_OnFileStruct_senderGuid_set")]
         public static extern void OnFileStruct_senderGuid_set(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_OnFileStruct_senderGuid_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_OnFileStruct_senderGuid_get")]
         public static extern IntPtr OnFileStruct_senderGuid_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_OnFileStruct"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_OnFileStruct")]
         public static extern IntPtr new_OnFileStruct();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_OnFileStruct_SetFileData"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_OnFileStruct_SetFileData")]
         public static extern void OnFileStruct_SetFileData(HandleRef jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2, int jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_OnFileStruct"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_OnFileStruct")]
         public static extern void delete_OnFileStruct(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_FileProgressStruct_onFileStruct_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_FileProgressStruct_onFileStruct_set")]
         public static extern void FileProgressStruct_onFileStruct_set(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_FileProgressStruct_onFileStruct_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_FileProgressStruct_onFileStruct_get")]
         public static extern IntPtr FileProgressStruct_onFileStruct_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_FileProgressStruct_partCount_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_FileProgressStruct_partCount_set")]
         public static extern void FileProgressStruct_partCount_set(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_FileProgressStruct_partCount_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_FileProgressStruct_partCount_get")]
         public static extern uint FileProgressStruct_partCount_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_FileProgressStruct_partTotal_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_FileProgressStruct_partTotal_set")]
         public static extern void FileProgressStruct_partTotal_set(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_FileProgressStruct_partTotal_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_FileProgressStruct_partTotal_get")]
         public static extern uint FileProgressStruct_partTotal_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_FileProgressStruct_dataChunkLength_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_FileProgressStruct_dataChunkLength_set")]
         public static extern void FileProgressStruct_dataChunkLength_set(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_FileProgressStruct_dataChunkLength_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_FileProgressStruct_dataChunkLength_get")]
         public static extern uint FileProgressStruct_dataChunkLength_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_FileProgressStruct_firstDataChunk_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_FileProgressStruct_firstDataChunk_set")]
         public static extern void FileProgressStruct_firstDataChunk_set(HandleRef jarg1, IntPtr jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_FileProgressStruct_firstDataChunk_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_FileProgressStruct_firstDataChunk_get")]
         public static extern IntPtr FileProgressStruct_firstDataChunk_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_FileProgressStruct_iriDataChunk_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_FileProgressStruct_iriDataChunk_set")]
         public static extern void FileProgressStruct_iriDataChunk_set(HandleRef jarg1, IntPtr jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_FileProgressStruct_iriDataChunk_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_FileProgressStruct_iriDataChunk_get")]
         public static extern IntPtr FileProgressStruct_iriDataChunk_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_FileProgressStruct_iriWriteOffset_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_FileProgressStruct_iriWriteOffset_set")]
         public static extern void FileProgressStruct_iriWriteOffset_set(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_FileProgressStruct_iriWriteOffset_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_FileProgressStruct_iriWriteOffset_get")]
         public static extern uint FileProgressStruct_iriWriteOffset_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_FileProgressStruct_senderSystemAddress_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_FileProgressStruct_senderSystemAddress_set")]
         public static extern void FileProgressStruct_senderSystemAddress_set(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_FileProgressStruct_senderSystemAddress_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_FileProgressStruct_senderSystemAddress_get")]
         public static extern IntPtr FileProgressStruct_senderSystemAddress_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_FileProgressStruct_senderGuid_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_FileProgressStruct_senderGuid_set")]
         public static extern void FileProgressStruct_senderGuid_set(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_FileProgressStruct_senderGuid_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_FileProgressStruct_senderGuid_get")]
         public static extern IntPtr FileProgressStruct_senderGuid_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_FileProgressStruct_allocateIrIDataChunkAutomatically_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_FileProgressStruct_allocateIrIDataChunkAutomatically_set")]
         public static extern void FileProgressStruct_allocateIrIDataChunkAutomatically_set(HandleRef jarg1, bool jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_FileProgressStruct_allocateIrIDataChunkAutomatically_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_FileProgressStruct_allocateIrIDataChunkAutomatically_get")]
         public static extern bool FileProgressStruct_allocateIrIDataChunkAutomatically_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_FileProgressStruct"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_FileProgressStruct")]
         public static extern IntPtr new_FileProgressStruct();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_FileProgressStruct_SetFirstDataChunk"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_FileProgressStruct_SetFirstDataChunk")]
         public static extern void FileProgressStruct_SetFirstDataChunk(HandleRef jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2, int jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_FileProgressStruct_SetIriDataChunk"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_FileProgressStruct_SetIriDataChunk")]
         public static extern void FileProgressStruct_SetIriDataChunk(HandleRef jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2, int jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_FileProgressStruct"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_FileProgressStruct")]
         public static extern void delete_FileProgressStruct(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_DownloadCompleteStruct_setID_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_DownloadCompleteStruct_setID_set")]
         public static extern void DownloadCompleteStruct_setID_set(HandleRef jarg1, ushort jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_DownloadCompleteStruct_setID_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_DownloadCompleteStruct_setID_get")]
         public static extern ushort DownloadCompleteStruct_setID_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_DownloadCompleteStruct_numberOfFilesInThisSet_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_DownloadCompleteStruct_numberOfFilesInThisSet_set")]
         public static extern void DownloadCompleteStruct_numberOfFilesInThisSet_set(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_DownloadCompleteStruct_numberOfFilesInThisSet_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_DownloadCompleteStruct_numberOfFilesInThisSet_get")]
         public static extern uint DownloadCompleteStruct_numberOfFilesInThisSet_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_DownloadCompleteStruct_byteLengthOfThisSet_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_DownloadCompleteStruct_byteLengthOfThisSet_set")]
         public static extern void DownloadCompleteStruct_byteLengthOfThisSet_set(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_DownloadCompleteStruct_byteLengthOfThisSet_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_DownloadCompleteStruct_byteLengthOfThisSet_get")]
         public static extern uint DownloadCompleteStruct_byteLengthOfThisSet_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_DownloadCompleteStruct_senderSystemAddress_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_DownloadCompleteStruct_senderSystemAddress_set")]
         public static extern void DownloadCompleteStruct_senderSystemAddress_set(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_DownloadCompleteStruct_senderSystemAddress_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_DownloadCompleteStruct_senderSystemAddress_get")]
         public static extern IntPtr DownloadCompleteStruct_senderSystemAddress_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_DownloadCompleteStruct_senderGuid_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_DownloadCompleteStruct_senderGuid_set")]
         public static extern void DownloadCompleteStruct_senderGuid_set(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_DownloadCompleteStruct_senderGuid_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_DownloadCompleteStruct_senderGuid_get")]
         public static extern IntPtr DownloadCompleteStruct_senderGuid_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_DownloadCompleteStruct"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_DownloadCompleteStruct")]
         public static extern IntPtr new_DownloadCompleteStruct();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_DownloadCompleteStruct"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_DownloadCompleteStruct")]
         public static extern void delete_DownloadCompleteStruct(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_StatisticsToStringHelper"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_StatisticsToStringHelper")]
         public static extern string StatisticsToStringHelper(HandleRef jarg1, string jarg2, int jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp___GET_TIME_64BIT_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp___GET_TIME_64BIT_get")]
         public static extern int __GET_TIME_64BIT_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_MAX_ALLOCA_STACK_ALLOCATION_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_MAX_ALLOCA_STACK_ALLOCATION_get")]
         public static extern int MAX_ALLOCA_STACK_ALLOCATION_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp__USE_RAK_MEMORY_OVERRIDE_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp__USE_RAK_MEMORY_OVERRIDE_get")]
         public static extern int _USE_RAK_MEMORY_OVERRIDE_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_OPEN_SSL_CLIENT_SUPPORT_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_OPEN_SSL_CLIENT_SUPPORT_get")]
         public static extern int OPEN_SSL_CLIENT_SUPPORT_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BITSTREAM_STACK_ALLOCATION_SIZE_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BITSTREAM_STACK_ALLOCATION_SIZE_get")]
         public static extern int BITSTREAM_STACK_ALLOCATION_SIZE_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_MAXIMUM_NUMBER_OF_INTERNAL_IDS_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_MAXIMUM_NUMBER_OF_INTERNAL_IDS_get")]
         public static extern int MAXIMUM_NUMBER_OF_INTERNAL_IDS_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_DATAGRAM_MESSAGE_ID_ARRAY_LENGTH_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_DATAGRAM_MESSAGE_ID_ARRAY_LENGTH_get")]
         public static extern int DATAGRAM_MESSAGE_ID_ARRAY_LENGTH_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RESEND_BUFFER_ARRAY_LENGTH_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RESEND_BUFFER_ARRAY_LENGTH_get")]
         public static extern int RESEND_BUFFER_ARRAY_LENGTH_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RESEND_BUFFER_ARRAY_MASK_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RESEND_BUFFER_ARRAY_MASK_get")]
         public static extern int RESEND_BUFFER_ARRAY_MASK_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_GET_TIME_SPIKE_LIMIT_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_GET_TIME_SPIKE_LIMIT_get")]
         public static extern int GET_TIME_SPIKE_LIMIT_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_USE_SLIDING_WINDOW_CONGESTION_CONTROL_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_USE_SLIDING_WINDOW_CONGESTION_CONTROL_get")]
         public static extern int USE_SLIDING_WINDOW_CONGESTION_CONTROL_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_PREALLOCATE_LARGE_MESSAGES_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_PREALLOCATE_LARGE_MESSAGES_get")]
         public static extern int PREALLOCATE_LARGE_MESSAGES_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RAKNET_SUPPORT_IPV6_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RAKNET_SUPPORT_IPV6_get")]
         public static extern int RAKNET_SUPPORT_IPV6_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RAKSTRING_TYPE_IS_UNICODE_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RAKSTRING_TYPE_IS_UNICODE_get")]
         public static extern int RAKSTRING_TYPE_IS_UNICODE_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RPC4_GLOBAL_REGISTRATION_MAX_FUNCTIONS_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RPC4_GLOBAL_REGISTRATION_MAX_FUNCTIONS_get")]
         public static extern int RPC4_GLOBAL_REGISTRATION_MAX_FUNCTIONS_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RPC4_GLOBAL_REGISTRATION_MAX_FUNCTION_NAME_LENGTH_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RPC4_GLOBAL_REGISTRATION_MAX_FUNCTION_NAME_LENGTH_get")]
         public static extern int RPC4_GLOBAL_REGISTRATION_MAX_FUNCTION_NAME_LENGTH_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_XBOX_BYPASS_SECURITY_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_XBOX_BYPASS_SECURITY_get")]
         public static extern int XBOX_BYPASS_SECURITY_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BUFFERED_PACKETS_PAGE_SIZE_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BUFFERED_PACKETS_PAGE_SIZE_get")]
         public static extern int BUFFERED_PACKETS_PAGE_SIZE_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_INTERNAL_PACKET_PAGE_SIZE_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_INTERNAL_PACKET_PAGE_SIZE_get")]
         public static extern int INTERNAL_PACKET_PAGE_SIZE_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RAKPEER_USER_THREADED_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RAKPEER_USER_THREADED_get")]
         public static extern int RAKPEER_USER_THREADED_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_USE_ALLOCA_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_USE_ALLOCA_get")]
         public static extern int USE_ALLOCA_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_LIBCAT_SECURITY_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_LIBCAT_SECURITY_get")]
         public static extern int LIBCAT_SECURITY_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp__RAKNET_SUPPORT_ConnectionGraph2_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp__RAKNET_SUPPORT_ConnectionGraph2_get")]
         public static extern int _RAKNET_SUPPORT_ConnectionGraph2_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp__RAKNET_SUPPORT_DirectoryDeltaTransfer_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp__RAKNET_SUPPORT_DirectoryDeltaTransfer_get")]
         public static extern int _RAKNET_SUPPORT_DirectoryDeltaTransfer_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp__RAKNET_SUPPORT_FileListTransfer_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp__RAKNET_SUPPORT_FileListTransfer_get")]
         public static extern int _RAKNET_SUPPORT_FileListTransfer_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp__RAKNET_SUPPORT_FullyConnectedMesh_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp__RAKNET_SUPPORT_FullyConnectedMesh_get")]
         public static extern int _RAKNET_SUPPORT_FullyConnectedMesh_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp__RAKNET_SUPPORT_FullyConnectedMesh2_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp__RAKNET_SUPPORT_FullyConnectedMesh2_get")]
         public static extern int _RAKNET_SUPPORT_FullyConnectedMesh2_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp__RAKNET_SUPPORT_MessageFilter_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp__RAKNET_SUPPORT_MessageFilter_get")]
         public static extern int _RAKNET_SUPPORT_MessageFilter_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-        , EntryPoint = "CSharp__RAKNET_SUPPORT_NatPunchthroughClient_get"
-#endif
-        )]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp__RAKNET_SUPPORT_NatPunchthroughClient_get")]
         public static extern int _RAKNET_SUPPORT_NatPunchthroughClient_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-        , EntryPoint = "CSharp__RAKNET_SUPPORT_NatPunchthroughServer_get"
-#endif
-        )]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp__RAKNET_SUPPORT_NatPunchthroughServer_get")]
         public static extern int _RAKNET_SUPPORT_NatPunchthroughServer_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-        , EntryPoint = "CSharp__RAKNET_SUPPORT_NatTypeDetectionClient_get"
-#endif
-        )]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp__RAKNET_SUPPORT_NatTypeDetectionClient_get")]
         public static extern int _RAKNET_SUPPORT_NatTypeDetectionClient_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-        , EntryPoint = "CSharp__RAKNET_SUPPORT_NatTypeDetectionServer_get"
-#endif
-        )]
+        [DllImport(Const.LibraryName , EntryPoint = "CSharp__RAKNET_SUPPORT_NatTypeDetectionServer_get")]
         public static extern int _RAKNET_SUPPORT_NatTypeDetectionServer_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp__RAKNET_SUPPORT_PacketLogger_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp__RAKNET_SUPPORT_PacketLogger_get")]
         public static extern int _RAKNET_SUPPORT_PacketLogger_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp__RAKNET_SUPPORT_ReadyEvent_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp__RAKNET_SUPPORT_ReadyEvent_get")]
         public static extern int _RAKNET_SUPPORT_ReadyEvent_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp__RAKNET_SUPPORT_ReplicaManager3_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp__RAKNET_SUPPORT_ReplicaManager3_get")]
         public static extern int _RAKNET_SUPPORT_ReplicaManager3_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp__RAKNET_SUPPORT_Router2_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp__RAKNET_SUPPORT_Router2_get")]
         public static extern int _RAKNET_SUPPORT_Router2_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp__RAKNET_SUPPORT_RPC4Plugin_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp__RAKNET_SUPPORT_RPC4Plugin_get")]
         public static extern int _RAKNET_SUPPORT_RPC4Plugin_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp__RAKNET_SUPPORT_TeamBalancer_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp__RAKNET_SUPPORT_TeamBalancer_get")]
         public static extern int _RAKNET_SUPPORT_TeamBalancer_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp__RAKNET_SUPPORT_TeamManager_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp__RAKNET_SUPPORT_TeamManager_get")]
         public static extern int _RAKNET_SUPPORT_TeamManager_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-        , EntryPoint = "CSharp__RAKNET_SUPPORT_UDPProxyClient_get"
-#endif
-        )]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp__RAKNET_SUPPORT_UDPProxyClient_get"  )]
         public static extern int _RAKNET_SUPPORT_UDPProxyClient_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-        , EntryPoint = "CSharp__RAKNET_SUPPORT_UDPProxyCoordinator_get"
-#endif
-        )]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp__RAKNET_SUPPORT_UDPProxyCoordinator_get")]
         public static extern int _RAKNET_SUPPORT_UDPProxyCoordinator_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-        , EntryPoint = "CSharp__RAKNET_SUPPORT_UDPProxyServer_get"
-#endif
-        )]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp__RAKNET_SUPPORT_UDPProxyServer_get")]
         public static extern int _RAKNET_SUPPORT_UDPProxyServer_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp__RAKNET_SUPPORT_ConsoleServer_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp__RAKNET_SUPPORT_ConsoleServer_get")]
         public static extern int _RAKNET_SUPPORT_ConsoleServer_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp__RAKNET_SUPPORT_RakNetTransport_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp__RAKNET_SUPPORT_RakNetTransport_get")]
         public static extern int _RAKNET_SUPPORT_RakNetTransport_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp__RAKNET_SUPPORT_TelnetTransport_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp__RAKNET_SUPPORT_TelnetTransport_get")]
         public static extern int _RAKNET_SUPPORT_TelnetTransport_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp__RAKNET_SUPPORT_TCPInterface_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp__RAKNET_SUPPORT_TCPInterface_get")]
         public static extern int _RAKNET_SUPPORT_TCPInterface_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp__RAKNET_SUPPORT_LogCommandParser_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp__RAKNET_SUPPORT_LogCommandParser_get")]
         public static extern int _RAKNET_SUPPORT_LogCommandParser_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp__RAKNET_SUPPORT_RakNetCommandParser_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp__RAKNET_SUPPORT_RakNetCommandParser_get")]
         public static extern int _RAKNET_SUPPORT_RakNetCommandParser_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp__RAKNET_SUPPORT_EmailSender_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp__RAKNET_SUPPORT_EmailSender_get")]
         public static extern int _RAKNET_SUPPORT_EmailSender_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp__RAKNET_SUPPORT_HTTPConnection_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp__RAKNET_SUPPORT_HTTPConnection_get")]
         public static extern int _RAKNET_SUPPORT_HTTPConnection_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp__RAKNET_SUPPORT_HTTPConnection2_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp__RAKNET_SUPPORT_HTTPConnection2_get")]
         public static extern int _RAKNET_SUPPORT_HTTPConnection2_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp__RAKNET_SUPPORT_PacketizedTCP_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp__RAKNET_SUPPORT_PacketizedTCP_get")]
         public static extern int _RAKNET_SUPPORT_PacketizedTCP_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp__RAKNET_SUPPORT_TwoWayAuthentication_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp__RAKNET_SUPPORT_TwoWayAuthentication_get")]
         public static extern int _RAKNET_SUPPORT_TwoWayAuthentication_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp__RAKNET_SUPPORT_CloudClient_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp__RAKNET_SUPPORT_CloudClient_get")]
         public static extern int _RAKNET_SUPPORT_CloudClient_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp__RAKNET_SUPPORT_CloudServer_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp__RAKNET_SUPPORT_CloudServer_get")]
         public static extern int _RAKNET_SUPPORT_CloudServer_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp__RAKNET_SUPPORT_DynDNS_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp__RAKNET_SUPPORT_DynDNS_get")]
         public static extern int _RAKNET_SUPPORT_DynDNS_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp__RAKNET_SUPPORT_Rackspace_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp__RAKNET_SUPPORT_Rackspace_get")]
         public static extern int _RAKNET_SUPPORT_Rackspace_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp__RAKNET_SUPPORT_FileOperations_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp__RAKNET_SUPPORT_FileOperations_get")]
         public static extern int _RAKNET_SUPPORT_FileOperations_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp__RAKNET_SUPPORT_UDPForwarder_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp__RAKNET_SUPPORT_UDPForwarder_get")]
         public static extern int _RAKNET_SUPPORT_UDPForwarder_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp__RAKNET_SUPPORT_StatisticsHistory_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp__RAKNET_SUPPORT_StatisticsHistory_get")]
         public static extern int _RAKNET_SUPPORT_StatisticsHistory_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp__RAKNET_SUPPORT_LibVoice_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp__RAKNET_SUPPORT_LibVoice_get")]
         public static extern int _RAKNET_SUPPORT_LibVoice_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp__RAKNET_SUPPORT_RelayPlugin_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp__RAKNET_SUPPORT_RelayPlugin_get")]
         public static extern int _RAKNET_SUPPORT_RelayPlugin_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_SimpleMutex"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_SimpleMutex")]
         public static extern IntPtr new_SimpleMutex();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_SimpleMutex"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_SimpleMutex")]
         public static extern void delete_SimpleMutex(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SimpleMutex_Lock"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SimpleMutex_Lock")]
         public static extern void SimpleMutex_Lock(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SimpleMutex_Unlock"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SimpleMutex_Unlock")]
         public static extern void SimpleMutex_Unlock(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_MAX_RPC_MAP_SIZE_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_MAX_RPC_MAP_SIZE_get")]
         public static extern int MAX_RPC_MAP_SIZE_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_UNDEFINED_RPC_INDEX_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_UNDEFINED_RPC_INDEX_get")]
         public static extern int UNDEFINED_RPC_INDEX_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_PRINTF_64_BIT_MODIFIER_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_PRINTF_64_BIT_MODIFIER_get")]
         public static extern string PRINTF_64_BIT_MODIFIER_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_PublicKey_publicKeyMode_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_PublicKey_publicKeyMode_set")]
         public static extern void PublicKey_publicKeyMode_set(HandleRef jarg1, int jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_PublicKey_publicKeyMode_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_PublicKey_publicKeyMode_get")]
         public static extern int PublicKey_publicKeyMode_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_PublicKey_remoteServerPublicKey_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_PublicKey_remoteServerPublicKey_set")]
         public static extern void PublicKey_remoteServerPublicKey_set(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_PublicKey_remoteServerPublicKey_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_PublicKey_remoteServerPublicKey_get")]
         public static extern string PublicKey_remoteServerPublicKey_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_PublicKey_myPublicKey_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_PublicKey_myPublicKey_set")]
         public static extern void PublicKey_myPublicKey_set(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_PublicKey_myPublicKey_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_PublicKey_myPublicKey_get")]
         public static extern string PublicKey_myPublicKey_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_PublicKey_myPrivateKey_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_PublicKey_myPrivateKey_set")]
         public static extern void PublicKey_myPrivateKey_set(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_PublicKey_myPrivateKey_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_PublicKey_myPrivateKey_get")]
         public static extern string PublicKey_myPrivateKey_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_PublicKey"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_PublicKey")]
         public static extern IntPtr new_PublicKey();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_PublicKey"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_PublicKey")]
         public static extern void delete_PublicKey(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_SocketDescriptor__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_SocketDescriptor__SWIG_0")]
         public static extern IntPtr new_SocketDescriptor__SWIG_0();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_SocketDescriptor__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_SocketDescriptor__SWIG_1")]
         public static extern IntPtr new_SocketDescriptor__SWIG_1(ushort jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SocketDescriptor_port_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SocketDescriptor_port_set")]
         public static extern void SocketDescriptor_port_set(HandleRef jarg1, ushort jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SocketDescriptor_port_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SocketDescriptor_port_get")]
         public static extern ushort SocketDescriptor_port_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SocketDescriptor_hostAddress_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SocketDescriptor_hostAddress_set")]
         public static extern void SocketDescriptor_hostAddress_set(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SocketDescriptor_hostAddress_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SocketDescriptor_hostAddress_get")]
         public static extern string SocketDescriptor_hostAddress_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SocketDescriptor_socketFamily_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SocketDescriptor_socketFamily_set")]
         public static extern void SocketDescriptor_socketFamily_set(HandleRef jarg1, short jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SocketDescriptor_socketFamily_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SocketDescriptor_socketFamily_get")]
         public static extern short SocketDescriptor_socketFamily_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SocketDescriptor_remotePortRakNetWasStartedOn_PS3_PSP2_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SocketDescriptor_remotePortRakNetWasStartedOn_PS3_PSP2_set")]
         public static extern void SocketDescriptor_remotePortRakNetWasStartedOn_PS3_PSP2_set(HandleRef jarg1, ushort jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SocketDescriptor_remotePortRakNetWasStartedOn_PS3_PSP2_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SocketDescriptor_remotePortRakNetWasStartedOn_PS3_PSP2_get")]
         public static extern ushort SocketDescriptor_remotePortRakNetWasStartedOn_PS3_PSP2_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SocketDescriptor_chromeInstance_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SocketDescriptor_chromeInstance_set")]
         public static extern void SocketDescriptor_chromeInstance_set(HandleRef jarg1, int jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SocketDescriptor_chromeInstance_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SocketDescriptor_chromeInstance_get")]
         public static extern int SocketDescriptor_chromeInstance_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SocketDescriptor_blockingSocket_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SocketDescriptor_blockingSocket_set")]
         public static extern void SocketDescriptor_blockingSocket_set(HandleRef jarg1, bool jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SocketDescriptor_blockingSocket_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SocketDescriptor_blockingSocket_get")]
         public static extern bool SocketDescriptor_blockingSocket_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SocketDescriptor_extraSocketOptions_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SocketDescriptor_extraSocketOptions_set")]
         public static extern void SocketDescriptor_extraSocketOptions_set(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SocketDescriptor_extraSocketOptions_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SocketDescriptor_extraSocketOptions_get")]
         public static extern uint SocketDescriptor_extraSocketOptions_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_SocketDescriptor"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_SocketDescriptor")]
         public static extern void delete_SocketDescriptor(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_NonNumericHostString"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_NonNumericHostString")]
         public static extern bool NonNumericHostString(string jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_SystemAddress__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_SystemAddress__SWIG_0")]
         public static extern IntPtr new_SystemAddress__SWIG_0();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_SystemAddress__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_SystemAddress__SWIG_1")]
         public static extern IntPtr new_SystemAddress__SWIG_1(string jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_SystemAddress__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_SystemAddress__SWIG_2")]
         public static extern IntPtr new_SystemAddress__SWIG_2(string jarg1, ushort jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SystemAddress_debugPort_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SystemAddress_debugPort_set")]
         public static extern void SystemAddress_debugPort_set(HandleRef jarg1, ushort jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SystemAddress_debugPort_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SystemAddress_debugPort_get")]
         public static extern ushort SystemAddress_debugPort_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SystemAddress_size"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SystemAddress_size")]
         public static extern int SystemAddress_size();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SystemAddress_ToInteger"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SystemAddress_ToInteger")]
         public static extern uint SystemAddress_ToInteger(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SystemAddress_GetIPVersion"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SystemAddress_GetIPVersion")]
         public static extern byte SystemAddress_GetIPVersion(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SystemAddress_GetIPPROTO"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SystemAddress_GetIPPROTO")]
         public static extern uint SystemAddress_GetIPPROTO(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SystemAddress_SetToLoopback__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SystemAddress_SetToLoopback__SWIG_0")]
         public static extern void SystemAddress_SetToLoopback__SWIG_0(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SystemAddress_SetToLoopback__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SystemAddress_SetToLoopback__SWIG_1")]
         public static extern void SystemAddress_SetToLoopback__SWIG_1(HandleRef jarg1, byte jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SystemAddress_IsLoopback"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SystemAddress_IsLoopback")]
         public static extern bool SystemAddress_IsLoopback(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SystemAddress_ToString__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SystemAddress_ToString__SWIG_0")]
         public static extern string SystemAddress_ToString__SWIG_0(HandleRef jarg1, bool jarg2, char jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SystemAddress_ToString__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SystemAddress_ToString__SWIG_1")]
         public static extern string SystemAddress_ToString__SWIG_1(HandleRef jarg1, bool jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SystemAddress_ToString__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SystemAddress_ToString__SWIG_2")]
         public static extern void SystemAddress_ToString__SWIG_2(HandleRef jarg1, bool jarg2, string jarg3, char jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SystemAddress_FromString__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SystemAddress_FromString__SWIG_0")]
         public static extern bool SystemAddress_FromString__SWIG_0(HandleRef jarg1, string jarg2, char jarg3, int jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SystemAddress_FromString__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SystemAddress_FromString__SWIG_1")]
         public static extern bool SystemAddress_FromString__SWIG_1(HandleRef jarg1, string jarg2, char jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SystemAddress_FromString__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SystemAddress_FromString__SWIG_2")]
         public static extern bool SystemAddress_FromString__SWIG_2(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SystemAddress_FromStringExplicitPort__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SystemAddress_FromStringExplicitPort__SWIG_0")]
         public static extern bool SystemAddress_FromStringExplicitPort__SWIG_0(HandleRef jarg1, string jarg2, ushort jarg3, int jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SystemAddress_FromStringExplicitPort__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SystemAddress_FromStringExplicitPort__SWIG_1")]
         public static extern bool SystemAddress_FromStringExplicitPort__SWIG_1(HandleRef jarg1, string jarg2, ushort jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SystemAddress_CopyPort"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SystemAddress_CopyPort")]
         public static extern void SystemAddress_CopyPort(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SystemAddress_EqualsExcludingPort"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SystemAddress_EqualsExcludingPort")]
         public static extern bool SystemAddress_EqualsExcludingPort(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SystemAddress_GetPort"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SystemAddress_GetPort")]
         public static extern ushort SystemAddress_GetPort(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SystemAddress_GetPortNetworkOrder"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SystemAddress_GetPortNetworkOrder")]
         public static extern ushort SystemAddress_GetPortNetworkOrder(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SystemAddress_SetPortHostOrder"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SystemAddress_SetPortHostOrder")]
         public static extern void SystemAddress_SetPortHostOrder(HandleRef jarg1, ushort jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SystemAddress_SetPortNetworkOrder"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SystemAddress_SetPortNetworkOrder")]
         public static extern void SystemAddress_SetPortNetworkOrder(HandleRef jarg1, ushort jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SystemAddress_SetBinaryAddress__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SystemAddress_SetBinaryAddress__SWIG_0")]
         public static extern bool SystemAddress_SetBinaryAddress__SWIG_0(HandleRef jarg1, string jarg2, char jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SystemAddress_SetBinaryAddress__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SystemAddress_SetBinaryAddress__SWIG_1")]
         public static extern bool SystemAddress_SetBinaryAddress__SWIG_1(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SystemAddress_ToString_Old__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SystemAddress_ToString_Old__SWIG_0")]
         public static extern void SystemAddress_ToString_Old__SWIG_0(HandleRef jarg1, bool jarg2, string jarg3, char jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SystemAddress_ToString_Old__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SystemAddress_ToString_Old__SWIG_1")]
         public static extern void SystemAddress_ToString_Old__SWIG_1(HandleRef jarg1, bool jarg2, string jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SystemAddress_FixForIPVersion"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SystemAddress_FixForIPVersion")]
         public static extern void SystemAddress_FixForIPVersion(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SystemAddress_IsLANAddress"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SystemAddress_IsLANAddress")]
         public static extern bool SystemAddress_IsLANAddress(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SystemAddress_CopyData"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SystemAddress_CopyData")]
         public static extern IntPtr SystemAddress_CopyData(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SystemAddress_Equals"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SystemAddress_Equals")]
         public static extern bool SystemAddress_Equals(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SystemAddress_OpNotEqual"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SystemAddress_OpNotEqual")]
         public static extern bool SystemAddress_OpNotEqual(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SystemAddress_OpGreater"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SystemAddress_OpGreater")]
         public static extern bool SystemAddress_OpGreater(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SystemAddress_OpLess"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SystemAddress_OpLess")]
         public static extern bool SystemAddress_OpLess(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SystemAddress_systemIndex_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SystemAddress_systemIndex_set")]
         public static extern void SystemAddress_systemIndex_set(HandleRef jarg1, ushort jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_SystemAddress_systemIndex_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_SystemAddress_systemIndex_get")]
         public static extern ushort SystemAddress_systemIndex_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_SystemAddress"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_SystemAddress")]
         public static extern void delete_SystemAddress(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_RakNetGUID__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_RakNetGUID__SWIG_0")]
         public static extern IntPtr new_RakNetGUID__SWIG_0();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_RakNetGUID__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_RakNetGUID__SWIG_1")]
         public static extern IntPtr new_RakNetGUID__SWIG_1(ulong jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetGUID_g_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetGUID_g_set")]
         public static extern void RakNetGUID_g_set(HandleRef jarg1, ulong jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetGUID_g_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetGUID_g_get")]
         public static extern ulong RakNetGUID_g_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetGUID_ToString"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetGUID_ToString")]
         public static extern string RakNetGUID_ToString(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetGUID_FromString"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetGUID_FromString")]
         public static extern bool RakNetGUID_FromString(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetGUID_ToUint32"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetGUID_ToUint32")]
         public static extern uint RakNetGUID_ToUint32(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetGUID_CopyData"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetGUID_CopyData")]
         public static extern IntPtr RakNetGUID_CopyData(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetGUID_systemIndex_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetGUID_systemIndex_set")]
         public static extern void RakNetGUID_systemIndex_set(HandleRef jarg1, ushort jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetGUID_systemIndex_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetGUID_systemIndex_get")]
         public static extern ushort RakNetGUID_systemIndex_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetGUID_size"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetGUID_size")]
         public static extern int RakNetGUID_size();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetGUID_Equals"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetGUID_Equals")]
         public static extern bool RakNetGUID_Equals(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetGUID_OpNotEqual"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetGUID_OpNotEqual")]
         public static extern bool RakNetGUID_OpNotEqual(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetGUID_OpGreater"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetGUID_OpGreater")]
         public static extern bool RakNetGUID_OpGreater(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetGUID_OpLess"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetGUID_OpLess")]
         public static extern bool RakNetGUID_OpLess(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_RakNetGUID"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_RakNetGUID")]
         public static extern void delete_RakNetGUID(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_AddressOrGUID_rakNetGuid_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_AddressOrGUID_rakNetGuid_set")]
         public static extern void AddressOrGUID_rakNetGuid_set(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_AddressOrGUID_rakNetGuid_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_AddressOrGUID_rakNetGuid_get")]
         public static extern IntPtr AddressOrGUID_rakNetGuid_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_AddressOrGUID_systemAddress_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_AddressOrGUID_systemAddress_set")]
         public static extern void AddressOrGUID_systemAddress_set(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_AddressOrGUID_systemAddress_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_AddressOrGUID_systemAddress_get")]
         public static extern IntPtr AddressOrGUID_systemAddress_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_AddressOrGUID_GetSystemIndex"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_AddressOrGUID_GetSystemIndex")]
         public static extern ushort AddressOrGUID_GetSystemIndex(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_AddressOrGUID_IsUndefined"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_AddressOrGUID_IsUndefined")]
         public static extern bool AddressOrGUID_IsUndefined(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_AddressOrGUID_SetUndefined"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_AddressOrGUID_SetUndefined")]
         public static extern void AddressOrGUID_SetUndefined(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_AddressOrGUID_ToInteger"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_AddressOrGUID_ToInteger")]
         public static extern uint AddressOrGUID_ToInteger(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_AddressOrGUID_ToString"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_AddressOrGUID_ToString")]
         public static extern string AddressOrGUID_ToString(HandleRef jarg1, bool jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_AddressOrGUID__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_AddressOrGUID__SWIG_0")]
         public static extern IntPtr new_AddressOrGUID__SWIG_0();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_AddressOrGUID__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_AddressOrGUID__SWIG_1")]
         public static extern IntPtr new_AddressOrGUID__SWIG_1(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_AddressOrGUID__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_AddressOrGUID__SWIG_2")]
         public static extern IntPtr new_AddressOrGUID__SWIG_2(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_AddressOrGUID__SWIG_3"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_AddressOrGUID__SWIG_3")]
         public static extern IntPtr new_AddressOrGUID__SWIG_3(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_AddressOrGUID__SWIG_4"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_AddressOrGUID__SWIG_4")]
         public static extern IntPtr new_AddressOrGUID__SWIG_4(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_AddressOrGUID_CopyData__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_AddressOrGUID_CopyData__SWIG_0")]
         public static extern IntPtr AddressOrGUID_CopyData__SWIG_0(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_AddressOrGUID_CopyData__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_AddressOrGUID_CopyData__SWIG_1")]
         public static extern IntPtr AddressOrGUID_CopyData__SWIG_1(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_AddressOrGUID_CopyData__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_AddressOrGUID_CopyData__SWIG_2")]
         public static extern IntPtr AddressOrGUID_CopyData__SWIG_2(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_AddressOrGUID_Equals"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_AddressOrGUID_Equals")]
         public static extern bool AddressOrGUID_Equals(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_AddressOrGUID"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_AddressOrGUID")]
         public static extern void delete_AddressOrGUID(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Packet_systemAddress_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Packet_systemAddress_set")]
         public static extern void Packet_systemAddress_set(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Packet_systemAddress_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Packet_systemAddress_get")]
         public static extern IntPtr Packet_systemAddress_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Packet_guid_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Packet_guid_set")]
         public static extern void Packet_guid_set(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Packet_guid_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Packet_guid_get")]
         public static extern IntPtr Packet_guid_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Packet_length_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Packet_length_set")]
         public static extern void Packet_length_set(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Packet_length_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Packet_length_get")]
         public static extern uint Packet_length_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Packet_bitSize_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Packet_bitSize_set")]
         public static extern void Packet_bitSize_set(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Packet_bitSize_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Packet_bitSize_get")]
         public static extern uint Packet_bitSize_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Packet_data_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Packet_data_set")]
         public static extern void Packet_data_set(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Packet_data_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Packet_data_get")]
         public static extern IntPtr Packet_data_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Packet_deleteData_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Packet_deleteData_set")]
         public static extern void Packet_deleteData_set(HandleRef jarg1, bool jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Packet_deleteData_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Packet_deleteData_get")]
         public static extern bool Packet_deleteData_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Packet_wasGeneratedLocally_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Packet_wasGeneratedLocally_set")]
         public static extern void Packet_wasGeneratedLocally_set(HandleRef jarg1, bool jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Packet_wasGeneratedLocally_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Packet_wasGeneratedLocally_get")]
         public static extern bool Packet_wasGeneratedLocally_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_Packet"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_Packet")]
         public static extern IntPtr new_Packet();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Packet_SetPacketData"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Packet_SetPacketData")]
         public static extern void Packet_SetPacketData(HandleRef jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2, int jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_Packet"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_Packet")]
         public static extern void delete_Packet(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_UNASSIGNED_PLAYER_INDEX_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_UNASSIGNED_PLAYER_INDEX_get")]
         public static extern ushort UNASSIGNED_PLAYER_INDEX_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_UNASSIGNED_NETWORK_ID_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_UNASSIGNED_NETWORK_ID_get")]
         public static extern ulong UNASSIGNED_NETWORK_ID_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_PING_TIMES_ARRAY_SIZE_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_PING_TIMES_ARRAY_SIZE_get")]
         public static extern int PING_TIMES_ARRAY_SIZE_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_uint24_t_val_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_uint24_t_val_set")]
         public static extern void uint24_t_val_set(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_uint24_t_val_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_uint24_t_val_get")]
         public static extern uint uint24_t_val_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_uint24_t__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_uint24_t__SWIG_0")]
         public static extern IntPtr new_uint24_t__SWIG_0();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_uint24_t__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_uint24_t__SWIG_1")]
         public static extern IntPtr new_uint24_t__SWIG_1(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_uint24_t_OpPlusPlus"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_uint24_t_OpPlusPlus")]
         public static extern IntPtr uint24_t_OpPlusPlus(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_uint24_t_OpMinusMinus"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_uint24_t_OpMinusMinus")]
         public static extern IntPtr uint24_t_OpMinusMinus(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_uint24_t_CopyData__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_uint24_t_CopyData__SWIG_0")]
         public static extern IntPtr uint24_t_CopyData__SWIG_0(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_uint24_t_Equals__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_uint24_t_Equals__SWIG_0")]
         public static extern bool uint24_t_Equals__SWIG_0(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_uint24_t_OpNotEqual__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_uint24_t_OpNotEqual__SWIG_0")]
         public static extern bool uint24_t_OpNotEqual__SWIG_0(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_uint24_t_OpGreater__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_uint24_t_OpGreater__SWIG_0")]
         public static extern bool uint24_t_OpGreater__SWIG_0(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_uint24_t_OpLess__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_uint24_t_OpLess__SWIG_0")]
         public static extern bool uint24_t_OpLess__SWIG_0(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_uint24_t_OpPlus__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_uint24_t_OpPlus__SWIG_0")]
         public static extern IntPtr uint24_t_OpPlus__SWIG_0(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_uint24_t_OpMinus__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_uint24_t_OpMinus__SWIG_0")]
         public static extern IntPtr uint24_t_OpMinus__SWIG_0(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_uint24_t_OpDivide__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_uint24_t_OpDivide__SWIG_0")]
         public static extern IntPtr uint24_t_OpDivide__SWIG_0(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_uint24_t_OpMultiply__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_uint24_t_OpMultiply__SWIG_0")]
         public static extern IntPtr uint24_t_OpMultiply__SWIG_0(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_uint24_t__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_uint24_t__SWIG_2")]
         public static extern IntPtr new_uint24_t__SWIG_2(uint jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_uint24_t_CopyData__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_uint24_t_CopyData__SWIG_1")]
         public static extern IntPtr uint24_t_CopyData__SWIG_1(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_uint24_t_Equals__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_uint24_t_Equals__SWIG_1")]
         public static extern bool uint24_t_Equals__SWIG_1(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_uint24_t_OpNotEqual__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_uint24_t_OpNotEqual__SWIG_1")]
         public static extern bool uint24_t_OpNotEqual__SWIG_1(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_uint24_t_OpGreater__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_uint24_t_OpGreater__SWIG_1")]
         public static extern bool uint24_t_OpGreater__SWIG_1(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_uint24_t_OpLess__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_uint24_t_OpLess__SWIG_1")]
         public static extern bool uint24_t_OpLess__SWIG_1(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_uint24_t_OpPlus__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_uint24_t_OpPlus__SWIG_1")]
         public static extern IntPtr uint24_t_OpPlus__SWIG_1(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_uint24_t_OpMinus__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_uint24_t_OpMinus__SWIG_1")]
         public static extern IntPtr uint24_t_OpMinus__SWIG_1(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_uint24_t_OpDivide__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_uint24_t_OpDivide__SWIG_1")]
         public static extern IntPtr uint24_t_OpDivide__SWIG_1(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_uint24_t_OpMultiply__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_uint24_t_OpMultiply__SWIG_1")]
         public static extern IntPtr uint24_t_OpMultiply__SWIG_1(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_uint24_t"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_uint24_t")]
         public static extern void delete_uint24_t(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_RakString__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_RakString__SWIG_0")]
         public static extern IntPtr new_RakString__SWIG_0();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_RakString__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_RakString__SWIG_1")]
         public static extern IntPtr new_RakString__SWIG_1(char jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_RakString__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_RakString__SWIG_2")]
         public static extern IntPtr new_RakString__SWIG_2(byte jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_RakString__SWIG_3"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_RakString__SWIG_3")]
         public static extern IntPtr new_RakString__SWIG_3(string jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_RakString"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_RakString")]
         public static extern void delete_RakString(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_RakString__SWIG_4"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_RakString__SWIG_4")]
         public static extern IntPtr new_RakString__SWIG_4(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_C_String"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_C_String")]
         public static extern string RakString_C_String(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_C_StringUnsafe"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_C_StringUnsafe")]
         public static extern string RakString_C_StringUnsafe(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_CopyData__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_CopyData__SWIG_0")]
         public static extern IntPtr RakString_CopyData__SWIG_0(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_CopyData__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_CopyData__SWIG_1")]
         public static extern IntPtr RakString_CopyData__SWIG_1(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_CopyData__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_CopyData__SWIG_2")]
         public static extern IntPtr RakString_CopyData__SWIG_2(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_CopyData__SWIG_4"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_CopyData__SWIG_4")]
         public static extern IntPtr RakString_CopyData__SWIG_4(HandleRef jarg1, char jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_OpArray"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_OpArray")]
         public static extern byte RakString_OpArray(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_Find__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_Find__SWIG_0")]
         public static extern uint RakString_Find__SWIG_0(HandleRef jarg1, string jarg2, uint jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_Find__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_Find__SWIG_1")]
         public static extern uint RakString_Find__SWIG_1(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_Equals__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_Equals__SWIG_0")]
         public static extern bool RakString_Equals__SWIG_0(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_Equals__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_Equals__SWIG_1")]
         public static extern bool RakString_Equals__SWIG_1(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_OpLess"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_OpLess")]
         public static extern bool RakString_OpLess(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_OpLessEquals"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_OpLessEquals")]
         public static extern bool RakString_OpLessEquals(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_OpGreater"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_OpGreater")]
         public static extern bool RakString_OpGreater(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_OpGreaterEquals"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_OpGreaterEquals")]
         public static extern bool RakString_OpGreaterEquals(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_OpNotEqual__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_OpNotEqual__SWIG_0")]
         public static extern bool RakString_OpNotEqual__SWIG_0(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_OpNotEqual__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_OpNotEqual__SWIG_1")]
         public static extern bool RakString_OpNotEqual__SWIG_1(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_ToLower"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_ToLower")]
         public static extern string RakString_ToLower(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_ToUpper"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_ToUpper")]
         public static extern string RakString_ToUpper(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_Set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_Set")]
         public static extern void RakString_Set(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_Assign"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_Assign")]
         public static extern IntPtr RakString_Assign(HandleRef jarg1, string jarg2, uint jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_IsEmpty"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_IsEmpty")]
         public static extern bool RakString_IsEmpty(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_GetLength"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_GetLength")]
         public static extern uint RakString_GetLength(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_GetLengthUTF8"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_GetLengthUTF8")]
         public static extern uint RakString_GetLengthUTF8(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_Replace"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_Replace")]
         public static extern void RakString_Replace(HandleRef jarg1, uint jarg2, uint jarg3, byte jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_SetChar__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_SetChar__SWIG_0")]
         public static extern void RakString_SetChar__SWIG_0(HandleRef jarg1, uint jarg2, byte jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_SetChar__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_SetChar__SWIG_1")]
         public static extern void RakString_SetChar__SWIG_1(HandleRef jarg1, uint jarg2, HandleRef jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_Truncate"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_Truncate")]
         public static extern void RakString_Truncate(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_TruncateUTF8"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_TruncateUTF8")]
         public static extern void RakString_TruncateUTF8(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_SubStr"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_SubStr")]
         public static extern IntPtr RakString_SubStr(HandleRef jarg1, uint jarg2, uint jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_Erase"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_Erase")]
         public static extern void RakString_Erase(HandleRef jarg1, uint jarg2, uint jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_TerminateAtFirstCharacter"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_TerminateAtFirstCharacter")]
         public static extern void RakString_TerminateAtFirstCharacter(HandleRef jarg1, char jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_TerminateAtLastCharacter"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_TerminateAtLastCharacter")]
         public static extern void RakString_TerminateAtLastCharacter(HandleRef jarg1, char jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_StartAfterFirstCharacter"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_StartAfterFirstCharacter")]
         public static extern void RakString_StartAfterFirstCharacter(HandleRef jarg1, char jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_StartAfterLastCharacter"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_StartAfterLastCharacter")]
         public static extern void RakString_StartAfterLastCharacter(HandleRef jarg1, char jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_GetCharacterCount"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_GetCharacterCount")]
         public static extern int RakString_GetCharacterCount(HandleRef jarg1, char jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_RemoveCharacter"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_RemoveCharacter")]
         public static extern void RakString_RemoveCharacter(HandleRef jarg1, char jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_NonVariadic"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_NonVariadic")]
         public static extern IntPtr RakString_NonVariadic(string jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_ToInteger__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_ToInteger__SWIG_0")]
         public static extern uint RakString_ToInteger__SWIG_0(string jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_ToInteger__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_ToInteger__SWIG_1")]
         public static extern uint RakString_ToInteger__SWIG_1(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_ReadIntFromSubstring"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_ReadIntFromSubstring")]
         public static extern int RakString_ReadIntFromSubstring(string jarg1, uint jarg2, uint jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_StrCmp"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_StrCmp")]
         public static extern int RakString_StrCmp(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_StrNCmp"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_StrNCmp")]
         public static extern int RakString_StrNCmp(HandleRef jarg1, HandleRef jarg2, uint jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_StrICmp"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_StrICmp")]
         public static extern int RakString_StrICmp(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_Clear"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_Clear")]
         public static extern void RakString_Clear(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_Printf"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_Printf")]
         public static extern void RakString_Printf(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_IPAddressMatch"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_IPAddressMatch")]
         public static extern bool RakString_IPAddressMatch(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_ContainsNonprintableExceptSpaces"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_ContainsNonprintableExceptSpaces")]
         public static extern bool RakString_ContainsNonprintableExceptSpaces(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_IsEmailAddress"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_IsEmailAddress")]
         public static extern bool RakString_IsEmailAddress(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_URLEncode"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_URLEncode")]
         public static extern IntPtr RakString_URLEncode(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_URLDecode"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_URLDecode")]
         public static extern IntPtr RakString_URLDecode(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_SplitURI"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_SplitURI")]
         public static extern void RakString_SplitURI(HandleRef jarg1, HandleRef jarg2, HandleRef jarg3, HandleRef jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_SQLEscape"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_SQLEscape")]
         public static extern IntPtr RakString_SQLEscape(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_FormatForPOST__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_FormatForPOST__SWIG_0")]
         public static extern IntPtr RakString_FormatForPOST__SWIG_0(string jarg1, string jarg2, string jarg3, string jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_FormatForPOST__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_FormatForPOST__SWIG_1")]
         public static extern IntPtr RakString_FormatForPOST__SWIG_1(string jarg1, string jarg2, string jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_FormatForPUT__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_FormatForPUT__SWIG_0")]
         public static extern IntPtr RakString_FormatForPUT__SWIG_0(string jarg1, string jarg2, string jarg3, string jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_FormatForPUT__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_FormatForPUT__SWIG_1")]
         public static extern IntPtr RakString_FormatForPUT__SWIG_1(string jarg1, string jarg2, string jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_FormatForGET__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_FormatForGET__SWIG_0")]
         public static extern IntPtr RakString_FormatForGET__SWIG_0(string jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_FormatForGET__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_FormatForGET__SWIG_1")]
         public static extern IntPtr RakString_FormatForGET__SWIG_1(string jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_FormatForDELETE__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_FormatForDELETE__SWIG_0")]
         public static extern IntPtr RakString_FormatForDELETE__SWIG_0(string jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_FormatForDELETE__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_FormatForDELETE__SWIG_1")]
         public static extern IntPtr RakString_FormatForDELETE__SWIG_1(string jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_MakeFilePath"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_MakeFilePath")]
         public static extern IntPtr RakString_MakeFilePath(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_FreeMemory"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_FreeMemory")]
         public static extern void RakString_FreeMemory();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_FreeMemoryNoMutex"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_FreeMemoryNoMutex")]
         public static extern void RakString_FreeMemoryNoMutex();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_Serialize__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_Serialize__SWIG_0")]
         public static extern void RakString_Serialize__SWIG_0(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_Serialize__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_Serialize__SWIG_1")]
         public static extern void RakString_Serialize__SWIG_1(string jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_SerializeCompressed__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_SerializeCompressed__SWIG_0")]
         public static extern void RakString_SerializeCompressed__SWIG_0(HandleRef jarg1, HandleRef jarg2, byte jarg3, bool jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_SerializeCompressed__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_SerializeCompressed__SWIG_1")]
         public static extern void RakString_SerializeCompressed__SWIG_1(HandleRef jarg1, HandleRef jarg2, byte jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_SerializeCompressed__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_SerializeCompressed__SWIG_2")]
         public static extern void RakString_SerializeCompressed__SWIG_2(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_SerializeCompressed__SWIG_3"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_SerializeCompressed__SWIG_3")]
         public static extern void RakString_SerializeCompressed__SWIG_3(string jarg1, HandleRef jarg2, byte jarg3, bool jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_SerializeCompressed__SWIG_4"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_SerializeCompressed__SWIG_4")]
         public static extern void RakString_SerializeCompressed__SWIG_4(string jarg1, HandleRef jarg2, byte jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_SerializeCompressed__SWIG_5"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_SerializeCompressed__SWIG_5")]
         public static extern void RakString_SerializeCompressed__SWIG_5(string jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_Deserialize__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_Deserialize__SWIG_0")]
         public static extern bool RakString_Deserialize__SWIG_0(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_Deserialize__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_Deserialize__SWIG_1")]
         public static extern bool RakString_Deserialize__SWIG_1(string jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_DeserializeCompressed__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_DeserializeCompressed__SWIG_0")]
         public static extern bool RakString_DeserializeCompressed__SWIG_0(HandleRef jarg1, HandleRef jarg2, bool jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_DeserializeCompressed__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_DeserializeCompressed__SWIG_1")]
         public static extern bool RakString_DeserializeCompressed__SWIG_1(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_DeserializeCompressed__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_DeserializeCompressed__SWIG_2")]
         public static extern bool RakString_DeserializeCompressed__SWIG_2(string jarg1, HandleRef jarg2, bool jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_DeserializeCompressed__SWIG_3"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_DeserializeCompressed__SWIG_3")]
         public static extern bool RakString_DeserializeCompressed__SWIG_3(string jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_ToString__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_ToString__SWIG_0")]
         public static extern string RakString_ToString__SWIG_0(long jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_ToString__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_ToString__SWIG_1")]
         public static extern string RakString_ToString__SWIG_1(ulong jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_GetSizeToAllocate"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_GetSizeToAllocate")]
         public static extern uint RakString_GetSizeToAllocate(uint jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_RakStringComp"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_RakStringComp")]
         public static extern int RakString_RakStringComp(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_LockMutex"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_LockMutex")]
         public static extern void RakString_LockMutex();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_UnlockMutex"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_UnlockMutex")]
         public static extern void RakString_UnlockMutex();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakString_AppendBytes"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakString_AppendBytes")]
         public static extern void RakString_AppendBytes(HandleRef jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2, uint jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_OpPlus"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_OpPlus")]
         public static extern IntPtr OpPlus(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_RakWString__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_RakWString__SWIG_0")]
         public static extern IntPtr new_RakWString__SWIG_0();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_RakWString__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_RakWString__SWIG_1")]
         public static extern IntPtr new_RakWString__SWIG_1(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_RakWString__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_RakWString__SWIG_2")]
         public static extern IntPtr new_RakWString__SWIG_2(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_RakWString__SWIG_3"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_RakWString__SWIG_3")]
         public static extern IntPtr new_RakWString__SWIG_3(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_RakWString__SWIG_4"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_RakWString__SWIG_4")]
         public static extern IntPtr new_RakWString__SWIG_4(string jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_RakWString"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_RakWString")]
         public static extern void delete_RakWString(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakWString_C_String"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakWString_C_String")]
         public static extern IntPtr RakWString_C_String(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakWString_CopyData__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakWString_CopyData__SWIG_0")]
         public static extern IntPtr RakWString_CopyData__SWIG_0(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakWString_CopyData__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakWString_CopyData__SWIG_1")]
         public static extern IntPtr RakWString_CopyData__SWIG_1(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakWString_CopyData__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakWString_CopyData__SWIG_2")]
         public static extern IntPtr RakWString_CopyData__SWIG_2(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakWString_CopyData__SWIG_4"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakWString_CopyData__SWIG_4")]
         public static extern IntPtr RakWString_CopyData__SWIG_4(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakWString_Equals"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakWString_Equals")]
         public static extern bool RakWString_Equals(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakWString_OpLess"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakWString_OpLess")]
         public static extern bool RakWString_OpLess(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakWString_OpLessEquals"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakWString_OpLessEquals")]
         public static extern bool RakWString_OpLessEquals(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakWString_OpGreater"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakWString_OpGreater")]
         public static extern bool RakWString_OpGreater(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakWString_OpGreaterEquals"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakWString_OpGreaterEquals")]
         public static extern bool RakWString_OpGreaterEquals(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakWString_OpNotEqual"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakWString_OpNotEqual")]
         public static extern bool RakWString_OpNotEqual(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakWString_Set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakWString_Set")]
         public static extern void RakWString_Set(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakWString_IsEmpty"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakWString_IsEmpty")]
         public static extern bool RakWString_IsEmpty(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakWString_GetLength"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakWString_GetLength")]
         public static extern uint RakWString_GetLength(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakWString_ToInteger"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakWString_ToInteger")]
         public static extern uint RakWString_ToInteger(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakWString_StrCmp"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakWString_StrCmp")]
         public static extern int RakWString_StrCmp(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakWString_StrICmp"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakWString_StrICmp")]
         public static extern int RakWString_StrICmp(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakWString_Clear"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakWString_Clear")]
         public static extern void RakWString_Clear(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakWString_Printf"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakWString_Printf")]
         public static extern void RakWString_Printf(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakWString_FPrintf"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakWString_FPrintf")]
         public static extern void RakWString_FPrintf(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakWString_Serialize__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakWString_Serialize__SWIG_0")]
         public static extern void RakWString_Serialize__SWIG_0(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakWString_Serialize__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakWString_Serialize__SWIG_1")]
         public static extern void RakWString_Serialize__SWIG_1(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakWString_Deserialize__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakWString_Deserialize__SWIG_0")]
         public static extern bool RakWString_Deserialize__SWIG_0(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakWString_Deserialize__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakWString_Deserialize__SWIG_1")]
         public static extern bool RakWString_Deserialize__SWIG_1(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_OpPlus__SWIG_1"
-#endif
-)]
-        public static extern IntPtr OpPlus__SWIG_1(HandleRef jarg1, HandleRef jarg2);
+        //[DllImport(Const.LibraryName, EntryPoint = "CSharp_OpPlus__SWIG_1")]
+        //public static extern IntPtr OpPlus__SWIG_1(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_GetInstance"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_GetInstance")]
         public static extern IntPtr BitStream_GetInstance();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_DestroyInstance"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_DestroyInstance")]
         public static extern void BitStream_DestroyInstance(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_BitStream__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_BitStream__SWIG_0")]
         public static extern IntPtr new_BitStream__SWIG_0();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_BitStream__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_BitStream__SWIG_1")]
         public static extern IntPtr new_BitStream__SWIG_1(uint jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_BitStream__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_BitStream__SWIG_2")]
         public static extern IntPtr new_BitStream__SWIG_2([In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg1, uint jarg2, bool jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_BitStream"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_BitStream")]
         public static extern void delete_BitStream(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_Reset"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_Reset")]
         public static extern void BitStream_Reset(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeFloat16"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeFloat16")]
         public static extern bool BitStream_SerializeFloat16(HandleRef jarg1, bool jarg2, ref float jarg3, float jarg4, float jarg5);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeBits__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeBits__SWIG_0")]
         public static extern bool BitStream_SerializeBits__SWIG_0(HandleRef jarg1, bool jarg2, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg3, uint jarg4, bool jarg5);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeBits__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeBits__SWIG_1")]
         public static extern bool BitStream_SerializeBits__SWIG_1(HandleRef jarg1, bool jarg2, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_Read__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_Read__SWIG_1")]
         public static extern bool BitStream_Read__SWIG_1(HandleRef jarg1, HandleRef jarg2, uint jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_Read__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_Read__SWIG_2")]
         public static extern bool BitStream_Read__SWIG_2(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_Write__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_Write__SWIG_1")]
         public static extern void BitStream_Write__SWIG_1(HandleRef jarg1, HandleRef jarg2, uint jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_Write__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_Write__SWIG_2")]
         public static extern void BitStream_Write__SWIG_2(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteFloat16"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteFloat16")]
         public static extern void BitStream_WriteFloat16(HandleRef jarg1, float jarg2, float jarg3, float jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ReadFloat16"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ReadFloat16")]
         public static extern bool BitStream_ReadFloat16(HandleRef jarg1, out float jarg2, float jarg3, float jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ResetReadPointer"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ResetReadPointer")]
         public static extern void BitStream_ResetReadPointer(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ResetWritePointer"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ResetWritePointer")]
         public static extern void BitStream_ResetWritePointer(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_AssertStreamEmpty"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_AssertStreamEmpty")]
         public static extern void BitStream_AssertStreamEmpty(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_PrintBits"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_PrintBits")]
         public static extern void BitStream_PrintBits(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_PrintHex"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_PrintHex")]
         public static extern void BitStream_PrintHex(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_IgnoreBits"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_IgnoreBits")]
         public static extern void BitStream_IgnoreBits(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_IgnoreBytes"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_IgnoreBytes")]
         public static extern void BitStream_IgnoreBytes(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SetWriteOffset"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SetWriteOffset")]
         public static extern void BitStream_SetWriteOffset(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_GetNumberOfBitsUsed"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_GetNumberOfBitsUsed")]
         public static extern uint BitStream_GetNumberOfBitsUsed(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_GetWriteOffset"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_GetWriteOffset")]
         public static extern uint BitStream_GetWriteOffset(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_GetNumberOfBytesUsed"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_GetNumberOfBytesUsed")]
         public static extern uint BitStream_GetNumberOfBytesUsed(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_GetReadOffset"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_GetReadOffset")]
         public static extern uint BitStream_GetReadOffset(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SetReadOffset"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SetReadOffset")]
         public static extern void BitStream_SetReadOffset(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_GetNumberOfUnreadBits"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_GetNumberOfUnreadBits")]
         public static extern uint BitStream_GetNumberOfUnreadBits(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SetData"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SetData")]
         public static extern void BitStream_SetData(HandleRef jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteBits__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteBits__SWIG_0")]
         public static extern void BitStream_WriteBits__SWIG_0(HandleRef jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2, uint jarg3, bool jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteBits__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteBits__SWIG_1")]
         public static extern void BitStream_WriteBits__SWIG_1(HandleRef jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2, uint jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteAlignedBytes"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteAlignedBytes")]
         public static extern void BitStream_WriteAlignedBytes(HandleRef jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2, uint jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_EndianSwapBytes"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_EndianSwapBytes")]
         public static extern void BitStream_EndianSwapBytes(HandleRef jarg1, int jarg2, int jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ReadAlignedBytes"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ReadAlignedBytes")]
         public static extern bool BitStream_ReadAlignedBytes(HandleRef jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2, uint jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_AlignWriteToByteBoundary"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_AlignWriteToByteBoundary")]
         public static extern void BitStream_AlignWriteToByteBoundary(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_AlignReadToByteBoundary"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_AlignReadToByteBoundary")]
         public static extern void BitStream_AlignReadToByteBoundary(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ReadBits__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ReadBits__SWIG_0")]
         public static extern bool BitStream_ReadBits__SWIG_0(HandleRef jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2, uint jarg3, bool jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ReadBits__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ReadBits__SWIG_1")]
         public static extern bool BitStream_ReadBits__SWIG_1(HandleRef jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2, uint jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_Write0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_Write0")]
         public static extern void BitStream_Write0(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_Write1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_Write1")]
         public static extern void BitStream_Write1(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ReadBit"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ReadBit")]
         public static extern bool BitStream_ReadBit(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_AssertCopyData"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_AssertCopyData")]
         public static extern void BitStream_AssertCopyData(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SetNumberOfBitsAllocated"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SetNumberOfBitsAllocated")]
         public static extern void BitStream_SetNumberOfBitsAllocated(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_AddBitsAndReallocate"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_AddBitsAndReallocate")]
         public static extern void BitStream_AddBitsAndReallocate(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_GetNumberOfBitsAllocated"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_GetNumberOfBitsAllocated")]
         public static extern uint BitStream_GetNumberOfBitsAllocated(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_PadWithZeroToByteLength"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_PadWithZeroToByteLength")]
         public static extern void BitStream_PadWithZeroToByteLength(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_NumberOfLeadingZeroes__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_NumberOfLeadingZeroes__SWIG_0")]
         public static extern int BitStream_NumberOfLeadingZeroes__SWIG_0(byte jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_NumberOfLeadingZeroes__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_NumberOfLeadingZeroes__SWIG_1")]
         public static extern int BitStream_NumberOfLeadingZeroes__SWIG_1(ushort jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_NumberOfLeadingZeroes__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_NumberOfLeadingZeroes__SWIG_2")]
         public static extern int BitStream_NumberOfLeadingZeroes__SWIG_2(uint jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_NumberOfLeadingZeroes__SWIG_3"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_NumberOfLeadingZeroes__SWIG_3")]
         public static extern int BitStream_NumberOfLeadingZeroes__SWIG_3(ulong jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_NumberOfLeadingZeroes__SWIG_4"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_NumberOfLeadingZeroes__SWIG_4")]
         public static extern int BitStream_NumberOfLeadingZeroes__SWIG_4(sbyte jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_NumberOfLeadingZeroes__SWIG_5"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_NumberOfLeadingZeroes__SWIG_5")]
         public static extern int BitStream_NumberOfLeadingZeroes__SWIG_5(short jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_NumberOfLeadingZeroes__SWIG_6"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_NumberOfLeadingZeroes__SWIG_6")]
         public static extern int BitStream_NumberOfLeadingZeroes__SWIG_6(int jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_NumberOfLeadingZeroes__SWIG_7"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_NumberOfLeadingZeroes__SWIG_7")]
         public static extern int BitStream_NumberOfLeadingZeroes__SWIG_7(long jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_Write__SWIG_3"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_Write__SWIG_3")]
         public static extern void BitStream_Write__SWIG_3(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_Write__SWIG_4"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_Write__SWIG_4")]
         public static extern void BitStream_Write__SWIG_4(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteCompressed__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteCompressed__SWIG_1")]
         public static extern void BitStream_WriteCompressed__SWIG_1(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteCompressed__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteCompressed__SWIG_2")]
         public static extern void BitStream_WriteCompressed__SWIG_2(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_DoEndianSwap"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_DoEndianSwap")]
         public static extern bool BitStream_DoEndianSwap();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_IsBigEndian"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_IsBigEndian")]
         public static extern bool BitStream_IsBigEndian();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_IsNetworkOrder"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_IsNetworkOrder")]
         public static extern bool BitStream_IsNetworkOrder();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_IsNetworkOrderInternal"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_IsNetworkOrderInternal")]
         public static extern bool BitStream_IsNetworkOrderInternal();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ReverseBytes"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ReverseBytes")]
         public static extern void BitStream_ReverseBytes([In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2, uint jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ReverseBytesInPlace"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ReverseBytesInPlace")]
         public static extern void BitStream_ReverseBytesInPlace([In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_CSharpStringReader"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_CSharpStringReader")]
         public static extern string BitStream_CSharpStringReader(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_CSharpByteReader"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_CSharpByteReader")]
         public static extern bool BitStream_CSharpByteReader(HandleRef jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2, uint jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_CSharpStringReaderCompressedDelta"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_CSharpStringReaderCompressedDelta")]
         public static extern string BitStream_CSharpStringReaderCompressedDelta(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_CSharpStringReaderDelta"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_CSharpStringReaderDelta")]
         public static extern string BitStream_CSharpStringReaderDelta(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_CSharpStringReaderCompressed"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_CSharpStringReaderCompressed")]
         public static extern string BitStream_CSharpStringReaderCompressed(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_Write__SWIG_6"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_Write__SWIG_6")]
         public static extern void BitStream_Write__SWIG_6(HandleRef jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2, uint jarg3);
 
 //        [DllImport(Const.LibraryName
@@ -4000,1754 +1876,754 @@ namespace RakNet
 //)]
 //        public static extern void BitStream_Write__SWIG_7(HandleRef jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2, uint jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_CSharpCopyDataHelper"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_CSharpCopyDataHelper")]
         public static extern uint BitStream_CSharpCopyDataHelper(HandleRef jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_CSharpPrintBitsHelper"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_CSharpPrintBitsHelper")]
         public static extern string BitStream_CSharpPrintBitsHelper(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_CSharpPrintHexHelper"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_CSharpPrintHexHelper")]
         public static extern string BitStream_CSharpPrintHexHelper(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_Serialize__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_Serialize__SWIG_1")]
         public static extern void BitStream_Serialize__SWIG_1(HandleRef jarg1, bool jarg2, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ReadAlignedBytesSafe__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ReadAlignedBytesSafe__SWIG_0")]
         public static extern bool BitStream_ReadAlignedBytesSafe__SWIG_0(HandleRef jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2, int jarg3, int jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ReadAlignedBytesSafe__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ReadAlignedBytesSafe__SWIG_1")]
         public static extern bool BitStream_ReadAlignedBytesSafe__SWIG_1(HandleRef jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2, uint jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteAlignedVar8"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteAlignedVar8")]
         public static extern void BitStream_WriteAlignedVar8(HandleRef jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ReadAlignedVar8"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ReadAlignedVar8")]
         public static extern bool BitStream_ReadAlignedVar8(HandleRef jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteAlignedVar16"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteAlignedVar16")]
         public static extern void BitStream_WriteAlignedVar16(HandleRef jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ReadAlignedVar16"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ReadAlignedVar16")]
         public static extern bool BitStream_ReadAlignedVar16(HandleRef jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteAlignedVar32"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteAlignedVar32")]
         public static extern void BitStream_WriteAlignedVar32(HandleRef jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ReadAlignedVar32"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ReadAlignedVar32")]
         public static extern bool BitStream_ReadAlignedVar32(HandleRef jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteAlignedBytesSafe"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteAlignedBytesSafe")]
         public static extern void BitStream_WriteAlignedBytesSafe(HandleRef jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2, uint jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_Serialize__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_Serialize__SWIG_2")]
         public static extern bool BitStream_Serialize__SWIG_2(HandleRef jarg1, bool jarg2, ref bool jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_Serialize__SWIG_3"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_Serialize__SWIG_3")]
         public static extern bool BitStream_Serialize__SWIG_3(HandleRef jarg1, bool jarg2, ref byte jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_Serialize__SWIG_4"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_Serialize__SWIG_4")]
         public static extern bool BitStream_Serialize__SWIG_4(HandleRef jarg1, bool jarg2, ref short jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_Serialize__SWIG_5"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_Serialize__SWIG_5")]
         public static extern bool BitStream_Serialize__SWIG_5(HandleRef jarg1, bool jarg2, ref ushort jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_Serialize__SWIG_6"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_Serialize__SWIG_6")]
         public static extern bool BitStream_Serialize__SWIG_6(HandleRef jarg1, bool jarg2, ref int jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_Serialize__SWIG_7"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_Serialize__SWIG_7")]
         public static extern bool BitStream_Serialize__SWIG_7(HandleRef jarg1, bool jarg2, ref long jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_Serialize__SWIG_8"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_Serialize__SWIG_8")]
         public static extern bool BitStream_Serialize__SWIG_8(HandleRef jarg1, bool jarg2, ref float jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_Serialize__SWIG_9"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_Serialize__SWIG_9")]
         public static extern bool BitStream_Serialize__SWIG_9(HandleRef jarg1, bool jarg2, HandleRef jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_Serialize__SWIG_10"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_Serialize__SWIG_10")]
         public static extern bool BitStream_Serialize__SWIG_10(HandleRef jarg1, bool jarg2, HandleRef jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_Serialize__SWIG_11"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_Serialize__SWIG_11")]
         public static extern bool BitStream_Serialize__SWIG_11(HandleRef jarg1, bool jarg2, HandleRef jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeDelta__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeDelta__SWIG_2")]
         public static extern bool BitStream_SerializeDelta__SWIG_2(HandleRef jarg1, bool jarg2, ref bool jarg3, bool jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeDelta__SWIG_3"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeDelta__SWIG_3")]
         public static extern bool BitStream_SerializeDelta__SWIG_3(HandleRef jarg1, bool jarg2, ref bool jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeDelta__SWIG_4"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeDelta__SWIG_4")]
         public static extern bool BitStream_SerializeDelta__SWIG_4(HandleRef jarg1, bool jarg2, ref byte jarg3, byte jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeDelta__SWIG_5"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeDelta__SWIG_5")]
         public static extern bool BitStream_SerializeDelta__SWIG_5(HandleRef jarg1, bool jarg2, ref byte jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeDelta__SWIG_6"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeDelta__SWIG_6")]
         public static extern bool BitStream_SerializeDelta__SWIG_6(HandleRef jarg1, bool jarg2, ref short jarg3, short jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeDelta__SWIG_7"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeDelta__SWIG_7")]
         public static extern bool BitStream_SerializeDelta__SWIG_7(HandleRef jarg1, bool jarg2, ref short jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeDelta__SWIG_8"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeDelta__SWIG_8")]
         public static extern bool BitStream_SerializeDelta__SWIG_8(HandleRef jarg1, bool jarg2, ref ushort jarg3, ushort jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeDelta__SWIG_9"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeDelta__SWIG_9")]
         public static extern bool BitStream_SerializeDelta__SWIG_9(HandleRef jarg1, bool jarg2, ref ushort jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeDelta__SWIG_10"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeDelta__SWIG_10")]
         public static extern bool BitStream_SerializeDelta__SWIG_10(HandleRef jarg1, bool jarg2, ref int jarg3, int jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeDelta__SWIG_11"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeDelta__SWIG_11")]
         public static extern bool BitStream_SerializeDelta__SWIG_11(HandleRef jarg1, bool jarg2, ref int jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeDelta__SWIG_12"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeDelta__SWIG_12")]
         public static extern bool BitStream_SerializeDelta__SWIG_12(HandleRef jarg1, bool jarg2, ref long jarg3, long jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeDelta__SWIG_13"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeDelta__SWIG_13")]
         public static extern bool BitStream_SerializeDelta__SWIG_13(HandleRef jarg1, bool jarg2, ref long jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeDelta__SWIG_14"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeDelta__SWIG_14")]
         public static extern bool BitStream_SerializeDelta__SWIG_14(HandleRef jarg1, bool jarg2, ref float jarg3, float jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeDelta__SWIG_15"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeDelta__SWIG_15")]
         public static extern bool BitStream_SerializeDelta__SWIG_15(HandleRef jarg1, bool jarg2, ref float jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeDelta__SWIG_16"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeDelta__SWIG_16")]
         public static extern bool BitStream_SerializeDelta__SWIG_16(HandleRef jarg1, bool jarg2, HandleRef jarg3, HandleRef jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeDelta__SWIG_17"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeDelta__SWIG_17")]
         public static extern bool BitStream_SerializeDelta__SWIG_17(HandleRef jarg1, bool jarg2, HandleRef jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeDelta__SWIG_18"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeDelta__SWIG_18")]
         public static extern bool BitStream_SerializeDelta__SWIG_18(HandleRef jarg1, bool jarg2, HandleRef jarg3, HandleRef jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeDelta__SWIG_19"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeDelta__SWIG_19")]
         public static extern bool BitStream_SerializeDelta__SWIG_19(HandleRef jarg1, bool jarg2, HandleRef jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeDelta__SWIG_20"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeDelta__SWIG_20")]
         public static extern bool BitStream_SerializeDelta__SWIG_20(HandleRef jarg1, bool jarg2, HandleRef jarg3, HandleRef jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeDelta__SWIG_21"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeDelta__SWIG_21")]
         public static extern bool BitStream_SerializeDelta__SWIG_21(HandleRef jarg1, bool jarg2, HandleRef jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeCompressed__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeCompressed__SWIG_1")]
         public static extern bool BitStream_SerializeCompressed__SWIG_1(HandleRef jarg1, bool jarg2, ref bool jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeCompressed__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeCompressed__SWIG_2")]
         public static extern bool BitStream_SerializeCompressed__SWIG_2(HandleRef jarg1, bool jarg2, ref byte jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeCompressed__SWIG_3"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeCompressed__SWIG_3")]
         public static extern bool BitStream_SerializeCompressed__SWIG_3(HandleRef jarg1, bool jarg2, ref short jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeCompressed__SWIG_4"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeCompressed__SWIG_4")]
         public static extern bool BitStream_SerializeCompressed__SWIG_4(HandleRef jarg1, bool jarg2, ref ushort jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeCompressed__SWIG_5"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeCompressed__SWIG_5")]
         public static extern bool BitStream_SerializeCompressed__SWIG_5(HandleRef jarg1, bool jarg2, ref int jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeCompressed__SWIG_6"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeCompressed__SWIG_6")]
         public static extern bool BitStream_SerializeCompressed__SWIG_6(HandleRef jarg1, bool jarg2, ref long jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeCompressed__SWIG_7"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeCompressed__SWIG_7")]
         public static extern bool BitStream_SerializeCompressed__SWIG_7(HandleRef jarg1, bool jarg2, ref float jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeCompressed__SWIG_8"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeCompressed__SWIG_8")]
         public static extern bool BitStream_SerializeCompressed__SWIG_8(HandleRef jarg1, bool jarg2, HandleRef jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeCompressed__SWIG_9"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeCompressed__SWIG_9")]
         public static extern bool BitStream_SerializeCompressed__SWIG_9(HandleRef jarg1, bool jarg2, HandleRef jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeCompressed__SWIG_10"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeCompressed__SWIG_10")]
         public static extern bool BitStream_SerializeCompressed__SWIG_10(HandleRef jarg1, bool jarg2, HandleRef jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeCompressedDelta__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeCompressedDelta__SWIG_2")]
         public static extern bool BitStream_SerializeCompressedDelta__SWIG_2(HandleRef jarg1, bool jarg2, ref bool jarg3, bool jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeCompressedDelta__SWIG_3"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeCompressedDelta__SWIG_3")]
         public static extern bool BitStream_SerializeCompressedDelta__SWIG_3(HandleRef jarg1, bool jarg2, ref bool jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeCompressedDelta__SWIG_4"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeCompressedDelta__SWIG_4")]
         public static extern bool BitStream_SerializeCompressedDelta__SWIG_4(HandleRef jarg1, bool jarg2, ref byte jarg3, byte jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeCompressedDelta__SWIG_5"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeCompressedDelta__SWIG_5")]
         public static extern bool BitStream_SerializeCompressedDelta__SWIG_5(HandleRef jarg1, bool jarg2, ref byte jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeCompressedDelta__SWIG_6"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeCompressedDelta__SWIG_6")]
         public static extern bool BitStream_SerializeCompressedDelta__SWIG_6(HandleRef jarg1, bool jarg2, ref short jarg3, short jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeCompressedDelta__SWIG_7"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeCompressedDelta__SWIG_7")]
         public static extern bool BitStream_SerializeCompressedDelta__SWIG_7(HandleRef jarg1, bool jarg2, ref short jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeCompressedDelta__SWIG_8"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeCompressedDelta__SWIG_8")]
         public static extern bool BitStream_SerializeCompressedDelta__SWIG_8(HandleRef jarg1, bool jarg2, ref ushort jarg3, ushort jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeCompressedDelta__SWIG_9"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeCompressedDelta__SWIG_9")]
         public static extern bool BitStream_SerializeCompressedDelta__SWIG_9(HandleRef jarg1, bool jarg2, ref ushort jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeCompressedDelta__SWIG_10"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeCompressedDelta__SWIG_10")]
         public static extern bool BitStream_SerializeCompressedDelta__SWIG_10(HandleRef jarg1, bool jarg2, ref int jarg3, int jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeCompressedDelta__SWIG_11"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeCompressedDelta__SWIG_11")]
         public static extern bool BitStream_SerializeCompressedDelta__SWIG_11(HandleRef jarg1, bool jarg2, ref int jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeCompressedDelta__SWIG_12"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeCompressedDelta__SWIG_12")]
         public static extern bool BitStream_SerializeCompressedDelta__SWIG_12(HandleRef jarg1, bool jarg2, ref long jarg3, long jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeCompressedDelta__SWIG_13"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeCompressedDelta__SWIG_13")]
         public static extern bool BitStream_SerializeCompressedDelta__SWIG_13(HandleRef jarg1, bool jarg2, ref long jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeCompressedDelta__SWIG_14"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeCompressedDelta__SWIG_14")]
         public static extern bool BitStream_SerializeCompressedDelta__SWIG_14(HandleRef jarg1, bool jarg2, ref float jarg3, float jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeCompressedDelta__SWIG_15"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeCompressedDelta__SWIG_15")]
         public static extern bool BitStream_SerializeCompressedDelta__SWIG_15(HandleRef jarg1, bool jarg2, ref float jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeCompressedDelta__SWIG_16"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeCompressedDelta__SWIG_16")]
         public static extern bool BitStream_SerializeCompressedDelta__SWIG_16(HandleRef jarg1, bool jarg2, HandleRef jarg3, HandleRef jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeCompressedDelta__SWIG_17"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeCompressedDelta__SWIG_17")]
         public static extern bool BitStream_SerializeCompressedDelta__SWIG_17(HandleRef jarg1, bool jarg2, HandleRef jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeCompressedDelta__SWIG_18"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeCompressedDelta__SWIG_18")]
         public static extern bool BitStream_SerializeCompressedDelta__SWIG_18(HandleRef jarg1, bool jarg2, HandleRef jarg3, HandleRef jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeCompressedDelta__SWIG_19"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeCompressedDelta__SWIG_19")]
         public static extern bool BitStream_SerializeCompressedDelta__SWIG_19(HandleRef jarg1, bool jarg2, HandleRef jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeCompressedDelta__SWIG_20"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeCompressedDelta__SWIG_20")]
         public static extern bool BitStream_SerializeCompressedDelta__SWIG_20(HandleRef jarg1, bool jarg2, HandleRef jarg3, HandleRef jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_SerializeCompressedDelta__SWIG_21"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_SerializeCompressedDelta__SWIG_21")]
         public static extern bool BitStream_SerializeCompressedDelta__SWIG_21(HandleRef jarg1, bool jarg2, HandleRef jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-        , EntryPoint = "CSharp_BitStream_Write__SWIG_8"
-#endif
-        )]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_Write__SWIG_8")]
         public static extern void BitStream_Write__SWIG_8(HandleRef jarg1, bool jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_Write__SWIG_9"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_Write__SWIG_9")]
         public static extern void BitStream_Write__SWIG_9(HandleRef jarg1, byte jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_Write__SWIG_10"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_Write__SWIG_10")]
         public static extern void BitStream_Write__SWIG_10(HandleRef jarg1, char jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_Write__SWIG_11"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_Write__SWIG_11")]
         public static extern void BitStream_Write__SWIG_11(HandleRef jarg1, short jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_Write__SWIG_12"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_Write__SWIG_12")]
         public static extern void BitStream_Write__SWIG_12(HandleRef jarg1, ushort jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_Write__SWIG_13"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_Write__SWIG_13")]
         public static extern void BitStream_Write__SWIG_13(HandleRef jarg1, int jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_Write__SWIG_14"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_Write__SWIG_14")]
         public static extern void BitStream_Write__SWIG_14(HandleRef jarg1, long jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_Write__SWIG_15"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_Write__SWIG_15")]
         public static extern void BitStream_Write__SWIG_15(HandleRef jarg1, float jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_Write__SWIG_16"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_Write__SWIG_16")]
         public static extern void BitStream_Write__SWIG_16(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_Write__SWIG_17"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_Write__SWIG_17")]
         public static extern void BitStream_Write__SWIG_17(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_Write__SWIG_18"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_Write__SWIG_18")]
         public static extern void BitStream_Write__SWIG_18(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_2")]
         public static extern void BitStream_WriteDelta__SWIG_2(HandleRef jarg1, string jarg2, string jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_3"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_3")]
         public static extern void BitStream_WriteDelta__SWIG_3(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_4"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_4")]
         public static extern void BitStream_WriteDelta__SWIG_4(HandleRef jarg1, bool jarg2, bool jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_5"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_5")]
         public static extern void BitStream_WriteDelta__SWIG_5(HandleRef jarg1, bool jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_6"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_6")]
         public static extern void BitStream_WriteDelta__SWIG_6(HandleRef jarg1, byte jarg2, byte jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_7"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_7")]
         public static extern void BitStream_WriteDelta__SWIG_7(HandleRef jarg1, byte jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_8"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_8")]
         public static extern void BitStream_WriteDelta__SWIG_8(HandleRef jarg1, char jarg2, char jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_9"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_9")]
         public static extern void BitStream_WriteDelta__SWIG_9(HandleRef jarg1, char jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_10"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_10")]
         public static extern void BitStream_WriteDelta__SWIG_10(HandleRef jarg1, short jarg2, short jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_11"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_11")]
         public static extern void BitStream_WriteDelta__SWIG_11(HandleRef jarg1, short jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_12"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_12")]
         public static extern void BitStream_WriteDelta__SWIG_12(HandleRef jarg1, ushort jarg2, ushort jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_13"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_13")]
         public static extern void BitStream_WriteDelta__SWIG_13(HandleRef jarg1, ushort jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_14"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_14")]
         public static extern void BitStream_WriteDelta__SWIG_14(HandleRef jarg1, int jarg2, int jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_15"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_15")]
         public static extern void BitStream_WriteDelta__SWIG_15(HandleRef jarg1, int jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_16"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_16")]
         public static extern void BitStream_WriteDelta__SWIG_16(HandleRef jarg1, long jarg2, long jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_17"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_17")]
         public static extern void BitStream_WriteDelta__SWIG_17(HandleRef jarg1, long jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_18"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_18")]
         public static extern void BitStream_WriteDelta__SWIG_18(HandleRef jarg1, float jarg2, float jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_19"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_19")]
         public static extern void BitStream_WriteDelta__SWIG_19(HandleRef jarg1, float jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_20"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_20")]
         public static extern void BitStream_WriteDelta__SWIG_20(HandleRef jarg1, HandleRef jarg2, HandleRef jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_21"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_21")]
         public static extern void BitStream_WriteDelta__SWIG_21(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_22"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_22")]
         public static extern void BitStream_WriteDelta__SWIG_22(HandleRef jarg1, HandleRef jarg2, HandleRef jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_23"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_23")]
         public static extern void BitStream_WriteDelta__SWIG_23(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_24"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_24")]
         public static extern void BitStream_WriteDelta__SWIG_24(HandleRef jarg1, HandleRef jarg2, HandleRef jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_25"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteDelta__SWIG_25")]
         public static extern void BitStream_WriteDelta__SWIG_25(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteCompressed__SWIG_5"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteCompressed__SWIG_5")]
         public static extern void BitStream_WriteCompressed__SWIG_5(HandleRef jarg1, bool jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteCompressed__SWIG_6"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteCompressed__SWIG_6")]
         public static extern void BitStream_WriteCompressed__SWIG_6(HandleRef jarg1, byte jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteCompressed__SWIG_7"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteCompressed__SWIG_7")]
         public static extern void BitStream_WriteCompressed__SWIG_7(HandleRef jarg1, char jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteCompressed__SWIG_8"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteCompressed__SWIG_8")]
         public static extern void BitStream_WriteCompressed__SWIG_8(HandleRef jarg1, short jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteCompressed__SWIG_9"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteCompressed__SWIG_9")]
         public static extern void BitStream_WriteCompressed__SWIG_9(HandleRef jarg1, ushort jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteCompressed__SWIG_10"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteCompressed__SWIG_10")]
         public static extern void BitStream_WriteCompressed__SWIG_10(HandleRef jarg1, int jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteCompressed__SWIG_11"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteCompressed__SWIG_11")]
         public static extern void BitStream_WriteCompressed__SWIG_11(HandleRef jarg1, long jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteCompressed__SWIG_12"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteCompressed__SWIG_12")]
         public static extern void BitStream_WriteCompressed__SWIG_12(HandleRef jarg1, float jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteCompressed__SWIG_13"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteCompressed__SWIG_13")]
         public static extern void BitStream_WriteCompressed__SWIG_13(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteCompressed__SWIG_14"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteCompressed__SWIG_14")]
         public static extern void BitStream_WriteCompressed__SWIG_14(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteCompressed__SWIG_15"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteCompressed__SWIG_15")]
         public static extern void BitStream_WriteCompressed__SWIG_15(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_2")]
         public static extern void BitStream_WriteCompressedDelta__SWIG_2(HandleRef jarg1, string jarg2, string jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_3"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_3")]
         public static extern void BitStream_WriteCompressedDelta__SWIG_3(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_4"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_4")]
         public static extern void BitStream_WriteCompressedDelta__SWIG_4(HandleRef jarg1, bool jarg2, bool jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_5"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_5")]
         public static extern void BitStream_WriteCompressedDelta__SWIG_5(HandleRef jarg1, bool jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_6"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_6")]
         public static extern void BitStream_WriteCompressedDelta__SWIG_6(HandleRef jarg1, byte jarg2, byte jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_7"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_7")]
         public static extern void BitStream_WriteCompressedDelta__SWIG_7(HandleRef jarg1, byte jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_8"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_8")]
         public static extern void BitStream_WriteCompressedDelta__SWIG_8(HandleRef jarg1, char jarg2, char jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_9"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_9")]
         public static extern void BitStream_WriteCompressedDelta__SWIG_9(HandleRef jarg1, char jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_10"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_10")]
         public static extern void BitStream_WriteCompressedDelta__SWIG_10(HandleRef jarg1, short jarg2, short jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_11"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_11")]
         public static extern void BitStream_WriteCompressedDelta__SWIG_11(HandleRef jarg1, short jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_12"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_12")]
         public static extern void BitStream_WriteCompressedDelta__SWIG_12(HandleRef jarg1, ushort jarg2, ushort jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_13"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_13")]
         public static extern void BitStream_WriteCompressedDelta__SWIG_13(HandleRef jarg1, ushort jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_14"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_14")]
         public static extern void BitStream_WriteCompressedDelta__SWIG_14(HandleRef jarg1, int jarg2, int jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_15"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_15")]
         public static extern void BitStream_WriteCompressedDelta__SWIG_15(HandleRef jarg1, int jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_16"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_16")]
         public static extern void BitStream_WriteCompressedDelta__SWIG_16(HandleRef jarg1, long jarg2, long jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_17"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_17")]
         public static extern void BitStream_WriteCompressedDelta__SWIG_17(HandleRef jarg1, long jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_18"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_18")]
         public static extern void BitStream_WriteCompressedDelta__SWIG_18(HandleRef jarg1, float jarg2, float jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_19"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_19")]
         public static extern void BitStream_WriteCompressedDelta__SWIG_19(HandleRef jarg1, float jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_20"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_20")]
         public static extern void BitStream_WriteCompressedDelta__SWIG_20(HandleRef jarg1, HandleRef jarg2, HandleRef jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_21"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_21")]
         public static extern void BitStream_WriteCompressedDelta__SWIG_21(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_22"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_22")]
         public static extern void BitStream_WriteCompressedDelta__SWIG_22(HandleRef jarg1, HandleRef jarg2, HandleRef jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_23"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_23")]
         public static extern void BitStream_WriteCompressedDelta__SWIG_23(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_24"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_24")]
         public static extern void BitStream_WriteCompressedDelta__SWIG_24(HandleRef jarg1, HandleRef jarg2, HandleRef jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_25"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_WriteCompressedDelta__SWIG_25")]
         public static extern void BitStream_WriteCompressedDelta__SWIG_25(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_Read__SWIG_3"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_Read__SWIG_3")]
         public static extern bool BitStream_Read__SWIG_3(HandleRef jarg1, out bool jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_Read__SWIG_4"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_Read__SWIG_4")]
         public static extern bool BitStream_Read__SWIG_4(HandleRef jarg1, out byte jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_Read__SWIG_5"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_Read__SWIG_5")]
         public static extern bool BitStream_Read__SWIG_5(HandleRef jarg1, out short jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_Read__SWIG_6"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_Read__SWIG_6")]
         public static extern bool BitStream_Read__SWIG_6(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_Read__SWIG_7"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_Read__SWIG_7")]
         public static extern bool BitStream_Read__SWIG_7(HandleRef jarg1, out int jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_Read__SWIG_8"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_Read__SWIG_8")]
         public static extern bool BitStream_Read__SWIG_8(HandleRef jarg1, out long jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_Read__SWIG_9"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_Read__SWIG_9")]
         public static extern bool BitStream_Read__SWIG_9(HandleRef jarg1, out float jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_Read__SWIG_10"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_Read__SWIG_10")]
         public static extern bool BitStream_Read__SWIG_10(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_Read__SWIG_11"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_Read__SWIG_11")]
         public static extern bool BitStream_Read__SWIG_11(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_Read__SWIG_12"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_Read__SWIG_12")]
         public static extern bool BitStream_Read__SWIG_12(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ReadDelta__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ReadDelta__SWIG_1")]
         public static extern bool BitStream_ReadDelta__SWIG_1(HandleRef jarg1, out bool jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ReadDelta__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ReadDelta__SWIG_2")]
         public static extern bool BitStream_ReadDelta__SWIG_2(HandleRef jarg1, out byte jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ReadDelta__SWIG_3"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ReadDelta__SWIG_3")]
         public static extern bool BitStream_ReadDelta__SWIG_3(HandleRef jarg1, out short jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ReadDelta__SWIG_4"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ReadDelta__SWIG_4")]
         public static extern bool BitStream_ReadDelta__SWIG_4(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ReadDelta__SWIG_5"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ReadDelta__SWIG_5")]
         public static extern bool BitStream_ReadDelta__SWIG_5(HandleRef jarg1, out int jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ReadDelta__SWIG_6"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ReadDelta__SWIG_6")]
         public static extern bool BitStream_ReadDelta__SWIG_6(HandleRef jarg1, out long jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ReadDelta__SWIG_7"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ReadDelta__SWIG_7")]
         public static extern bool BitStream_ReadDelta__SWIG_7(HandleRef jarg1, out float jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ReadDelta__SWIG_8"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ReadDelta__SWIG_8")]
         public static extern bool BitStream_ReadDelta__SWIG_8(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ReadDelta__SWIG_9"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ReadDelta__SWIG_9")]
         public static extern bool BitStream_ReadDelta__SWIG_9(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ReadDelta__SWIG_10"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ReadDelta__SWIG_10")]
         public static extern bool BitStream_ReadDelta__SWIG_10(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ReadCompressed__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ReadCompressed__SWIG_1")]
         public static extern bool BitStream_ReadCompressed__SWIG_1(HandleRef jarg1, out bool jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ReadCompressed__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ReadCompressed__SWIG_2")]
         public static extern bool BitStream_ReadCompressed__SWIG_2(HandleRef jarg1, out byte jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ReadCompressed__SWIG_3"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ReadCompressed__SWIG_3")]
         public static extern bool BitStream_ReadCompressed__SWIG_3(HandleRef jarg1, out short jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ReadCompressed__SWIG_4"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ReadCompressed__SWIG_4")]
         public static extern bool BitStream_ReadCompressed__SWIG_4(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ReadCompressed__SWIG_5"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ReadCompressed__SWIG_5")]
         public static extern bool BitStream_ReadCompressed__SWIG_5(HandleRef jarg1, out int jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ReadCompressed__SWIG_6"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ReadCompressed__SWIG_6")]
         public static extern bool BitStream_ReadCompressed__SWIG_6(HandleRef jarg1, out long jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ReadCompressed__SWIG_7"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ReadCompressed__SWIG_7")]
         public static extern bool BitStream_ReadCompressed__SWIG_7(HandleRef jarg1, out float jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ReadCompressed__SWIG_8"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ReadCompressed__SWIG_8")]
         public static extern bool BitStream_ReadCompressed__SWIG_8(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ReadCompressed__SWIG_9"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ReadCompressed__SWIG_9")]
         public static extern bool BitStream_ReadCompressed__SWIG_9(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ReadCompressed__SWIG_10"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ReadCompressed__SWIG_10")]
         public static extern bool BitStream_ReadCompressed__SWIG_10(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ReadCompressedDelta__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ReadCompressedDelta__SWIG_1")]
         public static extern bool BitStream_ReadCompressedDelta__SWIG_1(HandleRef jarg1, out bool jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ReadCompressedDelta__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ReadCompressedDelta__SWIG_2")]
         public static extern bool BitStream_ReadCompressedDelta__SWIG_2(HandleRef jarg1, out byte jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ReadCompressedDelta__SWIG_3"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ReadCompressedDelta__SWIG_3")]
         public static extern bool BitStream_ReadCompressedDelta__SWIG_3(HandleRef jarg1, out short jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ReadCompressedDelta__SWIG_4"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ReadCompressedDelta__SWIG_4")]
         public static extern bool BitStream_ReadCompressedDelta__SWIG_4(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ReadCompressedDelta__SWIG_5"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ReadCompressedDelta__SWIG_5")]
         public static extern bool BitStream_ReadCompressedDelta__SWIG_5(HandleRef jarg1, out int jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ReadCompressedDelta__SWIG_6"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ReadCompressedDelta__SWIG_6")]
         public static extern bool BitStream_ReadCompressedDelta__SWIG_6(HandleRef jarg1, out long jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ReadCompressedDelta__SWIG_7"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ReadCompressedDelta__SWIG_7")]
         public static extern bool BitStream_ReadCompressedDelta__SWIG_7(HandleRef jarg1, out float jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ReadCompressedDelta__SWIG_8"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ReadCompressedDelta__SWIG_8")]
         public static extern bool BitStream_ReadCompressedDelta__SWIG_8(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ReadCompressedDelta__SWIG_9"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ReadCompressedDelta__SWIG_9")]
         public static extern bool BitStream_ReadCompressedDelta__SWIG_9(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_BitStream_ReadCompressedDelta__SWIG_10"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_BitStream_ReadCompressedDelta__SWIG_10")]
         public static extern bool BitStream_ReadCompressedDelta__SWIG_10(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_MAX_UNSIGNED_LONG_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_MAX_UNSIGNED_LONG_get")]
         public static extern uint MAX_UNSIGNED_LONG_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_ByteQueue"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_ByteQueue")]
         public static extern IntPtr new_ByteQueue();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_ByteQueue"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_ByteQueue")]
         public static extern void delete_ByteQueue(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_ByteQueue_GetBytesWritten"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_ByteQueue_GetBytesWritten")]
         public static extern uint ByteQueue_GetBytesWritten(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_ByteQueue_IncrementReadOffset"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_ByteQueue_IncrementReadOffset")]
         public static extern void ByteQueue_IncrementReadOffset(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_ByteQueue_DecrementReadOffset"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_ByteQueue_DecrementReadOffset")]
         public static extern void ByteQueue_DecrementReadOffset(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_ByteQueue_Clear"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_ByteQueue_Clear")]
         public static extern void ByteQueue_Clear(HandleRef jarg1, string jarg2, uint jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_ByteQueue_Print"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_ByteQueue_Print")]
         public static extern void ByteQueue_Print(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_ByteQueue_WriteBytes"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_ByteQueue_WriteBytes")]
         public static extern void ByteQueue_WriteBytes(HandleRef jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2, uint jarg3, string jarg4, uint jarg5);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_ByteQueue_ReadBytes"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_ByteQueue_ReadBytes")]
         public static extern bool ByteQueue_ReadBytes(HandleRef jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2, uint jarg3, bool jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_ByteQueue_PeekContiguousBytesHelper"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_ByteQueue_PeekContiguousBytesHelper")]
         public static extern IntPtr ByteQueue_PeekContiguousBytesHelper(HandleRef jarg1, out uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetStatistics_valueOverLastSecond_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetStatistics_valueOverLastSecond_set")]
         public static extern void RakNetStatistics_valueOverLastSecond_set(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetStatistics_valueOverLastSecond_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetStatistics_valueOverLastSecond_get")]
         public static extern IntPtr RakNetStatistics_valueOverLastSecond_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetStatistics_runningTotal_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetStatistics_runningTotal_set")]
         public static extern void RakNetStatistics_runningTotal_set(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetStatistics_runningTotal_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetStatistics_runningTotal_get")]
         public static extern IntPtr RakNetStatistics_runningTotal_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetStatistics_connectionStartTime_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetStatistics_connectionStartTime_set")]
         public static extern void RakNetStatistics_connectionStartTime_set(HandleRef jarg1, ulong jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetStatistics_connectionStartTime_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetStatistics_connectionStartTime_get")]
         public static extern ulong RakNetStatistics_connectionStartTime_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetStatistics_isLimitedByCongestionControl_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetStatistics_isLimitedByCongestionControl_set")]
         public static extern void RakNetStatistics_isLimitedByCongestionControl_set(HandleRef jarg1, bool jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetStatistics_isLimitedByCongestionControl_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetStatistics_isLimitedByCongestionControl_get")]
         public static extern bool RakNetStatistics_isLimitedByCongestionControl_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetStatistics_BPSLimitByCongestionControl_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetStatistics_BPSLimitByCongestionControl_set")]
         public static extern void RakNetStatistics_BPSLimitByCongestionControl_set(HandleRef jarg1, ulong jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetStatistics_BPSLimitByCongestionControl_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetStatistics_BPSLimitByCongestionControl_get")]
         public static extern ulong RakNetStatistics_BPSLimitByCongestionControl_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetStatistics_isLimitedByOutgoingBandwidthLimit_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetStatistics_isLimitedByOutgoingBandwidthLimit_set")]
         public static extern void RakNetStatistics_isLimitedByOutgoingBandwidthLimit_set(HandleRef jarg1, bool jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetStatistics_isLimitedByOutgoingBandwidthLimit_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetStatistics_isLimitedByOutgoingBandwidthLimit_get")]
         public static extern bool RakNetStatistics_isLimitedByOutgoingBandwidthLimit_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetStatistics_BPSLimitByOutgoingBandwidthLimit_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetStatistics_BPSLimitByOutgoingBandwidthLimit_set")]
         public static extern void RakNetStatistics_BPSLimitByOutgoingBandwidthLimit_set(HandleRef jarg1, ulong jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetStatistics_BPSLimitByOutgoingBandwidthLimit_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetStatistics_BPSLimitByOutgoingBandwidthLimit_get")]
         public static extern ulong RakNetStatistics_BPSLimitByOutgoingBandwidthLimit_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetStatistics_messageInSendBuffer_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetStatistics_messageInSendBuffer_set")]
         public static extern void RakNetStatistics_messageInSendBuffer_set(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetStatistics_messageInSendBuffer_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetStatistics_messageInSendBuffer_get")]
         public static extern IntPtr RakNetStatistics_messageInSendBuffer_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetStatistics_bytesInSendBuffer_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetStatistics_bytesInSendBuffer_set")]
         public static extern void RakNetStatistics_bytesInSendBuffer_set(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetStatistics_bytesInSendBuffer_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetStatistics_bytesInSendBuffer_get")]
         public static extern IntPtr RakNetStatistics_bytesInSendBuffer_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetStatistics_messagesInResendBuffer_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetStatistics_messagesInResendBuffer_set")]
         public static extern void RakNetStatistics_messagesInResendBuffer_set(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetStatistics_messagesInResendBuffer_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetStatistics_messagesInResendBuffer_get")]
         public static extern uint RakNetStatistics_messagesInResendBuffer_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetStatistics_bytesInResendBuffer_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetStatistics_bytesInResendBuffer_set")]
         public static extern void RakNetStatistics_bytesInResendBuffer_set(HandleRef jarg1, ulong jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetStatistics_bytesInResendBuffer_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetStatistics_bytesInResendBuffer_get")]
         public static extern ulong RakNetStatistics_bytesInResendBuffer_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetStatistics_packetlossLastSecond_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetStatistics_packetlossLastSecond_set")]
         public static extern void RakNetStatistics_packetlossLastSecond_set(HandleRef jarg1, float jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetStatistics_packetlossLastSecond_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetStatistics_packetlossLastSecond_get")]
         public static extern float RakNetStatistics_packetlossLastSecond_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetStatistics_packetlossTotal_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetStatistics_packetlossTotal_set")]
         public static extern void RakNetStatistics_packetlossTotal_set(HandleRef jarg1, float jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetStatistics_packetlossTotal_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetStatistics_packetlossTotal_get")]
         public static extern float RakNetStatistics_packetlossTotal_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetStatistics_SetBytesInSendBuffer"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetStatistics_SetBytesInSendBuffer")]
         public static extern void RakNetStatistics_SetBytesInSendBuffer(HandleRef jarg1, [Out, MarshalAs(UnmanagedType.LPArray)]double[] jarg2, int jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetStatistics_SetMessageInSendBuffer"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetStatistics_SetMessageInSendBuffer")]
         public static extern void RakNetStatistics_SetMessageInSendBuffer(HandleRef jarg1, [Out, MarshalAs(UnmanagedType.LPArray)]uint[] jarg2, int jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetStatistics_SetRunningTotal"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetStatistics_SetRunningTotal")]
         public static extern void RakNetStatistics_SetRunningTotal(HandleRef jarg1, [Out, MarshalAs(UnmanagedType.LPArray)]ulong[] jarg2, int jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetStatistics_SetValueOverLastSecond"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetStatistics_SetValueOverLastSecond")]
         public static extern void RakNetStatistics_SetValueOverLastSecond(HandleRef jarg1, [Out, MarshalAs(UnmanagedType.LPArray)]ulong[] jarg2, int jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_RakNetStatistics"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_RakNetStatistics")]
         public static extern IntPtr new_RakNetStatistics();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_RakNetStatistics"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_RakNetStatistics")]
         public static extern void delete_RakNetStatistics(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_NetworkIDObject"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_NetworkIDObject")]
         public static extern IntPtr new_NetworkIDObject();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_NetworkIDObject"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_NetworkIDObject")]
         public static extern void delete_NetworkIDObject(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_NetworkIDObject_SetNetworkIDManagerOrig"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_NetworkIDObject_SetNetworkIDManagerOrig")]
         public static extern void NetworkIDObject_SetNetworkIDManagerOrig(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_NetworkIDObject_SetNetworkIDManagerOrigSwigExplicitNetworkIDObject"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_NetworkIDObject_SetNetworkIDManagerOrigSwigExplicitNetworkIDObject")]
         public static extern void NetworkIDObject_SetNetworkIDManagerOrigSwigExplicitNetworkIDObject(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_NetworkIDObject_GetNetworkIDManager"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_NetworkIDObject_GetNetworkIDManager")]
         public static extern IntPtr NetworkIDObject_GetNetworkIDManager(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_NetworkIDObject_GetNetworkIDManagerSwigExplicitNetworkIDObject"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_NetworkIDObject_GetNetworkIDManagerSwigExplicitNetworkIDObject")]
         public static extern IntPtr NetworkIDObject_GetNetworkIDManagerSwigExplicitNetworkIDObject(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_NetworkIDObject_GetNetworkID"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_NetworkIDObject_GetNetworkID")]
         public static extern ulong NetworkIDObject_GetNetworkID(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_NetworkIDObject_GetNetworkIDSwigExplicitNetworkIDObject"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_NetworkIDObject_GetNetworkIDSwigExplicitNetworkIDObject")]
         public static extern ulong NetworkIDObject_GetNetworkIDSwigExplicitNetworkIDObject(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_NetworkIDObject_SetNetworkID"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_NetworkIDObject_SetNetworkID")]
         public static extern void NetworkIDObject_SetNetworkID(HandleRef jarg1, ulong jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_NetworkIDObject_SetNetworkIDSwigExplicitNetworkIDObject"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_NetworkIDObject_SetNetworkIDSwigExplicitNetworkIDObject")]
         public static extern void NetworkIDObject_SetNetworkIDSwigExplicitNetworkIDObject(HandleRef jarg1, ulong jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_NetworkIDObject_director_connect"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_NetworkIDObject_director_connect")]
         public static extern void NetworkIDObject_director_connect(HandleRef jarg1, NetworkIDObject.SwigDelegateNetworkIDObject_0 delegate0, NetworkIDObject.SwigDelegateNetworkIDObject_1 delegate1, NetworkIDObject.SwigDelegateNetworkIDObject_2 delegate2, NetworkIDObject.SwigDelegateNetworkIDObject_3 delegate3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_NETWORK_ID_MANAGER_HASH_LENGTH_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_NETWORK_ID_MANAGER_HASH_LENGTH_get")]
         public static extern int NETWORK_ID_MANAGER_HASH_LENGTH_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_NetworkIDManager_GetInstance"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_NetworkIDManager_GetInstance")]
         public static extern IntPtr NetworkIDManager_GetInstance();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_NetworkIDManager_DestroyInstance"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_NetworkIDManager_DestroyInstance")]
         public static extern void NetworkIDManager_DestroyInstance(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_NetworkIDManager"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_NetworkIDManager")]
         public static extern IntPtr new_NetworkIDManager();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_NetworkIDManager"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_NetworkIDManager")]
         public static extern void delete_NetworkIDManager(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_NetworkIDManager_Clear"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_NetworkIDManager_Clear")]
         public static extern void NetworkIDManager_Clear(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_NetworkIDManager_GET_BASE_OBJECT_FROM_IDORIG"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_NetworkIDManager_GET_BASE_OBJECT_FROM_IDORIG")]
         public static extern IntPtr NetworkIDManager_GET_BASE_OBJECT_FROM_IDORIG(HandleRef jarg1, ulong jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_PluginInterface2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_PluginInterface2")]
         public static extern IntPtr new_PluginInterface2();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_PluginInterface2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_PluginInterface2")]
         public static extern void delete_PluginInterface2(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_PluginInterface2_UsesReliabilityLayer"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_PluginInterface2_UsesReliabilityLayer")]
         public static extern bool PluginInterface2_UsesReliabilityLayer(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_PluginInterface2_OnReliabilityLayerNotification"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_PluginInterface2_OnReliabilityLayerNotification")]
         public static extern void PluginInterface2_OnReliabilityLayerNotification(HandleRef jarg1, string jarg2, uint jarg3, HandleRef jarg4, bool jarg5);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_PluginInterface2_GetRakPeerInterface"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_PluginInterface2_GetRakPeerInterface")]
         public static extern IntPtr PluginInterface2_GetRakPeerInterface(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_PluginInterface2_GetMyGUIDUnified"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_PluginInterface2_GetMyGUIDUnified")]
         public static extern IntPtr PluginInterface2_GetMyGUIDUnified(HandleRef jarg1);
 
         //        [DllImport(Const.LibraryName
@@ -5757,1754 +2633,754 @@ namespace RakNet
         //)]
         //        public static extern void PluginInterface2_SetTCPInterface(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_GetInstance"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_GetInstance")]
         public static extern IntPtr RakPeerInterface_GetInstance();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_DestroyInstance"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_DestroyInstance")]
         public static extern void RakPeerInterface_DestroyInstance(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_RakPeerInterface"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_RakPeerInterface")]
         public static extern void delete_RakPeerInterface(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_Startup__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_Startup__SWIG_0")]
         public static extern int RakPeerInterface_Startup__SWIG_0(HandleRef jarg1, uint jarg2, HandleRef jarg3, int jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_Startup__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_Startup__SWIG_1")]
         public static extern int RakPeerInterface_Startup__SWIG_1(HandleRef jarg1, uint jarg2, HandleRef jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_InitializeSecurity__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_InitializeSecurity__SWIG_0")]
         public static extern bool RakPeerInterface_InitializeSecurity__SWIG_0(HandleRef jarg1, string jarg2, string jarg3, bool jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_InitializeSecurity__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_InitializeSecurity__SWIG_1")]
         public static extern bool RakPeerInterface_InitializeSecurity__SWIG_1(HandleRef jarg1, string jarg2, string jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_DisableSecurity"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_DisableSecurity")]
         public static extern void RakPeerInterface_DisableSecurity(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_AddToSecurityExceptionList"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_AddToSecurityExceptionList")]
         public static extern void RakPeerInterface_AddToSecurityExceptionList(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_RemoveFromSecurityExceptionList"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_RemoveFromSecurityExceptionList")]
         public static extern void RakPeerInterface_RemoveFromSecurityExceptionList(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_IsInSecurityExceptionList"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_IsInSecurityExceptionList")]
         public static extern bool RakPeerInterface_IsInSecurityExceptionList(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_SetMaximumIncomingConnections"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_SetMaximumIncomingConnections")]
         public static extern void RakPeerInterface_SetMaximumIncomingConnections(HandleRef jarg1, ushort jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_GetMaximumIncomingConnections"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_GetMaximumIncomingConnections")]
         public static extern uint RakPeerInterface_GetMaximumIncomingConnections(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_NumberOfConnections"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_NumberOfConnections")]
         public static extern ushort RakPeerInterface_NumberOfConnections(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_SetIncomingPassword__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_SetIncomingPassword__SWIG_0")]
         public static extern void RakPeerInterface_SetIncomingPassword__SWIG_0(HandleRef jarg1, string jarg2, int jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_Connect__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_Connect__SWIG_0")]
         public static extern int RakPeerInterface_Connect__SWIG_0(HandleRef jarg1, string jarg2, ushort jarg3, string jarg4, int jarg5, HandleRef jarg6, uint jarg7, uint jarg8, uint jarg9, uint jarg10);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_Connect__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_Connect__SWIG_1")]
         public static extern int RakPeerInterface_Connect__SWIG_1(HandleRef jarg1, string jarg2, ushort jarg3, string jarg4, int jarg5, HandleRef jarg6, uint jarg7, uint jarg8, uint jarg9);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_Connect__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_Connect__SWIG_2")]
         public static extern int RakPeerInterface_Connect__SWIG_2(HandleRef jarg1, string jarg2, ushort jarg3, string jarg4, int jarg5, HandleRef jarg6, uint jarg7, uint jarg8);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_Connect__SWIG_3"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_Connect__SWIG_3")]
         public static extern int RakPeerInterface_Connect__SWIG_3(HandleRef jarg1, string jarg2, ushort jarg3, string jarg4, int jarg5, HandleRef jarg6, uint jarg7);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_Connect__SWIG_4"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_Connect__SWIG_4")]
         public static extern int RakPeerInterface_Connect__SWIG_4(HandleRef jarg1, string jarg2, ushort jarg3, string jarg4, int jarg5, HandleRef jarg6);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_Connect__SWIG_5"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_Connect__SWIG_5")]
         public static extern int RakPeerInterface_Connect__SWIG_5(HandleRef jarg1, string jarg2, ushort jarg3, string jarg4, int jarg5);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_Shutdown__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_Shutdown__SWIG_0")]
         public static extern void RakPeerInterface_Shutdown__SWIG_0(HandleRef jarg1, uint jarg2, byte jarg3, int jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_Shutdown__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_Shutdown__SWIG_1")]
         public static extern void RakPeerInterface_Shutdown__SWIG_1(HandleRef jarg1, uint jarg2, byte jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_Shutdown__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_Shutdown__SWIG_2")]
         public static extern void RakPeerInterface_Shutdown__SWIG_2(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_IsActive"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_IsActive")]
         public static extern bool RakPeerInterface_IsActive(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_GetNextSendReceipt"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_GetNextSendReceipt")]
         public static extern uint RakPeerInterface_GetNextSendReceipt(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_IncrementNextSendReceipt"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_IncrementNextSendReceipt")]
         public static extern uint RakPeerInterface_IncrementNextSendReceipt(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_Send__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_Send__SWIG_0")]
         public static extern uint RakPeerInterface_Send__SWIG_0(HandleRef jarg1, string jarg2, int jarg3, int jarg4, int jarg5, char jarg6, HandleRef jarg7, bool jarg8, uint jarg9);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_Send__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_Send__SWIG_1")]
         public static extern uint RakPeerInterface_Send__SWIG_1(HandleRef jarg1, string jarg2, int jarg3, int jarg4, int jarg5, char jarg6, HandleRef jarg7, bool jarg8);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_SendLoopback__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_SendLoopback__SWIG_0")]
         public static extern void RakPeerInterface_SendLoopback__SWIG_0(HandleRef jarg1, string jarg2, int jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_Send__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_Send__SWIG_2")]
         public static extern uint RakPeerInterface_Send__SWIG_2(HandleRef jarg1, HandleRef jarg2, int jarg3, int jarg4, char jarg5, HandleRef jarg6, bool jarg7, uint jarg8);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_Send__SWIG_3"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_Send__SWIG_3")]
         public static extern uint RakPeerInterface_Send__SWIG_3(HandleRef jarg1, HandleRef jarg2, int jarg3, int jarg4, char jarg5, HandleRef jarg6, bool jarg7);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_Receive"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_Receive")]
         public static extern IntPtr RakPeerInterface_Receive(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_DeallocatePacket"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_DeallocatePacket")]
         public static extern void RakPeerInterface_DeallocatePacket(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_GetMaximumNumberOfPeers"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_GetMaximumNumberOfPeers")]
         public static extern uint RakPeerInterface_GetMaximumNumberOfPeers(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_CloseConnection__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_CloseConnection__SWIG_0")]
         public static extern void RakPeerInterface_CloseConnection__SWIG_0(HandleRef jarg1, HandleRef jarg2, bool jarg3, byte jarg4, int jarg5);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_CloseConnection__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_CloseConnection__SWIG_1")]
         public static extern void RakPeerInterface_CloseConnection__SWIG_1(HandleRef jarg1, HandleRef jarg2, bool jarg3, byte jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_CloseConnection__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_CloseConnection__SWIG_2")]
         public static extern void RakPeerInterface_CloseConnection__SWIG_2(HandleRef jarg1, HandleRef jarg2, bool jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_GetConnectionState"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_GetConnectionState")]
         public static extern int RakPeerInterface_GetConnectionState(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_CancelConnectionAttempt"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_CancelConnectionAttempt")]
         public static extern void RakPeerInterface_CancelConnectionAttempt(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_GetIndexFromSystemAddress"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_GetIndexFromSystemAddress")]
         public static extern int RakPeerInterface_GetIndexFromSystemAddress(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_GetSystemAddressFromIndex"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_GetSystemAddressFromIndex")]
         public static extern IntPtr RakPeerInterface_GetSystemAddressFromIndex(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_GetGUIDFromIndex"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_GetGUIDFromIndex")]
         public static extern IntPtr RakPeerInterface_GetGUIDFromIndex(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_GetSystemList"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_GetSystemList")]
         public static extern void RakPeerInterface_GetSystemList(HandleRef jarg1, HandleRef jarg2, HandleRef jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_AddToBanList__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_AddToBanList__SWIG_0")]
         public static extern void RakPeerInterface_AddToBanList__SWIG_0(HandleRef jarg1, string jarg2, uint jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_AddToBanList__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_AddToBanList__SWIG_1")]
         public static extern void RakPeerInterface_AddToBanList__SWIG_1(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_RemoveFromBanList"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_RemoveFromBanList")]
         public static extern void RakPeerInterface_RemoveFromBanList(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_ClearBanList"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_ClearBanList")]
         public static extern void RakPeerInterface_ClearBanList(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_IsBanned"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_IsBanned")]
         public static extern bool RakPeerInterface_IsBanned(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_SetLimitIPConnectionFrequency"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_SetLimitIPConnectionFrequency")]
         public static extern void RakPeerInterface_SetLimitIPConnectionFrequency(HandleRef jarg1, bool jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_Ping__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_Ping__SWIG_0")]
         public static extern void RakPeerInterface_Ping__SWIG_0(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_Ping__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_Ping__SWIG_1")]
         public static extern bool RakPeerInterface_Ping__SWIG_1(HandleRef jarg1, string jarg2, ushort jarg3, bool jarg4, uint jarg5);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_Ping__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_Ping__SWIG_2")]
         public static extern bool RakPeerInterface_Ping__SWIG_2(HandleRef jarg1, string jarg2, ushort jarg3, bool jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_GetAveragePing"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_GetAveragePing")]
         public static extern int RakPeerInterface_GetAveragePing(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_GetLastPing"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_GetLastPing")]
         public static extern int RakPeerInterface_GetLastPing(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_GetLowestPing"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_GetLowestPing")]
         public static extern int RakPeerInterface_GetLowestPing(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_SetOccasionalPing"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_SetOccasionalPing")]
         public static extern void RakPeerInterface_SetOccasionalPing(HandleRef jarg1, bool jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_GetClockDifferential"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_GetClockDifferential")]
         public static extern ulong RakPeerInterface_GetClockDifferential(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_SetOfflinePingResponse__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_SetOfflinePingResponse__SWIG_0")]
         public static extern void RakPeerInterface_SetOfflinePingResponse__SWIG_0(HandleRef jarg1, string jarg2, uint jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_GetInternalID__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_GetInternalID__SWIG_0")]
         public static extern IntPtr RakPeerInterface_GetInternalID__SWIG_0(HandleRef jarg1, HandleRef jarg2, int jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_GetInternalID__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_GetInternalID__SWIG_1")]
         public static extern IntPtr RakPeerInterface_GetInternalID__SWIG_1(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_GetInternalID__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_GetInternalID__SWIG_2")]
         public static extern IntPtr RakPeerInterface_GetInternalID__SWIG_2(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_SetInternalID__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_SetInternalID__SWIG_0")]
         public static extern void RakPeerInterface_SetInternalID__SWIG_0(HandleRef jarg1, HandleRef jarg2, int jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_SetInternalID__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_SetInternalID__SWIG_1")]
         public static extern void RakPeerInterface_SetInternalID__SWIG_1(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_GetExternalID"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_GetExternalID")]
         public static extern IntPtr RakPeerInterface_GetExternalID(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_GetMyGUID"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_GetMyGUID")]
         public static extern IntPtr RakPeerInterface_GetMyGUID(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_GetMyBoundAddress__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_GetMyBoundAddress__SWIG_0")]
         public static extern IntPtr RakPeerInterface_GetMyBoundAddress__SWIG_0(HandleRef jarg1, int jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_GetMyBoundAddress__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_GetMyBoundAddress__SWIG_1")]
         public static extern IntPtr RakPeerInterface_GetMyBoundAddress__SWIG_1(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_Get64BitUniqueRandomNumber"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_Get64BitUniqueRandomNumber")]
         public static extern ulong RakPeerInterface_Get64BitUniqueRandomNumber();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_GetGuidFromSystemAddress"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_GetGuidFromSystemAddress")]
         public static extern IntPtr RakPeerInterface_GetGuidFromSystemAddress(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_GetSystemAddressFromGuid"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_GetSystemAddressFromGuid")]
         public static extern IntPtr RakPeerInterface_GetSystemAddressFromGuid(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_GetClientPublicKeyFromSystemAddress"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_GetClientPublicKeyFromSystemAddress")]
         public static extern bool RakPeerInterface_GetClientPublicKeyFromSystemAddress(HandleRef jarg1, HandleRef jarg2, string jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_SetTimeoutTime"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_SetTimeoutTime")]
         public static extern void RakPeerInterface_SetTimeoutTime(HandleRef jarg1, uint jarg2, HandleRef jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_GetTimeoutTime"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_GetTimeoutTime")]
         public static extern uint RakPeerInterface_GetTimeoutTime(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_GetMTUSize"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_GetMTUSize")]
         public static extern int RakPeerInterface_GetMTUSize(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_GetNumberOfAddresses"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_GetNumberOfAddresses")]
         public static extern uint RakPeerInterface_GetNumberOfAddresses(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_GetLocalIP"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_GetLocalIP")]
         public static extern string RakPeerInterface_GetLocalIP(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_IsLocalIP"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_IsLocalIP")]
         public static extern bool RakPeerInterface_IsLocalIP(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_AllowConnectionResponseIPMigration"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_AllowConnectionResponseIPMigration")]
         public static extern void RakPeerInterface_AllowConnectionResponseIPMigration(HandleRef jarg1, bool jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_AdvertiseSystem__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_AdvertiseSystem__SWIG_0")]
         public static extern bool RakPeerInterface_AdvertiseSystem__SWIG_0(HandleRef jarg1, string jarg2, ushort jarg3, string jarg4, int jarg5, uint jarg6);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_AdvertiseSystem__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_AdvertiseSystem__SWIG_1")]
         public static extern bool RakPeerInterface_AdvertiseSystem__SWIG_1(HandleRef jarg1, string jarg2, ushort jarg3, string jarg4, int jarg5);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_SetSplitMessageProgressInterval"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_SetSplitMessageProgressInterval")]
         public static extern void RakPeerInterface_SetSplitMessageProgressInterval(HandleRef jarg1, int jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_GetSplitMessageProgressInterval"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_GetSplitMessageProgressInterval")]
         public static extern int RakPeerInterface_GetSplitMessageProgressInterval(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_SetUnreliableTimeout"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_SetUnreliableTimeout")]
         public static extern void RakPeerInterface_SetUnreliableTimeout(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_SendTTL__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_SendTTL__SWIG_0")]
         public static extern void RakPeerInterface_SendTTL__SWIG_0(HandleRef jarg1, string jarg2, ushort jarg3, int jarg4, uint jarg5);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_SendTTL__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_SendTTL__SWIG_1")]
         public static extern void RakPeerInterface_SendTTL__SWIG_1(HandleRef jarg1, string jarg2, ushort jarg3, int jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_AttachPlugin"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_AttachPlugin")]
         public static extern void RakPeerInterface_AttachPlugin(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_DetachPlugin"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_DetachPlugin")]
         public static extern void RakPeerInterface_DetachPlugin(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_PushBackPacket"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_PushBackPacket")]
         public static extern void RakPeerInterface_PushBackPacket(HandleRef jarg1, HandleRef jarg2, bool jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_ChangeSystemAddress"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_ChangeSystemAddress")]
         public static extern void RakPeerInterface_ChangeSystemAddress(HandleRef jarg1, HandleRef jarg2, HandleRef jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_AllocatePacket"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_AllocatePacket")]
         public static extern IntPtr RakPeerInterface_AllocatePacket(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_GetSockets"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_GetSockets")]
         public static extern void RakPeerInterface_GetSockets(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_WriteOutOfBandHeader"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_WriteOutOfBandHeader")]
         public static extern void RakPeerInterface_WriteOutOfBandHeader(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_ApplyNetworkSimulator"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_ApplyNetworkSimulator")]
         public static extern void RakPeerInterface_ApplyNetworkSimulator(HandleRef jarg1, float jarg2, ushort jarg3, ushort jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_SetPerConnectionOutgoingBandwidthLimit"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_SetPerConnectionOutgoingBandwidthLimit")]
         public static extern void RakPeerInterface_SetPerConnectionOutgoingBandwidthLimit(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_IsNetworkSimulatorActive"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_IsNetworkSimulatorActive")]
         public static extern bool RakPeerInterface_IsNetworkSimulatorActive(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_GetStatistics__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_GetStatistics__SWIG_0")]
         public static extern IntPtr RakPeerInterface_GetStatistics__SWIG_0(HandleRef jarg1, HandleRef jarg2, HandleRef jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_GetStatistics__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_GetStatistics__SWIG_1")]
         public static extern IntPtr RakPeerInterface_GetStatistics__SWIG_1(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_GetStatistics__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_GetStatistics__SWIG_2")]
         public static extern bool RakPeerInterface_GetStatistics__SWIG_2(HandleRef jarg1, uint jarg2, HandleRef jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_GetReceiveBufferSize"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_GetReceiveBufferSize")]
         public static extern uint RakPeerInterface_GetReceiveBufferSize(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_RunUpdateCycle"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_RunUpdateCycle")]
         public static extern bool RakPeerInterface_RunUpdateCycle(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_SendOutOfBand__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_SendOutOfBand__SWIG_0")]
         public static extern bool RakPeerInterface_SendOutOfBand__SWIG_0(HandleRef jarg1, string jarg2, ushort jarg3, string jarg4, uint jarg5, uint jarg6);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_SendOutOfBand__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_SendOutOfBand__SWIG_1")]
         public static extern bool RakPeerInterface_SendOutOfBand__SWIG_1(HandleRef jarg1, string jarg2, ushort jarg3, string jarg4, uint jarg5);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_Send__SWIG_4"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_Send__SWIG_4")]
         public static extern uint RakPeerInterface_Send__SWIG_4(HandleRef jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2, int jarg3, int jarg4, int jarg5, char jarg6, HandleRef jarg7, bool jarg8);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_SendLoopback__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_SendLoopback__SWIG_1")]
         public static extern void RakPeerInterface_SendLoopback__SWIG_1(HandleRef jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2, int jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_SetOfflinePingResponse__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_SetOfflinePingResponse__SWIG_1")]
         public static extern void RakPeerInterface_SetOfflinePingResponse__SWIG_1(HandleRef jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2, uint jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_AdvertiseSystem__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_AdvertiseSystem__SWIG_2")]
         public static extern bool RakPeerInterface_AdvertiseSystem__SWIG_2(HandleRef jarg1, string jarg2, ushort jarg3, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg4, int jarg5, uint jarg6);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_AdvertiseSystem__SWIG_3"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_AdvertiseSystem__SWIG_3")]
         public static extern bool RakPeerInterface_AdvertiseSystem__SWIG_3(HandleRef jarg1, string jarg2, ushort jarg3, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg4, int jarg5);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_CSharpGetIncomingPasswordHelper"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_CSharpGetIncomingPasswordHelper")]
         public static extern string RakPeerInterface_CSharpGetIncomingPasswordHelper(HandleRef jarg1, string jarg2, ref int jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_SetIncomingPassword__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_SetIncomingPassword__SWIG_1")]
         public static extern void RakPeerInterface_SetIncomingPassword__SWIG_1(HandleRef jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2, int jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_GetIncomingPassword"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_GetIncomingPassword")]
         public static extern void RakPeerInterface_GetIncomingPassword(HandleRef jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2, ref int jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_CSharpGetOfflinePingResponseHelper"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_CSharpGetOfflinePingResponseHelper")]
         public static extern void RakPeerInterface_CSharpGetOfflinePingResponseHelper(HandleRef jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2, out uint jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeerInterface_GetConnectionList"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeerInterface_GetConnectionList")]
         public static extern bool RakPeerInterface_GetConnectionList(HandleRef jarg1, HandleRef jarg2, ref ushort jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RemoteSystemIndex_index_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RemoteSystemIndex_index_set")]
         public static extern void RemoteSystemIndex_index_set(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RemoteSystemIndex_index_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RemoteSystemIndex_index_get")]
         public static extern uint RemoteSystemIndex_index_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RemoteSystemIndex_next_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RemoteSystemIndex_next_set")]
         public static extern void RemoteSystemIndex_next_set(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RemoteSystemIndex_next_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RemoteSystemIndex_next_get")]
         public static extern IntPtr RemoteSystemIndex_next_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_RemoteSystemIndex"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_RemoteSystemIndex")]
         public static extern IntPtr new_RemoteSystemIndex();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_RemoteSystemIndex"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_RemoteSystemIndex")]
         public static extern void delete_RemoteSystemIndex(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_RakPeer"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_RakPeer")]
         public static extern IntPtr new_RakPeer();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_RakPeer"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_RakPeer")]
         public static extern void delete_RakPeer(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_Startup__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_Startup__SWIG_0")]
         public static extern int RakPeer_Startup__SWIG_0(HandleRef jarg1, uint jarg2, HandleRef jarg3, int jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_Startup__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_Startup__SWIG_1")]
         public static extern int RakPeer_Startup__SWIG_1(HandleRef jarg1, uint jarg2, HandleRef jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_InitializeSecurity__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_InitializeSecurity__SWIG_0")]
         public static extern bool RakPeer_InitializeSecurity__SWIG_0(HandleRef jarg1, string jarg2, string jarg3, bool jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_InitializeSecurity__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_InitializeSecurity__SWIG_1")]
         public static extern bool RakPeer_InitializeSecurity__SWIG_1(HandleRef jarg1, string jarg2, string jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_DisableSecurity"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_DisableSecurity")]
         public static extern void RakPeer_DisableSecurity(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_AddToSecurityExceptionList"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_AddToSecurityExceptionList")]
         public static extern void RakPeer_AddToSecurityExceptionList(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_RemoveFromSecurityExceptionList"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_RemoveFromSecurityExceptionList")]
         public static extern void RakPeer_RemoveFromSecurityExceptionList(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_IsInSecurityExceptionList"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_IsInSecurityExceptionList")]
         public static extern bool RakPeer_IsInSecurityExceptionList(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_SetMaximumIncomingConnections"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_SetMaximumIncomingConnections")]
         public static extern void RakPeer_SetMaximumIncomingConnections(HandleRef jarg1, ushort jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_GetMaximumIncomingConnections"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_GetMaximumIncomingConnections")]
         public static extern uint RakPeer_GetMaximumIncomingConnections(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_NumberOfConnections"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_NumberOfConnections")]
         public static extern ushort RakPeer_NumberOfConnections(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_SetIncomingPassword__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_SetIncomingPassword__SWIG_0")]
         public static extern void RakPeer_SetIncomingPassword__SWIG_0(HandleRef jarg1, string jarg2, int jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_Connect__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_Connect__SWIG_0")]
         public static extern int RakPeer_Connect__SWIG_0(HandleRef jarg1, string jarg2, ushort jarg3, string jarg4, int jarg5, HandleRef jarg6, uint jarg7, uint jarg8, uint jarg9, uint jarg10);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_Connect__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_Connect__SWIG_1")]
         public static extern int RakPeer_Connect__SWIG_1(HandleRef jarg1, string jarg2, ushort jarg3, string jarg4, int jarg5, HandleRef jarg6, uint jarg7, uint jarg8, uint jarg9);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_Connect__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_Connect__SWIG_2")]
         public static extern int RakPeer_Connect__SWIG_2(HandleRef jarg1, string jarg2, ushort jarg3, string jarg4, int jarg5, HandleRef jarg6, uint jarg7, uint jarg8);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_Connect__SWIG_3"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_Connect__SWIG_3")]
         public static extern int RakPeer_Connect__SWIG_3(HandleRef jarg1, string jarg2, ushort jarg3, string jarg4, int jarg5, HandleRef jarg6, uint jarg7);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_Connect__SWIG_4"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_Connect__SWIG_4")]
         public static extern int RakPeer_Connect__SWIG_4(HandleRef jarg1, string jarg2, ushort jarg3, string jarg4, int jarg5, HandleRef jarg6);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_Connect__SWIG_5"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_Connect__SWIG_5")]
         public static extern int RakPeer_Connect__SWIG_5(HandleRef jarg1, string jarg2, ushort jarg3, string jarg4, int jarg5);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_Shutdown__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_Shutdown__SWIG_0")]
         public static extern void RakPeer_Shutdown__SWIG_0(HandleRef jarg1, uint jarg2, byte jarg3, int jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_Shutdown__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_Shutdown__SWIG_1")]
         public static extern void RakPeer_Shutdown__SWIG_1(HandleRef jarg1, uint jarg2, byte jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_Shutdown__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_Shutdown__SWIG_2")]
         public static extern void RakPeer_Shutdown__SWIG_2(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_IsActive"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_IsActive")]
         public static extern bool RakPeer_IsActive(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_GetNextSendReceipt"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_GetNextSendReceipt")]
         public static extern uint RakPeer_GetNextSendReceipt(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_IncrementNextSendReceipt"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_IncrementNextSendReceipt")]
         public static extern uint RakPeer_IncrementNextSendReceipt(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_Send__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_Send__SWIG_0")]
         public static extern uint RakPeer_Send__SWIG_0(HandleRef jarg1, string jarg2, int jarg3, int jarg4, int jarg5, char jarg6, HandleRef jarg7, bool jarg8, uint jarg9);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_Send__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_Send__SWIG_1")]
         public static extern uint RakPeer_Send__SWIG_1(HandleRef jarg1, string jarg2, int jarg3, int jarg4, int jarg5, char jarg6, HandleRef jarg7, bool jarg8);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_SendLoopback__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_SendLoopback__SWIG_0")]
         public static extern void RakPeer_SendLoopback__SWIG_0(HandleRef jarg1, string jarg2, int jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_Send__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_Send__SWIG_2")]
         public static extern uint RakPeer_Send__SWIG_2(HandleRef jarg1, HandleRef jarg2, int jarg3, int jarg4, char jarg5, HandleRef jarg6, bool jarg7, uint jarg8);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_Send__SWIG_3"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_Send__SWIG_3")]
         public static extern uint RakPeer_Send__SWIG_3(HandleRef jarg1, HandleRef jarg2, int jarg3, int jarg4, char jarg5, HandleRef jarg6, bool jarg7);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_Receive"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_Receive")]
         public static extern IntPtr RakPeer_Receive(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_DeallocatePacket"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_DeallocatePacket")]
         public static extern void RakPeer_DeallocatePacket(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_GetMaximumNumberOfPeers"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_GetMaximumNumberOfPeers")]
         public static extern uint RakPeer_GetMaximumNumberOfPeers(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_CloseConnection__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_CloseConnection__SWIG_0")]
         public static extern void RakPeer_CloseConnection__SWIG_0(HandleRef jarg1, HandleRef jarg2, bool jarg3, byte jarg4, int jarg5);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_CloseConnection__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_CloseConnection__SWIG_1")]
         public static extern void RakPeer_CloseConnection__SWIG_1(HandleRef jarg1, HandleRef jarg2, bool jarg3, byte jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_CloseConnection__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_CloseConnection__SWIG_2")]
         public static extern void RakPeer_CloseConnection__SWIG_2(HandleRef jarg1, HandleRef jarg2, bool jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_CancelConnectionAttempt"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_CancelConnectionAttempt")]
         public static extern void RakPeer_CancelConnectionAttempt(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_GetConnectionState"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_GetConnectionState")]
         public static extern int RakPeer_GetConnectionState(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_GetIndexFromSystemAddress"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_GetIndexFromSystemAddress")]
         public static extern int RakPeer_GetIndexFromSystemAddress(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_GetSystemAddressFromIndex"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_GetSystemAddressFromIndex")]
         public static extern IntPtr RakPeer_GetSystemAddressFromIndex(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_GetGUIDFromIndex"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_GetGUIDFromIndex")]
         public static extern IntPtr RakPeer_GetGUIDFromIndex(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_GetSystemList"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_GetSystemList")]
         public static extern void RakPeer_GetSystemList(HandleRef jarg1, HandleRef jarg2, HandleRef jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_AddToBanList__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_AddToBanList__SWIG_0")]
         public static extern void RakPeer_AddToBanList__SWIG_0(HandleRef jarg1, string jarg2, uint jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_AddToBanList__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_AddToBanList__SWIG_1")]
         public static extern void RakPeer_AddToBanList__SWIG_1(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_RemoveFromBanList"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_RemoveFromBanList")]
         public static extern void RakPeer_RemoveFromBanList(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_ClearBanList"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_ClearBanList")]
         public static extern void RakPeer_ClearBanList(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_IsBanned"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_IsBanned")]
         public static extern bool RakPeer_IsBanned(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_SetLimitIPConnectionFrequency"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_SetLimitIPConnectionFrequency")]
         public static extern void RakPeer_SetLimitIPConnectionFrequency(HandleRef jarg1, bool jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_Ping__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_Ping__SWIG_0")]
         public static extern void RakPeer_Ping__SWIG_0(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_Ping__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_Ping__SWIG_1")]
         public static extern bool RakPeer_Ping__SWIG_1(HandleRef jarg1, string jarg2, ushort jarg3, bool jarg4, uint jarg5);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_Ping__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_Ping__SWIG_2")]
         public static extern bool RakPeer_Ping__SWIG_2(HandleRef jarg1, string jarg2, ushort jarg3, bool jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_GetAveragePing"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_GetAveragePing")]
         public static extern int RakPeer_GetAveragePing(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_GetLastPing"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_GetLastPing")]
         public static extern int RakPeer_GetLastPing(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_GetLowestPing"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_GetLowestPing")]
         public static extern int RakPeer_GetLowestPing(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_SetOccasionalPing"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_SetOccasionalPing")]
         public static extern void RakPeer_SetOccasionalPing(HandleRef jarg1, bool jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_GetClockDifferential"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_GetClockDifferential")]
         public static extern ulong RakPeer_GetClockDifferential(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_SetOfflinePingResponse__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_SetOfflinePingResponse__SWIG_0")]
         public static extern void RakPeer_SetOfflinePingResponse__SWIG_0(HandleRef jarg1, string jarg2, uint jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_GetInternalID__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_GetInternalID__SWIG_0")]
         public static extern IntPtr RakPeer_GetInternalID__SWIG_0(HandleRef jarg1, HandleRef jarg2, int jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_GetInternalID__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_GetInternalID__SWIG_1")]
         public static extern IntPtr RakPeer_GetInternalID__SWIG_1(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_GetInternalID__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_GetInternalID__SWIG_2")]
         public static extern IntPtr RakPeer_GetInternalID__SWIG_2(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_SetInternalID__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_SetInternalID__SWIG_0")]
         public static extern void RakPeer_SetInternalID__SWIG_0(HandleRef jarg1, HandleRef jarg2, int jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_SetInternalID__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_SetInternalID__SWIG_1")]
         public static extern void RakPeer_SetInternalID__SWIG_1(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_GetExternalID"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_GetExternalID")]
         public static extern IntPtr RakPeer_GetExternalID(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_GetMyGUID"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_GetMyGUID")]
         public static extern IntPtr RakPeer_GetMyGUID(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_GetMyBoundAddress__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_GetMyBoundAddress__SWIG_0")]
         public static extern IntPtr RakPeer_GetMyBoundAddress__SWIG_0(HandleRef jarg1, int jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_GetMyBoundAddress__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_GetMyBoundAddress__SWIG_1")]
         public static extern IntPtr RakPeer_GetMyBoundAddress__SWIG_1(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_GetGuidFromSystemAddress"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_GetGuidFromSystemAddress")]
         public static extern IntPtr RakPeer_GetGuidFromSystemAddress(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_GetSystemAddressFromGuid"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_GetSystemAddressFromGuid")]
         public static extern IntPtr RakPeer_GetSystemAddressFromGuid(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_GetClientPublicKeyFromSystemAddress"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_GetClientPublicKeyFromSystemAddress")]
         public static extern bool RakPeer_GetClientPublicKeyFromSystemAddress(HandleRef jarg1, HandleRef jarg2, string jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_SetTimeoutTime"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_SetTimeoutTime")]
         public static extern void RakPeer_SetTimeoutTime(HandleRef jarg1, uint jarg2, HandleRef jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_GetTimeoutTime"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_GetTimeoutTime")]
         public static extern uint RakPeer_GetTimeoutTime(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_GetMTUSize"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_GetMTUSize")]
         public static extern int RakPeer_GetMTUSize(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_GetNumberOfAddresses"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_GetNumberOfAddresses")]
         public static extern uint RakPeer_GetNumberOfAddresses(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_GetLocalIP"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_GetLocalIP")]
         public static extern string RakPeer_GetLocalIP(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_IsLocalIP"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_IsLocalIP")]
         public static extern bool RakPeer_IsLocalIP(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_AllowConnectionResponseIPMigration"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_AllowConnectionResponseIPMigration")]
         public static extern void RakPeer_AllowConnectionResponseIPMigration(HandleRef jarg1, bool jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_AdvertiseSystem__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_AdvertiseSystem__SWIG_0")]
         public static extern bool RakPeer_AdvertiseSystem__SWIG_0(HandleRef jarg1, string jarg2, ushort jarg3, string jarg4, int jarg5, uint jarg6);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_AdvertiseSystem__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_AdvertiseSystem__SWIG_1")]
         public static extern bool RakPeer_AdvertiseSystem__SWIG_1(HandleRef jarg1, string jarg2, ushort jarg3, string jarg4, int jarg5);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_SetSplitMessageProgressInterval"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_SetSplitMessageProgressInterval")]
         public static extern void RakPeer_SetSplitMessageProgressInterval(HandleRef jarg1, int jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_GetSplitMessageProgressInterval"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_GetSplitMessageProgressInterval")]
         public static extern int RakPeer_GetSplitMessageProgressInterval(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_SetUnreliableTimeout"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_SetUnreliableTimeout")]
         public static extern void RakPeer_SetUnreliableTimeout(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_SendTTL__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_SendTTL__SWIG_0")]
         public static extern void RakPeer_SendTTL__SWIG_0(HandleRef jarg1, string jarg2, ushort jarg3, int jarg4, uint jarg5);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_SendTTL__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_SendTTL__SWIG_1")]
         public static extern void RakPeer_SendTTL__SWIG_1(HandleRef jarg1, string jarg2, ushort jarg3, int jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_AttachPlugin"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_AttachPlugin")]
         public static extern void RakPeer_AttachPlugin(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_DetachPlugin"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_DetachPlugin")]
         public static extern void RakPeer_DetachPlugin(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_PushBackPacket"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_PushBackPacket")]
         public static extern void RakPeer_PushBackPacket(HandleRef jarg1, HandleRef jarg2, bool jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_ChangeSystemAddress"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_ChangeSystemAddress")]
         public static extern void RakPeer_ChangeSystemAddress(HandleRef jarg1, HandleRef jarg2, HandleRef jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_AllocatePacket"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_AllocatePacket")]
         public static extern IntPtr RakPeer_AllocatePacket(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_GetSockets"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_GetSockets")]
         public static extern void RakPeer_GetSockets(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_WriteOutOfBandHeader"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_WriteOutOfBandHeader")]
         public static extern void RakPeer_WriteOutOfBandHeader(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_ApplyNetworkSimulator"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_ApplyNetworkSimulator")]
         public static extern void RakPeer_ApplyNetworkSimulator(HandleRef jarg1, float jarg2, ushort jarg3, ushort jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_SetPerConnectionOutgoingBandwidthLimit"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_SetPerConnectionOutgoingBandwidthLimit")]
         public static extern void RakPeer_SetPerConnectionOutgoingBandwidthLimit(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_IsNetworkSimulatorActive"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_IsNetworkSimulatorActive")]
         public static extern bool RakPeer_IsNetworkSimulatorActive(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_GetStatistics__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_GetStatistics__SWIG_0")]
         public static extern IntPtr RakPeer_GetStatistics__SWIG_0(HandleRef jarg1, HandleRef jarg2, HandleRef jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_GetStatistics__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_GetStatistics__SWIG_1")]
         public static extern IntPtr RakPeer_GetStatistics__SWIG_1(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_GetStatistics__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_GetStatistics__SWIG_2")]
         public static extern bool RakPeer_GetStatistics__SWIG_2(HandleRef jarg1, uint jarg2, HandleRef jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_GetReceiveBufferSize"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_GetReceiveBufferSize")]
         public static extern uint RakPeer_GetReceiveBufferSize(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_RunUpdateCycle"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_RunUpdateCycle")]
         public static extern bool RakPeer_RunUpdateCycle(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_SendOutOfBand__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_SendOutOfBand__SWIG_0")]
         public static extern bool RakPeer_SendOutOfBand__SWIG_0(HandleRef jarg1, string jarg2, ushort jarg3, string jarg4, uint jarg5, uint jarg6);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_SendOutOfBand__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_SendOutOfBand__SWIG_1")]
         public static extern bool RakPeer_SendOutOfBand__SWIG_1(HandleRef jarg1, string jarg2, ushort jarg3, string jarg4, uint jarg5);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_Send__SWIG_4"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_Send__SWIG_4")]
         public static extern uint RakPeer_Send__SWIG_4(HandleRef jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2, int jarg3, int jarg4, int jarg5, char jarg6, HandleRef jarg7, bool jarg8);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_SendLoopback__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_SendLoopback__SWIG_1")]
         public static extern void RakPeer_SendLoopback__SWIG_1(HandleRef jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2, int jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_SetOfflinePingResponse__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_SetOfflinePingResponse__SWIG_1")]
         public static extern void RakPeer_SetOfflinePingResponse__SWIG_1(HandleRef jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2, uint jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_AdvertiseSystem__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_AdvertiseSystem__SWIG_2")]
         public static extern bool RakPeer_AdvertiseSystem__SWIG_2(HandleRef jarg1, string jarg2, ushort jarg3, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg4, int jarg5, uint jarg6);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_AdvertiseSystem__SWIG_3"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_AdvertiseSystem__SWIG_3")]
         public static extern bool RakPeer_AdvertiseSystem__SWIG_3(HandleRef jarg1, string jarg2, ushort jarg3, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg4, int jarg5);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_CSharpGetIncomingPasswordHelper"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_CSharpGetIncomingPasswordHelper")]
         public static extern string RakPeer_CSharpGetIncomingPasswordHelper(HandleRef jarg1, string jarg2, ref int jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_SetIncomingPassword__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_SetIncomingPassword__SWIG_1")]
         public static extern void RakPeer_SetIncomingPassword__SWIG_1(HandleRef jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2, int jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_GetIncomingPassword"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_GetIncomingPassword")]
         public static extern void RakPeer_GetIncomingPassword(HandleRef jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2, ref int jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_CSharpGetOfflinePingResponseHelper"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_CSharpGetOfflinePingResponseHelper")]
         public static extern void RakPeer_CSharpGetOfflinePingResponseHelper(HandleRef jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2, out uint jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_GetConnectionList"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_GetConnectionList")]
         public static extern bool RakPeer_GetConnectionList(HandleRef jarg1, HandleRef jarg2, ref ushort jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_PacketLogger_GetInstance"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_PacketLogger_GetInstance")]
         public static extern IntPtr PacketLogger_GetInstance();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_PacketLogger_DestroyInstance"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_PacketLogger_DestroyInstance")]
         public static extern void PacketLogger_DestroyInstance(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_PacketLogger"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_PacketLogger")]
         public static extern IntPtr new_PacketLogger();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_PacketLogger"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_PacketLogger")]
         public static extern void delete_PacketLogger(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_PacketLogger_OnReliabilityLayerNotification"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_PacketLogger_OnReliabilityLayerNotification")]
         public static extern void PacketLogger_OnReliabilityLayerNotification(HandleRef jarg1, string jarg2, uint jarg3, HandleRef jarg4, bool jarg5);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_PacketLogger_LogHeader"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_PacketLogger_LogHeader")]
         public static extern void PacketLogger_LogHeader(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_PacketLogger_WriteLog"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_PacketLogger_WriteLog")]
         public static extern void PacketLogger_WriteLog(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_PacketLogger_WriteMiscellaneous"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_PacketLogger_WriteMiscellaneous")]
         public static extern void PacketLogger_WriteMiscellaneous(HandleRef jarg1, string jarg2, string jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_PacketLogger_SetPrintID"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_PacketLogger_SetPrintID")]
         public static extern void PacketLogger_SetPrintID(HandleRef jarg1, bool jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_PacketLogger_SetPrintAcks"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_PacketLogger_SetPrintAcks")]
         public static extern void PacketLogger_SetPrintAcks(HandleRef jarg1, bool jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_PacketLogger_SetPrefix"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_PacketLogger_SetPrefix")]
         public static extern void PacketLogger_SetPrefix(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_PacketLogger_SetSuffix"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_PacketLogger_SetSuffix")]
         public static extern void PacketLogger_SetSuffix(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_PacketLogger_BaseIDTOString"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_PacketLogger_BaseIDTOString")]
         public static extern string PacketLogger_BaseIDTOString(byte jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_PacketLogger_SetLogDirectMessages"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_PacketLogger_SetLogDirectMessages")]
         public static extern void PacketLogger_SetLogDirectMessages(HandleRef jarg1, bool jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_PacketLogger_FormatLineHelper__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_PacketLogger_FormatLineHelper__SWIG_0")]
         public static extern string PacketLogger_FormatLineHelper__SWIG_0(HandleRef jarg1, string jarg2, string jarg3, string jarg4, uint jarg5, uint jarg6, byte jarg7, uint jarg8, ulong jarg9, HandleRef jarg10, HandleRef jarg11, uint jarg12, uint jarg13, uint jarg14, uint jarg15);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_PacketLogger_FormatLineHelper__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_PacketLogger_FormatLineHelper__SWIG_1")]
         public static extern string PacketLogger_FormatLineHelper__SWIG_1(HandleRef jarg1, string jarg2, string jarg3, string jarg4, uint jarg5, uint jarg6, string jarg7, uint jarg8, ulong jarg9, HandleRef jarg10, HandleRef jarg11, uint jarg12, uint jarg13, uint jarg14, uint jarg15);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_PacketFileLogger"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_PacketFileLogger")]
         public static extern IntPtr new_PacketFileLogger();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_PacketFileLogger"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_PacketFileLogger")]
         public static extern void delete_PacketFileLogger(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_PacketFileLogger_StartLog"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_PacketFileLogger_StartLog")]
         public static extern void PacketFileLogger_StartLog(HandleRef jarg1, string jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_PacketFileLogger_WriteLog"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_PacketFileLogger_WriteLog")]
         public static extern void PacketFileLogger_WriteLog(HandleRef jarg1, string jarg2);
 
         //        [DllImport(Const.LibraryName
@@ -8473,26 +4349,14 @@ namespace RakNet
         //)]
         //        public static extern int ReadyEvent_RemoteSystemCompByGuid(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_ALLOW_JOIN_ANY_AVAILABLE_TEAM_get"
-#endif
-)]
-        public static extern int ALLOW_JOIN_ANY_AVAILABLE_TEAM_get();
+        //[DllImport(Const.LibraryName, EntryPoint = "CSharp_ALLOW_JOIN_ANY_AVAILABLE_TEAM_get")]
+        //public static extern int ALLOW_JOIN_ANY_AVAILABLE_TEAM_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_ALLOW_JOIN_SPECIFIC_TEAM_get"
-#endif
-)]
-        public static extern int ALLOW_JOIN_SPECIFIC_TEAM_get();
+        //[DllImport(Const.LibraryName, EntryPoint = "CSharp_ALLOW_JOIN_SPECIFIC_TEAM_get")]
+        //public static extern int ALLOW_JOIN_SPECIFIC_TEAM_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_ALLOW_JOIN_REBALANCING_get"
-#endif
-)]
-        public static extern int ALLOW_JOIN_REBALANCING_get();
+        //[DllImport(Const.LibraryName, EntryPoint = "CSharp_ALLOW_JOIN_REBALANCING_get")]
+        //public static extern int ALLOW_JOIN_REBALANCING_get();
 
         //        [DllImport(Const.LibraryName
         //#if !UNITY_IOS || UNITY_EDITOR
@@ -9621,270 +5485,118 @@ namespace RakNet
         //)]
         //        public static extern IntPtr NatTypeDetectionServer_AllocRNS2RecvStruct(HandleRef jarg1, string jarg2, uint jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp__TABLE_BPLUS_TREE_ORDER_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp__TABLE_BPLUS_TREE_ORDER_get")]
         public static extern int _TABLE_BPLUS_TREE_ORDER_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp__TABLE_MAX_COLUMN_NAME_LENGTH_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp__TABLE_MAX_COLUMN_NAME_LENGTH_get")]
         public static extern int _TABLE_MAX_COLUMN_NAME_LENGTH_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_Table"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_Table")]
         public static extern IntPtr new_Table();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_Table"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_Table")]
         public static extern void delete_Table(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Table_AddColumn"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Table_AddColumn")]
         public static extern uint Table_AddColumn(HandleRef jarg1, string jarg2, int jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Table_RemoveColumn"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Table_RemoveColumn")]
         public static extern void Table_RemoveColumn(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Table_ColumnName"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Table_ColumnName")]
         public static extern string Table_ColumnName(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Table_GetColumnType"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Table_GetColumnType")]
         public static extern int Table_GetColumnType(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Table_GetColumnCount"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Table_GetColumnCount")]
         public static extern uint Table_GetColumnCount(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Table_GetRowCount"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Table_GetRowCount")]
         public static extern uint Table_GetRowCount(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Table_AddRow__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Table_AddRow__SWIG_0")]
         public static extern IntPtr Table_AddRow__SWIG_0(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Table_AddRow__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Table_AddRow__SWIG_1")]
         public static extern IntPtr Table_AddRow__SWIG_1(HandleRef jarg1, uint jarg2, HandleRef jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Table_AddRow__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Table_AddRow__SWIG_2")]
         public static extern IntPtr Table_AddRow__SWIG_2(HandleRef jarg1, uint jarg2, HandleRef jarg3, bool jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Table_AddRow__SWIG_3"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Table_AddRow__SWIG_3")]
         public static extern IntPtr Table_AddRow__SWIG_3(HandleRef jarg1, uint jarg2, HandleRef jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Table_RemoveRow"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Table_RemoveRow")]
         public static extern bool Table_RemoveRow(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Table_RemoveRows"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Table_RemoveRows")]
         public static extern void Table_RemoveRows(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Table_UpdateCell__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Table_UpdateCell__SWIG_0")]
         public static extern bool Table_UpdateCell__SWIG_0(HandleRef jarg1, uint jarg2, uint jarg3, int jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Table_UpdateCell__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Table_UpdateCell__SWIG_1")]
         public static extern bool Table_UpdateCell__SWIG_1(HandleRef jarg1, uint jarg2, uint jarg3, string jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Table_UpdateCellByIndex__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Table_UpdateCellByIndex__SWIG_0")]
         public static extern bool Table_UpdateCellByIndex__SWIG_0(HandleRef jarg1, uint jarg2, uint jarg3, int jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Table_UpdateCellByIndex__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Table_UpdateCellByIndex__SWIG_1")]
         public static extern bool Table_UpdateCellByIndex__SWIG_1(HandleRef jarg1, uint jarg2, uint jarg3, string jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Table_GetCellValueByIndex"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Table_GetCellValueByIndex")]
         public static extern void Table_GetCellValueByIndex(HandleRef jarg1, uint jarg2, uint jarg3, out int jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Table_GetRowByID"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Table_GetRowByID")]
         public static extern IntPtr Table_GetRowByID(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Table_GetRowByIndex"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Table_GetRowByIndex")]
         public static extern IntPtr Table_GetRowByIndex(HandleRef jarg1, uint jarg2, ref int jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Table_Clear"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Table_Clear")]
         public static extern void Table_Clear(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Table_GetColumns"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Table_GetColumns")]
         public static extern IntPtr Table_GetColumns(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Table_GetRows"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Table_GetRows")]
         public static extern IntPtr Table_GetRows(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Table_GetAvailableRowId"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Table_GetAvailableRowId")]
         public static extern uint Table_GetAvailableRowId(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Table_CopyData"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Table_CopyData")]
         public static extern IntPtr Table_CopyData(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Table_GetListHeadHelper"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Table_GetListHeadHelper")]
         public static extern IntPtr Table_GetListHeadHelper(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Table_SortTableHelper"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Table_SortTableHelper")]
         public static extern void Table_SortTableHelper(HandleRef jarg1, HandleRef jarg2, uint jarg3, HandleRef jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Table_GetCellValueByIndexHelper__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Table_GetCellValueByIndexHelper__SWIG_0")]
         public static extern void Table_GetCellValueByIndexHelper__SWIG_0(HandleRef jarg1, uint jarg2, uint jarg3, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg4, out int jarg5);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Table_GetCellValueByIndexHelper__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Table_GetCellValueByIndexHelper__SWIG_1")]
         public static extern string Table_GetCellValueByIndexHelper__SWIG_1(HandleRef jarg1, uint jarg2, uint jarg3, string jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Table_PrintColumnHeaders"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Table_PrintColumnHeaders")]
         public static extern void Table_PrintColumnHeaders(HandleRef jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2, int jarg3, char jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Table_PrintRow"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Table_PrintRow")]
         public static extern void Table_PrintRow(HandleRef jarg1, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg2, int jarg3, char jarg4, bool jarg5, HandleRef jarg6);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Table_QueryTableHelper"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Table_QueryTableHelper")]
         public static extern void Table_QueryTableHelper(HandleRef jarg1, [In, MarshalAs(UnmanagedType.LPArray)]uint[] jarg2, uint jarg3, HandleRef jarg4, uint jarg5, [In, MarshalAs(UnmanagedType.LPArray)]uint[] jarg6, uint jarg7, HandleRef jarg8);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Table_UpdateCell__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Table_UpdateCell__SWIG_2")]
         public static extern bool Table_UpdateCell__SWIG_2(HandleRef jarg1, uint jarg2, uint jarg3, int jarg4, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg5);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Table_UpdateCellByIndex__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Table_UpdateCellByIndex__SWIG_2")]
         public static extern bool Table_UpdateCellByIndex__SWIG_2(HandleRef jarg1, uint jarg2, uint jarg3, int jarg4, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg5);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_Table_ColumnIndexHelper"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_Table_ColumnIndexHelper")]
         public static extern uint Table_ColumnIndexHelper(HandleRef jarg1, string jarg2);
 
         //        [DllImport(Const.LibraryName
@@ -9964,25 +5676,13 @@ namespace RakNet
         //)]
         //        public static extern void FileListTransferCBInterface_director_connect(HandleRef jarg1, FileListTransferCBInterface.SwigDelegateFileListTransferCBInterface_0 delegate0, FileListTransferCBInterface.SwigDelegateFileListTransferCBInterface_1 delegate1, FileListTransferCBInterface.SwigDelegateFileListTransferCBInterface_2 delegate2, FileListTransferCBInterface.SwigDelegateFileListTransferCBInterface_3 delegate3, FileListTransferCBInterface.SwigDelegateFileListTransferCBInterface_4 delegate4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_IncrementalReadInterface"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_IncrementalReadInterface")]
         public static extern IntPtr new_IncrementalReadInterface();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_IncrementalReadInterface"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_IncrementalReadInterface")]
         public static extern void delete_IncrementalReadInterface(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_IncrementalReadInterface_GetFilePart"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_IncrementalReadInterface_GetFilePart")]
         public static extern uint IncrementalReadInterface_GetFilePart(HandleRef jarg1, string jarg2, uint jarg3, uint jarg4, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg5, HandleRef jarg6);
 
         //        [DllImport(Const.LibraryName
@@ -10496,186 +6196,82 @@ namespace RakNet
         //)]
         //        public static extern void FileList_AddFile__SWIG_2(HandleRef jarg1, string jarg2, string jarg3, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg4, uint jarg5, uint jarg6, HandleRef jarg7);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_REMOTE_MAX_TEXT_INPUT_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_REMOTE_MAX_TEXT_INPUT_get")]
         public static extern int REMOTE_MAX_TEXT_INPUT_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_TransportInterface"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_TransportInterface")]
         public static extern void delete_TransportInterface(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_TransportInterface_Start"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_TransportInterface_Start")]
         public static extern bool TransportInterface_Start(HandleRef jarg1, ushort jarg2, bool jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_TransportInterface_Stop"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_TransportInterface_Stop")]
         public static extern void TransportInterface_Stop(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_TransportInterface_CloseConnection"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_TransportInterface_CloseConnection")]
         public static extern void TransportInterface_CloseConnection(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_TransportInterface_Receive"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_TransportInterface_Receive")]
         public static extern IntPtr TransportInterface_Receive(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_TransportInterface_DeallocatePacket"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_TransportInterface_DeallocatePacket")]
         public static extern void TransportInterface_DeallocatePacket(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_TransportInterface_HasNewIncomingConnection"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_TransportInterface_HasNewIncomingConnection")]
         public static extern IntPtr TransportInterface_HasNewIncomingConnection(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_TransportInterface_HasLostConnection"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_TransportInterface_HasLostConnection")]
         public static extern IntPtr TransportInterface_HasLostConnection(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_TransportInterface_GetCommandParser"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_TransportInterface_GetCommandParser")]
         public static extern IntPtr TransportInterface_GetCommandParser(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_TransportInterface_Send"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_TransportInterface_Send")]
         public static extern void TransportInterface_Send(HandleRef jarg1, HandleRef jarg2, [In, Out, MarshalAs(UnmanagedType.LPArray)]byte[] jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_CommandParserInterface"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_CommandParserInterface")]
         public static extern void delete_CommandParserInterface(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_CommandParserInterface_GetName"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_CommandParserInterface_GetName")]
         public static extern string CommandParserInterface_GetName(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_CommandParserInterface_OnNewIncomingConnection"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_CommandParserInterface_OnNewIncomingConnection")]
         public static extern void CommandParserInterface_OnNewIncomingConnection(HandleRef jarg1, HandleRef jarg2, HandleRef jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_CommandParserInterface_OnConnectionLost"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_CommandParserInterface_OnConnectionLost")]
         public static extern void CommandParserInterface_OnConnectionLost(HandleRef jarg1, HandleRef jarg2, HandleRef jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_CommandParserInterface_SendHelp"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_CommandParserInterface_SendHelp")]
         public static extern void CommandParserInterface_SendHelp(HandleRef jarg1, HandleRef jarg2, HandleRef jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_CommandParserInterface_OnCommand"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_CommandParserInterface_OnCommand")]
         public static extern bool CommandParserInterface_OnCommand(HandleRef jarg1, string jarg2, uint jarg3, [In, MarshalAs(UnmanagedType.LPArray)]string[] jarg4, HandleRef jarg5, HandleRef jarg6, string jarg7);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_CommandParserInterface_OnTransportChange"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_CommandParserInterface_OnTransportChange")]
         public static extern void CommandParserInterface_OnTransportChange(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_CommandParserInterface_SendCommandList"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_CommandParserInterface_SendCommandList")]
         public static extern void CommandParserInterface_SendCommandList(HandleRef jarg1, HandleRef jarg2, HandleRef jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_CommandParserInterface_VARIABLE_NUMBER_OF_PARAMETERS_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_CommandParserInterface_VARIABLE_NUMBER_OF_PARAMETERS_get")]
         public static extern byte CommandParserInterface_VARIABLE_NUMBER_OF_PARAMETERS_get();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_CommandParserInterface_RegisterCommand"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_CommandParserInterface_RegisterCommand")]
         public static extern void CommandParserInterface_RegisterCommand(HandleRef jarg1, byte jarg2, string jarg3, string jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_CommandParserInterface_ReturnResult__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_CommandParserInterface_ReturnResult__SWIG_0")]
         public static extern void CommandParserInterface_ReturnResult__SWIG_0(HandleRef jarg1, bool jarg2, string jarg3, HandleRef jarg4, HandleRef jarg5);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_CommandParserInterface_ReturnResult__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_CommandParserInterface_ReturnResult__SWIG_1")]
         public static extern void CommandParserInterface_ReturnResult__SWIG_1(HandleRef jarg1, string jarg2, string jarg3, HandleRef jarg4, HandleRef jarg5);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_CommandParserInterface_ReturnResult__SWIG_2"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_CommandParserInterface_ReturnResult__SWIG_2")]
         public static extern void CommandParserInterface_ReturnResult__SWIG_2(HandleRef jarg1, HandleRef jarg2, string jarg3, HandleRef jarg4, HandleRef jarg5);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_CommandParserInterface_ReturnResult__SWIG_3"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_CommandParserInterface_ReturnResult__SWIG_3")]
         public static extern void CommandParserInterface_ReturnResult__SWIG_3(HandleRef jarg1, int jarg2, string jarg3, HandleRef jarg4, HandleRef jarg5);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_CommandParserInterface_ReturnResult__SWIG_4"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_CommandParserInterface_ReturnResult__SWIG_4")]
         public static extern void CommandParserInterface_ReturnResult__SWIG_4(HandleRef jarg1, string jarg2, HandleRef jarg3, HandleRef jarg4);
 
         //        [DllImport(Const.LibraryName
@@ -11091,18 +6687,10 @@ namespace RakNet
         //)]
         //        public static extern void FileListTransfer_ClearCallbacks(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_ThreadsafePacketLogger"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_ThreadsafePacketLogger")]
         public static extern IntPtr new_ThreadsafePacketLogger();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_ThreadsafePacketLogger"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_ThreadsafePacketLogger")]
         public static extern void delete_ThreadsafePacketLogger(HandleRef jarg1);
 
         //        [DllImport(Const.LibraryName
@@ -11224,858 +6812,370 @@ namespace RakNet
         //)]
         //        public static extern void ConnectionGraph2_GetParticipantListHelper(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_GetTime"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_GetTime")]
         public static extern ulong GetTime();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_GetTimeMS"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_GetTimeMS")]
         public static extern uint GetTimeMS();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_GetTimeUS"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_GetTimeUS")]
         public static extern ulong GetTimeUS();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_GreaterThan"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_GreaterThan")]
         public static extern bool GreaterThan(ulong jarg1, ulong jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_LessThan"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_LessThan")]
         public static extern bool LessThan(ulong jarg1, ulong jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_RakNetListRakNetGUID__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_RakNetListRakNetGUID__SWIG_0")]
         public static extern IntPtr new_RakNetListRakNetGUID__SWIG_0();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_RakNetListRakNetGUID"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_RakNetListRakNetGUID")]
         public static extern void delete_RakNetListRakNetGUID(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_RakNetListRakNetGUID__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_RakNetListRakNetGUID__SWIG_1")]
         public static extern IntPtr new_RakNetListRakNetGUID__SWIG_1(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListRakNetGUID_CopyData"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListRakNetGUID_CopyData")]
         public static extern IntPtr RakNetListRakNetGUID_CopyData(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListRakNetGUID_Get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListRakNetGUID_Get")]
         public static extern IntPtr RakNetListRakNetGUID_Get(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListRakNetGUID_Push"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListRakNetGUID_Push")]
         public static extern void RakNetListRakNetGUID_Push(HandleRef jarg1, HandleRef jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListRakNetGUID_Pop"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListRakNetGUID_Pop")]
         public static extern IntPtr RakNetListRakNetGUID_Pop(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListRakNetGUID_Insert__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListRakNetGUID_Insert__SWIG_0")]
         public static extern void RakNetListRakNetGUID_Insert__SWIG_0(HandleRef jarg1, HandleRef jarg2, uint jarg3, string jarg4, uint jarg5);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListRakNetGUID_Insert__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListRakNetGUID_Insert__SWIG_1")]
         public static extern void RakNetListRakNetGUID_Insert__SWIG_1(HandleRef jarg1, HandleRef jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListRakNetGUID_Replace__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListRakNetGUID_Replace__SWIG_0")]
         public static extern void RakNetListRakNetGUID_Replace__SWIG_0(HandleRef jarg1, HandleRef jarg2, HandleRef jarg3, uint jarg4, string jarg5, uint jarg6);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListRakNetGUID_Replace__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListRakNetGUID_Replace__SWIG_1")]
         public static extern void RakNetListRakNetGUID_Replace__SWIG_1(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListRakNetGUID_RemoveAtIndex"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListRakNetGUID_RemoveAtIndex")]
         public static extern void RakNetListRakNetGUID_RemoveAtIndex(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListRakNetGUID_RemoveAtIndexFast"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListRakNetGUID_RemoveAtIndexFast")]
         public static extern void RakNetListRakNetGUID_RemoveAtIndexFast(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListRakNetGUID_RemoveFromEnd__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListRakNetGUID_RemoveFromEnd__SWIG_0")]
         public static extern void RakNetListRakNetGUID_RemoveFromEnd__SWIG_0(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListRakNetGUID_RemoveFromEnd__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListRakNetGUID_RemoveFromEnd__SWIG_1")]
         public static extern void RakNetListRakNetGUID_RemoveFromEnd__SWIG_1(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListRakNetGUID_GetIndexOf"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListRakNetGUID_GetIndexOf")]
         public static extern uint RakNetListRakNetGUID_GetIndexOf(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListRakNetGUID_Size"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListRakNetGUID_Size")]
         public static extern uint RakNetListRakNetGUID_Size(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListRakNetGUID_Clear"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListRakNetGUID_Clear")]
         public static extern void RakNetListRakNetGUID_Clear(HandleRef jarg1, bool jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListRakNetGUID_Preallocate"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListRakNetGUID_Preallocate")]
         public static extern void RakNetListRakNetGUID_Preallocate(HandleRef jarg1, uint jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListRakNetGUID_Compress"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListRakNetGUID_Compress")]
         public static extern void RakNetListRakNetGUID_Compress(HandleRef jarg1, string jarg2, uint jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_RakNetListSystemAddress__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_RakNetListSystemAddress__SWIG_0")]
         public static extern IntPtr new_RakNetListSystemAddress__SWIG_0();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_RakNetListSystemAddress"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_RakNetListSystemAddress")]
         public static extern void delete_RakNetListSystemAddress(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_RakNetListSystemAddress__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_RakNetListSystemAddress__SWIG_1")]
         public static extern IntPtr new_RakNetListSystemAddress__SWIG_1(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSystemAddress_CopyData"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSystemAddress_CopyData")]
         public static extern IntPtr RakNetListSystemAddress_CopyData(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSystemAddress_Get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSystemAddress_Get")]
         public static extern IntPtr RakNetListSystemAddress_Get(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSystemAddress_Push"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSystemAddress_Push")]
         public static extern void RakNetListSystemAddress_Push(HandleRef jarg1, HandleRef jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSystemAddress_Pop"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSystemAddress_Pop")]
         public static extern IntPtr RakNetListSystemAddress_Pop(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSystemAddress_Insert__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSystemAddress_Insert__SWIG_0")]
         public static extern void RakNetListSystemAddress_Insert__SWIG_0(HandleRef jarg1, HandleRef jarg2, uint jarg3, string jarg4, uint jarg5);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSystemAddress_Insert__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSystemAddress_Insert__SWIG_1")]
         public static extern void RakNetListSystemAddress_Insert__SWIG_1(HandleRef jarg1, HandleRef jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSystemAddress_Replace__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSystemAddress_Replace__SWIG_0")]
         public static extern void RakNetListSystemAddress_Replace__SWIG_0(HandleRef jarg1, HandleRef jarg2, HandleRef jarg3, uint jarg4, string jarg5, uint jarg6);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSystemAddress_Replace__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSystemAddress_Replace__SWIG_1")]
         public static extern void RakNetListSystemAddress_Replace__SWIG_1(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSystemAddress_RemoveAtIndex"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSystemAddress_RemoveAtIndex")]
         public static extern void RakNetListSystemAddress_RemoveAtIndex(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSystemAddress_RemoveAtIndexFast"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSystemAddress_RemoveAtIndexFast")]
         public static extern void RakNetListSystemAddress_RemoveAtIndexFast(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSystemAddress_RemoveFromEnd__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSystemAddress_RemoveFromEnd__SWIG_0")]
         public static extern void RakNetListSystemAddress_RemoveFromEnd__SWIG_0(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSystemAddress_RemoveFromEnd__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSystemAddress_RemoveFromEnd__SWIG_1")]
         public static extern void RakNetListSystemAddress_RemoveFromEnd__SWIG_1(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSystemAddress_GetIndexOf"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSystemAddress_GetIndexOf")]
         public static extern uint RakNetListSystemAddress_GetIndexOf(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSystemAddress_Size"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSystemAddress_Size")]
         public static extern uint RakNetListSystemAddress_Size(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSystemAddress_Clear"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSystemAddress_Clear")]
         public static extern void RakNetListSystemAddress_Clear(HandleRef jarg1, bool jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSystemAddress_Preallocate"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSystemAddress_Preallocate")]
         public static extern void RakNetListSystemAddress_Preallocate(HandleRef jarg1, uint jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSystemAddress_Compress"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSystemAddress_Compress")]
         public static extern void RakNetListSystemAddress_Compress(HandleRef jarg1, string jarg2, uint jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_RakNetListRakString__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_RakNetListRakString__SWIG_0")]
         public static extern IntPtr new_RakNetListRakString__SWIG_0();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_RakNetListRakString"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_RakNetListRakString")]
         public static extern void delete_RakNetListRakString(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_RakNetListRakString__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_RakNetListRakString__SWIG_1")]
         public static extern IntPtr new_RakNetListRakString__SWIG_1(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListRakString_CopyData"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListRakString_CopyData")]
         public static extern IntPtr RakNetListRakString_CopyData(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListRakString_Get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListRakString_Get")]
         public static extern IntPtr RakNetListRakString_Get(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListRakString_Push"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListRakString_Push")]
         public static extern void RakNetListRakString_Push(HandleRef jarg1, HandleRef jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListRakString_Pop"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListRakString_Pop")]
         public static extern IntPtr RakNetListRakString_Pop(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListRakString_Insert__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListRakString_Insert__SWIG_0")]
         public static extern void RakNetListRakString_Insert__SWIG_0(HandleRef jarg1, HandleRef jarg2, uint jarg3, string jarg4, uint jarg5);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListRakString_Insert__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListRakString_Insert__SWIG_1")]
         public static extern void RakNetListRakString_Insert__SWIG_1(HandleRef jarg1, HandleRef jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListRakString_Replace__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListRakString_Replace__SWIG_0")]
         public static extern void RakNetListRakString_Replace__SWIG_0(HandleRef jarg1, HandleRef jarg2, HandleRef jarg3, uint jarg4, string jarg5, uint jarg6);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListRakString_Replace__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListRakString_Replace__SWIG_1")]
         public static extern void RakNetListRakString_Replace__SWIG_1(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListRakString_RemoveAtIndex"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListRakString_RemoveAtIndex")]
         public static extern void RakNetListRakString_RemoveAtIndex(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListRakString_RemoveAtIndexFast"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListRakString_RemoveAtIndexFast")]
         public static extern void RakNetListRakString_RemoveAtIndexFast(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListRakString_RemoveFromEnd__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListRakString_RemoveFromEnd__SWIG_0")]
         public static extern void RakNetListRakString_RemoveFromEnd__SWIG_0(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListRakString_RemoveFromEnd__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListRakString_RemoveFromEnd__SWIG_1")]
         public static extern void RakNetListRakString_RemoveFromEnd__SWIG_1(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListRakString_GetIndexOf"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListRakString_GetIndexOf")]
         public static extern uint RakNetListRakString_GetIndexOf(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListRakString_Size"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListRakString_Size")]
         public static extern uint RakNetListRakString_Size(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListRakString_Clear"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListRakString_Clear")]
         public static extern void RakNetListRakString_Clear(HandleRef jarg1, bool jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListRakString_Preallocate"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListRakString_Preallocate")]
         public static extern void RakNetListRakString_Preallocate(HandleRef jarg1, uint jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListRakString_Compress"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListRakString_Compress")]
         public static extern void RakNetListRakString_Compress(HandleRef jarg1, string jarg2, uint jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_RakNetListCell__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_RakNetListCell__SWIG_0")]
         public static extern IntPtr new_RakNetListCell__SWIG_0();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_RakNetListCell"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_RakNetListCell")]
         public static extern void delete_RakNetListCell(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_RakNetListCell__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_RakNetListCell__SWIG_1")]
         public static extern IntPtr new_RakNetListCell__SWIG_1(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListCell_CopyData"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListCell_CopyData")]
         public static extern IntPtr RakNetListCell_CopyData(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListCell_Get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListCell_Get")]
         public static extern IntPtr RakNetListCell_Get(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListCell_Push"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListCell_Push")]
         public static extern void RakNetListCell_Push(HandleRef jarg1, HandleRef jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListCell_Pop"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListCell_Pop")]
         public static extern IntPtr RakNetListCell_Pop(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListCell_Insert__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListCell_Insert__SWIG_0")]
         public static extern void RakNetListCell_Insert__SWIG_0(HandleRef jarg1, HandleRef jarg2, uint jarg3, string jarg4, uint jarg5);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListCell_Insert__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListCell_Insert__SWIG_1")]
         public static extern void RakNetListCell_Insert__SWIG_1(HandleRef jarg1, HandleRef jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListCell_Replace__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListCell_Replace__SWIG_0")]
         public static extern void RakNetListCell_Replace__SWIG_0(HandleRef jarg1, HandleRef jarg2, HandleRef jarg3, uint jarg4, string jarg5, uint jarg6);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListCell_Replace__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListCell_Replace__SWIG_1")]
         public static extern void RakNetListCell_Replace__SWIG_1(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListCell_RemoveAtIndex"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListCell_RemoveAtIndex")]
         public static extern void RakNetListCell_RemoveAtIndex(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListCell_RemoveAtIndexFast"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListCell_RemoveAtIndexFast")]
         public static extern void RakNetListCell_RemoveAtIndexFast(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListCell_RemoveFromEnd__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListCell_RemoveFromEnd__SWIG_0")]
         public static extern void RakNetListCell_RemoveFromEnd__SWIG_0(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListCell_RemoveFromEnd__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListCell_RemoveFromEnd__SWIG_1")]
         public static extern void RakNetListCell_RemoveFromEnd__SWIG_1(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListCell_Size"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListCell_Size")]
         public static extern uint RakNetListCell_Size(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListCell_Clear"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListCell_Clear")]
         public static extern void RakNetListCell_Clear(HandleRef jarg1, bool jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListCell_Preallocate"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListCell_Preallocate")]
         public static extern void RakNetListCell_Preallocate(HandleRef jarg1, uint jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListCell_Compress"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListCell_Compress")]
         public static extern void RakNetListCell_Compress(HandleRef jarg1, string jarg2, uint jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_RakNetListColumnDescriptor__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_RakNetListColumnDescriptor__SWIG_0")]
         public static extern IntPtr new_RakNetListColumnDescriptor__SWIG_0();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_RakNetListColumnDescriptor"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_RakNetListColumnDescriptor")]
         public static extern void delete_RakNetListColumnDescriptor(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_RakNetListColumnDescriptor__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_RakNetListColumnDescriptor__SWIG_1")]
         public static extern IntPtr new_RakNetListColumnDescriptor__SWIG_1(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListColumnDescriptor_CopyData"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListColumnDescriptor_CopyData")]
         public static extern IntPtr RakNetListColumnDescriptor_CopyData(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListColumnDescriptor_Get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListColumnDescriptor_Get")]
         public static extern IntPtr RakNetListColumnDescriptor_Get(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListColumnDescriptor_Push"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListColumnDescriptor_Push")]
         public static extern void RakNetListColumnDescriptor_Push(HandleRef jarg1, HandleRef jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListColumnDescriptor_Pop"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListColumnDescriptor_Pop")]
         public static extern IntPtr RakNetListColumnDescriptor_Pop(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListColumnDescriptor_Insert__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListColumnDescriptor_Insert__SWIG_0")]
         public static extern void RakNetListColumnDescriptor_Insert__SWIG_0(HandleRef jarg1, HandleRef jarg2, uint jarg3, string jarg4, uint jarg5);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListColumnDescriptor_Insert__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListColumnDescriptor_Insert__SWIG_1")]
         public static extern void RakNetListColumnDescriptor_Insert__SWIG_1(HandleRef jarg1, HandleRef jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListColumnDescriptor_Replace__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListColumnDescriptor_Replace__SWIG_0")]
         public static extern void RakNetListColumnDescriptor_Replace__SWIG_0(HandleRef jarg1, HandleRef jarg2, HandleRef jarg3, uint jarg4, string jarg5, uint jarg6);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListColumnDescriptor_Replace__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListColumnDescriptor_Replace__SWIG_1")]
         public static extern void RakNetListColumnDescriptor_Replace__SWIG_1(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListColumnDescriptor_RemoveAtIndex"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListColumnDescriptor_RemoveAtIndex")]
         public static extern void RakNetListColumnDescriptor_RemoveAtIndex(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListColumnDescriptor_RemoveAtIndexFast"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListColumnDescriptor_RemoveAtIndexFast")]
         public static extern void RakNetListColumnDescriptor_RemoveAtIndexFast(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListColumnDescriptor_RemoveFromEnd__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListColumnDescriptor_RemoveFromEnd__SWIG_0")]
         public static extern void RakNetListColumnDescriptor_RemoveFromEnd__SWIG_0(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListColumnDescriptor_RemoveFromEnd__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListColumnDescriptor_RemoveFromEnd__SWIG_1")]
         public static extern void RakNetListColumnDescriptor_RemoveFromEnd__SWIG_1(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListColumnDescriptor_Size"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListColumnDescriptor_Size")]
         public static extern uint RakNetListColumnDescriptor_Size(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListColumnDescriptor_Clear"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListColumnDescriptor_Clear")]
         public static extern void RakNetListColumnDescriptor_Clear(HandleRef jarg1, bool jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListColumnDescriptor_Preallocate"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListColumnDescriptor_Preallocate")]
         public static extern void RakNetListColumnDescriptor_Preallocate(HandleRef jarg1, uint jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListColumnDescriptor_Compress"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListColumnDescriptor_Compress")]
         public static extern void RakNetListColumnDescriptor_Compress(HandleRef jarg1, string jarg2, uint jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_RakNetListTableRow__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_RakNetListTableRow__SWIG_0")]
         public static extern IntPtr new_RakNetListTableRow__SWIG_0();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_RakNetListTableRow"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_RakNetListTableRow")]
         public static extern void delete_RakNetListTableRow(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_RakNetListTableRow__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_RakNetListTableRow__SWIG_1")]
         public static extern IntPtr new_RakNetListTableRow__SWIG_1(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListTableRow_CopyData"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListTableRow_CopyData")]
         public static extern IntPtr RakNetListTableRow_CopyData(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListTableRow_Get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListTableRow_Get")]
         public static extern IntPtr RakNetListTableRow_Get(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListTableRow_Push"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListTableRow_Push")]
         public static extern void RakNetListTableRow_Push(HandleRef jarg1, HandleRef jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListTableRow_Pop"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListTableRow_Pop")]
         public static extern IntPtr RakNetListTableRow_Pop(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListTableRow_Insert__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListTableRow_Insert__SWIG_0")]
         public static extern void RakNetListTableRow_Insert__SWIG_0(HandleRef jarg1, HandleRef jarg2, uint jarg3, string jarg4, uint jarg5);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListTableRow_Insert__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListTableRow_Insert__SWIG_1")]
         public static extern void RakNetListTableRow_Insert__SWIG_1(HandleRef jarg1, HandleRef jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListTableRow_Replace__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListTableRow_Replace__SWIG_0")]
         public static extern void RakNetListTableRow_Replace__SWIG_0(HandleRef jarg1, HandleRef jarg2, HandleRef jarg3, uint jarg4, string jarg5, uint jarg6);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListTableRow_Replace__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListTableRow_Replace__SWIG_1")]
         public static extern void RakNetListTableRow_Replace__SWIG_1(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListTableRow_RemoveAtIndex"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListTableRow_RemoveAtIndex")]
         public static extern void RakNetListTableRow_RemoveAtIndex(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListTableRow_RemoveAtIndexFast"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListTableRow_RemoveAtIndexFast")]
         public static extern void RakNetListTableRow_RemoveAtIndexFast(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListTableRow_RemoveFromEnd__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListTableRow_RemoveFromEnd__SWIG_0")]
         public static extern void RakNetListTableRow_RemoveFromEnd__SWIG_0(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListTableRow_RemoveFromEnd__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListTableRow_RemoveFromEnd__SWIG_1")]
         public static extern void RakNetListTableRow_RemoveFromEnd__SWIG_1(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListTableRow_Size"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListTableRow_Size")]
         public static extern uint RakNetListTableRow_Size(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListTableRow_Clear"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListTableRow_Clear")]
         public static extern void RakNetListTableRow_Clear(HandleRef jarg1, bool jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListTableRow_Preallocate"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListTableRow_Preallocate")]
         public static extern void RakNetListTableRow_Preallocate(HandleRef jarg1, uint jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListTableRow_Compress"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListTableRow_Compress")]
         public static extern void RakNetListTableRow_Compress(HandleRef jarg1, string jarg2, uint jarg3);
 
         //        [DllImport(Const.LibraryName
@@ -12211,1075 +7311,463 @@ namespace RakNet
         //)]
         //        public static extern void RakNetListFileListNode_Compress(HandleRef jarg1, string jarg2, uint jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_RakNetListFilterQuery__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_RakNetListFilterQuery__SWIG_0")]
         public static extern IntPtr new_RakNetListFilterQuery__SWIG_0();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_RakNetListFilterQuery"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_RakNetListFilterQuery")]
         public static extern void delete_RakNetListFilterQuery(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_RakNetListFilterQuery__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_RakNetListFilterQuery__SWIG_1")]
         public static extern IntPtr new_RakNetListFilterQuery__SWIG_1(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListFilterQuery_CopyData"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListFilterQuery_CopyData")]
         public static extern IntPtr RakNetListFilterQuery_CopyData(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListFilterQuery_Get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListFilterQuery_Get")]
         public static extern IntPtr RakNetListFilterQuery_Get(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListFilterQuery_Push"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListFilterQuery_Push")]
         public static extern void RakNetListFilterQuery_Push(HandleRef jarg1, HandleRef jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListFilterQuery_Pop"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListFilterQuery_Pop")]
         public static extern IntPtr RakNetListFilterQuery_Pop(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListFilterQuery_Insert__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListFilterQuery_Insert__SWIG_0")]
         public static extern void RakNetListFilterQuery_Insert__SWIG_0(HandleRef jarg1, HandleRef jarg2, uint jarg3, string jarg4, uint jarg5);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListFilterQuery_Insert__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListFilterQuery_Insert__SWIG_1")]
         public static extern void RakNetListFilterQuery_Insert__SWIG_1(HandleRef jarg1, HandleRef jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListFilterQuery_Replace__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListFilterQuery_Replace__SWIG_0")]
         public static extern void RakNetListFilterQuery_Replace__SWIG_0(HandleRef jarg1, HandleRef jarg2, HandleRef jarg3, uint jarg4, string jarg5, uint jarg6);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListFilterQuery_Replace__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListFilterQuery_Replace__SWIG_1")]
         public static extern void RakNetListFilterQuery_Replace__SWIG_1(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListFilterQuery_RemoveAtIndex"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListFilterQuery_RemoveAtIndex")]
         public static extern void RakNetListFilterQuery_RemoveAtIndex(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListFilterQuery_RemoveAtIndexFast"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListFilterQuery_RemoveAtIndexFast")]
         public static extern void RakNetListFilterQuery_RemoveAtIndexFast(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListFilterQuery_RemoveFromEnd__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListFilterQuery_RemoveFromEnd__SWIG_0")]
         public static extern void RakNetListFilterQuery_RemoveFromEnd__SWIG_0(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListFilterQuery_RemoveFromEnd__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListFilterQuery_RemoveFromEnd__SWIG_1")]
         public static extern void RakNetListFilterQuery_RemoveFromEnd__SWIG_1(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListFilterQuery_Size"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListFilterQuery_Size")]
         public static extern uint RakNetListFilterQuery_Size(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListFilterQuery_Clear"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListFilterQuery_Clear")]
         public static extern void RakNetListFilterQuery_Clear(HandleRef jarg1, bool jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListFilterQuery_Preallocate"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListFilterQuery_Preallocate")]
         public static extern void RakNetListFilterQuery_Preallocate(HandleRef jarg1, uint jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListFilterQuery_Compress"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListFilterQuery_Compress")]
         public static extern void RakNetListFilterQuery_Compress(HandleRef jarg1, string jarg2, uint jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_RakNetListSortQuery__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_RakNetListSortQuery__SWIG_0")]
         public static extern IntPtr new_RakNetListSortQuery__SWIG_0();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_RakNetListSortQuery"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_RakNetListSortQuery")]
         public static extern void delete_RakNetListSortQuery(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_RakNetListSortQuery__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_RakNetListSortQuery__SWIG_1")]
         public static extern IntPtr new_RakNetListSortQuery__SWIG_1(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSortQuery_CopyData"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSortQuery_CopyData")]
         public static extern IntPtr RakNetListSortQuery_CopyData(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSortQuery_Get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSortQuery_Get")]
         public static extern IntPtr RakNetListSortQuery_Get(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSortQuery_Push"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSortQuery_Push")]
         public static extern void RakNetListSortQuery_Push(HandleRef jarg1, HandleRef jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSortQuery_Pop"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSortQuery_Pop")]
         public static extern IntPtr RakNetListSortQuery_Pop(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSortQuery_Insert__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSortQuery_Insert__SWIG_0")]
         public static extern void RakNetListSortQuery_Insert__SWIG_0(HandleRef jarg1, HandleRef jarg2, uint jarg3, string jarg4, uint jarg5);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSortQuery_Insert__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSortQuery_Insert__SWIG_1")]
         public static extern void RakNetListSortQuery_Insert__SWIG_1(HandleRef jarg1, HandleRef jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSortQuery_Replace__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSortQuery_Replace__SWIG_0")]
         public static extern void RakNetListSortQuery_Replace__SWIG_0(HandleRef jarg1, HandleRef jarg2, HandleRef jarg3, uint jarg4, string jarg5, uint jarg6);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSortQuery_Replace__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSortQuery_Replace__SWIG_1")]
         public static extern void RakNetListSortQuery_Replace__SWIG_1(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSortQuery_RemoveAtIndex"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSortQuery_RemoveAtIndex")]
         public static extern void RakNetListSortQuery_RemoveAtIndex(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSortQuery_RemoveAtIndexFast"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSortQuery_RemoveAtIndexFast")]
         public static extern void RakNetListSortQuery_RemoveAtIndexFast(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSortQuery_RemoveFromEnd__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSortQuery_RemoveFromEnd__SWIG_0")]
         public static extern void RakNetListSortQuery_RemoveFromEnd__SWIG_0(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSortQuery_RemoveFromEnd__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSortQuery_RemoveFromEnd__SWIG_1")]
         public static extern void RakNetListSortQuery_RemoveFromEnd__SWIG_1(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSortQuery_Size"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSortQuery_Size")]
         public static extern uint RakNetListSortQuery_Size(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSortQuery_Clear"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSortQuery_Clear")]
         public static extern void RakNetListSortQuery_Clear(HandleRef jarg1, bool jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSortQuery_Preallocate"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSortQuery_Preallocate")]
         public static extern void RakNetListSortQuery_Preallocate(HandleRef jarg1, uint jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSortQuery_Compress"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSortQuery_Compress")]
         public static extern void RakNetListSortQuery_Compress(HandleRef jarg1, string jarg2, uint jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_RakNetListSocketDescriptor__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_RakNetListSocketDescriptor__SWIG_0")]
         public static extern IntPtr new_RakNetListSocketDescriptor__SWIG_0();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_RakNetListSocketDescriptor"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_RakNetListSocketDescriptor")]
         public static extern void delete_RakNetListSocketDescriptor(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_RakNetListSocketDescriptor__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_RakNetListSocketDescriptor__SWIG_1")]
         public static extern IntPtr new_RakNetListSocketDescriptor__SWIG_1(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSocketDescriptor_CopyData"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSocketDescriptor_CopyData")]
         public static extern IntPtr RakNetListSocketDescriptor_CopyData(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSocketDescriptor_Get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSocketDescriptor_Get")]
         public static extern IntPtr RakNetListSocketDescriptor_Get(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSocketDescriptor_Push"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSocketDescriptor_Push")]
         public static extern void RakNetListSocketDescriptor_Push(HandleRef jarg1, HandleRef jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSocketDescriptor_Pop"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSocketDescriptor_Pop")]
         public static extern IntPtr RakNetListSocketDescriptor_Pop(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSocketDescriptor_Insert__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSocketDescriptor_Insert__SWIG_0")]
         public static extern void RakNetListSocketDescriptor_Insert__SWIG_0(HandleRef jarg1, HandleRef jarg2, uint jarg3, string jarg4, uint jarg5);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSocketDescriptor_Insert__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSocketDescriptor_Insert__SWIG_1")]
         public static extern void RakNetListSocketDescriptor_Insert__SWIG_1(HandleRef jarg1, HandleRef jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSocketDescriptor_Replace__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSocketDescriptor_Replace__SWIG_0")]
         public static extern void RakNetListSocketDescriptor_Replace__SWIG_0(HandleRef jarg1, HandleRef jarg2, HandleRef jarg3, uint jarg4, string jarg5, uint jarg6);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSocketDescriptor_Replace__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSocketDescriptor_Replace__SWIG_1")]
         public static extern void RakNetListSocketDescriptor_Replace__SWIG_1(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSocketDescriptor_RemoveAtIndex"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSocketDescriptor_RemoveAtIndex")]
         public static extern void RakNetListSocketDescriptor_RemoveAtIndex(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSocketDescriptor_RemoveAtIndexFast"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSocketDescriptor_RemoveAtIndexFast")]
         public static extern void RakNetListSocketDescriptor_RemoveAtIndexFast(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSocketDescriptor_RemoveFromEnd__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSocketDescriptor_RemoveFromEnd__SWIG_0")]
         public static extern void RakNetListSocketDescriptor_RemoveFromEnd__SWIG_0(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSocketDescriptor_RemoveFromEnd__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSocketDescriptor_RemoveFromEnd__SWIG_1")]
         public static extern void RakNetListSocketDescriptor_RemoveFromEnd__SWIG_1(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSocketDescriptor_Size"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSocketDescriptor_Size")]
         public static extern uint RakNetListSocketDescriptor_Size(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSocketDescriptor_Clear"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSocketDescriptor_Clear")]
         public static extern void RakNetListSocketDescriptor_Clear(HandleRef jarg1, bool jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSocketDescriptor_Preallocate"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSocketDescriptor_Preallocate")]
         public static extern void RakNetListSocketDescriptor_Preallocate(HandleRef jarg1, uint jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListSocketDescriptor_Compress"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListSocketDescriptor_Compress")]
         public static extern void RakNetListSocketDescriptor_Compress(HandleRef jarg1, string jarg2, uint jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_RakNetListCellPointer__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_RakNetListCellPointer__SWIG_0")]
         public static extern IntPtr new_RakNetListCellPointer__SWIG_0();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_RakNetListCellPointer"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_RakNetListCellPointer")]
         public static extern void delete_RakNetListCellPointer(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_RakNetListCellPointer__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_RakNetListCellPointer__SWIG_1")]
         public static extern IntPtr new_RakNetListCellPointer__SWIG_1(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListCellPointer_CopyData"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListCellPointer_CopyData")]
         public static extern IntPtr RakNetListCellPointer_CopyData(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListCellPointer_Push"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListCellPointer_Push")]
         public static extern void RakNetListCellPointer_Push(HandleRef jarg1, HandleRef jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListCellPointer_Insert__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListCellPointer_Insert__SWIG_0")]
         public static extern void RakNetListCellPointer_Insert__SWIG_0(HandleRef jarg1, HandleRef jarg2, uint jarg3, string jarg4, uint jarg5);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListCellPointer_Insert__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListCellPointer_Insert__SWIG_1")]
         public static extern void RakNetListCellPointer_Insert__SWIG_1(HandleRef jarg1, HandleRef jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListCellPointer_Replace__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListCellPointer_Replace__SWIG_0")]
         public static extern void RakNetListCellPointer_Replace__SWIG_0(HandleRef jarg1, HandleRef jarg2, HandleRef jarg3, uint jarg4, string jarg5, uint jarg6);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListCellPointer_Replace__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListCellPointer_Replace__SWIG_1")]
         public static extern void RakNetListCellPointer_Replace__SWIG_1(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListCellPointer_RemoveAtIndex"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListCellPointer_RemoveAtIndex")]
         public static extern void RakNetListCellPointer_RemoveAtIndex(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListCellPointer_RemoveAtIndexFast"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListCellPointer_RemoveAtIndexFast")]
         public static extern void RakNetListCellPointer_RemoveAtIndexFast(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListCellPointer_RemoveFromEnd__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListCellPointer_RemoveFromEnd__SWIG_0")]
         public static extern void RakNetListCellPointer_RemoveFromEnd__SWIG_0(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListCellPointer_RemoveFromEnd__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListCellPointer_RemoveFromEnd__SWIG_1")]
         public static extern void RakNetListCellPointer_RemoveFromEnd__SWIG_1(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListCellPointer_GetIndexOf"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListCellPointer_GetIndexOf")]
         public static extern uint RakNetListCellPointer_GetIndexOf(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListCellPointer_Size"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListCellPointer_Size")]
         public static extern uint RakNetListCellPointer_Size(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListCellPointer_Clear"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListCellPointer_Clear")]
         public static extern void RakNetListCellPointer_Clear(HandleRef jarg1, bool jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListCellPointer_Preallocate"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListCellPointer_Preallocate")]
         public static extern void RakNetListCellPointer_Preallocate(HandleRef jarg1, uint jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListCellPointer_Compress"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListCellPointer_Compress")]
         public static extern void RakNetListCellPointer_Compress(HandleRef jarg1, string jarg2, uint jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListCellPointer_GetHelper"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListCellPointer_GetHelper")]
         public static extern IntPtr RakNetListCellPointer_GetHelper(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListCellPointer_PopHelper"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListCellPointer_PopHelper")]
         public static extern IntPtr RakNetListCellPointer_PopHelper(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_UnsignedShortPointer"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_UnsignedShortPointer")]
         public static extern IntPtr new_UnsignedShortPointer();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_UnsignedShortPointer"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_UnsignedShortPointer")]
         public static extern void delete_UnsignedShortPointer(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_UnsignedShortPointer_assign"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_UnsignedShortPointer_assign")]
         public static extern void UnsignedShortPointer_assign(HandleRef jarg1, ushort jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_UnsignedShortPointer_value"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_UnsignedShortPointer_value")]
         public static extern ushort UnsignedShortPointer_value(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_UnsignedShortPointer_cast"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_UnsignedShortPointer_cast")]
         public static extern IntPtr UnsignedShortPointer_cast(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_UnsignedShortPointer_frompointer"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_UnsignedShortPointer_frompointer")]
         public static extern IntPtr UnsignedShortPointer_frompointer(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_RakNetListUnsignedShort__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_RakNetListUnsignedShort__SWIG_0")]
         public static extern IntPtr new_RakNetListUnsignedShort__SWIG_0();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_RakNetListUnsignedShort"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_RakNetListUnsignedShort")]
         public static extern void delete_RakNetListUnsignedShort(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_RakNetListUnsignedShort__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_RakNetListUnsignedShort__SWIG_1")]
         public static extern IntPtr new_RakNetListUnsignedShort__SWIG_1(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListUnsignedShort_CopyData"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListUnsignedShort_CopyData")]
         public static extern IntPtr RakNetListUnsignedShort_CopyData(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListUnsignedShort_GetHelper"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListUnsignedShort_GetHelper")]
         public static extern IntPtr RakNetListUnsignedShort_GetHelper(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListUnsignedShort_Push"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListUnsignedShort_Push")]
         public static extern void RakNetListUnsignedShort_Push(HandleRef jarg1, ushort jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListUnsignedShort_PopHelper"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListUnsignedShort_PopHelper")]
         public static extern IntPtr RakNetListUnsignedShort_PopHelper(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListUnsignedShort_Insert__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListUnsignedShort_Insert__SWIG_0")]
         public static extern void RakNetListUnsignedShort_Insert__SWIG_0(HandleRef jarg1, ushort jarg2, uint jarg3, string jarg4, uint jarg5);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListUnsignedShort_Insert__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListUnsignedShort_Insert__SWIG_1")]
         public static extern void RakNetListUnsignedShort_Insert__SWIG_1(HandleRef jarg1, ushort jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListUnsignedShort_Replace__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListUnsignedShort_Replace__SWIG_0")]
         public static extern void RakNetListUnsignedShort_Replace__SWIG_0(HandleRef jarg1, ushort jarg2, ushort jarg3, uint jarg4, string jarg5, uint jarg6);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListUnsignedShort_Replace__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListUnsignedShort_Replace__SWIG_1")]
         public static extern void RakNetListUnsignedShort_Replace__SWIG_1(HandleRef jarg1, ushort jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListUnsignedShort_RemoveAtIndex"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListUnsignedShort_RemoveAtIndex")]
         public static extern void RakNetListUnsignedShort_RemoveAtIndex(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListUnsignedShort_RemoveAtIndexFast"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListUnsignedShort_RemoveAtIndexFast")]
         public static extern void RakNetListUnsignedShort_RemoveAtIndexFast(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListUnsignedShort_RemoveFromEnd__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListUnsignedShort_RemoveFromEnd__SWIG_0")]
         public static extern void RakNetListUnsignedShort_RemoveFromEnd__SWIG_0(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListUnsignedShort_RemoveFromEnd__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListUnsignedShort_RemoveFromEnd__SWIG_1")]
         public static extern void RakNetListUnsignedShort_RemoveFromEnd__SWIG_1(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListUnsignedShort_GetIndexOf"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListUnsignedShort_GetIndexOf")]
         public static extern uint RakNetListUnsignedShort_GetIndexOf(HandleRef jarg1, ushort jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListUnsignedShort_Size"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListUnsignedShort_Size")]
         public static extern uint RakNetListUnsignedShort_Size(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListUnsignedShort_Clear"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListUnsignedShort_Clear")]
         public static extern void RakNetListUnsignedShort_Clear(HandleRef jarg1, bool jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListUnsignedShort_Preallocate"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListUnsignedShort_Preallocate")]
         public static extern void RakNetListUnsignedShort_Preallocate(HandleRef jarg1, uint jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListUnsignedShort_Compress"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListUnsignedShort_Compress")]
         public static extern void RakNetListUnsignedShort_Compress(HandleRef jarg1, string jarg2, uint jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_UnsignedIntPointer"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_UnsignedIntPointer")]
         public static extern IntPtr new_UnsignedIntPointer();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_UnsignedIntPointer"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_UnsignedIntPointer")]
         public static extern void delete_UnsignedIntPointer(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_UnsignedIntPointer_assign"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_UnsignedIntPointer_assign")]
         public static extern void UnsignedIntPointer_assign(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_UnsignedIntPointer_value"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_UnsignedIntPointer_value")]
         public static extern uint UnsignedIntPointer_value(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_UnsignedIntPointer_cast"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_UnsignedIntPointer_cast")]
         public static extern IntPtr UnsignedIntPointer_cast(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_UnsignedIntPointer_frompointer"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_UnsignedIntPointer_frompointer")]
         public static extern IntPtr UnsignedIntPointer_frompointer(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_RakNetListUnsignedInt__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_RakNetListUnsignedInt__SWIG_0")]
         public static extern IntPtr new_RakNetListUnsignedInt__SWIG_0();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_RakNetListUnsignedInt"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_RakNetListUnsignedInt")]
         public static extern void delete_RakNetListUnsignedInt(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_RakNetListUnsignedInt__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_RakNetListUnsignedInt__SWIG_1")]
         public static extern IntPtr new_RakNetListUnsignedInt__SWIG_1(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListUnsignedInt_CopyData"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListUnsignedInt_CopyData")]
         public static extern IntPtr RakNetListUnsignedInt_CopyData(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListUnsignedInt_GetHelper"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListUnsignedInt_GetHelper")]
         public static extern IntPtr RakNetListUnsignedInt_GetHelper(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListUnsignedInt_Push"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListUnsignedInt_Push")]
         public static extern void RakNetListUnsignedInt_Push(HandleRef jarg1, uint jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListUnsignedInt_PopHelper"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListUnsignedInt_PopHelper")]
         public static extern IntPtr RakNetListUnsignedInt_PopHelper(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListUnsignedInt_Insert__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListUnsignedInt_Insert__SWIG_0")]
         public static extern void RakNetListUnsignedInt_Insert__SWIG_0(HandleRef jarg1, uint jarg2, uint jarg3, string jarg4, uint jarg5);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListUnsignedInt_Insert__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListUnsignedInt_Insert__SWIG_1")]
         public static extern void RakNetListUnsignedInt_Insert__SWIG_1(HandleRef jarg1, uint jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListUnsignedInt_Replace__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListUnsignedInt_Replace__SWIG_0")]
         public static extern void RakNetListUnsignedInt_Replace__SWIG_0(HandleRef jarg1, uint jarg2, uint jarg3, uint jarg4, string jarg5, uint jarg6);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListUnsignedInt_Replace__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListUnsignedInt_Replace__SWIG_1")]
         public static extern void RakNetListUnsignedInt_Replace__SWIG_1(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListUnsignedInt_RemoveAtIndex"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListUnsignedInt_RemoveAtIndex")]
         public static extern void RakNetListUnsignedInt_RemoveAtIndex(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListUnsignedInt_RemoveAtIndexFast"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListUnsignedInt_RemoveAtIndexFast")]
         public static extern void RakNetListUnsignedInt_RemoveAtIndexFast(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListUnsignedInt_RemoveFromEnd__SWIG_0"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListUnsignedInt_RemoveFromEnd__SWIG_0")]
         public static extern void RakNetListUnsignedInt_RemoveFromEnd__SWIG_0(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListUnsignedInt_RemoveFromEnd__SWIG_1"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListUnsignedInt_RemoveFromEnd__SWIG_1")]
         public static extern void RakNetListUnsignedInt_RemoveFromEnd__SWIG_1(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListUnsignedInt_GetIndexOf"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListUnsignedInt_GetIndexOf")]
         public static extern uint RakNetListUnsignedInt_GetIndexOf(HandleRef jarg1, uint jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListUnsignedInt_Size"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListUnsignedInt_Size")]
         public static extern uint RakNetListUnsignedInt_Size(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListUnsignedInt_Clear"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListUnsignedInt_Clear")]
         public static extern void RakNetListUnsignedInt_Clear(HandleRef jarg1, bool jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListUnsignedInt_Preallocate"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListUnsignedInt_Preallocate")]
         public static extern void RakNetListUnsignedInt_Preallocate(HandleRef jarg1, uint jarg2, string jarg3, uint jarg4);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetListUnsignedInt_Compress"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetListUnsignedInt_Compress")]
         public static extern void RakNetListUnsignedInt_Compress(HandleRef jarg1, string jarg2, uint jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetPageRow_isLeaf_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetPageRow_isLeaf_set")]
         public static extern void RakNetPageRow_isLeaf_set(HandleRef jarg1, bool jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetPageRow_isLeaf_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetPageRow_isLeaf_get")]
         public static extern bool RakNetPageRow_isLeaf_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetPageRow_size_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetPageRow_size_set")]
         public static extern void RakNetPageRow_size_set(HandleRef jarg1, int jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetPageRow_size_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetPageRow_size_get")]
         public static extern int RakNetPageRow_size_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetPageRow_next_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetPageRow_next_set")]
         public static extern void RakNetPageRow_next_set(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetPageRow_next_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetPageRow_next_get")]
         public static extern IntPtr RakNetPageRow_next_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetPageRow_previous_set"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetPageRow_previous_set")]
         public static extern void RakNetPageRow_previous_set(HandleRef jarg1, HandleRef jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetPageRow_previous_get"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetPageRow_previous_get")]
         public static extern IntPtr RakNetPageRow_previous_get(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_RakNetPageRow"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_RakNetPageRow")]
         public static extern IntPtr new_RakNetPageRow();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_RakNetPageRow"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_RakNetPageRow")]
         public static extern void delete_RakNetPageRow(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_new_RakNetBPlusTreeRow"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_new_RakNetBPlusTreeRow")]
         public static extern IntPtr new_RakNetBPlusTreeRow();
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_delete_RakNetBPlusTreeRow"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_delete_RakNetBPlusTreeRow")]
         public static extern void delete_RakNetBPlusTreeRow(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetBPlusTreeRow_SetPoolPageSize"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetBPlusTreeRow_SetPoolPageSize")]
         public static extern void RakNetBPlusTreeRow_SetPoolPageSize(HandleRef jarg1, int jarg2);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetBPlusTreeRow_Insert"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetBPlusTreeRow_Insert")]
         public static extern bool RakNetBPlusTreeRow_Insert(HandleRef jarg1, uint jarg2, HandleRef jarg3);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetBPlusTreeRow_Clear"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetBPlusTreeRow_Clear")]
         public static extern void RakNetBPlusTreeRow_Clear(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetBPlusTreeRow_Size"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetBPlusTreeRow_Size")]
         public static extern uint RakNetBPlusTreeRow_Size(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetBPlusTreeRow_IsEmpty"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetBPlusTreeRow_IsEmpty")]
         public static extern bool RakNetBPlusTreeRow_IsEmpty(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetBPlusTreeRow_GetListHead"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetBPlusTreeRow_GetListHead")]
         public static extern IntPtr RakNetBPlusTreeRow_GetListHead(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetBPlusTreeRow_GetDataHead"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetBPlusTreeRow_GetDataHead")]
         public static extern IntPtr RakNetBPlusTreeRow_GetDataHead(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetBPlusTreeRow_PrintLeaves"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetBPlusTreeRow_PrintLeaves")]
         public static extern void RakNetBPlusTreeRow_PrintLeaves(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakNetBPlusTreeRow_PrintGraph"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakNetBPlusTreeRow_PrintGraph")]
         public static extern void RakNetBPlusTreeRow_PrintGraph(HandleRef jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_RakPeer_SWIGUpcast"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_RakPeer_SWIGUpcast")]
         public static extern IntPtr RakPeer_SWIGUpcast(IntPtr jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_PacketLogger_SWIGUpcast"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_PacketLogger_SWIGUpcast")]
         public static extern IntPtr PacketLogger_SWIGUpcast(IntPtr jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_PacketFileLogger_SWIGUpcast"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_PacketFileLogger_SWIGUpcast")]
         public static extern IntPtr PacketFileLogger_SWIGUpcast(IntPtr jarg1);
 
         //        [DllImport(Const.LibraryName
@@ -13422,11 +7910,7 @@ namespace RakNet
         //)]
         //        public static extern IntPtr FileListTransfer_SWIGUpcast(IntPtr jarg1);
 
-        [DllImport(Const.LibraryName
-#if !UNITY_IOS || UNITY_EDITOR
-, EntryPoint = "CSharp_ThreadsafePacketLogger_SWIGUpcast"
-#endif
-)]
+        [DllImport(Const.LibraryName, EntryPoint = "CSharp_ThreadsafePacketLogger_SWIGUpcast")]
         public static extern IntPtr ThreadsafePacketLogger_SWIGUpcast(IntPtr jarg1);
 
         //        [DllImport(Const.LibraryName
